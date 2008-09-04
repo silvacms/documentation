@@ -20,8 +20,8 @@ you can issue::
 
   If you use buildout, ``zopectl`` might be called ``instance``.
 
-Writing tests
--------------
+Writing a new test
+------------------
 
 Your test module should have the prefix ``test_``, and be located in a
 ``tests`` package of the package that you want to test. Hereby a
@@ -70,3 +70,4 @@ Documentation on test API
    :maxdepth: 2
 
    helpers
+   silvabrowser
