@@ -2,13 +2,75 @@
 Silva Test Case
 ===============
 
-A Silva Test Case let your write test for Silva. Some convenient methods have been added on it.
+A Silva Test Case let your write test for Silva. It set up a Silva
+site which can used, and some convenient methods have been added on
+it.
 
 .. module:: Products.Silva.tests.SilvaTestCase
 
 .. class:: SilvaTestCase
 
    .. function:: add_document(parent, id, title)
+
+      :param parent: parent folder where to create the document.
+      :param id: id of the new document.
+      :param title: title of the new document.
+
+      Create a Silva Document in the given folder and return id.
+
+
+   .. function:: add_folder(parent, id, title)
+
+      :param parent: parent folder where to create the new sub-folder.
+      :param id: id of the new folder.
+      :param title: title of the new folder.
+
+      Create a Silva Folder in the given folder and return id.
+
+   .. function:: add_publication(parent, id, title)
+
+      :param parent: parent folder where to create the new publication.
+      :param id: id of the new publication.
+      :param title: title of the new publication.
+
+      Create a Silva Publication in the given folder and return id.
+
+   .. function:: get_users():
+
+      Return all the available pre-defined users for tests.
+
+   .. function:: get_password(username):
+
+      :param username: username to retrieve the password.
+
+      Return the pre-defined password of the given pre-defined user.
+
+   .. function:: get_role(username):
+
+      :param username: username to lookup roles
+
+      Return all default roles for the given pre-defined user.
+
+   .. function:: get_user_by_role(role):
+
+      :param role: role used to lookup for a user.
+
+      Return a pre-defined user which have the given role.
+
+   .. function:: login(username):
+
+      Login with the user to which correspond the given username. All
+      creation actions, and security check in the test will be done
+      using that user rights and information.
+
+   .. function:: logout():
+
+      Logout, after that method have been executed, the current user
+      will be anonymous.
+
+   .. function:: silva_url():
+  
+      Return the URL of the test Silva site.
 
 .. class:: SilvaFunctionalTestCase
 
