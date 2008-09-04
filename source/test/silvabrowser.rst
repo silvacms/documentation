@@ -6,20 +6,26 @@ Silva Browser
 
 .. class:: SilvaBrowser
 
-   .. function:: click_button_labeled()
+   .. function:: click_button_labeled(name)
+
+      :param name: name of button to click on.
     
       Click on a button or psuedo button (a link dressed up as button).
   
       Example: ``delete``, ``close``, ``publish now``, ``addables``
       (pseudo button).
 
-   .. function:: click_href_labeled()
+   .. function:: click_href_labeled(name)
+
+      :param name: name of the link to click on.
   
       Click on a link.
   
       Example: ``logout``, ``index``, created or existing content types.
 
-   .. function:: click_tab_named()
+   .. function:: click_tab_named(name)
+
+      :param name: name of the tab to click on.
   
       Click on a specific tab name.
   
@@ -57,17 +63,19 @@ Silva Browser
   
      Usage: check if existing or created content exists.
 
-   .. function:: get_href_named()
+   .. function:: get_href_named(name)
 
-     Return an href with a specific label.
+     :param name: name of the link to search.
+
+     Return a link with a specific name.
   
      Usage: retrieve a link from a specific page to test location.
 
-   .. function:: get_listing_h2
+   .. function:: get_listing_h2()
 
      Return the content type and name of the ``<h2>`` in the listing table.
   
-   .. function:: get_status_and_url():
+   .. function:: get_status_and_url()
 
      Return HTTP status and the URL.
   
@@ -120,24 +128,34 @@ Silva Browser
      ``get_addform_title()``, ``get_listing_h2()``,
      ``get_tabs_named()``, ``get_middlegroung_buttons()``.
 
-   .. function:: login()
+   .. function:: login(username='manager', password='secret', url=None)
   
-     Login to the SMI
+     :param username: username used to login.
+     :param password: password used to login.
+     :param url: base URL where to ask authentification.
+
+     Login to the SMI.
 
    .. function:: logout()
   
-     Logout of the SMI
+     Logout of the SMI.
 
    .. function:: make_content()
     
      Makes content of a specific type as a specific user, with one or
      more fields filled in.
 
-   .. function:: make_default_content()
+   .. function:: make_default_content(content_type)
 
-   .. function:: open_file()
+     :param content_type: content type of object to create.
+
+     Create a content of ``content_type`` with default parameters in fields.
+
+   .. function:: open_file(filename)
+   
+     :param filename: filename to open.
   
-     Format the path to data/ for test files.
+     Open a file located in the current sub-directory ``data``, and return it.
 
    .. function:: select_addable()
 
