@@ -69,5 +69,6 @@ Documentation on test API
 .. toctree::
    :maxdepth: 2
 
+   silvatestcase
    helpers
    silvabrowser

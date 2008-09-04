@@ -1,6 +1,25 @@
 
 Silva Browser
--------------
+=============
+
+SilvaBrowser is Python driven web navigator that you can use in your
+tests to verify the rendering of your application. It should be used
+inside of a functional test. Example:
+
+.. code-block:: python
+
+  from Products.Silva.tests.SilvaBrowser import SilvaBrowser
+  from Products.Silva.tests import SilvaTestCase
+
+  class MyTestCase(SilvaTestCase.SilvaFunctionalTestCase):
+
+      def test_mytest(self):
+          browser = SilvaBrowser()
+          browser.go('http://localhost/root')
+
+
+Silva Browser API
+-----------------
 
 .. module:: Products.Silva.tests.SilvaBrowser
 
@@ -33,194 +52,194 @@ Silva Browser
 
    .. function:: get_addables_list()
   
-     Return a list of addable metatypes from the select menu.
+      Return a list of addable metatypes from the select menu.
   
-     Usage: check what content is available for a particular role.
+      Usage: check what content is available for a particular role.
 
    .. function:: get_addform_title()
     
-     Return a normalized ``<h2>`` title for add forms.
+      Return a normalized ``<h2>`` title for add forms.
   
-     Example: *create Silva Document*.
+      Example: *create Silva Document*.
   
-     Usage: check if the proper add form, or title is being retrieved.
+      Usage: check if the proper add form, or title is being retrieved.
 
    .. function:: get_alert_feedback()
 
-     Return the alert message in the page
+      Return the alert message in the page
   
-     Example: *Could not delete <<index>>*.
+      Example: *Could not delete <<index>>*.
   
-     Usage: check if an SMI error occurred.
+      Usage: check if an SMI error occurred.
 
    .. function:: get_content_data()
 
-     Return a list of dictionaries describing the content objects.
+      Return a list of dictionaries describing the content objects.
     
    .. function:: get_content_ids()
 
-     Return a list of ids for objects in a current container.
+      Return a list of ids for objects in a current container.
   
-     Usage: check if existing or created content exists.
+      Usage: check if existing or created content exists.
 
    .. function:: get_href_named(name)
 
-     :param name: name of the link to search.
+      :param name: name of the link to search.
 
-     Return a link with a specific name.
+      Return a link with a specific name.
   
-     Usage: retrieve a link from a specific page to test location.
+      Usage: retrieve a link from a specific page to test location.
 
    .. function:: get_listing_h2()
 
-     Return the content type and name of the ``<h2>`` in the listing table.
+      Return the content type and name of the ``<h2>`` in the listing table.
   
    .. function:: get_status_and_url()
 
-     Return HTTP status and the URL.
+      Return HTTP status and the URL.
   
-     Usage: check the HTTP error code for logging out or check location.
+      Usage: check the HTTP error code for logging out or check location.
 
    .. function:: get_status_feedback()
 
-     Return the status message in the page.
+      Return the status message in the page.
   
-     Example: ``Added Silva Folder``, ``Version Approved``
+      Example: ``Added Silva Folder``, ``Version Approved``
 
    .. function:: get_tabs_named()
 
-     Return a specific tab name from ``<div class="tabs">``.
+      Return a specific tab name from ``<div class="tabs">``.
   
-     Example: ``editor``
+      Example: ``editor``
   
-     Usage: check location specific tabs.
+      Usage: check location specific tabs.
 
    .. function:: get_middleground_buttons()
 
-     Return a specific button from the ``<div class="middleground">``.
+      Return a specific button from the ``<div class="middleground">``.
   
-     Example: ``settings...``, ``addables...``
+      Example: ``settings...``, ``addables...``
   
-     Usage: check locations specific buttons.
+      Usage: check locations specific buttons.
 
    .. function:: get_url()
 
-     Return the current URL.
+      Return the current URL.
   
-     Usage: check current location.
+      Usage: check current location.
 
    .. function:: get_root_url()
 
-     Return the ZMI root URL.
+      Return the ZMI root URL.
   
-     Usage: jump from current location to the ZMI.
+      Usage: jump from current location to the ZMI.
 
    .. function:: go(url)
 
-     :param url: URL to open.
+      :param url: URL to open.
 
-     Open a specific browser page and return the HTTP status code and current URL.
+      Open a specific browser page and return the HTTP status code and current URL.
     
    .. function:: html2text()
 
-     Return children of an html element, stripping out child elements,
-     and normalizing text nodes. Supports ``click_button_labeled()``,
-     ``get_addform_title()``, ``get_listing_h2()``,
-     ``get_tabs_named()``, ``get_middlegroung_buttons()``.
+      Return children of an html element, stripping out child elements,
+      and normalizing text nodes. Supports ``click_button_labeled()``,
+      ``get_addform_title()``, ``get_listing_h2()``,
+      ``get_tabs_named()``, ``get_middlegroung_buttons()``.
 
    .. function:: login(username='manager', password='secret', url=None)
   
-     :param username: username used to login.
-     :param password: password used to login.
-     :param url: base URL where to ask authentification.
+      :param username: username used to login.
+      :param password: password used to login.
+      :param url: base URL where to ask authentification.
 
-     Login to the SMI.
+      Login to the SMI.
 
    .. function:: logout()
   
-     Logout of the SMI.
+      Logout of the SMI.
 
    .. function:: make_content()
     
-     Makes content of a specific type as a specific user, with one or
-     more fields filled in.
+      Makes content of a specific type as a specific user, with one or
+      more fields filled in.
 
    .. function:: make_default_content(content_type)
 
-     :param content_type: content type of object to create.
+      :param content_type: content type of object to create.
 
-     Create a content of ``content_type`` with default parameters in fields.
+      Create a content of ``content_type`` with default parameters in fields.
 
    .. function:: open_file(filename)
    
-     :param filename: filename to open.
+      :param filename: filename to open.
   
-     Open a file located in the current sub-directory ``data``, and return it.
+      Open a file located in the current sub-directory ``data``, and return it.
 
    .. function:: select_addable()
 
-     Select a meta_type form the addables list.
+      Select a meta_type form the addables list.
 
    .. function:: select_all_content()
 
-     Toggle all content item checkboxes.
+      Toggle all content item checkboxes.
 
-     Usage: Selecting all content to close, then delete.
+      Usage: Selecting all content to close, then delete.
 
    .. function:: select_content()
 
-     Toggle a content item checkbox.
+      Toggle a content item checkbox.
 
-     Usage: Select a content item to close.
+      Usage: Select a content item to close.
 
    .. function:: select_delete_content()
 
-     Select and then delete a content item.
+      Select and then delete a content item.
 
    .. function:: smi_url()
 
-     Return the SMI URL for current URL.
+      Return the SMI URL for current URL.
 
    .. function:: sef_fields()
 
-     Fill multiple ``field_object`` controls where keyword is a fieldname
-     and value. This is support for the ``make_content()`` method.
+      Fill multiple ``field_object`` controls where keyword is a fieldname
+      and value. This is support for the ``make_content()`` method.
 
    .. function:: set_id_field()
     
-     Set the id field.
+      Set the id field.
 
    .. function:: set_title_field()
     
-     Set the title field.
+      Set the title field.
 
    .. function:: set_policy_field()
     
-     Set the policy field.
+      Set the policy field.
   
-     Example: Set the default document as ``Silva Document`` when
-     creating a Silva Folder.
+      Example: Set the default document as ``Silva Document`` when
+      creating a Silva Folder.
 
    .. function:: set_image_field()
     
-     Set the image field.
+      Set the image field.
 
    .. function:: set_file_field()
     
-     Set the file field.
+      Set the file field.
 
    .. function:: set_ghost_url_field()
     
-     Set the ghost url field.
+      Set the ghost url field.
 
    .. function:: set_url_field()
     
-     Set the url field.
+      Set the url field.
 
    .. function:: set_link_type_field()
     
-     Set the link type button.
+      Set the link type button.
 
    .. function:: set_depth_field()
     
-     Set the depth field.
+      Set the depth field.
