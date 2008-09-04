@@ -24,10 +24,10 @@ import os, os.path, shutil, sys, tempfile, urllib2
 
 tmpeggs = tempfile.mkdtemp()
 
-enable_virtualenv = True
-if '--without-virtualenv' in sys.argv:
-    enable_virtualenv = False
-    sys.argv.remove('--without-virtualenv')
+enable_virtualenv = False
+if '--with-virtualenv' in sys.argv:
+    enable_virtualenv = True
+    sys.argv.remove('--with-virtualenv')
 
 if '--buildout-profile' in sys.argv:
     index = sys.argv.index('--buildout-profile') + 1
