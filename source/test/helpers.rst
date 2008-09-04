@@ -1,8 +1,8 @@
-Test in Silva
-=============
 
-Helpers
--------
+Helpers methods
+===============
+
+Some helpers can be used in you test to accomplish some actions.
 
 .. module:: Products.Silva.tests.helpers
 

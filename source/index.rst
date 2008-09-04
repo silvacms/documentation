@@ -10,7 +10,7 @@ Contents:
    extension/index
    contents/index
    services
-   test
+   test/index
 
 Indices and tables
 ==================
