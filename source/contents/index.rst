@@ -2,8 +2,6 @@
 Create content types
 ====================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
@@ -12,3 +10,4 @@ Contents:
    xsltrender
    forms
    xml
+   api/index
