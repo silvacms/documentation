@@ -1,5 +1,5 @@
-Creating a extension
-====================
+Creating an extension
+=====================
 
 You have two different ways to create a Silva extension:
 
