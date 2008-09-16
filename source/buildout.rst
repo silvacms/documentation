@@ -22,7 +22,7 @@ Installation under Linux Ubuntu/Debian
  
       $ sudo apt-get install python2.4 
 
-2. Python2.4 headers and development add-ons
+2. Python 2.4 headers and development add-ons
 
    On UNIX systems,  the buildout will also need the python header
    files. If you compiled python by hand, these files are already on your
@@ -54,12 +54,54 @@ Installation under Linux Ubuntu/Debian
 
 	  $ sudo apt-get install libjpeg62-dev 
 
+   Silva use libXML and libXSLT has well, so you need to install them
+   as well:
+
+   .. code-block:: sh
+  
+      $ sudo apt-get install libxml2-dev libxslt1-dev
+
+
+Installation under Mac OS X
+```````````````````````````
+
+Silva 2.x needs Python 2.4 to work. You need first to install `XCode
+<http://developer.apple.com/tools/xcode/>`_ in order to have a working
+compiler.
+
+After that, you can install `macports <http://www.macports.org/>`_ to
+install Python and other required tools. Don't forget to update your
+``~/.bashrc`` file with:
+
+.. code-block:: sh
+
+   export PATH=/opt/local/bin:$PATH
+
+Now, you can open a Terminal to install Python and required
+components:
+
+.. code-block:: sh
+
+   $ sudo port -v install python24
+
+You can install the ``libjpeg``:
+
+.. code-block:: sh
+
+   $ sudo port -v install jpeg
+
+And ``libxml2``/``libxslt``:
+
+.. code-block:: sh
+
+   $ sudo port -v install libxml2
+   $ sudo port -v install libxslt
 
 Installation under FreeBSD
 ``````````````````````````
 
- Silva 2.x needs Python 2.4 to work, this is probably already present
- on your system. You can install it using the FreeBSD ports.
+Silva 2.x needs Python 2.4 to work, this is probably already present
+on your system. You can install it using the FreeBSD ports.
 
 .. note::
 
@@ -84,6 +126,14 @@ You will need as well the ``libjpeg``:
    $ make install
    $ make distclean
 
+And ``libxml2`` and ``libxslt``:
+
+.. code-block:: sh
+
+  $ cd /usr/ports/textproc/libxslt
+  $ make install
+  $ make distclean
+  
 
 Installing Silva to test it with Paster
 ---------------------------------------
