@@ -2,11 +2,10 @@
 Silva Developer Documentation
 =============================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
+   buildout
    extension/index
    contents/index
    services
