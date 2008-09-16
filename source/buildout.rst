@@ -473,7 +473,7 @@ which will be the ZEO server. It's created with the help of the
 `zope2zeoserver recipe
 <http://pypi.python.org/pypi/plone.recipe.zope2zeoserver>`_. This will
 create a script called ``bin/zeoserver`` which controls your ZEO
-server.
+server. By default it listen on the port 8100 of the computer.
 
 Your ZEO setup can be distributed on more than one computer, so in
 fact we are going to build a profile for your setup which can be
@@ -496,7 +496,109 @@ re-use:
    You need to keep this new profile file with your ``buildout.cfg`` to
    be able to re-create your environment.
 
-Now, it's going to be a slightly more complicated.
+Now, it's going to be a slightly more complicated. We want to have
+more than one instance with the same configuration, so more than one
+part with the same options, but we don't want to copy them more than
+one time, to prevent synchronization error between them. So our
+``instance`` section will become our configuration, and we are going
+to use the `macro recipe
+<http://pypi.python.org/pypi/zc.recipe.macro>`_ to create several Zope
+instances with the same configuration.
+
+For the moment, we need to use a development version of this
+recipe. In you profile file ``mycorp.cfg``, add the options to the
+``buildout`` section:
+
+.. code-block:: ini
+
+   [buildout]
+   extensions = gp.svndevelop>0.3
+   develop-dir = src
+   svn-extend-develop =
+      svn://svn.zope.org/repos/main/zc.recipe.macro/branches/infrae-force-recipe#egg=zc.recipe.macro
+
+After, we are going to say that ``instance`` is just used as
+configuration entry in our profile, and define 6 Zope instances, with
+special settings for each of them.
+
+.. code-block:: ini
+
+   [instance]
+   recipe = zc.recipe.macro:empty
+   http-address = $${:port}
+
+   [client1-conf]
+   port = 8080
+
+   [client2-conf]
+   port = 8082
+
+   [client3-conf]
+   port = 8084
+
+   [client4-conf]
+   port = 8086
+
+   [client5-conf]
+   port = 8088
+
+   [client6-conf]
+   port = 8090
+
+And now we generate a part for each Zope instance, always in the same profile file:
+
+.. code-block:: ini
+
+   [zeoclients]
+   recipe = zc.recipe.macro
+   macro = instance
+   result-recipe = plone.recipe.zope2instance
+   force-recipe = true
+   targets =
+      client1:client1-conf
+      client2:client2-conf
+      client3:client3-conf
+      client4:client4-conf
+      client5:client5-conf
+      client6:client6-conf
+
+We can now use our profile. Your ``buildout.cfg`` file will be for you
+ZEO server, with two ZEO clients:
+
+.. code-block:: ini
+
+   [buildout]
+   extends = mycorp.cfg
+   parts = 
+       zope2
+       silva-all
+       zeoserver
+       zeoclients
+       client1
+       client2
+
+We say here we want to install Zope 2, Silva, a ZEO server, create ZEO
+clients configuration and setup two Zope instances ``client1``, and
+``client2``.
+
+On an other computer, we can run four ZEO clients connected on the ZEO
+server located on the computer called ``zeoserver.mycorp`` in the DNS:
+
+.. code-block:: ini
+
+   [buildout]
+   extends = mycorp.cfg
+   parts = 
+        zope2
+        silva-all
+        zeoclients
+        client1
+        client2
+        client3
+        client4
+
+   [instance]
+   zeo-address = zeoserver.mycorp:8100
 
 Upgrading your setup
 ````````````````````
@@ -511,6 +613,10 @@ tag, and re-run buildout:
    $ svn switch https://svn.infrae.com/buildout/silva/tags/Silva-2.1.1b1
    $ ./bin/buildout 
    $ ./bin/instance start
+
+.. note::
+
+   It's recommended to do a backup of your data before.
 
 And that's done !
 
@@ -528,6 +634,37 @@ tree, you just need to re-run buildout:
 We  highly recommend  to  stop your  Zope  instance(s) before  running
 buildout.
 
+
+What's in the buildout directory
+````````````````````````````````
+
+A Buildout tree contains the following sub-directories:
+
+``bin``
+
+   Contains all generated script to use installed software. This
+   should contains start/stop scripts for your Zope/ZEO
+   instance/server, maildrophost server.
+
+``parts``
+
+   Contains software components. **This directory can be deleted**
+   when you re-run buildout to upgrade your tree. You should not make
+   any changes inside it.
+
+``products``
+
+   Directory that can contains additional Zope products to be used.
+
+``profiles``
+
+   Contains default configurations profiles, that can
+   be used or extended again.
+
+``var``
+
+   Contains all data used by the software. ``var/filestorage``
+   contains for instance the Zope database.
 
 Troubleshooting
 ```````````````
