@@ -266,52 +266,60 @@ script to automaticly pull in the Silva code and configure it.
    $ ./bin/buildout
 
 
-You will obtain a command called ``bin/instance`` after which is going
-to let you start Zope, and create a Silva Root inside it.
+After this the command ``bin/instance`` will be available which will
+start your Zope instance, after which you can manually create a Silva
+Root inside it.
 
 
 Installing Silva from SVN for development or production
 -------------------------------------------------------
 
-For production or development we recommend you to use a SVN checkout
-of the Infrae buildout for Silva.
+For production deployment or development we recommend you use a SVN
+checkout of the Infrae buildout for Silva.
 
-You going to need to install subversion if it's not already installed
-on your system.
+You are going to need to install subversion if it's not already
+installed on your system.
 
-You have different buildout SVN tree for all the Silva version. A SVN
-tag correspond to a specific release of Silva, and is located in
-https://svn.infrae.com/buildout/silva/tag. We highly recommend to use
-tags for production website.
+There are different buildout SVN trees for the different Silva
+versions. A SVN tag corresponds to a specific release of Silva, and is
+located in::
 
-Latest development release for main version are located in
-https://svn.infrae.com/buildout/silva/branch and
-https://svn.infrae.com/buildout/silva/trunk.
+  https://svn.infrae.com/buildout/silva/tag
 
-All buildout trees works the same way.
+We highly recommend to use tags for production website.
+
+The development branches of main version are located in::
+
+  https://svn.infrae.com/buildout/silva/branch 
+
+and (for the main or newest development branch)::
+
+  https://svn.infrae.com/buildout/silva/trunk
+
+All buildout trees work the same way.
 
 Getting your Buildout tree
 ``````````````````````````
 
-It's really easy, you just run the following command to fetch files
-from SVN:
+Run the following command to fetch files from SVN:
 
 .. code-block:: sh
 
    $ svn co https://svn.infrae.com/buildout/silva/tags/Silva-2.1 Silva
 
 You can consult the ``README.txt`` file in the newly created ``Silva``
-directory which contains additional information.
+directory which can contain additional information for the specific
+version.
 
 The ``Silva`` directory will be referenced as your Buildout tree from
-now.
+now on.
 
 Running the installation
 ````````````````````````
 
-You need first to *bootstrap* your Buildout directory, and to create a
-configuration file. You can select your configuration as an extension
-from one of the available profile located in the ``profiles``
+You need first to *bootstrap* your Buildout directory, and create a
+configuration file. You can create a new configuration as an extension
+of one of the available profiles located in the ``profiles``
 sub-directory of your Buildout tree. Here we are going to use the
 ``simple-instance`` profile:
 
@@ -319,31 +327,31 @@ sub-directory of your Buildout tree. Here we are going to use the
 
    $ python2.4 bootstrap.py --buildout-profile profiles/simple-instance.cfg
 
-This going to create a couple of files, and one called
+This will create some files, most importantly one called
 ``buildout.cfg`` in your Buildout tree. It's going to be your
-configuration file to control what's you want to be installed, and
-how. Refer to the next documentation part to known how to extend it.
+configuration file to control what you want to be installed, and
+how. Refer to the next documentation part to learn how to extend it.
 
-You can after run the installation:
+After you can run the installation:
 
 .. code-block:: sh
 
    $ ./bin/buildout
 
-You will obtain a script ``bin/instance`` which can be used to start
-your Zope instance, which would be available on the port 8080 of your
-computer. The default administrator user name is ``admin`` and the
-corresponding password ``admin``. Of course we highly recommend to
-change it in the Zope Interface.
+After this a script ``bin/instance`` will be available that can be
+used to start your Zope instance, which would then be available on
+port 8080. The default administrator user name is ``admin`` and the
+corresponding password ``admin``. Of course we highly recommend that
+you change the password in the Zope Management Interface.
 
 Extending your installation
 ```````````````````````````
 
 You can add additional configuration information in the
-``buildout.cfg`` file directly. This file follow a format like a
-Windows INI file, with section which install a part of the software,
-and option in those section which control how these software parts are
-installed. 
+``buildout.cfg`` file directly. This file follows a format like
+Windows INI files, with sections which install parts of the software,
+and options in those sections which control how these software parts
+are installed.
 
 Default parts defined in the Silva are:
 
