@@ -9,6 +9,7 @@ Silva Developer Documentation
    extension/index
    contents/index
    services
+   layout
    test/index
 
 Indices and tables

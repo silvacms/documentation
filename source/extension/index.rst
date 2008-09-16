@@ -1,3 +1,6 @@
+
+.. _creating-an-extension:
+
 Creating an extension
 =====================
 
@@ -24,6 +27,7 @@ components with Silva:
    different registration actions used by the Silva extension. In this
    documentation, we be making a ``configure.zcml`` file for the blog
    product.
+
 
 Creating a new extension as a Zope Product
 ------------------------------------------
