@@ -1,21 +1,21 @@
 Creating an extension
 =====================
 
-You have two different ways to create a Silva extension:
+There are two different ways to create a Silva extension:
 
-1. As a standard Zope product,
+1. As a standard Zope product
 
-2. As an egg.
+2. As an egg
 
-After creating your extension there are two ways to declare it, and
-its objects in Silva:
+After creating an extension there are two ways to register it, and its
+components with Silva:
 
 1. ZCML (Zope Configuration Markup Language),
 
-2. Grok. Grok is sort of scanner which looks at your code and
-   magically registers what is needed. If you want to use Grok, we
-   recommend to use only Grok, and do not try to mix Grok with ZCML
-   declaration.
+2. Grok. Grok is a kind of scanner which looks at your code and infers
+   what needs to be registered and registers it. If you want to use
+   Grok, we recommend to use only Grok, and to not try to mix Grok
+   with ZCML declaration.
 
 .. note:: 
 
