@@ -2,11 +2,12 @@
 Installing Silva with Buildout
 ==============================
 
-Buildout is a tool used to automatise software installation. You can
-install Silva easily with the help of that tool.
+Buildout is a tool used to automate software installation. Installing
+Silva using buildout will greatly reduce the chance of errors and the
+time needed.
 
-Requirement
------------
+Requirements
+------------
 
 Installation under Linux Ubuntu/Debian
 ``````````````````````````````````````
@@ -45,17 +46,17 @@ Installation under Linux Ubuntu/Debian
 
 	  $ sudo apt-get install zlib1g-dev 
 
-   Silva uses PIL, the Python Imaging Library when using images.
-   You might want to make sure that you have the ``libjpeg`` (``jpeglib.h``) 
-   library installed otherwise, PIL cannot use jpeg images. 
-   On Ubuntu / Debian systems, run:
+   Silva uses PIL, the Python Imaging Library when using images.  You
+   might want to make sure that you have the ``libjpeg``
+   (``jpeglib.h``) library installed otherwise, PIL cannot use jpeg
+   images.  On Ubuntu / Debian systems, run:
 
    .. code-block:: sh
 
 	  $ sudo apt-get install libjpeg62-dev 
 
-   Silva use libXML and libXSLT has well, so you need to install them
-   as well:
+   Silva also uses libXML2 and libXSLT, so you need to install them as
+   well:
 
    .. code-block:: sh
   
@@ -138,15 +139,16 @@ And ``libxml2`` and ``libxslt``:
 Installing Silva to test it with Paster
 ---------------------------------------
 
-You can install Silva using Paster to test it in a quick way. If you
-want to setup a environment for production or development we recommend
-to do a SVN check out of the buildout located in the Infrae SVN. This
-will let you upgrade your Silva instance more easily after.
+You can install Silva using Paster if you want to take it for a quick
+test drive. If you want to set up a production or development
+environment we recommend to do a SVN check out of the buildout located
+in the Infrae SVN. This will let you upgrade your Silva instance more
+easily after.
 
 Installing Paster
 `````````````````
 
-You need to install Python Setuptools which is need to install
+You need to install Python Setuptools which is needed to install
 ZopeSkel. On UNIX systems, this can be installed by your OS package
 manager, for example on Ubuntu / Debian systems, run:
 
@@ -180,19 +182,18 @@ command:
 
     This install can take a while. ``easy_install`` will download some
     python packages from external software repositories like
-    `sourceforge.net <http://sourceforge.net/>`_.  It could be that
-    some of these servers are down. In that case you will get a
-    connection timeout error, but you can try it again, until the
-    command succeeds.
+    `sourceforge.net <http://sourceforge.net/>`_. It could be that
+    one of these servers is temporarily unavailable. In that case you
+    will get a connection timeout error, but you can try it again,
+    until the command succeeds.
 
 
 Creating a Silva Buildout tree
 ``````````````````````````````
 
 The ZopeSkel package installed a script called ``paster`` on your
-system.  This can be used to install several CMS products including
-Silva.  First we'll test if the Silva templates are present by
-running:
+system. This can be used to install several CMS products including
+Silva. First we'll test if the Silva templates are present by running:
 
 .. code-block:: sh
 
@@ -233,21 +234,21 @@ Paster will now ask you the following questions:
 
 ``Enter zope_password`` 
 
-   A password for the user you mentioned above. You must fill in
-   something here, otherwise you will not be able to log in.
+   A password for the user mentioned above. You must fill in something
+   here, otherwise you will not be able to log in.
 
 ``Enter http_port`` 
 
-   TCP Port number on which the server will run.
+   HTTP Port number on which the server will run.
 
 ``Enter debug_mode`` 
 
-  Should debug mode be "on" or "off"? We recommend to let it off.
+  Debug mode is useful for tracking down problems when developing. For
+  a simple test deployment we recommend to turn it off.
 
 ``Enter verbose_security``
 
-  Should verbose security (an another debug functionality) should be
-  "on" or "off"? We recommend to let it off.
+  Again, really only useful in a development context.
 
 After replying to these questions, paster will generate a Silva
 environment in the ``project name`` directory.
