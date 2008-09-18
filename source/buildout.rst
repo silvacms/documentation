@@ -141,9 +141,9 @@ Installing Silva to test it with Paster
 
 You can install Silva using Paster if you want to take it for a quick
 test drive. If you want to set up a production or development
-environment we recommend to do a SVN check out of the buildout located
-in the Infrae SVN. This will let you upgrade your Silva instance more
-easily after.
+environment we recommend you do a SVN check out of the buildout
+located in the Infrae SVN. This will let you upgrade your Silva
+instance more easily at a later date.
 
 Installing Paster
 `````````````````
@@ -202,9 +202,9 @@ Silva. First we'll test if the Silva templates are present by running:
 Paster will now print a list of templates, this list should contain an
 entry called ``silva_buildout``.
 
-Now we will create a Silva environment with paster. 
-First go to a directory where you want to install Silva, then 
-run the paster script with the following arguments:
+Now we will create a Silva environment with paster.  First go to a
+directory where you want to install Silva, then run the paster script
+with the following arguments:
 
 .. code-block:: sh
 
@@ -219,8 +219,8 @@ Paster will now ask you the following questions:
 
 ``Enter zope2_install``
 
-   Path to existing Zope 2 setup, leave this blank to download a new
-   one.
+   Path to an existing Zope 2 setup, leave this blank to download and
+   create new one.
 
 ``Enter silva_distribution`` 
 
@@ -243,8 +243,9 @@ Paster will now ask you the following questions:
 
 ``Enter debug_mode`` 
 
-  Debug mode is useful for tracking down problems when developing. For
-  a simple test deployment we recommend to turn it off.
+   Debug mode is useful for tracking down problems when
+   developing. For a simple test deployment we recommend to turn it
+   off.
 
 ``Enter verbose_security``
 
@@ -329,10 +330,10 @@ sub-directory of your Buildout tree. Here we are going to use the
 
 This will create some files, most importantly one called
 ``buildout.cfg`` in your Buildout tree. It's going to be your
-configuration file to control what you want to be installed, and
-how. Refer to the next documentation part to learn how to extend it.
+configuration file to control what you want installed, and how. Refer
+to the next documentation part to learn how to extend it.
 
-After you can run the installation:
+After this you can run the installation:
 
 .. code-block:: sh
 
@@ -357,26 +358,26 @@ Default parts defined in the Silva are:
 
 ``zope2``
 
-   Zope 2 installation. You may don't want to change that
-   parts. Available options are defined `on the zope2install recipe
-   description page
+   Zope 2 installation. You may not want to change that part, as it's
+   rarely needed for Silva. Available options are defined `on the
+   zope2install recipe description page
    <http://pypi.python.org/pypi/plone.recipe.zope2install>`_.
 
 ``silva-all``
 
-   Is all Silva software, coming from the Infrae SVN repository.
+   All Silva software, coming from the Infrae SVN repository.
 
 ``instance``
 
-   Is your Zope 2 instance. You may want to add/customize settings
+   Your Zope 2 instance. You may want to add/customize settings
    here. All available options are referenced `on the zope2instance
    recipe description page
    <http://pypi.python.org/pypi/plone.recipe.zope2instance>`_.
 
 
-To extends modify settings in a part, you just add it your
+To extend or modify settings in a part, you just add it to your
 configuration file, ``buildout.cfg``. For instance to change the port
-number of your zope instance, add this:
+number of your zope instance to 8086, add this:
 
 .. code-block:: ini
 
@@ -385,9 +386,9 @@ number of your zope instance, add this:
 
 
 Some configuration options accept more than one value. In that case
-they are mentioned as one value per line. You can extends existing
+they are mentioned as one value per line. You can extend existing
 options using the ``+=`` operator instead of ``=`` to add new values,
-or ``-=`` to remove mentioned ones.
+or ``-=`` to remove existing ones.
 
 .. note::
 
@@ -402,9 +403,10 @@ Adding new software to your setup
 
 * Software packaged as a tarball:
 
-  We are going to add a new part to install that software, using the
-  `distros recipe <http://pypi.python.org/pypi/plone.recipe.distros>`_
-  and refer it to our instance.
+  We can add a new part to install software packaged as a tarball,
+  using the `distros recipe
+  <http://pypi.python.org/pypi/plone.recipe.distros>`_ and refer it to
+  our instance.
 
   So for instance to install `PASRaduis
   <http://www.zope.org/Members/shimizukawa/PASRadius>`_:
@@ -420,7 +422,7 @@ Adding new software to your setup
      products +=
          ${distros-extra:location}
 
-  You can mention more than one URL of course.
+  You can use more than one URL of course.
 
 * Software coming from a SVN repository:
 
@@ -429,7 +431,7 @@ Adding new software to your setup
   <http://pypi.python.org/pypi/infrae.subversion>`_ and refer it to
   our instance.
 
-  We take here the example of the SilvaMailing product:
+  We take here the example of the trunk of the SilvaMailing product:
 
   .. code-block:: ini
 
@@ -446,12 +448,12 @@ Adding new software to your setup
    
   .. note::
 
-     We don't recommend to *trunk* version of SVN repository if you
+     We don't recommend to *trunk* version of any SVN repository if you
      want to setup an instance for production, but *tag*.
 
 * Software packaged as a Python egg:
 
-  You just reference them in your ``instance`` section:
+  You simply reference them in your ``instance`` section:
 
   .. code-block:: ini
 
@@ -461,8 +463,8 @@ Adding new software to your setup
      zcml +=
          silva.app.base
 
-  The ``eggs`` directive add them to the Zope environment, the
-  ``zcml`` let Zope load it Zope 3 configuration type.
+  The ``eggs`` directive adds it to the Zope environment, the
+  ``zcml`` lets Zope load its Zope 3 configuration.
 
 * Software not packaged, being a Zope product:
 
@@ -522,11 +524,11 @@ ZEO Setup
 ~~~~~~~~~
 
 You can define a ZEO-setup with the help of Buildout. Since it's going
-always to reproduce the same setup, you will be sure that all your ZEO
-node runs exactly the same software release/products.
+to reliably reproduce the exact same setup, you will be sure that all
+your ZEO node run exactly the same software releases/products.
 
 In the ``profiles`` sub-directory of your Buildout tree is defined a
-``zeo-instance.cfg`` profile. You can extends that one instead of
+``zeo-instance.cfg`` profile. You can extend that one instead of
 ``simple-instance.cfg``. It defines a new part, called ``zeoserver``
 which will be the ZEO server. It's created with the help of the
 `zope2zeoserver recipe
@@ -537,10 +539,10 @@ server. By default it listen on the port 8100 of the computer.
 Your ZEO setup can be distributed on more than one computer, so in
 fact we are going to build a profile for your setup which can be
 extended again locally on each computer to select only what you want
-to run. 
+to run.
 
-After extending the ZEO configuration like explained, you add all your
-wanted options in your ``buildout.cfg`` file, like for a normal Zope
+After extending the ZEO configuration like explained, you add all the
+desired options in your ``buildout.cfg`` file, like for a normal Zope
 instance (add reference to new Products, Python extensions and so
 on). Rename it to the name you want, it will be your base profile to
 re-use:
@@ -552,17 +554,18 @@ re-use:
 
 .. note::
 
-   You need to keep this new profile file with your ``buildout.cfg`` to
-   be able to re-create your environment.
+   You need to keep this new profile file with your ``buildout.cfg``
+   to be able to re-create your environment. It is a good idea to back
+   it up somewhere 'off server' and possible to keep it under version
+   control, to be able to go back to an earlier set-up.
 
-Now, it's going to be a slightly more complicated. We want to have
-more than one instance with the same configuration, so more than one
-part with the same options, but we don't want to copy them more than
-one time, to prevent synchronization error between them. So our
-``instance`` section will become our configuration, and we are going
-to use the `macro recipe
-<http://pypi.python.org/pypi/zc.recipe.macro>`_ to create several Zope
-instances with the same configuration.
+Now, it's going to be slightly more complicated. We want to have more
+than one instance with the same configuration, so more than one part
+with the same options, but we don't want to copy them more than once,
+to prevent synchronization errors between them. So our ``instance``
+section will become our configuration, and we are going to use the
+`macro recipe <http://pypi.python.org/pypi/zc.recipe.macro>`_ to
+create several Zope instances with the same configuration.
 
 For the moment, we need to use a development version of this
 recipe. In you profile file ``mycorp.cfg``, add the options to the
@@ -604,7 +607,8 @@ special settings for each of them.
    [client6-conf]
    port = 8090
 
-And now we generate a part for each Zope instance, always in the same profile file:
+And now we generate a part for each Zope instance, always in the same
+profile file:
 
 .. code-block:: ini
 
@@ -621,8 +625,8 @@ And now we generate a part for each Zope instance, always in the same profile fi
       client5:client5-conf
       client6:client6-conf
 
-We can now use our profile. Your ``buildout.cfg`` file will be for you
-ZEO server, with two ZEO clients:
+We can now use our profile. Your ``buildout.cfg`` file will be for
+your ZEO server, with two ZEO clients:
 
 .. code-block:: ini
 
@@ -677,7 +681,7 @@ tag, and re-run buildout:
 
    It's recommended to do a backup of your data before.
 
-And that's done !
+And that's it!
 
 
 Using Buildout
@@ -701,13 +705,13 @@ A Buildout tree contains the following sub-directories:
 
 ``bin``
 
-   Contains all generated script to use installed software. This
-   should contains start/stop scripts for your Zope/ZEO
+   Contains all generated scripts to use installed software. This
+   should contain start/stop scripts for your Zope/ZEO
    instance/server, maildrophost server.
 
 ``parts``
 
-   Contains software components. **This directory can be deleted**
+   Contains software components. **This directory could be deleted**
    when you re-run buildout to upgrade your tree. You should not make
    any changes inside it.
 
