@@ -5,4 +5,4 @@ Silva API
    :maxdepth: 2
 
    silvaobject
-
+   version
