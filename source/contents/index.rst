@@ -10,4 +10,5 @@ Create content types
    xsltrender
    forms
    xml
+   permission
    api/index
