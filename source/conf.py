@@ -159,6 +159,8 @@ htmlhelp_basename = 'SilvaDocumentationCenterdoc'
 latex_documents = [
   ('index', 'SilvaReference.tex', 'Silva Reference Guide',
    'Infrae', 'manual'),
+  ('buildout', 'InstallingSilva.tex', 'Silva Installation Guide',
+   'Infrae', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
