@@ -152,14 +152,14 @@ We don't recommand (and support) Windows as a production environment.
 
       The default installation path is perfect.
 
-  After, right-click on *My Computer* on your desktop, and select
-  *Manage*. Click on the *Advanced* tab, and click on the button
-  *Environment variable*. Here you select *Path*, and click on
-  modify. You append your path to your Python binary here, so
-  ``C:\Python24`` for the default installation path.
+   After, right-click on *My Computer* on your desktop, and select
+   *Manage*. Click on the *Advanced* tab, and click on the button
+   *Environment variable*. Here you select *Path*, and click on
+   modify. You append your path to your Python binary here, so
+   ``C:\Python24`` for the default installation path.
 
-  Now if you start a shell (click on *Start*, *Run*, type ``cmd``
-  and enter), you should be able to run ``python`` directly in it.
+   Now if you start a shell (click on *Start*, *Run*, type ``cmd``
+   and enter), you should be able to run ``python`` directly in it.
 
 2. We need to have a working compiler as well. So we are going to
    install MinGW. Download and run the installer from `Sourceforge
@@ -196,6 +196,13 @@ We don't recommand (and support) Windows as a production environment.
    We recommand to install `PySVN for Windows, Python 2.4 and SVN 1.5.2
    <http://pysvn.tigris.org/files/documents/1233/43646/py24-pysvn-svn152-1.6.1-1024.exe>`_.
 
+4. You can download and install ``libjpeg`` from the `GNUWin32
+   Sourceforge page <http://gnuwin32.sourceforge.net/downlinks/jpeg.php>`_.
+
+   *You need to select the same path than MinGW for installation*, and
+   remove any ``GNUWin32`` append to that installation path, to get
+   exactly the same installation path.
+
 .. warning::
 
    It's recommanded to work in directories which don't have any spaces
@@ -208,6 +215,12 @@ We don't recommand (and support) Windows as a production environment.
    Windows don't use the same separator in paths, so when you will be
    asked to type ``bin/buildout`` in your shell, type ``bin\buildout``
    instead.
+
+Installation notes for others systems
+`````````````````````````````````````
+
+If you want to install Python by hand, don't forget that it need to
+have support for ZLib, and SSL (usually provided by OpenSSL).
 
 
 Installing Silva to test it with Paster
@@ -820,3 +833,79 @@ A Buildout tree contains the following sub-directories:
 
 Troubleshooting
 ```````````````
+
+1. Under Windows, with SVN 1.5:
+
+   .. code-block:: sh
+
+     unrecognized .svn/entries format; skipping .
+     Traceback (most recent call last):
+       File "c:\docume~1\arthur\locals~1\temp\tmpnmclvm", line 11, in ?
+         execfile('C:\\silva-trunk\\src/five.grok\\setup.py')
+       File "C:\silva-trunk\src/five.grok\setup.py", line 38, in ?
+         entry_points="""
+       File "C:\Python24\lib\distutils\core.py", line 149, in setup
+         dist.run_commands()
+       File "C:\Python24\lib\distutils\dist.py", line 946, in run_commands
+         self.run_command(cmd)
+       File "C:\Python24\lib\distutils\dist.py", line 966, in run_command
+         cmd_obj.run()
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\d
+     evelop.py", line 27, in run
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\d
+     evelop.py", line 85, in install_for_development
+       File "C:\Python24\lib\distutils\cmd.py", line 333, in run_command
+         self.distribution.run_command(command)
+       File "C:\Python24\lib\distutils\dist.py", line 966, in run_command
+         cmd_obj.run()
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
+     gg_info.py", line 171, in run
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
+     gg_info.py", line 252, in find_sources
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
+     gg_info.py", line 306, in run
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
+     gg_info.py", line 333, in add_defaults
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\s
+     dist.py", line 45, in walk_revctrl
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\s
+     dist.py", line 52, in _default_revctrl
+       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\s
+     dist.py", line 98, in entries_finder
+     NameError: global name 'log' is not defined
+     While:
+       Installing.
+       Processing develop directory 'C:\\silva-trunk\\src/five.grok'.
+     
+     An internal error occured due to a bug in either zc.buildout or in a
+     recipe being used:
+     Traceback (most recent call last):
+       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
+     c\buildout\buildout.py", line 1477, in main
+       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
+     c\buildout\buildout.py", line 324, in install
+       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
+     c\buildout\buildout.py", line 556, in _develop
+       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
+     c\buildout\easy_install.py", line 866, in develop
+     AssertionError
+        
+   You have to fix it by hand. In a shell, do:
+
+   .. code-block:: sh
+
+      C:\Silva-trunk>cd eggs
+      C:\Silva-trunk\eggs>move setuptools-0.6c8-py2.4.egg setuptools-0.6c8-py2.4.egg.zip
+
+   After with the explorer, unpack the archive
+   ``setuptools-0.6c8-py2.4.egg`` in that same folder to the same
+   folder. Delete the archive after. Edit the file
+   ``setuptools-0.6c8-py2.4.egg\setuptools\commands\sdist.py``, add a
+   line at the top of it:
+
+   .. code-block:: python
+
+      from distutils import log
+
+   Rerun buildout, and thanks setuptools' maintainers for a good test
+   coverage of their software.
