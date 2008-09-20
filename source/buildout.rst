@@ -70,7 +70,7 @@ Silva 2.x needs Python 2.4 to work. You need first to install `XCode
 <http://developer.apple.com/tools/xcode/>`_ in order to have a working
 compiler.
 
-After that, you can install `macports <http://www.macports.org/>`_ to
+After that, you can install `MacPorts <http://www.macports.org/>`_ to
 install Python and other required tools. Don't forget to update your
 ``~/.bashrc`` file with:
 
@@ -136,6 +136,76 @@ And ``libxml2`` and ``libxslt``:
   $ make distclean
   
 
+Installation under Windows 
+``````````````````````````
+
+We don't recommand (and support) Windows as a production environment.
+
+1. First you need to install `Python 2.4
+   <http://www.python.org/ftp/python/2.4.4/python-2.4.4.msi>`_.
+
+   .. warning::
+
+      Don't install Python in a directory so it will contain spaces in
+      its path when you are going to call the binary afterwards. Some
+      Python programs might have problems with that.
+
+      The default installation path is perfect.
+
+  After, right-click on *My Computer* on your desktop, and select
+  *Manage*. Click on the *Advanced* tab, and click on the button
+  *Environment variable*. Here you select *Path*, and click on
+  modify. You append your path to your Python binary here, so
+  ``C:\Python24`` for the default installation path.
+
+  Now if you start a shell (click on *Start*, *Run*, type ``cmd``
+  and enter), you should be able to run ``python`` directly in it.
+
+2. We need to have a working compiler as well. So we are going to
+   install MinGW. Download and run the installer from `Sourceforge
+   <https://sourceforge.net/project/showfiles.php?group_id=2435&package_id=240780>`_.
+   
+   In the installer, select at least the minimal distribution, with
+   the C++ compiler and the make utility. Like for Python, don't
+   select an installation path with spaces, the default one is the
+   perfect.
+
+   Like you did for Python, just add your installation path plus
+   ``/bin`` (i.e. ``C:\MinGW\bin`` for the default installation path)
+   to your path environment variable. You should be able to type
+   ``gcc`` in a newly created shell.
+
+   In your Python installation path plus ``\Lib\distutils`` (so
+   ``C:\Python24\Lib\distutils`` for the default installation path)
+   create a file called ``distutils.cfg`` which contains:
+
+   .. code-block:: ini
+
+      [build]
+      compiler=mingw32
+
+   This will tells Python to use MinGW to compile needed extensions.
+
+3. We need at last Subversion. You can download and install it from
+   the `Slik distribution page <http://www.sliksvn.com/en/download>`_.
+
+   After, you should be able to type ``svn help`` in a newly created
+   shell.
+
+.. warning::
+
+   It's recommanded to work in directories which don't have any spaces
+   in their paths. When you will be asked to checkout files from SVN
+   to create your buildout directory, keep this in mind (or you will
+   have problems).
+
+.. note::
+
+   Windows don't use the same separator in paths, so when you will be
+   asked to type ``bin/buildout`` in your shell, type ``bin\buildout``
+   instead.
+
+
 Installing Silva to test it with Paster
 ---------------------------------------
 
@@ -156,10 +226,16 @@ manager, for example on Ubuntu / Debian systems, run:
 
   $ sudo apt-get install python-setuptools
 
+Under Mac OS X, you can use MacPorts:
+
+.. code-block:: sh
+
+  $ sudo port install py-setuptools
+
 Otherwise you can install setuptools by hand by downloading the
 ``ez_setup`` script from
 http://peak.telecommunity.com/dist/ez_setup.py and then running it
-with the python that you want to use, for example:
+with the python that you want to use, for example under Unix:
 
 .. code-block:: sh
         
@@ -168,15 +244,24 @@ with the python that you want to use, for example:
    $ sudo python2.4 ez_setup.py
 
 
-Now that we have the setuptools installed, we can use easy_install to
-install ZopeSkel. This should be very easy. Just run the following
-command:
+Now that we have the setuptools installed, we can use ``easy_install``
+to install ZopeSkel. This scripts have been installed in the same
+directory than your Python directory. This should be very easy. Just
+run the following command:
 
 .. code-block:: sh
 
    $ sudo easy_install-2.4 -U ZopeSkel
 
+If you are under Mac OS X, we recommand to use the option ``-s``. By
+default ``easy_install`` put all scripts in the same directory than
+Python, which is hided inside a framework on Mac OS X. By specifying
+``-s /opt/local/bin`` installed scripts are going to be installed in
+the same directory than Mac Ports softwares:
 
+.. code-block:: sh
+
+   $ sudo easy_install-2.4 -s /opt/local/bin -U ZopeSkel
 
 .. note:: 
 
@@ -306,7 +391,7 @@ Run the following command to fetch files from SVN:
 
 .. code-block:: sh
 
-   $ svn co https://svn.infrae.com/buildout/silva/tags/Silva-2.1 Silva
+   $ svn co https://svn.infrae.com/buildout/silva/tag/Silva-2.1 Silva
 
 You can consult the ``README.txt`` file in the newly created ``Silva``
 directory which can contain additional information for the specific
