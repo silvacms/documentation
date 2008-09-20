@@ -187,10 +187,14 @@ We don't recommand (and support) Windows as a production environment.
    This will tells Python to use MinGW to compile needed extensions.
 
 3. We need at last Subversion. You can download and install it from
-   the `Slik distribution page <http://www.sliksvn.com/en/download>`_.
+   the `Slik distribution page <http://www.sliksvn.com/en/download>`_
+   (select the version 1.5.2).
 
    After, you should be able to type ``svn help`` in a newly created
    shell.
+
+   We recommand to install `PySVN for Windows, Python 2.4 and SVN 1.5.2
+   <http://pysvn.tigris.org/files/documents/1233/43646/py24-pysvn-svn152-1.6.1-1024.exe>`_.
 
 .. warning::
 
