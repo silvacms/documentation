@@ -148,9 +148,8 @@ We don't recommand (and support) Windows as a production environment.
 
       Don't install Python in a directory so it will contain spaces in
       its path when you are going to call the binary afterwards. Some
-      Python programs might have problems with that.
-
-      The default installation path is perfect.
+      Python programs might have problems with that. The default
+      installation path is perfect.
 
    After, right-click on *My Computer* on your desktop, and select
    *Manage*. Click on the *Advanced* tab, and click on the button
@@ -186,9 +185,9 @@ We don't recommand (and support) Windows as a production environment.
 
    This will tells Python to use MinGW to compile needed extensions.
 
-3. We need at last Subversion. You can download and install it from
-   the `Slik distribution page <http://www.sliksvn.com/en/download>`_
-   (select the version 1.5.2).
+3. We need Subversion. You can download and install it from the `Slik
+   distribution page <http://www.sliksvn.com/en/download>`_ (select
+   the version 1.5.2).
 
    After, you should be able to type ``svn help`` in a newly created
    shell.
@@ -447,6 +446,28 @@ port 8080. The default administrator user name is ``admin`` and the
 corresponding password ``admin``. Of course we highly recommend that
 you change the password in the Zope Management Interface.
 
+
+Available profiles
+~~~~~~~~~~~~~~~~~~
+
+The following interesting profiles are available:
+
+``development``
+
+   Setup Silva in development mode. Debug options are activated by
+   default, and some extra development tools are installed.
+
+``simple-instance``
+
+   Recommanded profiles for a production instance.
+
+``zeo-instance``
+
+   Base profile for a ZEO setup. This install a ZEO server and a ZEO
+   client instead of a simple instance. Refer to :ref:`zeo-setup` for
+   more details about that profile.
+
+
 Extending your installation
 ```````````````````````````
 
@@ -621,6 +642,8 @@ MaildropHost with the help of the `maildrophost recipe
 The ``maildrophost`` part will install and configure MaildropHost, and
 create a ``bin/maildrophost`` script to start/stop the MaildropHost
 daemon.
+
+.. _zeo-setup:
 
 ZEO Setup
 ~~~~~~~~~
