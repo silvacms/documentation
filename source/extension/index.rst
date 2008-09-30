@@ -22,7 +22,7 @@ components with Silva:
 
 .. note:: 
 
-   ZCML is a XML file format called ``configure.zcml`` by
+   ZCML is a XML file format, in a file called ``configure.zcml`` by
    default. This file uses namespaced tags to be able to handle
    different registration actions used by the Silva extension. In this
    documentation, we be making a ``configure.zcml`` file for the blog
