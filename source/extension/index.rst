@@ -185,7 +185,7 @@ Installation into the Silva Root
 --------------------------------
 
 You need to have an installer which is going to install our extension
-in the selected Silva root. An installer is a class which define the
+in the selected Silva root. An installer is a class that defines the
 following methods:
 
 ``install``
@@ -206,21 +206,21 @@ the ``__init__.py`` file of your extension.
 A default installer can be used, and extended. It provides the
 following installation steps:
 
-1. Add addable contents (all Silva content, no version content) to the
-   addable list of the Silva site.
+1. Add addable content (all Silva content, no version content) to the
+   list of addables of the Silva site.
 
 2. Register contents to the metadata service, to be able to set them
    on our objects. All contents are registered, but for versioned
-   contents, class representing versions are registered instead of the
-   class representing the content itself.
+   content objects, classes representing versions are registered
+   instead of the class representing the content itself.
 
 3. Eventually if you have one, register the ``views`` directory of
    your extension to the ``service_views``.
 
-You don't need more steps to build an extension which create/add new
-content in Silva.
+You don't need anything else to build an extension that adds new
+content types to Silva.
 
-As well, this installer use a marker interface on the
+Also, this installer uses a marker interface on the
 ``service_extensions`` to known if the extension is installed.
 
 So you can add to the ``__init__.py`` of our extension:
