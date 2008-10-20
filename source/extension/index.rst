@@ -150,7 +150,7 @@ After, if you use buildout, you can update your ``buildout.cfg`` file:
   zcml +=
      silva.app.blog
 
-Add re-run ``buildout``:
+And re-run ``buildout``:
 
 .. code-block:: sh
 
