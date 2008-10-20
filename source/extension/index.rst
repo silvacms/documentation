@@ -170,10 +170,10 @@ the command ``easy_install``.
 
   - Because of the use of specific Zope python package, only present
     in a Zope environment, you may not be able to use your egg outside
-    Zope. That's means as well you can't create an egg called
-    `silva.mytech`, and `silva.mytech.extension`, if the first use
-    some specific Zope package, otherwise operation on this egg
-    (building, uploading) may fails due to missing import (these
+    Zope. That also means you can't create an egg called
+    `silva.mytech`, and `silva.mytech.extension`, if the first uses
+    some specific Zope package, otherwise operations on this egg
+    (building, uploading) may fail due to missing imports (these
     operations are not done by Zope or in a Zope environment).
 
 
