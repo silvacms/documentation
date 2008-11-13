@@ -35,7 +35,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General substitutions.
-project = 'Silva Documentation Center'
+project = 'Infrae Documentation Center'
 copyright = '2008, Infrae'
 
 # The default replacements for |version| and |release|, also used in various
@@ -142,7 +142,7 @@ html_last_updated_fmt = '%b %d, %Y'
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'SilvaDocumentationCenterdoc'
+htmlhelp_basename = 'InfraeDocumentationCenter'
 
 
 # Options for LaTeX output
@@ -157,9 +157,9 @@ htmlhelp_basename = 'SilvaDocumentationCenterdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'SilvaReference.tex', 'Silva Reference Guide',
+  ('silva/index', 'SilvaReference.tex', 'Silva Reference Guide',
    'Infrae', 'manual'),
-  ('buildout', 'InstallingSilva.tex', 'Silva Installation Guide',
+  ('silva/buildout', 'InstallingSilva.tex', 'Silva Installation Guide',
    'Infrae', 'manual'),
 ]
 
