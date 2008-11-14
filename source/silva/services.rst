@@ -31,7 +31,7 @@ module:
 
   from Products.PageTemplates.PageTemplateFile import PageTemplateFile
   from Products.Silva.helpers import add_and_edit
-  
+
   def manage_addMySortingService(self, id, REQUEST=None):
       """Add a sorting service.
       """
@@ -57,15 +57,14 @@ You can define view on your service for administration tasks:
 
 .. code-block:: python
 
-  from silva.core.views import views
+  from silva.core.views import views as silvaviews
 
-  MySortingSettings(views.ZMIView):
+  class MySortingSettings(silvaviews.ZMIView):
 
       silvaconf.context(MySortingService)
-      silvaconf.require('zope2.ViewManagementScreens')
       silvaconf.name('manage_sorting')
-      ...
-      
+
+
 
 Rules on ZMI views are exactly the same than on public views, however
 there is no ``content`` attribute on them (since it's not for a
@@ -87,3 +86,37 @@ If you need to write template, your can use the following skeleton:
       </div>
     </body>
   </html>
+
+
+Edit form on your service
+-------------------------
+
+You can used formlib-based forms in your service. For instance, let's
+take the following interface:
+
+.. code-block:: python
+
+  from Products.Silva.interfaces import ISilvaLocalService
+  from zope import schema
+
+  class IFilesService(ISilvaLocalService):
+
+      storage = schema.Choice(title=_(u"Files Storage"),
+                              description=_(u"Method used to store files"),
+                              required=True,
+                              vocabulary="File Storage Type")
+
+
+You can defined an edition form like this:
+
+.. code-block:: python
+
+  from five import grok
+
+  class FileServiceManagementView(silvaviews.ZMIEditForm):
+
+      silvaconf.context(IFilesService)
+      silvaconf.name('manage_filesservice')
+
+      form_fields = grok.Fields(IFilesService)
+

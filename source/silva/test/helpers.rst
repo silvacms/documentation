@@ -31,3 +31,10 @@ Some helpers can be used in you test to accomplish some actions.
    :param obj: approved object to publish.
 
    Publish the given object.
+
+.. function:: openTestFile(filename, mode='rb')
+
+   :param filename: name of the file in the ``data`` directory.
+   :param mode: which mode the file should be opened.
+
+   Open a test file, and return a file descriptor object.

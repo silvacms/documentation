@@ -13,7 +13,7 @@ way:
   class XSLTBlogRenderer(XSLTRendererBase):
 
       silvaconf.context(Blog)
-      silvaconf.title('XSLT Renderer over blogs')
+      silvaconf.title('XSLT Renderer for blogs')
       silvaconf.XSLT(myrules.xslt')
 
 

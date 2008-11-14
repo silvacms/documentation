@@ -97,14 +97,14 @@ going to be created using your version's interface *(line 8)*:
 .. code-block:: python
   :linenos:
 
-  from zope.formlib import form
+  from five import grok
 
   class MyContentAddForm(silvaforms.AddForm):
 
      silvaconf.context(IMyContent)
      silvaconf.name("My Content")
 
-     form_fields = form.FormFields(IMyVersionContent)
+     form_fields = grok.Fields(IMyVersionContent)
 
 After having created the new content, the add form is going to fill
 values for these fields on the *editable* object returned by your
@@ -136,7 +136,7 @@ create form fields using the version's interface *(line 5)*:
 
        silvaconf.context(IMyContext):
 
-       form_fields = form.FormFields(IMyVersionContent)
+       form_fields = grok.Fields(IMyVersionContent)
 
 
 Others forms
@@ -155,13 +155,13 @@ with settings fields:
           title=u"Hide email address",
           default=True,
           required=False)
- 
+
 
 And after you can use this interface for your form:
 
 .. code-block:: python
 
-  from zope.formlib import form
+  from five import grok
 
   class MyContentSettingsForm(silvaforms.PageForm):
 
@@ -169,12 +169,12 @@ And after you can use this interface for your form:
        silvaconf.name("tab_settings")
 
        # Set form fields using our new interface
-       form_fields = form.FormFields(IMyContentSettings) 
+       form_fields = grok.Fields(IMyContentSettings)
 
        # Define one action
-       @silvaforms.action(u"Send information")
+       @grok.action(u"Send information")
        def action_send(self, action, data):
-            # data['hide_email'] contain the validated form value 
+            # data['hide_email'] contain the validated form value
 
 
 
