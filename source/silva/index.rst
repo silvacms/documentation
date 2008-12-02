@@ -11,6 +11,7 @@ Silva Developer Documentation
    services
    layout
    test/index
+   development_guidelines
 
 Indices and tables
 ==================

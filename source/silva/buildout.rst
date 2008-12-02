@@ -20,14 +20,14 @@ Installation under Linux Ubuntu/Debian
    system. For example, on Ubuntu/Debian systems, type:
 
    .. code-block:: sh
- 
-      $ sudo apt-get install python2.4 
+
+      $ sudo apt-get install python2.4
 
 2. Python 2.4 headers and development add-ons
 
    On UNIX systems,  the buildout will also need the python header
    files. If you compiled python by hand, these files are already on your
-   system, otherwise you can install them with the package manager of your 
+   system, otherwise you can install them with the package manager of your
    choice.
 
    f.e. on Ubuntu and Debian systems, run:
@@ -36,7 +36,7 @@ Installation under Linux Ubuntu/Debian
 
       $ sudo apt-get install python2.4-dev build-essential
 
-   You will also need a working C compiler (gcc), which is what the 
+   You will also need a working C compiler (gcc), which is what the
    ``build-essential`` package will install.
 
    Another set of headers that need to be present is the zlib compression
@@ -44,7 +44,7 @@ Installation under Linux Ubuntu/Debian
 
    .. code-block:: sh
 
-	  $ sudo apt-get install zlib1g-dev 
+	  $ sudo apt-get install zlib1g-dev
 
    Silva uses PIL, the Python Imaging Library when using images.  You
    might want to make sure that you have the ``libjpeg``
@@ -53,13 +53,13 @@ Installation under Linux Ubuntu/Debian
 
    .. code-block:: sh
 
-	  $ sudo apt-get install libjpeg62-dev 
+	  $ sudo apt-get install libjpeg62-dev
 
    Silva also uses libXML2 and libXSLT, so you need to install them as
    well:
 
    .. code-block:: sh
-  
+
       $ sudo apt-get install libxml2-dev libxslt1-dev
 
 
@@ -134,9 +134,9 @@ And ``libxml2`` and ``libxslt``:
   $ cd /usr/ports/textproc/libxslt
   $ make install
   $ make distclean
-  
 
-Installation under Windows 
+
+Installation under Windows
 ``````````````````````````
 
 We don't recommand (and support) Windows as a production environment.
@@ -163,7 +163,7 @@ We don't recommand (and support) Windows as a production environment.
 2. We need to have a working compiler as well. So we are going to
    install MinGW. Download and run the installer from `Sourceforge
    <https://sourceforge.net/project/showfiles.php?group_id=2435&package_id=240780>`_.
-   
+
    In the installer, select at least the minimal distribution, with
    the C++ compiler and the make utility. Like for Python, don't
    select an installation path with spaces, the default one is the
@@ -254,7 +254,7 @@ http://peak.telecommunity.com/dist/ez_setup.py and then running it
 with the python that you want to use, for example under Unix:
 
 .. code-block:: sh
-        
+
    $ cd /tmp
    $ wget http://peak.telecommunity.com/dist/ez_setup.py
    $ sudo python2.4 ez_setup.py
@@ -279,7 +279,7 @@ the same directory than Mac Ports softwares:
 
    $ sudo easy_install-2.4 -s /opt/local/bin -U ZopeSkel
 
-.. note:: 
+.. note::
 
     This install can take a while. ``easy_install`` will download some
     python packages from external software repositories like
@@ -313,7 +313,7 @@ with the following arguments:
 
 Paster will now ask you the following questions:
 
-``Enter project name`` 
+``Enter project name``
 
    This is the name of your project, a directory with this name will
    be created to install the Silva instance in.
@@ -323,7 +323,7 @@ Paster will now ask you the following questions:
    Path to an existing Zope 2 setup, leave this blank to download and
    create new one.
 
-``Enter silva_distribution`` 
+``Enter silva_distribution``
 
    Choose to install stable version of Silva.
 
@@ -333,16 +333,16 @@ Paster will now ask you the following questions:
    administrate the site.
 
 
-``Enter zope_password`` 
+``Enter zope_password``
 
    A password for the user mentioned above. You must fill in something
    here, otherwise you will not be able to log in.
 
-``Enter http_port`` 
+``Enter http_port``
 
    HTTP Port number on which the server will run.
 
-``Enter debug_mode`` 
+``Enter debug_mode``
 
    Debug mode is useful for tracking down problems when
    developing. For a simple test deployment we recommend to turn it
@@ -392,7 +392,7 @@ We highly recommend to use tags for production website.
 
 The development branches of main version are located in::
 
-  https://svn.infrae.com/buildout/silva/branch 
+  https://svn.infrae.com/buildout/silva/branch
 
 and (for the main or newest development branch)::
 
@@ -538,7 +538,7 @@ Adding new software to your setup
 
      [distros-extra]
      recipe = plone.recipe.distros
-     urls = 
+     urls =
          http://www.zope.org/Members/shimizukawa/PASRadius/PASRadius-0.2/PASRadius-0.2.tgz
 
      [instance]
@@ -560,7 +560,7 @@ Adding new software to your setup
 
      [svn-extra]
      recipe = infrae.subversion
-     urls = 
+     urls =
          https://svn.infrae.com/SilvaMailing/trunk SilvaMailing
 
      [instance]
@@ -568,7 +568,7 @@ Adding new software to your setup
          ${svn-extra:location}
 
   Like for tarball-distribution, you can refer more than one SVN URL.
-   
+
   .. note::
 
      We don't recommend to *trunk* version of any SVN repository if you
@@ -757,7 +757,7 @@ your ZEO server, with two ZEO clients:
 
    [buildout]
    extends = mycorp.cfg
-   parts = 
+   parts =
        zope2
        silva-all
        zeoserver
@@ -776,7 +776,7 @@ server located on the computer called ``zeoserver.mycorp`` in the DNS:
 
    [buildout]
    extends = mycorp.cfg
-   parts = 
+   parts =
         zope2
         silva-all
         zeoclients
@@ -799,7 +799,7 @@ tag, and re-run buildout:
    $ cd Silva
    $ ./bin/instance stop
    $ svn switch https://svn.infrae.com/buildout/silva/tags/Silva-2.1.1b1
-   $ ./bin/buildout 
+   $ ./bin/buildout
    $ ./bin/instance start
 
 .. note::
@@ -857,78 +857,8 @@ A Buildout tree contains the following sub-directories:
 Troubleshooting
 ```````````````
 
-1. Under Windows, with SVN 1.5:
+.. toctree::
+   :maxdepth: 2
 
-   .. code-block:: sh
+   buildout_troubleshooting
 
-     unrecognized .svn/entries format; skipping .
-     Traceback (most recent call last):
-       File "c:\docume~1\arthur\locals~1\temp\tmpnmclvm", line 11, in ?
-         execfile('C:\\silva-trunk\\src/five.grok\\setup.py')
-       File "C:\silva-trunk\src/five.grok\setup.py", line 38, in ?
-         entry_points="""
-       File "C:\Python24\lib\distutils\core.py", line 149, in setup
-         dist.run_commands()
-       File "C:\Python24\lib\distutils\dist.py", line 946, in run_commands
-         self.run_command(cmd)
-       File "C:\Python24\lib\distutils\dist.py", line 966, in run_command
-         cmd_obj.run()
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\d
-     evelop.py", line 27, in run
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\d
-     evelop.py", line 85, in install_for_development
-       File "C:\Python24\lib\distutils\cmd.py", line 333, in run_command
-         self.distribution.run_command(command)
-       File "C:\Python24\lib\distutils\dist.py", line 966, in run_command
-         cmd_obj.run()
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
-     gg_info.py", line 171, in run
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
-     gg_info.py", line 252, in find_sources
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
-     gg_info.py", line 306, in run
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\e
-     gg_info.py", line 333, in add_defaults
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\s
-     dist.py", line 45, in walk_revctrl
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\s
-     dist.py", line 52, in _default_revctrl
-       File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\s
-     dist.py", line 98, in entries_finder
-     NameError: global name 'log' is not defined
-     While:
-       Installing.
-       Processing develop directory 'C:\\silva-trunk\\src/five.grok'.
-     
-     An internal error occured due to a bug in either zc.buildout or in a
-     recipe being used:
-     Traceback (most recent call last):
-       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-     c\buildout\buildout.py", line 1477, in main
-       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-     c\buildout\buildout.py", line 324, in install
-       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-     c\buildout\buildout.py", line 556, in _develop
-       File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-     c\buildout\easy_install.py", line 866, in develop
-     AssertionError
-        
-   You have to fix it by hand. In a shell, do:
-
-   .. code-block:: sh
-
-      C:\Silva-trunk>cd eggs
-      C:\Silva-trunk\eggs>move setuptools-0.6c8-py2.4.egg setuptools-0.6c8-py2.4.egg.zip
-
-   After with the explorer, unpack the archive
-   ``setuptools-0.6c8-py2.4.egg`` in that same folder to the same
-   folder. Delete the archive after. Edit the file
-   ``setuptools-0.6c8-py2.4.egg\setuptools\commands\sdist.py``, add a
-   line at the top of it:
-
-   .. code-block:: python
-
-      from distutils import log
-
-   Rerun buildout, and thanks setuptools' maintainers for a good test
-   coverage of their software.
