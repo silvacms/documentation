@@ -3,6 +3,10 @@ Development Guidelines for Silva
 
 .. contents::
 
+.. note:: That documentation is intended to Silva core developer. But
+   as development practice, they might be interesting to other people as
+   well.
+
 Introduction
 ============
 
