@@ -6,6 +6,7 @@ Infrae Developer Documentation
    :maxdepth: 2
 
    silva/index
+   code/index
 
 Indices and tables
 ==================

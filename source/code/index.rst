@@ -1,11 +1,11 @@
-.. 
+ 
 Code
-=============================
+====
 
 .. toctree::
    :maxdepth: 2
 
-   svn
+   svn/index
 
 Indices and tables
 ==================
@@ -13,4 +13,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-.. 
+
