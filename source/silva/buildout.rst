@@ -400,6 +400,12 @@ and (for the main or newest development branch)::
 
 All buildout trees work the same way.
 
+.. note::
+
+   It's recommend to configure SVN correctly, specially ignored
+   files. Refer to :ref:`svn-configuration` for more
+   information.
+
 Getting your Buildout tree
 ``````````````````````````
 

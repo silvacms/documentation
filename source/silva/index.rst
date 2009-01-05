@@ -1,4 +1,3 @@
-.. 
 Silva Developer Documentation
 =============================
 
@@ -13,10 +12,3 @@ Silva Developer Documentation
    test/index
    development_guidelines
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-.. 
