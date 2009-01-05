@@ -860,6 +860,32 @@ A Buildout tree contains the following sub-directories:
    Contains all data used by the software. ``var/filestorage``
    contains for instance the Zope database.
 
+Configuring a cache
+```````````````````
+
+Buildout downloads software in the ``eggs`` and ``download`` directory
+by default. When you use buildout a multiple times on the same host
+it's interesting to share those directories between buildout trees, to
+prevent buildout to download again those software.
+
+In a network setup, you can even share those directory among different
+host using NFS or something similar.
+
+To do so, you need to create a ``.buildout`` directory in your home
+directory, which contains a ``default.cfg`` file. The content of this
+file will be::
+
+  [buildout]
+  eggs-directory = /home/sylvain/cache/eggs
+  download-cache = /home/sylvain/cache/download
+  download-directory = /home/sylvain/cache/download
+
+I used here a directory ``cache`` located in my home directory. Of
+course you need to update those path to the cache you will have
+created. You need as well to create those directories, buildout won't
+do it for you.
+
+
 Troubleshooting
 ```````````````
 
