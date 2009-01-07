@@ -876,14 +876,14 @@ directory, which contains a ``default.cfg`` file. The content of this
 file will be::
 
   [buildout]
-  eggs-directory = /home/sylvain/cache/eggs
-  download-cache = /home/sylvain/cache/download
-  download-directory = /home/sylvain/cache/download
+  eggs-directory = /path/to/your/cache/eggs
+  download-cache = /path/to/your/cache/download
+  download-directory = /path/to/your/cache/download
 
-I used here a directory ``cache`` located in my home directory. Of
-course you need to update those path to the cache you will have
-created. You need as well to create those directories, buildout won't
-do it for you.
+I used here a directory ``cache`` located in the ``/path/to/your``
+directory. Of course you need to update those path to the cache you
+will have created. You need as well to create those directories
+(``eggs`` and ``download``), buildout won't do it for you.
 
 
 Troubleshooting

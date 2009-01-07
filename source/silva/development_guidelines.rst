@@ -80,9 +80,54 @@ released versions. Like for buildouts, if you want to fix something on
 a tag, do it on the corresponding branch and make a new tag.
 
 
-.. warning:: All buildouts should refer to tags of Silva
-   components. To add a new feature to a component, add a new tag of
-   that component to the current versions buildouts.
+.. warning::
+
+   All buildouts  should refer to tags  of Silva components.  To add a
+   new feature to a component, add  a new tag of that component to the
+   current versions buildouts.
+
+
+Porting rules
+=============
+
+1. If you work on an feature or bug fix on (for) 2.0 you *must*
+   provide the same on (for) 2.1 and (for) the trunk. Also provide a
+   unit test if at all possible, to prevent regression errors.
+
+2. If you work on an feature or bug fix (for) 2.1 you *must* provide
+   the same on (for) the trunk. Also provide a unit test if at all
+   possible, to prevent regression errors.
+
+3. If you work on a bug fix (for) the trunk, you *must* provide the
+   same on (for) 2.1.
+
+
+Creating new branches
+=====================
+
+There is only two cases where you want (and have) to create new
+branches:
+
+1. You want to have a version of an extension which still work for a
+   previous version of Silva (backward incompatible changes): in that
+   case the branch should be called ``extensionname-version``, for
+   example ``SilvaLayout-1.4``. Those branches are likely to stay
+   forever in SVN.
+
+2. You want to make an experimentation, and your are not sure about
+   the ending of it. In that case the branch should be called with
+   ``yourname-why``, for example ``sylvain-database-distribution``.
+
+   Those branches are likely to be merged as soon as they work and
+   you're happy with theirs changes. An experimentation of one year
+   old is already deprecated and too far difficult to merge, it should
+   just be deleted. If your are not happy with those changes you can
+   delete it right now.
+
+   .. note::
+
+      All merged branches should be deleted right after.
+
 
 Setting up a development environment
 ====================================
@@ -147,17 +192,6 @@ Run buildout:
 
    $ ./bin/buildout
 
-
-Porting rules
-=============
-
-1. If you work on an feature or bug fix on (for) 2.0 you *must*
-   provide the same on (for) 2.1 and (for) the trunk. Also provide a
-   unit test if at all possible, to prevent regression errors.
-
-2. If you work on an feature or bug fix (for) 2.1 you *must* provide
-   the same on (for) the trunk. Also provide a unit test if at all
-   possible, to prevent regression errors.
 
 
 Releasing and creating tags
