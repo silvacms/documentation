@@ -25,8 +25,8 @@ components with Silva:
    ZCML is a XML file format, in a file called ``configure.zcml`` by
    default. This file uses namespaced tags to be able to handle
    different registration actions used by the Silva extension. In this
-   documentation, we be making a ``configure.zcml`` file for the blog
-   product.
+   documentation, we will be making a ``configure.zcml`` file for the
+   blog product.
 
 
 Creating a new extension as a Zope Product
@@ -64,7 +64,7 @@ in the ``Products`` directory of the Zope instance, or the
 Creating a new extension As an `Egg`
 ------------------------------------
 
-`Eggs` are an way to provide and ship Python extension in a automated
+`Eggs` are a way to provide and ship Python extensions in a automated
 way. The best way to use `eggs`, is to use them with the help of
 `buildout <https://svn.infrae.com/buildout/silva/INSTALL.txt>`_.
 
@@ -308,7 +308,7 @@ Registration with ZCML
 ~~~~~~~~~~~~~~~~~~~~~~
 
 In your extension directory, add the following ZCML directives to the
-``configure.zcml``, or create the file if it doesn't exists yet:
+``configure.zcml``, or create the file if it doesn't exist yet:
 
 .. code-block:: xml
 

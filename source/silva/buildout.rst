@@ -211,7 +211,7 @@ We don't recommand (and support) Windows as a production environment.
 
 .. note::
 
-   Windows don't use the same separator in paths, so when you will be
+   Windows doesn't use the same separator in paths, so when you will be
    asked to type ``bin/buildout`` in your shell, type ``bin\buildout``
    instead.
 
@@ -261,7 +261,7 @@ with the python that you want to use, for example under Unix:
 
 
 Now that we have the setuptools installed, we can use ``easy_install``
-to install ZopeSkel. This scripts have been installed in the same
+to install ZopeSkel. These scripts have been installed in the same
 directory than your Python directory. This should be very easy. Just
 run the following command:
 
@@ -269,9 +269,9 @@ run the following command:
 
    $ sudo easy_install-2.4 -U ZopeSkel
 
-If you are under Mac OS X, we recommand to use the option ``-s``. By
-default ``easy_install`` put all scripts in the same directory than
-Python, which is hided inside a framework on Mac OS X. By specifying
+If you are under Mac OS X, we recommend to use the option ``-s``. By
+default ``easy_install`` puts all scripts in the same directory than
+Python, which is hidden inside a framework on Mac OS X. By specifying
 ``-s /opt/local/bin`` installed scripts are going to be installed in
 the same directory than Mac Ports softwares:
 
@@ -469,7 +469,7 @@ The following interesting profiles are available:
 
 ``zeo-instance``
 
-   Base profile for a ZEO setup. This install a ZEO server and a ZEO
+   Base profile for a ZEO setup. This installs a ZEO server and a ZEO
    client instead of a simple instance. Refer to :ref:`zeo-setup` for
    more details about that profile.
 
