@@ -111,8 +111,9 @@ branches:
 1. You want to have a version of an extension which still work for a
    previous version of Silva (backward incompatible changes): in that
    case the branch should be called ``extensionname-version``, for
-   example ``SilvaLayout-1.4``. Those branches are likely to stay
-   forever in SVN.
+   example ``SilvaLayout-1.4``. They exists mainly to maintain that
+   extension for that specific older version of Silva (i.e. bug
+   fixes). Those branches are likely to stay forever in SVN.
 
 2. You want to make an experimentation, and your are not sure about
    the ending of it. In that case the branch should be called with
