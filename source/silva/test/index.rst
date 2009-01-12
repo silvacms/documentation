@@ -20,6 +20,13 @@ you can issue::
 
   If you use buildout, ``zopectl`` might be called ``instance``.
 
+.. note::
+
+  If you use buildout, you might already have a script called
+  ``bin/test`` which run tests for Silva. You don't need to add any
+  argument to that script.
+
+
 Writing a new test
 ------------------
 

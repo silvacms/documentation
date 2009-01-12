@@ -18,6 +18,12 @@ it.
 
       Create a Silva Document in the given folder and return id.
 
+   .. function:: add_link(parent, id, title, url)
+
+      :param parent: parent folder to create the link.
+      :param id: id of the new link.
+      :param title: title of the new link.
+      :param url: target url of the link.
 
    .. function:: add_folder(parent, id, title)
 

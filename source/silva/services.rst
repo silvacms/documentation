@@ -88,11 +88,12 @@ If you need to write template, your can use the following skeleton:
   </html>
 
 
-Edit form on your service
--------------------------
+Edit forms
+----------
 
-You can used formlib-based forms in your service. For instance, let's
-take the following interface:
+You can used formlib-based forms in your service to edit its
+configuration. For instance, let's take the following interface which
+defines a file service:
 
 .. code-block:: python
 
@@ -119,4 +120,41 @@ You can defined an edition form like this:
       silvaconf.name('manage_filesservice')
 
       form_fields = grok.Fields(IFilesService)
+
+
+Regular forms
+-------------
+
+Like edition forms, you can create regular formlib-forms.
+
+As example, a migration form for the previous service. First you need
+to define an interface which declare which fields (information) are
+needed by your form:
+
+.. code-block:: python
+
+   from zope.interface import Interface
+
+   class IMigrationForm(Interface):
+
+      path = schema.TextLine(title=_("Path to migrate"))
+
+And then the form:
+
+.. code-block:: python
+
+   class FileServiceMigrationForm(silvaviews.ZMIForm):
+
+      silvaconf.context(IFilesService)
+      silvaconf.name('manage_migration')
+
+      form_fields = grok.Fields(IMigrationForm)
+
+      @grok.action(_(u"Migrate"))
+      def migrate(self, path):
+          # do stuff
+          pass
+
+
+This works exactly like content-based forms.
 
