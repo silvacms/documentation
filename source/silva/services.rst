@@ -1,5 +1,15 @@
-Creating a Silva service
-========================
+Creating a new Silva service
+============================
+
+Services are configurable utilities. By utilities they are helpers
+which are not content-specific. By configurable, those helpers can be
+configured to behave differently.
+
+For instance, we could imagine a sorting service, which sorts Silva
+items. We could configure its sorting criteria (by ids, title or
+modification date) and sorting algorithm (bubble sort, quick sort) in
+that service. After contents or views can request that service to sort
+a bunch of items.
 
 You can create a service object like this:
 
