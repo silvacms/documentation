@@ -134,7 +134,7 @@ create form fields using the version's interface *(line 5)*:
 
   class MyContentEditForm(silvaforms.EditForm):
 
-       silvaconf.context(IMyContext):
+       silvaconf.context(IMyContext)
 
        form_fields = grok.Fields(IMyVersionContent)
 
@@ -173,8 +173,9 @@ And after you can use this interface for your form:
 
        # Define one action
        @grok.action(u"Send information")
-       def action_send(self, action, data):
-            # data['hide_email'] contain the validated form value
+       def action_send(self, hide_email):
+            # hide_email contain the validated form value
+            pass
 
 
 

@@ -1,6 +1,6 @@
 
-Create content types
-====================
+Creating content types
+======================
 
 .. toctree::
    :maxdepth: 2

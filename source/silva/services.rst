@@ -1,5 +1,5 @@
-Create a Silva service
-======================
+Creating a Silva service
+========================
 
 You can create a service object like this:
 

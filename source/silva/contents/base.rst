@@ -77,12 +77,13 @@ You can add some directive in your Python code:
 
    class Blog(Publication):
        meta_type = 'Silva Blog'
-       silvaconf.icon(blog.png')           # Set an icon for the content
+       silvaconf.icon('blog.png')          # Set an icon for the content
        silvaconf.factory('manage_addBlog') # Add a Zope factory for your content
        silvaconf.priority(-3)              # Set priority in addable menu
 
    def manage_addBlog(context, id, title):
-       # Regular Zope manage_add function.
+       # Regular Zope manage_add function
+       pass
 
 You can give more than one factory, and if the first one is a adding
 form (the name should finish by ``Form``), it will be used to create
