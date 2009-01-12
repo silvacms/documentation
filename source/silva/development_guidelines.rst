@@ -209,6 +209,8 @@ And run the tests of your extension (and any others which depend on
 it) if it has tests. (Which it should!)
 
 
+.. _tag-zope-product:
+
 Creating a tag of a Zope product
 --------------------------------
 
@@ -323,7 +325,8 @@ Creating a tag of a Zope product packaged as an Python extension
 
 0. Run tests.
 
-1. Create a tag of the Zope product like described before.
+1. Create a tag of the Zope product like described before
+   (see :ref:`tag-zope-product`).
 
 2. Verify the validity of your documentation:
 
@@ -367,29 +370,35 @@ Creating a tag of a Zope product packaged as an Python extension
 
       $ svn propedit svn:externals Products
 
-8. Commit those changes (this is the *one* exception to the rule that
+8. Update to be sure to have the code of the tag:
+
+   .. code-block:: sh
+
+      $ svn up
+
+9. Commit those changes (this is the *one* exception to the rule that
    you should never check in anything on a tag.):
 
    .. code-block:: sh
 
       $ svn commit -m "Remove dev marker."
 
-9. Upload your egg on https://dist.infrae.com:
+10. Upload your egg on https://dist.infrae.com:
 
    .. code-block:: sh
 
       $ python2.4 setup.py register sdist bdist_egg upload -r https://dist.infrae.com/download
 
-10. Go back to your trunk or branch checkout:
+11. Go back to your trunk or branch checkout:
 
     .. code-block:: sh
 
       $ cd ..
       $ rm -rf release
 
-11. Update the version in ``setup.py``.
+12. Update the version in ``setup.py``.
 
-12. Commit thoses changes: ``svn commit``
+13. Commit thoses changes: ``svn commit``
 
 
 Creating a tag of the buildout
