@@ -616,7 +616,7 @@ MaildropHost with the help of the `maildrophost recipe
   extends = profiles/simple-instance.cfg
 
   [svn-extra]
-  recipe = infrae.subersion
+  recipe = infrae.subversion
   urls =
       https://svn.infrae.com/SilvaMailing/trunk SilvaMailing
 
