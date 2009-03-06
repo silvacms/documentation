@@ -146,7 +146,7 @@ documentation.
 
 
 Others recipes can be used to install software differently. To find
-more recipe, search on `PyPi
+more recipes, search on `PyPi
 <http://pypi.python.org/pypi?:action=browse&show=all&c=512>`_.
 
 Example
