@@ -224,16 +224,17 @@ You need first to *bootstrap* your Buildout directory, and create a
 configuration file. You can create a new configuration as an extension
 of one of the available profiles located in the ``profiles``
 sub-directory of your Buildout tree. Here we are going to use the
-``simple-instance`` profile:
+``simple-instance.cfg`` profile:
 
 .. code-block:: sh
 
    $ python2.4 bootstrap.py --buildout-profile profiles/simple-instance.cfg
 
 This will create some files, most importantly one called
-``buildout.cfg`` in your Buildout tree. It's going to be your
-configuration file to control what you want installed, and how. Refer
-to the next documentation part to learn how to extend it.
+``buildout.cfg`` in your Buildout tree. It's going to be your Buildout
+configuration file, which control what you want install, and
+how. Refer to :ref:`extending-and-customising-your-installation` to
+learn how to extend it.
 
 After this you can run the installation:
 
@@ -253,16 +254,16 @@ Available profiles
 
 The following interesting profiles are available:
 
-``development``
+``development.cfg``
 
    Setup Silva in development mode. Debug options are activated by
    default, and some extra development tools are installed.
 
-``simple-instance``
+``simple-instance.cfg``
 
    Recommanded profiles for a production instance.
 
-``zeo-instance``
+``zeo-instance.cfg``
 
    Base profile for a ZEO setup. This installs a ZEO server and a ZEO
    client instead of a simple instance. Refer to :ref:`zeo-setup` for
@@ -361,7 +362,9 @@ host using NFS or something similar.
 
 To do so, you need to create a ``.buildout`` directory in your home
 directory, which contains a ``default.cfg`` file. The content of this
-file will be::
+file will be:
+
+.. code-block:: ini
 
   [buildout]
   eggs-directory = /path/to/your/cache/eggs

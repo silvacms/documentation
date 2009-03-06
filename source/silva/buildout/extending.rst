@@ -1,36 +1,49 @@
-Extending and customing your installation
-=========================================
+.. _extending-and-customising-your-installation:
+
+Extending and customising your installation
+===========================================
 
 You can add additional configuration information in the
-``buildout.cfg`` file directly. This file follows a format like
-Windows INI files, with sections which install parts of the software,
-and options in those sections which control how these software parts
-are installed.
+``buildout.cfg`` file directly. It will mentioned as your
+configuration file afterwards.
 
-Default parts defined in the Silva are:
+
+Buildout configuration file format
+----------------------------------
+
+This file follows a format like Windows INI files, with
+sections. Those sections are called *parts* and are responsible for
+the installation of only a part of the software (like one part for
+Zope, one part for the Zope instance, one for Silva ...). They
+contains *options* which control how this is done. A part is installed
+with the help of a *recipe*. A recipe is fixed by the option
+``recipe`` of the part.
+
+A configuration file can be extended by one other, modifying its
+behavior. That's how profiles are implemented.
+
+Default parts defined in the Silva Buildout are:
 
 ``zope2``
-
    Zope 2 installation. You may not want to change that part, as it's
    rarely needed for Silva. Available options are defined `on the
    zope2install recipe description page
    <http://pypi.python.org/pypi/plone.recipe.zope2install>`_.
 
 ``silva-all``
-
-   All Silva software, coming from the Infrae SVN repository.
+   All Silva softwares, coming from the Infrae SVN repository.
 
 ``instance``
-
    Your Zope 2 instance. You may want to add/customize settings
    here. All available options are referenced `on the zope2instance
    recipe description page
    <http://pypi.python.org/pypi/plone.recipe.zope2instance>`_.
 
 
-To extend or modify settings in a part, you just add it to your
-configuration file, ``buildout.cfg``. For instance to change the port
-number of your zope instance to 8086, add this:
+To extend or modify options in a part, you just add them to your
+configuration file, under the same part name. For instance to change
+the port number of your zope instance to 8086, you can add this to
+your configuration file:
 
 .. code-block:: ini
 
@@ -46,13 +59,21 @@ or ``-=`` to remove existing ones.
 .. note::
 
    To re-create your environment you just need to keep your
-   ``buildout.cfg`` file. You can do a SVN checkout of a new Buildout
-   tree, put your ``buildout.cfg`` in that directory, run ``python2.4
-   bootstrap.py`` and after ``./bin/buildout`` to re-create exactly
-   the same environment.
+   ``buildout.cfg`` file. You can do a Subversion checkout of a new
+   Buildout tree, put your ``buildout.cfg`` in that directory, run
+   ``python2.4 bootstrap.py`` and after ``./bin/buildout`` to
+   re-create exactly the same environment.
 
-Adding new software to your setup
----------------------------------
+
+Adding new softwares to your setup
+----------------------------------
+
+You can add packaged software to your setup which can come from either
+a tarball on a website, an Subversion server, or a Python egg.
+
+There is as well possiblity to install software coming directly other
+Version Control System than Subersion, but they are not covered by this
+documentation.
 
 * Software packaged as a tarball:
 
@@ -77,7 +98,7 @@ Adding new software to your setup
 
   You can use more than one URL of course.
 
-* Software coming from a SVN repository:
+* Software coming from a Subversion repository:
 
   Like for tarball-distributed software, we are going to add a new
   part using the `subversion recipe
@@ -123,6 +144,10 @@ Adding new software to your setup
 
   You just drop them in the sub-directory ``products`` of your Buildout tree.
 
+
+Others recipes can be used to install software differently. To find
+more recipe, search on `PyPi
+<http://pypi.python.org/pypi?:action=browse&show=all&c=512>`_.
 
 Example
 ```````
@@ -172,6 +197,27 @@ MaildropHost with the help of the `maildrophost recipe
 The ``maildrophost`` part will install and configure MaildropHost, and
 create a ``bin/maildrophost`` script to start/stop the MaildropHost
 daemon.
+
+
+Changing your Zope instance settings
+------------------------------------
+
+You can change a couple of settings in the Zope instance, by adding
+options to the instance part. Most popular ones are:
+
+``http-address``
+   Address:Port where the instance should listen to.
+
+``effective-user``
+   Which user Zope should try to become if it's started as root.
+
+``debug-mode``
+   Toggle the debug mode on or off.
+
+You can have a complete listing of available options `on the
+zope2instance recipe description page
+<http://pypi.python.org/pypi/plone.recipe.zope2instance>`_.
+
 
 .. _zeo-setup:
 
