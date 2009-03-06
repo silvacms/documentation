@@ -4,6 +4,62 @@ Troubleshooting while using buildout
 If your cannot solve your problem, please report a bug on
 https://bugs.launchpad.net/silva.
 
+Non-error messages while running Buildout
+-----------------------------------------
+
+When you run Buildout, you can have non-fatal errors. Don't panic,
+that's not a problem. When you do have a real error, Buildout will
+stop and tells you:
+
+.. code-block:: sh
+
+   [...]
+   While:
+     Installing something.
+     Doing something.
+   Error: Reason.
+
+As well, the status will be different of zero (like all programs which
+end unexpectedly with an error). If Buildout finish its job, and
+return with a status code of zero, that's means it was not an real
+error.
+
+**When you have an error, read the error message!** If it say download
+error, try to download the file by yourself. Maybe the remote site is
+down or slow, or you internet connection is flicky. If you succed to
+download the file, try to run buildout again.
+
+Exemple of non-fatal errors:
+
+- Some download error from a site, or invalid URL. A different
+  location for that pacakge will be tried.
+
+  Sometime fetching a package might take time if your internet or the
+  remote site is slow.
+
+- Zope use Python Script which can be imported in ZODB. They are not
+  valid python files, and buildout try to compiles all python files
+  (to already have compiled code to run). So they fails to compile:
+
+  .. code-block:: sh
+
+     "/somewhere/Products.GenericSetup-1.3.4-py2.4.egg/Products/GenericSetup/doc/SampleSite/profiles/default/siteroot/bar.py",
+     line 22
+        return printed
+     SyntaxError: 'return' outside function
+
+- When you compile a Python extension, you can have warnings. They are
+  warning, not errors, like theirs names says. They are not intended
+  to you, but to the Python extension developers (so he can fix them):
+
+  .. code-block:: sh
+
+     libImaging/Effects.c:210: warning: ‘perlin_init’ defined but not used
+     libImaging/Geometry.c:236: warning: ‘quadratic_transform’ defined but not used
+     libImaging/Quant.c:311: warning: ‘test_sorted’ defined but not used
+     libImaging/QuantHash.c:136: warning: ‘_hashtable_test’ defined but not used
+
+
 .. _development-headers:
 
 Development Headers
@@ -151,3 +207,5 @@ line at the top of it:
 
 Rerun buildout, and thanks setuptools' maintainers for a good test
 coverage of their software.
+
+
