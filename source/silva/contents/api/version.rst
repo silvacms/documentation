@@ -1,32 +1,23 @@
 
 
-Version Object
-==============
+Version Objects
+===============
 
-.. module:: Products.Silva.Version
+Version interface
+-----------------
 
-.. class:: Version
+.. autointerface:: silva.core.interfaces.IVersion
 
-   .. function:: get_title()
 
-      :returns: title of the version
+Versioning interface
+--------------------
 
-   .. function:: get_short_title()
+.. autointerface:: silva.core.interfaces.IVersioning
 
-      :returns: short title of the version
 
-   .. function:: version_status()
+Versioned content interface
+---------------------------
 
-      :returns: status of the version, either ``unapproved``, ``approved``, ``public`` ``last_closed`` or ``closed``.
+.. autointerface:: silva.core.interfaces.IVersionedContent
 
-   .. function:: publication_datetime()
-
-      :returns: publication date
-
-   .. function:: expiration_datetime()
-
-      :returns: expiration date
-
-   .. function:: get_version()
-
-      :returns: version object itself
+.. autointerface:: silva.core.interfaces.ICatalogedVersionedContent

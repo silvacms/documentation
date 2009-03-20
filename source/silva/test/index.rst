@@ -1,24 +1,25 @@
 Test in Silva
 =============
 
-To run the Silva tests you can use the ``test`` subcommand of ``zopectl``
-of your Zope instance. So, assuming the current working directory is your
-Zope instance/buildout::
+To run the Silva tests you can use the ``test`` subcommand of
+``instance`` (or the script used to control your Zope instance). So,
+assuming the current working directory is your Zope
+instance/buildout::
 
-  ./bin/zopectl test -s Products.Silva
+  ./bin/instance test -s Products.Silva
 
 In case you'd like to run only one particular set of tests you can do this::
 
-  ./bin/zopectl test -m Products.Silva.test.test_silvaviews
+  ./bin/instance test -m Products.Silva.test.test_silvaviews
 
 There're a lot more options for the test subcommand. For more information
 you can issue::
 
-  ./bin/zopectl test --help
+  ./bin/instance test --help
 
 .. note::
 
-  If you use buildout, ``zopectl`` might be called ``instance``.
+  If you don't use buildout, ``instance`` might be called ``zopectl``.
 
 .. note::
 

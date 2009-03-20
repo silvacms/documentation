@@ -5,4 +5,6 @@ Silva API
    :maxdepth: 2
 
    silvaobject
+   assets
+   folders
    version

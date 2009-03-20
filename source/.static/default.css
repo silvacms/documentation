@@ -9,6 +9,7 @@ body {
   color: #000;
   margin: 0;
   padding: 0;
+  color: #225577;
 }
 
 /* :::: LAYOUT :::: */
@@ -509,7 +510,7 @@ p.subhead {
 }
 
 a {
-    color: #355f7c;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -735,6 +736,15 @@ dl.glossary dt {
     font-size: 1.1em;
 }
 
+dl.docutils dt {
+    color: #000000;
+    font-size: 0.9em;
+}
+
+dl.docutils dt span.pre {
+    color: #225577;
+}
+
 th {
     text-align: left;
     padding-right: 5px;
@@ -766,9 +776,12 @@ table.highlighttable td {
 }
 
 tt {
-    background-color: #ecf0f3;
+    background-color: #eeffcc;
+    border-color: #aacc99;
+    border-style: solid none;
+    border-width: 1px medium;
     padding: 0 1px 0 1px;
-    font-size: 0.95em;
+    font-size: 1em;
 }
 
 tt.descname {

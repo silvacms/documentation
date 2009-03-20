@@ -12,3 +12,6 @@ Silva Developer Documentation
    test/index
    development_guidelines
 
+
+You might be interested to look at the Zope 2 documentation:
+http://docs.zope.org/zope2/.
