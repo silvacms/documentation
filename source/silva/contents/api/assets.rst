@@ -2,6 +2,13 @@
 Assets Objects
 ==============
 
+Assets are non-publishable objects used only to hold data. That data
+can be uploaded, transformed, and download, but usually not edited on
+the server itself.
+
+Exemples of assets are files and images.
+
+
 Asset interface
 ---------------
 

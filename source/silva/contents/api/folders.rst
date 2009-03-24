@@ -2,6 +2,9 @@
 Folderish Objects
 =================
 
+All containers objects have to implement at least the container
+interface.
+
 Container interface
 -------------------
 

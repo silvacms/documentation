@@ -7,7 +7,8 @@ from the interfaces definitions.
 .. toctree::
    :maxdepth: 2
 
-   silvaobject
+   silvaobjects
+   contents
+   versions
    assets
    folders
-   version
