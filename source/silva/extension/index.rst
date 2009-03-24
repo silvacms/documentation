@@ -20,7 +20,7 @@ components with Silva:
    Grok, we recommend to use only Grok, and to not try to mix Grok
    with ZCML declaration.
 
-.. note:: 
+.. note::
 
    ZCML is a XML file format, in a file called ``configure.zcml`` by
    default. This file uses namespaced tags to be able to handle
@@ -69,7 +69,9 @@ way. The best way to use `eggs`, is to use them with the help of
 `buildout <https://svn.infrae.com/buildout/silva/INSTALL.txt>`_.
 
 You can create the structure of your `egg` with the help of the
-`paster` command, and `ZopeSkel <http://pypi.python.org/pypi/ZopeSkel>`_:
+`paster` command, and `ZopeSkel
+<http://pypi.python.org/pypi/ZopeSkel>`_ (see :ref:`installing-paster`
+to install those tools):
 
 .. code-block:: sh
 

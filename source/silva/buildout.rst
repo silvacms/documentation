@@ -17,20 +17,35 @@ Please refer to the section regarding the system you use.
    buildout/requirements
 
 
-Installing Silva to test it with Paster
----------------------------------------
+Installing Silva to test it with Paster and ZopeSkel
+----------------------------------------------------
 
-You can install Silva using Paster if you want to take it for a quick
-test drive. If you want to set up a production or development
-environment we recommend you do a SVN check out of the buildout
-located in the Infrae SVN. This will let you upgrade your Silva
-instance more easily at a later date.
+You can install Silva using Paster and `ZopeSkel`_ if you want to take
+it for a quick test drive. If you want to set up a production or
+development environment we recommend you do a SVN check out of the
+buildout located in the Infrae SVN. This will let you upgrade your
+Silva instance more easily at a later date.
 
-Installing Paster
-`````````````````
+.. glossary::
+
+  *Paster*
+     Paster is a multi-purpose tool. One of those use is to create a
+     project skeleton out of a configurable template. Basically It
+     helps you to get started by creating all the boilerplate
+     requirement for your project.
+
+  *ZopeSkel*
+     `ZopeSkel`_ is a set of templates for Paster which are Python,
+     Zope, Plone and Silva related.
+
+
+.. _installing-paster:
+
+Installing Paster and ZopeSkel
+``````````````````````````````
 
 You need to install Python Setuptools which is needed to install
-ZopeSkel. On UNIX systems, this can be installed by your OS package
+`ZopeSkel`_. On UNIX systems, this can be installed by your OS package
 manager, for example on Ubuntu / Debian systems, run:
 
 .. code-block:: sh
@@ -387,4 +402,6 @@ while running Buildout.
    :maxdepth: 2
 
    buildout/troubleshooting
+
+.. _ZopeSkel: http://pypi.python.org/pypi/ZopeSkel
 
