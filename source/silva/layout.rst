@@ -133,9 +133,34 @@ The next step is to :ref:`enable-grok-for-your-extension`.
     that refer on creating a extension to see how to create a non-egg
     extension.
 
+Creation of a skin
+``````````````````
 
-Adding file resources
----------------------
+Let's create a Python file called ``demo.py`` in our extension. It
+will contain the definition of our layout.
+
+.. code-block:: python
+   :linenos:
+
+   from silva.core.layout.interfaces import ISilvaSkin
+   from silva.core.layout.porto.interfaces import IPorto
+   from silva.core import conf as silvaconf
+
+
+   class IDemo(IPorto):
+       """Demo layer used to attach resources.
+       """
+
+   class IDemoSkin(IDemo, ISilvaSkin):
+       """Demo skin.
+       """
+
+       silvaconf.skin('Demo')
+
+
+
+Add file resources
+``````````````````
 
 In your skin extension, you can create a directory called
 ``static``. This should not be a Python package, but just a
@@ -148,7 +173,7 @@ type of file you want like this.
 
 
 CSS files as resources
-``````````````````````
+~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to include a CSS file by hand, a nice trick is to use the
 ``import`` statement:
