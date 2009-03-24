@@ -88,15 +88,15 @@ to install those tools):
   Enter namespace_package (Namespace package (like plone)) ['plone']: silva
   Enter namespace_package2 (Nested namespace package (like app)) ['app']: app
   Enter package (The package contained namespace package (like example)) ['example']: blog
-  Enter version (Version) ['1.0']: 
+  Enter version (Version) ['1.0']:
   Enter description (One-line description of the package) ['']: My Extension
   Enter long_description (Multi-line description (in reST)) ['']: Long description about my extension.
   Enter author (Author name) ['']: Sylvain Viollon
   Enter author_email (Author email) ['']: info@infrae.com
   Enter keywords (Space-separated keywords/tags) ['']: silva app extension
-  Enter url (URL of homepage) ['']: 
+  Enter url (URL of homepage) ['']:
   Enter license_name (License name) ['GPL']: ZPL 2.1
-  Enter zip_safe (True/False: if the package can be distributed as a .zip file) [False]: 
+  Enter zip_safe (True/False: if the package can be distributed as a .zip file) [False]:
   Creating template nested_namespace
   Creating directory ./silva.app.blog
     Recursing into +namespace_package+
@@ -116,9 +116,16 @@ to install those tools):
     Copying setup.py_tmpl to ./silva.app.blog/setup.py
   Running /usr/local/bin/python2.4 setup.py egg_info
 
+.. warning::
+
+   *Project name* should be take the same value than
+   *namespace_package.namespace_package2.package*,
+   otherwise you might have errors.
+
+
 Here the Silva Blog product will reside in the newly created directory
 ``silva.app.blog/silva/app/blog``, which is a Python
-module, accessible via ``silva.app.blog`` in your Python
+package, accessible via ``silva.app.blog`` in your Python
 code. It will be as well the name of your product in Zope (there is no
 ``Products``).
 
@@ -148,7 +155,7 @@ After, if you use buildout, you can update your ``buildout.cfg`` file:
   # Add your egg to your Zope instance.
   eggs +=
      silva.app.blog
-  # Load the ZCML for this egg. 
+  # Load the ZCML for this egg.
   zcml +=
      silva.app.blog
 
@@ -165,7 +172,7 @@ the command ``easy_install``.
 
 
 .. note::
- 
+
   - Here used the `nested_namespace` template to create our egg.  If
     you plan to create something called `silva.extension` (there is no
     `app`), you can use the `basic_namespace` template of `paster`.
@@ -198,7 +205,7 @@ following methods:
 
    Is used to uninstall the extension.
 
-``is_installed`` 
+``is_installed``
 
    Return ``True`` if the extension is installed, ``False`` otherwise.
 
@@ -233,7 +240,7 @@ So you can add to the ``__init__.py`` of our extension:
   from zope.interface import Interface
 
   class BlogInstaller(DefaultInstaller):
-      """Installer for the blog extension. Override install, uninstall 
+      """Installer for the blog extension. Override install, uninstall
       to add more actions.
       """
 
@@ -258,8 +265,10 @@ second is the marker interface.
 Registration with Grok
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Enabling Grok for your extension
-````````````````````````````````
+.. _enable-grok-for-your-extension:
+
+Enable Grok for your extension
+``````````````````````````````
 
 If you want to use Grok, you need to enable it in your extension.
 This can be done with the help of a ZCML directive in the

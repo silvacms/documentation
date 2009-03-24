@@ -66,7 +66,7 @@ tool working on your computer).
 .. code-block:: sh
 
   $ cd src
-  $ paster create -t nested_namespace
+  $ paster create -t basic_namespace
   Selected and implied templates:
     ZopeSkel#basic_namespace  A project with a namespace package
 
@@ -103,7 +103,20 @@ tool working on your computer).
   Running /usr/local/bin/python2.4 setup.py egg_info
 
 
+.. warning::
+
+   *Project name* should be take the same value than
+   *namespace_package.package*, otherwise you might have errors.
+
+
+This will create a directory called
+``silvatheme.demo/silvatheme/demo`` in ``src`` which will be a Python
+package available as ``silvatheme.demo``. We will work there
+afterwards and refer to this place as your extension.
+
 After you need to register the new egg in your buildout.
+
+The next step is to :ref:`enable-grok-for-your-extension`.
 
 .. note::
 
@@ -119,3 +132,34 @@ After you need to register the new egg in your buildout.
     buildout related setup. You can still build a non-egg theme, for
     that refer on creating a extension to see how to create a non-egg
     extension.
+
+
+Adding file resources
+---------------------
+
+In your skin extension, you can create a directory called
+``static``. This should not be a Python package, but just a
+directory. Files in that directory will exported through Zope using
+the following URL
+``http://zope-url/++resources++silvatheme.demo/file.css`` where
+``silvatheme.demo`` is the Python name of your extension, and
+``file.css`` is a file in the static directory. You can export any
+type of file you want like this.
+
+
+CSS files as resources
+``````````````````````
+
+If you want to include a CSS file by hand, a nice trick is to use the
+``import`` statement:
+
+.. code-block:: css
+
+  <style type="text/css">
+    @import url(http://zope-url/++resources++silvatheme.demo/file.css);
+  </style>
+
+After all resources refered in the imported CSS will be look by
+default in the same folder that the CSS which will be the exported
+resources directory.
+
