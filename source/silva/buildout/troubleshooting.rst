@@ -142,6 +142,21 @@ Under Debian/Ubuntu:
   $ sudo apt-get install postgresql-dev
 
 
+Version conflicts between system packages and Silva ones
+--------------------------------------------------------
+
+It is possible that you already have installed packages required by
+Silva in your (system) Python in a different version and that buildout
+raise a conflict version because of that. In that case, you can run
+buildout again, and gives the option ``-S`` to Python, which prevent
+it to look at the extensions you installed in that same Python:
+
+.. code-block:: sh
+
+  $ python2.4 -S ./bin/buildout -v
+
+
+
 SVN 1.5 and buildout
 --------------------
 
