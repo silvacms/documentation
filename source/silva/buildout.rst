@@ -312,11 +312,29 @@ tag, and re-run buildout:
    $ ./bin/buildout
    $ ./bin/instance start
 
+
+.. note::
+
+   If you made your own profile which refer directly to the Silva
+   buildout configuration using the ``extends`` option of buildout,
+   you should update the URL used instead of doing ``svn switch``.
+
+
+As generic upgrade procedure, we recommand first to copy your site as
+a test site, and run the upgrade procedure on that copy. After
+checking that everything works, you can do the same on your production
+site. This is specially recommand when you want to jump between
+versions where there is lot of changes (like major release of Silva).
+
 .. note::
 
    It's recommended to do a backup of your data before.
 
-And that's it!
+
+After restarting your Zope instance, you can go in each of the Silva
+Root object you have in that Zope server, in ZMI, select the service
+tab, go on *service_extensions* and click on upgrade content. Not all
+upgrades requires that.
 
 
 Using Buildout
@@ -364,6 +382,9 @@ A Buildout tree contains the following sub-directories:
    Contains all data used by the software. ``var/filestorage``
    contains for instance the Zope database.
 
+
+.. _configuring-a-cache-for-buildout:
+
 Configuring a cache
 ```````````````````
 
@@ -372,8 +393,8 @@ by default. When you use buildout a multiple times on the same host
 it's interesting to share those directories between buildout trees, to
 prevent buildout to download again those softwares.
 
-In a network setup, you can even share those directory among different
-host using NFS or something similar.
+In a network setup, you can even share the ``download`` directory
+among different hosts using NFS or something similar.
 
 To do so, you need to create a ``.buildout`` directory in your home
 directory, which contains a ``default.cfg`` file. The content of this
