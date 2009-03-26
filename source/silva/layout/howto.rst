@@ -1,95 +1,7 @@
-
-Creating a new layout
-=====================
-
-You can create a new layout as a filesystem-based extension. So you
-need first to create an extension (:ref:`creating-an-extension`). A
-full exemple will be provided in that documentation, otherwise you can
-look at the source of the `multiflex layout source
-<https://svn.infrae.com/silvatheme.multiflex/trunk>`_.
-
-First some vocabulary on layouts:
-
-.. glossary::
-
-   *layer*
-      A Layer is an Zope interface to switch are attached resources
-      (CSS, images) and templates. Theses resources and templates are
-      going to be used as soon as your layer is applied to your
-      request, i.e. used.
-
-   *skin*
-      A Skin is an Zope interface which inherit from a set of
-      layer. It a have a name, and can be considered as a layout (or
-      theme) in Silva.
-
-
-So to define a new layout, we are going to define two new
-interfaces. You can either define your all layout from scratch, or
-re-use an existing one, like the Porto layout.
-
-
-Layout elements
----------------
-
-You dispose of a few elements to build your theme:
-
-.. glossary::
-
-   *template*
-      A template can be used to define the structure of your page for
-      a given content type (interface) and a given layer. It will be
-      the main component of your layout.
-
-   *content provider*
-      .. image:: contentproviders.png
-         :alt: Content providers
-         :align: right
-
-      A content provider is a named piece of template, or Python code
-      which render a piece of HTML for a given template, content type
-      and layer. You can register the same template code for different
-      pages or type contents, and only change the HTML rendered by the
-      content provider on those pages or contents by registering new
-      ones. That's how you can implement a layout design, and having
-      different ways to fill the content region depending of your
-      content type or template.
-
-      For instance, you could imagine a content provider called
-      ``content``, which is going to display the name and email of
-      people for the imaginary *Subscription* content type on the
-      ``index`` page. On the ``search`` page of the same content type,
-      it an another content provider of the same name will render a
-      search box to search people in the subscription type.
-
-   *viewlet manager*
-      A viewlet manager is basicly a content provider which can
-      contains viewlets.
-
-   *viewlet*
-      .. image:: viewlets.png
-         :alt: Viewlets
-         :align: right
-
-      A viewlet is a template, or Python code, which render a piece of
-      HTML which can be inserted in a viewlet manager, for a given
-      template and content type. The typical use is when you want to
-      have blocks where actions, or other codes can register freely to
-      it. You could imagine having a colunm on your layout, where
-      layout parts can register dependly of the content.
-
-
-The Porto Layout
-----------------
-
-It's a default and simple layout shipped with
-``silva.core.layout``. Its purpose is to contains default CSS for
-Silva Documents, and be easilly overriden to implement your own
-layout.
-
-
 Creation of a new Layout
-------------------------
+========================
+
+.. contents::
 
 We are going to create the new layout in a Python extension, as an
 egg. We are going to use Paster (see :ref:`installing-paster` to get that
@@ -166,7 +78,7 @@ The next step is to :ref:`enable-grok-for-your-extension`.
     extension.
 
 Creation of a skin
-``````````````````
+------------------
 
 Let's create a Python file called ``demo.py`` in our extension. It
 will contain the definition of our layout.
@@ -190,9 +102,20 @@ will contain the definition of our layout.
        silvaconf.skin('Demo')
 
 
+On line 6, we define a new layer to collect resources for our
+theme. Basically it's just an interface which inherit form ``IPorto``,
+since we want to reuse Porto layout resources. If you don't want those
+resources you sould create your layer by extending ``ISilvaLayer``
+which is defined in ``silva.core.layout.interfaces``.
+
+On line 10, we define the skin itself. It will include our layer, and
+``ISilvaSkin`` which define it as a skin. Line 14 register it with the
+name ``Demo``. It will make it available throught the interface so
+user can select it in the *settings* screen and apply it.
+
 
 Add file resources
-``````````````````
+------------------
 
 In your skin extension, you can create a directory called
 ``static``. This should not be a Python package, but just a
@@ -204,13 +127,35 @@ the following URL
 type of file you want like this.
 
 
+Automatic inclusion of ressource files on a layer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you use the Porto layout, you can automatically include CSS and
+Javascript files in your layout. For that, we assume you put those
+resources in the ``static`` sub-directory. After, on your layer, you
+can mention them to get them included:
+
+.. code-block:: python
+
+   class IDemo(IPorto):
+       """Demo layer used to attach resources.
+       """
+
+       silvaconf.resource('demo.css')
+
+If you run your Zope instance in debug mode, the CSS cache won't be
+cached, so you can work safely on the filesystem and refresh directly
+in the browser to your changes. In production mode, the CSS file might
+be mergedd with others, and cached by Zope and your web browser.
+
+
 CSS files as resources
 ~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to include a CSS file by hand, a nice trick is to use the
 ``import`` statement:
 
-.. code-block:: css
+.. code-block:: html
 
   <style type="text/css">
     @import url(http://zope-url/++resources++silvatheme.demo/file.css);

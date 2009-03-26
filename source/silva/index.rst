@@ -8,7 +8,7 @@ Silva Developer Documentation
    extension/index
    contents/index
    services
-   layout
+   layout/index
    test/index
    development_guidelines
 
