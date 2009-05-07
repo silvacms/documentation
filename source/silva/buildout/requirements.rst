@@ -194,6 +194,10 @@ We don't recommand (and support) Windows as a production environment.
    remove any ``GNUWin32`` append to that installation path, to get
    exactly the same installation path.
 
+
+5. You need to install as well `pywin32
+   <http://sourceforge.net/projects/pywin32/>`_, for Python 2.4.
+
 .. warning::
 
    It's recommanded to work in directories which don't have any spaces
