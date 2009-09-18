@@ -13,7 +13,7 @@ First some vocabulary on layouts:
 .. glossary::
 
    *layer*
-      A Layer is an Zope interface to switch are attached resources
+      A layer is an Zope interface to which are attached resources
       (CSS, images) and templates. Theses resources and templates are
       going to be used as soon as your layer is applied to your
       request, i.e. used.
@@ -22,6 +22,28 @@ First some vocabulary on layouts:
       A Skin is an Zope interface which inherit from a set of
       layer. It a have a name, and can be considered as a layout (or
       theme) in Silva.
+
+   *layout*
+      A layout is an object that can be attached to a layer, and so to
+      a skin. It's going to be like *the main template* for your site,
+      and let you render the content of a page in it. It's the element
+      that will contain most of the HTML needed for you design.
+
+   *page*
+      A page correspond to a page of the site, that will be used to
+      render a content at a given URL. For instance, by default, you
+      have a default page ``index`` which use the defined view of your
+      content to display itself. You can implement extra pages, like a
+      ``search.html`` or ``detailed.html`` if you need.
+
+      A page can be linked to a specific skin, and to a specific
+      content. If you already have a generic page of the same name
+      available for a skin, you will be able to customized that page
+      by registering an another one only for a more specific content
+      type.
+
+      A page is going to look for the correct layout to use depending
+      of your settings and render itself inside it.
 
 
 So to define a new layout, we are going to define two new
@@ -32,14 +54,9 @@ re-use an existing one, like the Porto layout.
 Layout Elements
 ---------------
 
-You dispose of a few elements to build your theme:
+You dispose of a few more elements to build your theme:
 
 .. glossary::
-
-   *template*
-      A template can be used to define the structure of your page for
-      a given content type (interface) and a given layer. It will be
-      the main component of your layout.
 
    *content provider*
       .. image:: contentproviders.png
