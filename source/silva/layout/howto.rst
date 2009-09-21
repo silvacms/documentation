@@ -153,7 +153,7 @@ CSS files as resources
 ~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to include a CSS file by hand, a nice trick is to use the
-``import`` statement:
+``import`` statement in the HTML code:
 
 .. code-block:: html
 
@@ -164,4 +164,69 @@ If you want to include a CSS file by hand, a nice trick is to use the
 After all resources refered in the imported CSS will be look by
 default in the same folder that the CSS which will be the exported
 resources directory.
+
+.. note::
+
+     If you include CSS and JS by hand, it is recommanded to include
+     the CSS first and JS after, as this usually improve the loading
+     speed of those resources by current web browsers.
+
+
+Changing the HTML code of the layout
+------------------------------------
+
+The default Porto layout defines some content provider with which you
+can overrides some HTML parts for the ``<body>`` HTML tag content. You
+have by default:
+
+*header*
+   Top section of the site. It itself include by default a
+   *breadcrumbs* provider that define a breadcrums navigation.
+
+*navigation*
+   Right after the top section this provider define a generic
+   navigation code. Use can customize its behavior by inheriting it
+   and settings some configuration attributes on it.
+
+*footer*
+   Bottom section of the site.
+
+
+All those three content providers are themselves included in a more
+global one, *layout* which englobe all the body tag. If you whish
+replace all the HTML code inside the body section, you can overrides
+that last one. For layouts which doesn`t follow the described
+structure it is the best way to implement them.
+
+.. note::
+
+     The *layout* content provider is a content provider and not a
+     layout object. The layout object in the Porto layout is called
+     *mainlayout*. If you whish to replace that one, you can, but you
+     will have to call the content provider *resources* yourself if
+     you whish to use the automatic inclusion of CSS/JS resources.
+
+
+So if we back in our ``demo.py`` file, we can add at the bottom:
+
+.. code-block:: python
+   :linenos:
+
+   from silva.core.layout.porto import porto
+
+   silvaconf.layer(IDemo)
+
+   class Layout(porto.Layout):
+       pass
+
+
+This code declare a new content provider *layout* which just extends
+the one from the Porto layout.
+
+Now we can create an another directory called ``demo_templates`` in
+our skin extensions, like we did for ``static``. It will be used to
+add our *layout* template: like for templates associated with a view,
+they are by default stored in a directory which starts with the name
+of the Python module where they are and where you append
+``_templates``.
 

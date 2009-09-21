@@ -32,9 +32,9 @@ The class ``BlogPublicView`` represent the view.  It inherit from
 
 After you have to create a template associated to that view:
 
-1. Create a directory called ``blog_templates``. It's the name of the
+1. Create a directory called ``blog_templates``. It is the name of the
    Python module where the view code is, at which you append
-   ``templates``,
+   ``_templates``,
 
 2. In this directory, you can add a file called
    ``silvablogpublicview.pt``, it will be your template. This template
@@ -108,7 +108,11 @@ Notes
   templates.
 
 - You can execute code in the ``update`` method before the rendering
-  of your template (or before the method ``render`` is called). 
+  of your template (or before the method ``render`` is called). In
+  that method you can precompute needed values to render your view,
+  and set theirs values in attributes on the class. Afterwards you
+  will be able to access those attributes from your template, using
+  ``view/attribute_name`` (or from ``render`` method).
 
 - You can use the configuration directive ``silvaconf.templatedir`` in
   your module if you want to put your templates in a different
