@@ -268,21 +268,9 @@ section will become our configuration, and we are going to use the
 `macro recipe <http://pypi.python.org/pypi/zc.recipe.macro>`_ to
 create several Zope instances with the same configuration.
 
-For the moment, we need to use a development version of this
-recipe. In you profile file ``mycorp.cfg``, add the options to the
-``buildout`` section:
-
-.. code-block:: ini
-
-   [buildout]
-   extensions = gp.svndevelop>0.3
-   develop-dir = src
-   svn-extend-develop =
-      svn://svn.zope.org/repos/main/zc.recipe.macro/branches/infrae-force-recipe#egg=zc.recipe.macro
-
-After, we are going to say that ``instance`` is just used as
-configuration entry in our profile, and define 6 Zope instances, with
-special settings for each of them.
+We are going to say that ``instance`` is just used as configuration
+entry in our profile, and define 6 Zope instances, with special
+settings for each of them.
 
 .. code-block:: ini
 
@@ -317,7 +305,6 @@ profile file:
    recipe = zc.recipe.macro
    macro = instance
    result-recipe = plone.recipe.zope2instance
-   force-recipe = true
    targets =
       client1:client1-conf
       client2:client2-conf
