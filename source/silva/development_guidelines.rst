@@ -283,10 +283,8 @@ Creating a tag of a Python-only extension
       $ svn co extension/tag/extension_name-version release
       $ cd release
 
-6. In that checkout, edit ``setup.cfg`` and comment the two lines::
-
-      tag_build = dev
-      tag_svn_revision = true
+6. In that checkout, edit ``setup.py`` and remove the dev marker from
+   the version.
 
 7. Commit those changes (this is the *one* exception to the rule that
    you should never check in anything on a tag.):
@@ -299,7 +297,7 @@ Creating a tag of a Python-only extension
 
    .. code-block:: sh
 
-      $ python2.4 setup.py register sdist bdist_egg upload -r https://dist.infrae.com/download
+      $ python2.4 setup.py register sdist upload -r https://dist.infrae.com/download
 
 9. Go back to your trunk or branch checkout:
 
@@ -358,10 +356,8 @@ Creating a tag of a Zope product packaged as an Python extension
       $ svn co extension/tag/extension_name-version release
       $ cd release
 
-6. In that checkout, edit ``setup.cfg`` and comment the two lines::
-
-      tag_build = dev
-      tag_svn_revision = true
+6. In that checkout, edit ``setup.py`` and remove the dev marker from
+   the version.
 
 7. In the ``Products`` sub-folder, edit the ``svn:externals``
    properties to use the Zope product you tagged:
@@ -387,7 +383,7 @@ Creating a tag of a Zope product packaged as an Python extension
 
    .. code-block:: sh
 
-      $ python2.4 setup.py register sdist bdist_egg upload -r https://dist.infrae.com/download
+      $ python2.4 setup.py register sdist upload -r https://dist.infrae.com/download
 
 11. Go back to your trunk or branch checkout:
 
