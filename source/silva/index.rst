@@ -12,6 +12,11 @@ Silva Developer Documentation
    test/index
    development_guidelines
 
+Interesting Links
+-----------------
 
-You might be interested to look at the Zope 2 documentation:
-http://docs.zope.org/zope2/.
+You might be interested to look:
+
+- at the Zope 2 documentation: http://docs.zope.org/zope2/
+
+- at the Grok documentation: http://grok.zope.org/doc/current/reference/
