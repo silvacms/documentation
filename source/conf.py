@@ -23,7 +23,10 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['repoze.sphinx.autointerface']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'repoze.sphinx.autointerface']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']
@@ -75,7 +78,6 @@ today_fmt = '%B %d, %Y'
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
-
 
 # Options for HTML output
 # -----------------------
