@@ -8,6 +8,7 @@ from the interfaces definitions.
    :maxdepth: 2
 
    silvaobjects
+   members
    contents
    versions
    assets
