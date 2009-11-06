@@ -3,7 +3,7 @@
  */
 
 body {
-  font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 100%;
   background-color: #11303d;
   color: #000;
@@ -510,7 +510,7 @@ p.subhead {
 }
 
 a {
-    color: #000000;
+    color: #20435C;
     text-decoration: none;
 }
 
@@ -565,20 +565,19 @@ a.headerlink:hover {
 }
 
 div.body p, div.body dd, div.body li {
-    text-align: justify;
     line-height: 130%;
     color: #225577;
 }
 
 div.body ul li a {
-  color: #225577;
-  font-size: 1.1em;
+  color: #20435C;
+  font-size: 1em;
   font-weight: bold;
 }
 
 div.body ul li ul li a {
-  color: black;
-  font-size: .8em;
+  color: #20435C;
+  font-size: 0.9em;
   font-weight: normal;
 }
 
@@ -757,8 +756,6 @@ pre {
     background-color: #efc;
     color: #333;
     border: 1px solid #ac9;
-    border-left: none;
-    border-right: none;
     overflow: auto;
 }
 
@@ -766,40 +763,46 @@ td.linenos pre {
     padding: 5px 0px;
     border: 0;
     background-color: transparent;
-    color: #aaa;
+    color: #20435C;
 }
 
 table.highlighttable {
-    margin-left: 0.5em;
+    width: 100%;
 }
 
-table.highlighttable td {
-    padding: 0 0.5em 0 0.5em;
+table.highlighttable td.linenos {
+    width: 25px;
 }
 
 tt {
-    background-color: #eeffcc;
     border-color: #aacc99;
-    border-style: solid none;
-    border-width: 1px medium;
     padding: 0 1px 0 1px;
     font-size: 1em;
 }
 
-tt.descname {
-    background-color: transparent;
-    font-weight: bold;
+em.property {
+    color: #20435C;
+    font-style: normal;
     font-size: 1.2em;
+    font-weight: bold;
 }
 
+tt.descname,
 tt.descclassname {
-    background-color: transparent;
+    color: #20435C;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 tt.xref, a tt {
     background-color: transparent;
     font-weight: bold;
 }
+
+blockquote {
+    margin-right: 0px;
+}
+
 
 .footnote:target  { background-color: #ffa }
 
