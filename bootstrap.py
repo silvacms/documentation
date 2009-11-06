@@ -24,29 +24,10 @@ import os, os.path, shutil, sys, tempfile, urllib2
 
 tmpeggs = tempfile.mkdtemp()
 
-enable_virtualenv = False
-if '--with-virtualenv' in sys.argv:
-    enable_virtualenv = True
-    sys.argv.remove('--with-virtualenv')
-
-if '--buildout-profile' in sys.argv:
-    index = sys.argv.index('--buildout-profile') + 1
-    if index > len(sys.argv):
-        raise ValueError, '--buildout-profile require a config file.'
-    buildout_config = sys.argv[index]
-    if not os.path.isfile(buildout_config):
-        raise ValueError, 'no such configuration file.'
-
-    print "Creating configuration '%s'" % os.path.abspath('buildout.cfg')
-    config = open('buildout.cfg', 'w')
-    config.write("""[buildout]
-extends = %s
-""" % buildout_config)
-    del config
-
-    sys.argv.remove('--buildout-profile')
-    sys.argv.remove(buildout_config)
-
+enable_virtualenv = True
+if '--no-virtualenv' in sys.argv:
+    enable_virtualenv = False
+    sys.argv.remove('--no-virtualenv')
 
 if sys.platform.startswith('win'):
     bin_dir = 'Scripts'
