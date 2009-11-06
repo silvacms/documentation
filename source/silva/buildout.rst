@@ -319,6 +319,12 @@ tag, and re-run buildout:
    buildout configuration using the ``extends`` option of buildout,
    you should update the URL used instead of doing ``svn switch``.
 
+.. warning::
+
+   If you are using any specific extra and / or custom extensions to
+   Silva, you should check that they are compatible with the version
+   you are trying to upgrade to. If it's not the case they might break
+   your site and make the upgrade fail.
 
 As generic upgrade procedure, we recommand first to copy your site as
 a test site, and run the upgrade procedure on that copy. After
@@ -328,13 +334,24 @@ versions where there is lot of changes (like major release of Silva).
 
 .. note::
 
-   It's recommended to do a backup of your data before.
+   Please refer to the specific upgrade notes for each version as well.
+
+.. warning::
+
+   It's recommended to do a backup of your data before any upgrade
+   operation.
 
 
 After restarting your Zope instance, you can go in each of the Silva
 Root object you have in that Zope server, in ZMI, select the service
 tab, go on *service_extensions* and click on upgrade content. Not all
 upgrades requires that.
+
+
+.. toctree::
+   :maxdepth: 2
+
+   buildout/upgrade
 
 
 Using Buildout
