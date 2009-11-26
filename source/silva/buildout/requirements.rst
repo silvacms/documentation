@@ -55,6 +55,14 @@ Installation under Linux Ubuntu/Debian
       $ sudo apt-get install libxml2-dev libxslt1-dev
 
 
+Installation under Linux Fedora/Centos/Redhat
+---------------------------------------------
+
+You can refer to the following documentation:
+
+http://silva.mine.ch/Silva-Installation-under-Linux-Fedora-Centos-Redhat
+
+
 Installation under Mac OS X
 ---------------------------
 
@@ -89,6 +97,15 @@ And ``libxml2``/``libxslt``:
 
    $ sudo port -v install libxml2
    $ sudo port -v install libxslt
+
+
+Mac OS X Snow Leopard
+~~~~~~~~~~~~~~~~~~~~~
+
+Python 2.4 is a bit old for Snow Leopard. But you can refer to this
+documentation to install it:
+
+http://silva.mine.ch/Silva-Installation-under-MacOSX-Snow-Leopard
 
 Installation under FreeBSD
 --------------------------
