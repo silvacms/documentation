@@ -46,4 +46,4 @@ As well, you can report your experience here:
 
 - Silva mailing lists: https://lists.infrae.com
 
-- IRC chat: #silva on irc.freenode.net
+- IRC chat: ``#silva`` on irc.freenode.net
