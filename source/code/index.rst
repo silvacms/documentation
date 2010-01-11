@@ -1,6 +1,6 @@
 
-Generic development guidelines
-==============================
+Generic guidelines
+==================
 
 .. toctree::
    :maxdepth: 2

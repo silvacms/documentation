@@ -1,6 +1,6 @@
 
-Creating a new layout
-=====================
+Creating a new visual theme
+===========================
 
 You can create a new layout as a filesystem-based extension. So you
 need first to create an extension (:ref:`creating-an-extension`). A

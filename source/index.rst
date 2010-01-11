@@ -1,6 +1,9 @@
 
-Infrae Developer Documentation
-==============================
+Infrae Documentation
+====================
+
+This site include documentation for Silva developers and system
+administrators working with Silva installations.
 
 .. toctree::
    :maxdepth: 2
