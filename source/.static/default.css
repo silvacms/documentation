@@ -112,6 +112,11 @@ div.sphinxsidebar h4 {
   padding: 3px 12px 4px;
 }
 
+div.sphinxsidebar p.logo {
+  text-align: center;
+}
+
+
 div.sphinxsidebar p {
   color: white;
   padding: 3px 12px 4px;

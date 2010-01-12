@@ -12,6 +12,7 @@ administration tasks that can be done.
 
    buildout
    starting
+   apache
 
 
 Developer documentation
