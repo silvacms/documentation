@@ -2,13 +2,17 @@
 Creating a new visual theme
 ===========================
 
-You can create a new layout as a filesystem-based extension. So you
-need first to create an extension (:ref:`creating-an-extension`). A
-full exemple will be provided in that documentation, otherwise you can
-look at the source of the `multiflex layout source
-<https://svn.infrae.com/silvatheme.multiflex/trunk>`_.
+You can create a new visual theme (or layout) as a filesystem-based
+extension.
 
-First some vocabulary on layouts:
+You need first to create an extension (please refer to
+:ref:`creating-an-extension`). A full example will be provided in that
+documentation, otherwise you can look at the source of the `multiflex
+theme <https://svn.infrae.com/silvatheme.multiflex/trunk>`_, or
+`standard issue theme
+<https://svn.infrae.com/silvatheme.standardissue/trunk/>`_.
+
+First some vocabulary on visual themes:
 
 .. glossary::
 
@@ -20,39 +24,51 @@ First some vocabulary on layouts:
 
    *skin*
       A Skin is an Zope interface which inherit from a set of
-      layer. It a have a name, and can be considered as a layout (or
-      theme) in Silva.
+      layer. It a have a name, and can be considered as a visual theme
+      in Silva, and can be selected as such in the SMI. Some people
+      call this element layout as well, but layout will be used to
+      define an other object, so prefer to use the term skin or visual
+      theme.
+
+   *view*
+      A view is a Python object, to which can be associated to a
+      template, mainly used to render a content as an HTML
+      page. Different views can be defined and used on the same
+      content.
+
+      Interactions: A view is linked to a type of content, and a
+      layer (or a skin).
 
    *layout*
-      A layout is an object that can be attached to a layer, and so to
-      a skin. It's going to be like *the main template* for your site,
-      and let you render the content of a page in it. It's the element
-      that will contain most of the HTML needed for you design.
+      A layout is an Python object that can be attached to a layer (so
+      to a skin). It's going to be like *the main template* of your
+      visual theme, and render the main structure of your HTML pages,
+      in which blanks will be filled with pages or content providers.
+      You can as well register different layout for different type of
+      content.
 
    *page*
-      A page correspond to a page of the site, that will be used to
-      render a content at a given URL. For instance, by default, you
-      have a default page ``index`` which use the defined view of your
-      content to display itself. You can implement extra pages, like a
-      ``search.html`` or ``detailed.html`` if you need.
-
-      A page can be linked to a specific skin, and to a specific
-      content. If you already have a generic page of the same name
-      available for a skin, you will be able to customized that page
-      by registering an another one only for a more specific content
-      type.
-
-      A page is going to look for the correct layout to use depending
-      of your settings and render itself inside it.
+      A page is a view, which is designed to render a web page of the
+      site, at a given URL. It is going to look for a layout object,
+      to render itself inside it (in order to reuse the HTML structure
+      defined by the layout). For instance, the default page ``index``
+      will be used to display your content itself, and extra pages,
+      like ``search.html`` or ``detailed.html`` can be added reusing
+      the visual design defined by the layout object.
 
 
-So to define a new layout, we are going to define two new
-interfaces. You can either define your all layout from scratch, or
-re-use an existing one, like the Porto layout.
+
+To define a new visual theme, you need to define define two new
+interfaces: one layer to attach your resources, and one skin to use
+them.
+
+You can extend an already existing theme, by having your layer
+inheriting of the theme layer. For instance you can reuse default
+theme definition done in the Porto layout.
 
 
-Layout Elements
----------------
+Visual theme elements
+---------------------
 
 You dispose of a few more elements to build your theme:
 
@@ -63,14 +79,14 @@ You dispose of a few more elements to build your theme:
          :alt: Content providers
          :align: right
 
-      A content provider is a named piece of template, or Python code
-      which render a piece of HTML for a given template, content type
-      and layer. You can register the same template code for different
-      pages or type contents, and only change the HTML rendered by the
-      content provider on those pages or contents by registering new
-      ones. That's how you can implement a layout design, and having
-      different ways to fill the content region depending of your
-      content type or template.
+      A content provider is a named piece of Python code, with a
+      template which render a piece of HTML for a given content type,
+      layer and page. You can register the same template code for
+      different pages or type contents, and only change the HTML
+      rendered by the content provider on those pages or contents by
+      registering new ones. That's how you can implement a layout
+      design, and having different ways to fill the content region
+      depending of your content type or template.
 
       For instance, you could imagine a content provider called
       ``content``, which is going to display the name and email of
@@ -116,3 +132,4 @@ well.
    :maxdepth: 2
 
    howto
+   providers

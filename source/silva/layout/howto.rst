@@ -1,5 +1,5 @@
-Creation of a new Layout
-========================
+Creation of a Layout
+====================
 
 .. contents::
 
@@ -77,18 +77,18 @@ The next step is to :ref:`enable-grok-for-your-extension`.
     that refer on creating a extension to see how to create a non-egg
     extension.
 
-Creation of a skin
+Creation of a Skin
 ------------------
 
 Let's create a Python file called ``demo.py`` in our extension. It
 will contain the definition of our layout.
 
-.. code-block:: python
+.. sourcecode:: python
    :linenos:
 
    from silva.core.layout.interfaces import ISilvaSkin
    from silva.core.layout.porto.interfaces import IPorto
-   from silva.core import conf as silvaconf
+   from five import grok
 
 
    class IDemo(IPorto):
@@ -99,7 +99,7 @@ will contain the definition of our layout.
        """Demo skin.
        """
 
-       silvaconf.skin('Demo')
+       grok.skin('Demo')
 
 
 On line 6, we define a new layer to collect resources for our
@@ -114,8 +114,8 @@ name ``Demo``. It will make it available throught the interface so
 user can select it in the *settings* screen and apply it.
 
 
-Add file resources
-------------------
+Adding file resources
+---------------------
 
 In your skin extension, you can create a directory called
 ``static``. This should not be a Python package, but just a
@@ -135,7 +135,9 @@ Javascript files in your layout. For that, we assume you put those
 resources in the ``static`` sub-directory. After, on your layer, you
 can mention them to get them included:
 
-.. code-block:: python
+.. sourcecode:: python
+
+   from silva.core import conf as silvaconf
 
    class IDemo(IPorto):
        """Demo layer used to attach resources.
@@ -146,7 +148,7 @@ can mention them to get them included:
 If you run your Zope instance in debug mode, the CSS cache won't be
 cached, so you can work safely on the filesystem and refresh directly
 in the browser to your changes. In production mode, the CSS file might
-be mergedd with others, and cached by Zope and your web browser.
+be merged with others, and cached by Zope and your web browser.
 
 
 CSS files as resources
@@ -209,12 +211,12 @@ structure it is the best way to implement them.
 
 So if we back in our ``demo.py`` file, we can add at the bottom:
 
-.. code-block:: python
+.. sourcecode:: python
    :linenos:
 
    from silva.core.layout.porto import porto
 
-   silvaconf.layer(IDemo)
+   grok.layer(IDemo)
 
    class Layout(porto.Layout):
        pass
