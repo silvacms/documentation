@@ -383,7 +383,7 @@ Creating a tag of a Zope product packaged as an Python extension
 
    .. code-block:: sh
 
-      $ python2.4 setup.py register sdist upload -r https://dist.infrae.com/download
+      $ python2.4 setup.py register sdist upload -r https://www.infrae.com/download
 
 11. Go back to your trunk or branch checkout:
 
