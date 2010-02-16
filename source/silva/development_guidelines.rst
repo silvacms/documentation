@@ -257,13 +257,13 @@ Creating a tag of a Python-only extension
 
    .. code-block:: sh
 
-      $ python2.4 setup.py egg_info
+      $ python2.x setup.py egg_info
 
    Should not give an error, and:
 
    .. code-block:: sh
 
-      $ python2.4 setup.py --long-description | rst2html > description.html
+      $ python2.x setup.py --long-description | rst2html > description.html
 
    Should not either. Open ``description.html`` in your web browser
    and check that this looks good.
@@ -293,11 +293,31 @@ Creating a tag of a Python-only extension
 
       $ svn commit -m "Remove dev marker."
 
-8. Upload your egg on https://dist.infrae.com:
+8. Upload your egg on http://infrae.com/download:
+
+   Open up your ~/pypirc file and make sure it has an entry for infrae.com
 
    .. code-block:: sh
 
-      $ python2.4 setup.py register sdist upload -r https://dist.infrae.com/download
+      [distutils]
+      index-servers = pypi
+                      infrae
+      [pypi]
+      username = user
+      password = password
+                
+      [infrae]
+      username = user
+      password = password
+      repository = http://infrae.com/download
+      realm = Zope
+
+
+   Next, run the update
+
+   .. code-block:: sh
+
+      $ python2.x setup.py register sdist upload -r infrae
 
 9. Go back to your trunk or branch checkout:
 
