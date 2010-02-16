@@ -295,7 +295,7 @@ Creating a tag of a Python-only extension
 
 8. Upload your egg on http://infrae.com/download:
 
-   Open up your ~/pypirc file and make sure it has an entry for infrae.com
+   Open up your ~/.pypirc file and make sure it has an entry for infrae.com
 
    .. code-block:: sh
 
