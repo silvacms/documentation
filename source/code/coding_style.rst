@@ -8,7 +8,11 @@ Coding style
 ------------
 
 Silva, and others Infrae products should follow the coding style
-defined by `pep8`_, with the following enforcement:
+defined by `pep8`_, with the following enforcement.
+
+
+Spaces
+~~~~~~
 
 - Code is indented with spaces,
 
@@ -20,10 +24,24 @@ defined by `pep8`_, with the following enforcement:
   utf-8 encoding should be used, with a marker one the first line of
   the file (``# -*- coding: utf-8 -*-``),
 
+
+Doc string
+~~~~~~~~~~
+
 - All methods and classes should have a doc string,
 
 - In a method, the code should start right after the doc string,
   without an empty separating the both of them,
+
+
+Classes
+~~~~~~~
+
+- All classes should inherit at least from ``object``.
+
+
+Imports
+~~~~~~~
 
 - No local imports should be used,
 
@@ -31,6 +49,9 @@ defined by `pep8`_, with the following enforcement:
 
 - Unused imports should be removed.
 
+
+Example
+-------
 
 Here join an example:
 
