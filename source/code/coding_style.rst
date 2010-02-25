@@ -21,8 +21,8 @@ Spaces
 - Files should not be saved with Windows end of lines (only Unix ones),
 
 - ASCII encoding is preferred when saving files. If it is not enough,
-  utf-8 encoding should be used, with a marker one the first line of
-  the file (``# -*- coding: utf-8 -*-``),
+  utf-8 encoding should be used, with a coding cookie on the first
+  line of the file (``# -*- coding: utf-8 -*-``),
 
 
 Doc string
