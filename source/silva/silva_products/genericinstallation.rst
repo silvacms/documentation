@@ -23,4 +23,6 @@ Zope Management Interface Steps
 -------------------------------
 
 Start the zope server and either navigate to an existing Silva root or
-create a Silva root.
+create a Silva root. Then navigate to the ``services`` page and then
+the ``service_extensions`` page. Locate the product you just installed
+and click ``activate``.

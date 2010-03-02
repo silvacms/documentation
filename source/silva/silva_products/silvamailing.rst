@@ -10,17 +10,32 @@ valid for Silva-1.6 and Silva-2.x.
 Install
 -------
 
-There are several different ways to install a Silva product. If you
-are using a buildout be sure that the buildout doesn't already install
-the product you wish to install. To see the initial product list see
-the ``profiles/base.cfg`` file. If the product you wish to install is
-not included in the ``base.cfg`` file see :doc:`../buildout/extending`
+See :doc:`genericinstallation`
 
-If Silva is built manually (has not been built using buildout), svn
-checkout SilvaMailing or download the SilvaMailing tarball into the
-relevant "Products" directory.
+Configuration
+-------------
 
-Start the zope server and either navigate to an existing Silva root or
-create a Silva root. Then navigate to the ``services`` page and then
-the ``service_extensions`` page. Locate the product you just installed
-and click ``activate``.
+In the Silva root navigate to the Services tab and click into the
+service_extensions. Find the SilvaMailing product and click
+install. Return to the Silva root and click into the ``Silva
+/edit...`` view. Create a Silva Mailing Folder. Navigate into the
+Silva Mailing Folder object and click properties. Edit the mailhost id
+to point to service_subscription_mailhost. (Note, the
+service_subscription_mailhost should be changed to the current mail
+server being used. Click save.
+
+Using
+-----
+
+Now the Silva Mailing product should be configured. After a Mailing
+Folder object has been placed and configured properly, users can start
+creating 'Silva Mailing Document' type objects inside it. These
+documents each provide a mailing, with the contents of a single HTML
+mail. To send a mailing, click on the mail document to get into
+the 'editor' view. From here click on the publish tab and then the
+'send mailing' button.
+
+This box also provides a 'test email' field in which you can enter an
+email address to send the mail to for testing purposes - in case this
+is provided, email will not be sent off to the subscribers, only to
+this address.
