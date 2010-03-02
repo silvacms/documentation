@@ -8,7 +8,7 @@ instance/buildout::
 
   ./bin/instance test -s Products.Silva
 
-In case you'd like to run only one particular set of tests you can do this::
+Use the ``-m`` option to run a single test module.::
 
   ./bin/instance test -m Products.Silva.test.test_silvaviews
 
