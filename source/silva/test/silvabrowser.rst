@@ -4,7 +4,7 @@ Silva Browser
 
 SilvaBrowser is Python driven web navigator that you can use in your
 tests to verify the rendering of your application. It should be used
-inside of a functional test. Example:
+for creating functional tests. Example:
 
 .. code-block:: python
 

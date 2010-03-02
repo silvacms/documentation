@@ -2,9 +2,9 @@
 Silva Test Case
 ===============
 
-A Silva Test Case let your write test for Silva. It set up a Silva
-site which can used, and some convenient methods have been added on
-it.
+A Silva Test Case let your write tests for Silva. The class will set
+up a test Silva site for running your tests on. The class has many
+handy methods to manipulate the test site.
 
 .. module:: Products.Silva.tests.SilvaTestCase
 
