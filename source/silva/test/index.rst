@@ -12,28 +12,27 @@ Use the ``-m`` option to run a single test module.::
 
   ./bin/instance test -m Products.Silva.test.test_silvaviews
 
-There're a lot more options for the test subcommand. For more information
-you can issue::
+To see the other options for the test subcommand use the ``--help``
+option.
 
   ./bin/instance test --help
 
 .. note::
 
-  If you don't use buildout, ``instance`` might be called ``zopectl``.
+  If your not using buildout, ``instance`` is called ``zopectl``.
 
 .. note::
 
-  If you use buildout, you might already have a script called
-  ``bin/test`` which run tests for Silva. You don't need to add any
-  argument to that script.
-
+  Using the buildout, will generate a script in bin call ``test``.
+  The ``tests`` script will run all the tests for Silva without
+  passing any options.
 
 Writing a new test
 ------------------
 
-Your test module should have the prefix ``test_``, and be located in a
-``tests`` package of the package that you want to test. Hereby a
-example of a test:
+All test modules should have the prefix ``test_`` in the module name,
+and be located in a ``tests`` directory of the package that you want
+to test. Hereby a example of a test:
 
 .. code-block:: python
 
@@ -47,20 +46,20 @@ example of a test:
       def test_hasRoot(self):
           assert hasattr(self.app, 'root')
 
-
   def test_suite():
       import unittest
       suite = unittest.TestSuite()
       suite.addTest(unittest.makeSuite(TestSilvaTestCase))
       return suite
 
-Your test is represented by the method ``test_hasRoot``. You can add
-more test to your test case, but they should start with ``test_`` like
-the file does.
+Within the test module you need to create a test class as shown above
+in ``TestSilvaTestCase``. To inherit important testing functionality
+it is always a good idea to pass the ``SilvaTestCase.SilvaTestCase``
+class. Inside the test class are methods. These methods are your
+actual tests. Each test method must begin with the prefix ``test_``.
 
 You can get more information about writing tests in Python on the
 `Python website <http://docs.python.org/lib/module-unittest.html>`_.
-
 
 Useful information:
 
@@ -69,7 +68,6 @@ Useful information:
   * Silva root: ``self.root``,
 
   * Role of default user: ``ChiefEditor``.
-
 
 Documentation on test API
 -------------------------
