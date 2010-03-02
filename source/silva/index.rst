@@ -4,7 +4,7 @@ Silva Documentation
 Installation and Administration
 -------------------------------
 
-This section develop the installation process of Silva, and system
+This section describes the installation process of Silva, and system
 administration tasks that can be done.
 
 .. toctree::
@@ -14,6 +14,15 @@ administration tasks that can be done.
    starting
    apache
 
+Products
+--------
+
+This section has a number of documents about specific Silva products.
+
+.. toctree::
+   :maxdepth: 2
+
+   silva_products/index
 
 Developer documentation
 -----------------------
