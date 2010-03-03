@@ -37,6 +37,7 @@ themes and extensions.
    extension/index
    layout/index
    contents/index
+   code_source/index
    services
    test/index
    development_guidelines
