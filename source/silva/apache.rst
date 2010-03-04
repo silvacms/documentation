@@ -1,23 +1,25 @@
 Configuring Apache to present your site to the world
 ====================================================
 
-Zope is web server by is own and can host multiple Silva sites on
-different URLs. However it is difficult to configure to which URLs
-Zope is going to answer, and with which Silva site. Usually people use
-Apache to do this *routing* job.
+Zope is runs its own web server. It can host multiple Silva sites with
+different URLs. However it is difficult to configure which URLs the
+Zope will, with which Silva site. To solve this problem use Apache to
+handle *routing*.
 
 Configuring rewrite rules in Apache
 -----------------------------------
 
-First you need to enable the following modules in Apache:
+First enable the following modules in Apache:
 
 - ``mod_rewrite``.
 
-- ``mod_proxy`` (actually ``mod_proxy_http``). You don't need to authorize any
-  proxy operation, deny everything by default.
+- ``mod_proxy`` (actually ``mod_proxy_http``). You don't need to
+  authorize any proxy operation because it denies everything by
+  default.
 
-After in your configuration you can use the following lines to
-delegate the processing of your requests to Zope:
+After you've enable the Apache modules open the apache configuration
+file. In your configuration you can use the following lines to enable
+processing requests to Zope:
 
 .. code-block:: apache
    :linenos:
