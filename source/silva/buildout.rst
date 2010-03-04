@@ -23,11 +23,12 @@ Please refer to the section regarding your system.
 Installing quick drive Silva with Paster and ZopeSkel
 -----------------------------------------------------
 
-You can install Silva using `Paster`_ and `ZopeSkel`_ if you want to
-take it for a quick test drive. If you want to set up a production or
+If you want to take Silva for a quick test drive you can install Silva
+using `Paster`_ and `ZopeSkel`_. For setting up a production or
 development environment we recommend you do a SVN check out of the
-Buildout located in the Infrae SVN. This will let you upgrade your
-Silva instance more easily at a later date.
+Buildout located in the Infrae `SVN
+<https://svn.infrae.com/buildout/silva/>`_. This will let you upgrade
+your Silva instance more easily at a later date.
 
 .. glossary::
 
