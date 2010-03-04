@@ -24,4 +24,15 @@ adjusted for, the Silva CMS.
 
    silvamailing
 
+Silva Find
+----------
 
+SilvaFind is a powerful search feature to allow easy creation of
+search forms and result pages, both for users of the public site and
+for authors in the SMI.  Simple schemas can be defined to indicate
+which fields should be searchable.
+
+.. toctree::
+   :maxdepth: 2
+
+   silvafind
