@@ -51,7 +51,7 @@ Using rewrite rules to manipulate Silva URLs
 --------------------------------------------
 
 Some people have the use case to have different URLs within
-Silva. This present a small problem because the URL rewriting system
+Silva. This presents a small problem because the URL rewriting system
 is not able to compute URLs that are not inside the virtual root.
 
 Here is an example:
@@ -70,5 +70,5 @@ site begins at ``foo``. Via acquistion Zope will create the URL:
 
 To avoid this we suggest adding Silva Links at the root of your site
 redirecting you to the correct content. For instance, in this example
-you could create a Silva Link called ``foo``, which points to
+you would create a Silva Link called ``foo``, which points to
 ``your-site.com/pub2``.
