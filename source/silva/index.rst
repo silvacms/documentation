@@ -4,8 +4,8 @@ Silva Documentation
 Installation and Administration
 -------------------------------
 
-This section describes the installation process of Silva, and system
-administration tasks that can be done.
+This section describes installation and system administration tasks
+related to Silva.
 
 .. toctree::
    :maxdepth: 2
@@ -27,9 +27,7 @@ This section has a number of documents about specific Silva products.
 Developer documentation
 -----------------------
 
-This section describes how Silva can be extended by writing new visual
-themes and extensions.
-
+This section describes extending Silva's functionality.
 
 .. toctree::
    :maxdepth: 2

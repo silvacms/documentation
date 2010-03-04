@@ -1,8 +1,7 @@
-
 Infrae Documentation
 ====================
 
-This site include documentation for Silva developers and system
+This site includes documentation for Silva developers and system
 administrators working with Silva installations.
 
 .. toctree::
