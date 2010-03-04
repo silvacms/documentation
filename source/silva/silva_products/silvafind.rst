@@ -95,7 +95,7 @@ code:
         tal:attributes="href metatypecss" />
       <tal:comment replace="nothing">
         Make sure search results are never cached.
-      </tal:comment>    
+      </tal:comment>
       <tal:block replace="structure model/@@set_nocache" />
     </tal:block>
   </tal:block>

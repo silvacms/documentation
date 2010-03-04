@@ -56,8 +56,6 @@ First some vocabulary on visual themes:
       like ``search.html`` or ``detailed.html`` can be added reusing
       the visual design defined by the layout object.
 
-
-
 To define a new visual theme, you need to define define two new
 interfaces: one layer to attach your resources, and one skin to use
 them.
@@ -133,3 +131,4 @@ well.
 
    howto
    providers
+   legacy_howto
