@@ -6,14 +6,13 @@ Installing Silva with Buildout
 
    *Buildout*
      Buildout is a tool used to automate software
-     deployment. Installing and upgrading Silva using buildout will
-     greatly reduce the chance of errors and the time needed.
-
+     deployment. Installing and upgrading Silva using buildout can
+     greatly reduce the chances of errors.
 
 Requirements
 ------------
 
-Please refer to the section regarding the system you use.
+Please refer to the section regarding your system.
 
 .. toctree::
    :maxdepth: 2
@@ -21,11 +20,11 @@ Please refer to the section regarding the system you use.
    buildout/requirements
 
 
-Installing Silva to test it with Paster and ZopeSkel
-----------------------------------------------------
+Installing quick drive Silva with Paster and ZopeSkel
+-----------------------------------------------------
 
-You can install Silva using Paster and `ZopeSkel`_ if you want to take
-it for a quick test drive. If you want to set up a production or
+You can install Silva using `Paster`_ and `ZopeSkel`_ if you want to
+take it for a quick test drive. If you want to set up a production or
 development environment we recommend you do a SVN check out of the
 Buildout located in the Infrae SVN. This will let you upgrade your
 Silva instance more easily at a later date.
@@ -450,5 +449,6 @@ while running Buildout.
 
    buildout/troubleshooting
 
+.. _Paster: http://pythonpaste.org/
 .. _ZopeSkel: http://pypi.python.org/pypi/ZopeSkel
 
