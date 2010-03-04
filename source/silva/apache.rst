@@ -30,72 +30,45 @@ processing requests to Zope:
 
 Explanation:
 
-- On line 1, we declare which is the site we are handling.
+- On line 1, we declare the site we are handling.
 
 - On line 2, we activate ``mod_rewrite`` for this server (or virtual host).
 
 - On line 3, we redirect all requests to Zope.
 
-  In our case, Zope listen on localhost, port 8080. After the URL
-  component ``VirtualHostBase`` tell Zope to use the URL rewrite
-  engine.
+In our case, Zope listens to localhost on port 8080. Apache relocates
+the URL to our Zope server ``http://localhost:8080/``. VirtualHostBase
+is with Zope and is responsible for rewriting the links with Zope.
 
-  It will generate all links in web pages using http://your-site.com
-  instead of http://localhost:8080, and to use ``/silva`` as path to
-  the site root element instead of ``/``.
+This means that ``http://localhost:8080/silva`` will be accessible
+using the URL ``http://your-site.com``.
 
-  So that's means that http://localhost:8080/silva will be accessible
-  using the URL http://your-site.com via Apache.
-
-You can have more information on Apache configuration on `the official
-website <http://httpd.apache.org/docs>`_.
+For more information on Apache configuration see `the official website
+<http://httpd.apache.org/docs>`_.
 
 
 Using rewrite rules to manipulate Silva URLs
 --------------------------------------------
 
-Some people have the use case to have different URLs inside Silva and
-for the public. There is a restriction to that, the URL rewriting system
+Some people have the use case to have different URLs within
+Silva. This present a small problem because the URL rewriting system
 is not able to compute URLs that are not inside the virtual root.
 
-Let's take an example:
+Here is an example:
 
 1. You have a Silva root accessible via a rewrite rule with the name
-   ``your-site.com``. It contains two publications ``pub1`` and
-   ``pub2`` (which have themselves some data).
+   ``your-site.com``. The silva root It contains two publications
+   ``pub1`` and ``pub2`` (these two items also contain data).
 
 2. You set a rewrite rule so that you can access ``pub2`` via the URL
    ``your-site.com/foo``.
 
-Now on your site, inside ``pub2`` you have a link to ``pub1``, in
-navigation or inside a document. Zope is not going to compute the URL
-``your-site.com/pub1`` for you, as for him the world starts at
-``foo``. It is going to create you that URL:
-``your-site.com/foo/pub1``, which, because of Zope Acquisition *might*
-work.
+Now on your site, inside ``pub2`` you have a link to ``pub1``. Zope
+cannot compute the URL ``your-site.com/pub1``, because for Zope the
+site begins at ``foo``. Via acquistion Zope will create the URL:
+``your-site.com/foo/pub1``.
 
-The cases where that URL doesn't work are:
-
-- People having the right to edit the ``pub2`` publication can add
-  themselves a content called ``pub1`` that the people will get the
-  intended publication (like phis-hing)
-
-- If indeed you have a document with the same identifier in ``pub2``,
-  a link to content of ``pub1`` might result in 404 error instead of
-  the real content.
-
-- Links appearing in the browser will look wrong (and that's why they
-  will have those unwanted behaviors).
-
-- The virtual root is the starting point to cache theme resources
-  (CSS, images). Adding a lot more of them makes caching less
-  efficient and visitors will have to re-download CSS and images many
-  times.
-
-Solution
-~~~~~~~~
-
-Most of the time, you just wanted to add Silva Links at the root of
-your site to redirect you to the write content. For instance, you
-could have created a Silva Link called ``foo``, which points to
-``your-site.com/pub2`` in the previous example.
+To avoid this we suggest adding Silva Links at the root of your site
+redirecting you to the correct content. For instance, in this example
+you could create a Silva Link called ``foo``, which points to
+``your-site.com/pub2``.
