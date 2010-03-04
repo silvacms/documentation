@@ -33,24 +33,23 @@ your Silva instance more easily at a later date.
 .. glossary::
 
   *Paster*
-     Paster is a multi-purpose tool. One of those use is to create a
-     project skeleton out of a configurable template. Basically It
-     helps you to get started by creating all the boilerplate
-     requirement for your project.
+     `Paster`_ is a multi-purpose tool. One use is to create a project
+     skeleton out of a configurable template. Paster helps you to get
+     started by creating all the boilerplate requirements for your
+     project.
 
   *ZopeSkel*
-     `ZopeSkel`_ is a set of templates for Paster which are Python,
+     `ZopeSkel`_ is a set of templates for `Paster`_ which are Python,
      Zope, Plone and Silva related.
-
 
 .. _installing-paster:
 
 Installing Paster and ZopeSkel
 ``````````````````````````````
 
-You need to install Python Setuptools which is needed to install
-`ZopeSkel`_. On UNIX systems, this can be installed by your OS package
-manager, for example on Ubuntu / Debian systems, run:
+First install Python Setuptools which is needed to install
+`ZopeSkel`_. On UNIX systems, this can be installed through your OS
+package manager, for example on Ubuntu / Debian systems, run:
 
 .. code-block:: sh
 
@@ -62,10 +61,10 @@ Under Mac OS X, you can use MacPorts:
 
   $ sudo port install py-setuptools
 
-Otherwise you can install setuptools by hand by downloading the
+Otherwise you can install setuptools manually by downloading the
 ``ez_setup`` script from
 http://peak.telecommunity.com/dist/ez_setup.py and then running it
-with the python that you want to use, for example under Unix:
+with the python version you want to use. For example under Unix:
 
 .. code-block:: sh
 
@@ -73,18 +72,15 @@ with the python that you want to use, for example under Unix:
    $ wget http://peak.telecommunity.com/dist/ez_setup.py
    $ sudo python2.4 ez_setup.py
 
-
-Now that we have the setuptools installed, we can use ``easy_install``
-to install ZopeSkel. These scripts have been installed in the same
-directory than your Python directory. This should be very easy. Just
-run the following command:
+Now that we have the setuptools installed, we can use
+``easy_install``. Just run the following command:
 
 .. code-block:: sh
 
    $ sudo easy_install-2.4 -U ZopeSkel
 
-If you are under Mac OS X, we recommend to use the option ``-s``. By
-default ``easy_install`` puts all scripts in the same directory than
+If you are using Mac OS X, we recommend to use the option ``-s``. By
+default ``easy_install`` puts all scripts in the same directory as
 Python, which is hidden inside a framework on Mac OS X. By specifying
 ``-s /opt/local/bin`` installed scripts are going to be installed in
 the same directory than Mac Ports softwares:
@@ -101,7 +97,6 @@ the same directory than Mac Ports softwares:
     one of these servers is temporarily unavailable. In that case you
     will get a connection timeout error, but you can try it again,
     until the command succeeds.
-
 
 Creating a Silva Buildout tree
 ``````````````````````````````
@@ -143,9 +138,7 @@ Paster will now ask you the following questions:
 
 ``Enter zope_user``
 
-   The name of the initial user that will be created to access and
-   administrate the site.
-
+   The name of the user to access and administrate the site.
 
 ``Enter zope_password``
 
@@ -181,10 +174,8 @@ script to automaticly pull in the Silva code and configure it.
    $ python2.4 bootstrap.py
    $ ./bin/buildout
 
-
 After this the command ``bin/instance`` will be available. It will let
 you start and use Silva: :ref:`starting-creating-silva-site`.
-
 
 Installing Silva from SVN for development or production
 -------------------------------------------------------
@@ -196,12 +187,12 @@ You are going to need to install subversion if it's not already
 installed on your system.
 
 There are different buildout SVN trees for the different Silva
-versions. A SVN tag corresponds to a specific release of Silva, and is
-located in::
+versions. An SVN tag corresponds to a specific release of Silva, and
+is located in::
 
   https://svn.infrae.com/buildout/silva/tag
 
-We highly recommend to use tags for production website.
+We highly recommend to use tags for production websites.
 
 The development branches of main version are located in::
 
@@ -249,21 +240,19 @@ sub-directory of your Buildout tree. Here we are going to use the
    $ python2.4 bootstrap.py --buildout-profile profiles/simple-instance.cfg
 
 This will create some files, most importantly one called
-``buildout.cfg`` in your Buildout tree. It's going to be your Buildout
+``buildout.cfg`` in your Buildout tree. This is your Buildout
 configuration file, which control what you want install, and
 how. Refer to :ref:`extending-and-customising-your-installation` to
-learn how to extend it.
+learn how to extend your Buildout.
 
-After this you can run the installation:
+After this run the installation:
 
 .. code-block:: sh
 
    $ ./bin/buildout
 
-
-After this the command ``bin/instance`` will be available. It will let
+Now the command ``bin/instance`` will be available. It will let
 you start and use Silva: :ref:`starting-creating-silva-site`.
-
 
 Available profiles
 ~~~~~~~~~~~~~~~~~~
@@ -285,19 +274,16 @@ The following interesting profiles are available:
    client instead of a simple instance. Refer to :ref:`zeo-setup` for
    more details about that profile.
 
-
 Extending your installation
 ```````````````````````````
 
 You can read more about the following sections to customize your
 setup:
 
-
 .. toctree::
    :maxdepth: 2
 
    buildout/extending
-
 
 Upgrading your setup
 ````````````````````
