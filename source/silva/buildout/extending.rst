@@ -3,35 +3,74 @@
 Extending and customising your installation
 ===========================================
 
-You can add additional configuration information in the
-``buildout.cfg`` file directly. It will mentioned as your
-configuration file afterwards.
-
+Add additional configuration information in the ``buildout.cfg``
+file.
 
 Buildout configuration file format
 ----------------------------------
 
-This file follows a format like Windows INI files, with
-sections. Those sections are called *parts* and are responsible for
-the installation of only a part of the software (like one part for
-Zope, one part for the Zope instance, one for Silva ...). They
-contains *options* which control how this is done. A part is installed
-with the help of a *recipe*. A recipe is fixed by the option
-``recipe`` of the part.
+The ``buildout.cfg`` file follows a format like Windows INI files,
+using 'sections', sections are also called 'parts' (from this point
+forward I will refer to sections as parts). For example a part looks
+like this:
 
-A configuration file can be extended by one other, modifying its
-behavior. That's how profiles are implemented.
+.. code-block:: ini
+
+   [buildout]
+   ...
+
+Each part is responsible for the installing only that part of the
+software. For example a ``[zope2]`` part takes care of installing
+Zope. An ``[instance]`` part takes care of creating a Zope
+instance. See the example taken from ``profiles/base.cfg``:
+
+.. code-block:: ini
+
+   [buildout]
+   ...
+
+   [zope2]
+   ...
+
+   [instance]
+   ...
+
+   ...
+
+Within each part are *options*. Options define what gets installed
+into a part. This is governed by the *recipe* option.
+
+.. code-block:: ini
+
+   [zope2]
+   recipe = plone.recipe.zope2install
+   ...
+
+.. note::
+
+   The ``[buildout]`` part is used as an aggregator to combine all the
+   other sections, it should never be assigned a ``recipe`` option.
+
+A configuration file can be extended by another configuration file,
+modifying its behavior. That's how profiles are implemented. The
+``buildout.cfg`` file extends the profile development.cfg located in
+the ``profiles`` directory.
+
+.. code-block:: ini
+
+   [buildout]
+   extends = profile/development.cfg
 
 Default parts defined in the Silva Buildout are:
 
 ``zope2``
    Zope 2 installation. You may not want to change that part, as it's
-   rarely needed for Silva. Available options are defined `on the
+   required for Silva. Available options are defined `on the
    zope2install recipe description page
    <http://pypi.python.org/pypi/plone.recipe.zope2install>`_.
 
 ``silva-all``
-   All Silva softwares, coming from the Infrae SVN repository.
+   All Silva software, coming from the Infrae SVN repository.
 
 ``instance``
    Your Zope 2 instance. You may want to add/customize settings
@@ -39,17 +78,14 @@ Default parts defined in the Silva Buildout are:
    recipe description page
    <http://pypi.python.org/pypi/plone.recipe.zope2instance>`_.
 
-
-To extend or modify options in a part, you just add them to your
-configuration file, under the same part name. For instance to change
-the port number of your zope instance to 8086, you can add this to
-your configuration file:
+To extend or modify options in a part, add the option to the correct
+part. For instance to change the port number of your zope instance to
+8086, you can add this to your configuration file:
 
 .. code-block:: ini
 
   [instance]
   http-address = 8086
-
 
 Some configuration options accept more than one value. In that case
 they are mentioned as one value per line. You can extend existing
@@ -64,25 +100,22 @@ or ``-=`` to remove existing ones.
    ``python2.4 bootstrap.py`` and after ``./bin/buildout`` to
    re-create exactly the same environment.
 
-
 Adding new softwares to your setup
 ----------------------------------
 
 You can add packaged software to your setup which can come from either
 a tarball on a website, an Subversion server, or a Python egg.
 
-There is as well possiblity to install software coming directly other
-Version Control System than Subersion, but they are not covered by this
-documentation.
+You can also install software from other Version Control Systems, not
+just Subversion. This is not covered by this documentation.
 
 * Software packaged as a tarball:
 
-  We can add a new part to install software packaged as a tarball,
-  using the `distros recipe
-  <http://pypi.python.org/pypi/plone.recipe.distros>`_ and refer it to
-  our instance.
+  To add software packaged as a tarball, add a ``[distros-extra]``
+  part to the ``buildout.cfg`` and use the `distros recipe
+  <http://pypi.python.org/pypi/plone.recipe.distros>`_.
 
-  So for instance to install `PASRaduis
+  For example to install `PASRaduis
   <http://www.zope.org/Members/shimizukawa/PASRadius>`_:
 
   .. code-block:: ini
@@ -100,12 +133,12 @@ documentation.
 
 * Software coming from a Subversion repository:
 
-  Like for tarball-distributed software, we are going to add a new
-  part using the `subversion recipe
+  Just like for a tarball-distributed package, add a new part:
+  ``[svn-extra]`` using the `subversion recipe
   <http://pypi.python.org/pypi/infrae.subversion>`_ and refer it to
   our instance.
 
-  We take here the example of the trunk of the SilvaMailing product:
+  Here we use the SilvaMailing product trunk as an example:
 
   .. code-block:: ini
 
@@ -118,16 +151,18 @@ documentation.
      products +=
          ${svn-extra:location}
 
-  Like for tarball-distribution, you can refer more than one SVN URL.
+  Also just like for tarball-distributions, you can refer more than
+  one SVN URL.
 
   .. note::
 
-     We don't recommend to *trunk* version of any SVN repository if you
-     want to setup an instance for production, but *tag*.
+     We recommend not to use a *trunk* version of any software SVN
+     repository if you want to setup a production instance. Best
+     practice is to use a *tag* version of the software.
 
 * Software packaged as a Python egg:
 
-  You simply reference them in your ``instance`` section:
+  Simply reference the packages in your ``instance`` section:
 
   .. code-block:: ini
 
@@ -142,22 +177,29 @@ documentation.
 
 * Software not packaged, being a Zope product:
 
-  You just drop them in the sub-directory ``products`` of your Buildout tree.
-
+  You just drop them in the sub-directory ``products`` of your
+  Buildout tree.
 
 Others recipes can be used to install software differently. To find
-more recipes, search on `PyPi
+more recipes, search `PyPi
 <http://pypi.python.org/pypi?:action=browse&show=all&c=512>`_.
 
 Example
 ```````
 
-Here, a full example of a configuration with new software. We dropped
-``ZMysqlDA`` in the ``products`` folder of the Buildout tree, and add
-SilvaMailing product from SVN, Raduis authentication with PAS. We
-install ``MySQL-python`` as a dependency for ``ZMysqlDA``, and
-MaildropHost with the help of the `maildrophost recipe
-<http://pypi.python.org/pypi/infrae.maildrophost>`_ to send mail.
+Here, is a full example of a buidout configuration with new
+software. Not handled by the buildout file we put the `ZMysqlDA
+<http://www.zope.org/Members/adustman/Products/ZMySQLDA>`_ adapter
+into the ``products`` folder of the Buildout tree.
+
+In the configuration file we SVN checkout the SilvaMailing product
+using the `infrae subversion
+<http://pypi.python.org/pypi/infrae.subversion>`_ recipe, we download
+the Radius authentication with PAS tarball using the `distros
+<http://pypi.python.org/pypi/plone.recipe.distros>`_ recipe, and
+MaildropHost tarball using `infrae maildrophost
+<http://pypi.python.org/pypi/infrae.maildrophost>`_ recipe. We also
+get the MySQL-python and silva.pas.base eggs.
 
 .. code-block:: ini
 
@@ -193,20 +235,18 @@ MaildropHost with the help of the `maildrophost recipe
       ${distro-extra:location}
       ${maildrophost:location}
 
-
 The ``maildrophost`` part will install and configure MaildropHost, and
 create a ``bin/maildrophost`` script to start/stop the MaildropHost
 daemon.
-
 
 Changing your Zope instance settings
 ------------------------------------
 
 You can change a couple of settings in the Zope instance, by adding
-options to the instance part. Most popular ones are:
+options to the ``[instance]`` part. Most popular settings are:
 
 ``http-address``
-   Address:Port where the instance should listen to.
+   Address/Port the instance should listen to.
 
 ``effective-user``
    Which user Zope should try to become if it's started as root.
@@ -218,7 +258,6 @@ You can have a complete listing of available options `on the
 zope2instance recipe description page
 <http://pypi.python.org/pypi/plone.recipe.zope2instance>`_.
 
-
 .. _zeo-setup:
 
 ZEO Setup
@@ -226,25 +265,24 @@ ZEO Setup
 
 You can define a ZEO-setup with the help of Buildout. Since it's going
 to reliably reproduce the exact same setup, you will be sure that all
-your ZEO node run exactly the same software releases/products.
+your ZEO nodes run exactly the same software releases/products.
 
 In the ``profiles`` sub-directory of your Buildout tree is defined a
-``zeo-instance.cfg`` profile. You can extend that one instead of
-``simple-instance.cfg``. It defines a new part, called ``zeoserver``
-which will be the ZEO server. It's created with the help of the
-`zope2zeoserver recipe
-<http://pypi.python.org/pypi/plone.recipe.zope2zeoserver>`_. This will
-create a script called ``bin/zeoserver`` which controls your ZEO
-server. By default it listen on the port 8100 of the computer.
+``zeo-instance.cfg`` profile. It defines a new part, called
+``[zeoserver]``. This will be the ZEO server. It's created with the
+help of the `zope2zeoserver recipe
+<http://pypi.python.org/pypi/plone.recipe.zope2zeoserver>`_. After
+running buildout this will create a script called ``bin/zeoserver``
+which controls your ZEO server. By default it listen to port 8100.
 
 Your ZEO setup can be distributed on more than one computer, so in
-fact we are going to build a profile for your setup which can be
-extended again locally on each computer to select only what you want
-to run.
+fact we are going to build a profile for your setup which can then be
+extended locally for each computer to select only what you want to
+run.
 
 After extending the ZEO configuration like explained, you add all the
 desired options in your ``buildout.cfg`` file, like for a normal Zope
-instance (add reference to new Products, Python extensions and so
+instance (add a reference to new Products, Python extensions and so
 on). Rename it to the name you want, it will be your base profile to
 re-use:
 
@@ -257,18 +295,19 @@ re-use:
 
    You need to keep this new profile file with your ``buildout.cfg``
    to be able to re-create your environment. It is a good idea to back
-   it up somewhere 'off server' and possible to keep it under version
-   control, to be able to go back to an earlier set-up.
+   up the file somewhere 'off server' and if possible to keep it under
+   version control, to be able to go back to earlier set ups.
 
 Now, it's going to be slightly more complicated. We want to have more
 than one instance with the same configuration, so more than one part
 with the same options, but we don't want to copy them more than once,
-to prevent synchronization errors between them. So our ``instance``
-section will become our configuration, and we are going to use the
-`macro recipe <http://pypi.python.org/pypi/zc.recipe.macro>`_ to
-create several Zope instances with the same configuration.
+in order to prevent synchronization errors between them. Our
+``instance`` section will become our configuration, and we are going
+to use the `macro recipe
+<http://pypi.python.org/pypi/zc.recipe.macro>`_ to create several Zope
+instances with the same configuration.
 
-We are going to say that ``instance`` is just used as configuration
+We are going to say that ``instance`` is just used as a configuration
 entry in our profile, and define 6 Zope instances, with special
 settings for each of them.
 
@@ -296,8 +335,8 @@ settings for each of them.
    [client6-conf]
    port = 8090
 
-And now we generate a part for each Zope instance, always in the same
-profile file:
+Now we make a part for each Zope instance, always in the same profile
+file:
 
 .. code-block:: ini
 
@@ -313,8 +352,9 @@ profile file:
       client5:client5-conf
       client6:client6-conf
 
-We can now use our profile. Your ``buildout.cfg`` file will be for
-your ZEO server, with two ZEO clients:
+We can now use the profile. Use the ``buildout.cfg`` file to control
+the creation of the Zeo server and clients. The following example
+creates a Zeo server with 2 clients.
 
 .. code-block:: ini
 
@@ -328,12 +368,13 @@ your ZEO server, with two ZEO clients:
        client1
        client2
 
-We say here we want to install Zope 2, Silva, a ZEO server, create ZEO
-clients configuration and setup two Zope instances ``client1``, and
-``client2``.
+Again, here we state that we want to install Zope 2, Silva, a ZEO
+server, create ZEO clients and setup two Zope instances ``client1``,
+and ``client2``.
 
-On an other computer, we can run four ZEO clients connected on the ZEO
-server located on the computer called ``zeoserver.mycorp`` in the DNS:
+On another computer, using another ``buildout.cfg`` we can run four
+ZEO clients connected on the ZEO server located on the computer called
+``zeoserver.mycorp`` in the DNS:
 
 .. code-block:: ini
 
