@@ -19,7 +19,6 @@ Please refer to the section regarding your system.
 
    buildout/requirements
 
-
 Installing quick drive Silva with Paster and ZopeSkel
 -----------------------------------------------------
 
@@ -288,11 +287,12 @@ setup:
 Upgrading your setup
 ````````````````````
 
-You need first to stop your Zope instance, change the version of Silva
-you are running, rerun buildout and restart your Zope instance:
+Before starting an upgrade first stop your Zope instance, change the
+version of Silva you are running, rerun buildout and restart your Zope
+instance:
 
--  If you have a SVN checkout, you can switch to a newer tag to change
-   Silva version:
+- If you have an SVN checkout, you can switch Silva versions by
+  running ``svn switch``:
 
    .. code-block:: sh
 
@@ -302,17 +302,16 @@ you are running, rerun buildout and restart your Zope instance:
       $ ./bin/buildout
       $ ./bin/instance start
 
-
--  If you made your own profile which refer directly to the Silva
-   Buildout configuration using the ``extends`` option of buildout,
-   you should update the URL used.
+- If you made your own buildout profile that refers directly to the
+  Silva Buildout configuration using buildout's ``extends`` option be
+  sure to update the URL used.
 
 .. warning::
 
-   If you are using any specific extra and / or custom extensions to
-   Silva, you should check that they are compatible with the version
-   you are trying to upgrade to. If it's not the case they might break
-   your site and make the upgrade fail.
+   If you are using any specific extra and/or custom extensions with
+   Silva, you should check that they are compatible with the upgrad
+   version of Silva. Failing to test these extension may break your
+   site and cause the upgrade to fail.
 
 As generic upgrade procedure, we recommand first to copy your site as
 a test site, and run the upgrade procedure on that copy. After
@@ -329,18 +328,15 @@ versions where there is lot of changes (like major release of Silva).
    It's recommended to do a backup of your data before any upgrade
    operation.
 
-
 After restarting your Zope instance, you can go in each of the Silva
 Root object you have in that Zope server, in ZMI, select the service
 tab, go on *service_extensions* and click on upgrade content. Not all
 upgrades requires that.
 
-
 .. toctree::
    :maxdepth: 2
 
    buildout/upgrade
-
 
 Using Buildout
 --------------
@@ -354,7 +350,6 @@ tree, you just need to re-run buildout:
 
 We  highly recommend  to  stop your  Zope  instance(s) before  running
 buildout.
-
 
 What's in the buildout directory
 ````````````````````````````````
@@ -393,7 +388,6 @@ A Buildout tree contains the following sub-directories:
    Silva. You migth want to install a tool like
    `logrotate <http://linuxcommand.org/man_pages/logrotate8.html>`_ in
    order to rotate them and control their sizes.
-
 
 .. _configuring-a-cache-for-buildout:
 
