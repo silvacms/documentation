@@ -313,11 +313,12 @@ instance:
    version of Silva. Failing to test these extension may break your
    site and cause the upgrade to fail.
 
-As generic upgrade procedure, we recommand first to copy your site as
-a test site, and run the upgrade procedure on that copy. After
-checking that everything works, you can do the same on your production
-site. This is specially recommand when you want to jump between
-versions where there is lot of changes (like major release of Silva).
+As standard upgrade procedure, we recommend to first copy your site as
+a test site, and then do the upgrade procedure on the copy. After
+checking that everything on your sitee works, you can do the same
+procedure on your production site. This is especially recommended fo
+upgrades that jump between versions with several changes (for instance
+a major release of Silva).
 
 .. note::
 
