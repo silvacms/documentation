@@ -233,5 +233,5 @@ We don't recommend (nor support) Windows as a production environment.
 Installation notes for others systems
 -------------------------------------
 
-If you want to install Python by hand, don't forget that it need to
+If you want to install Python by hand, don't forget that it needs to
 have support for ZLib, and SSL (usually provided by OpenSSL).
