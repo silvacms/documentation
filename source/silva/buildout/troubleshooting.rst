@@ -1,15 +1,15 @@
 Troubleshooting using buildout
 ==============================
 
-If your cannot solve your problem, please report a bug on
+If you cannot solve your problem, please report a bug on
 https://bugs.launchpad.net/silva.
 
 Non-error messages while running Buildout
 -----------------------------------------
 
-When you run Buildout, you can have non-fatal errors. Don't panic,
-that's not a problem. When you do have a real error, Buildout will
-stop and tells you:
+When you run Buildout, you can have non-fatal errors. **Don't panic**,
+it's not a problem. When you **do** have a real error, Buildout will
+stop and tell you:
 
 .. code-block:: sh
 
@@ -19,27 +19,27 @@ stop and tells you:
      Doing something.
    Error: Reason.
 
-As well, the status will be different of zero (like all programs which
-end unexpectedly with an error). If Buildout finish its job, and
-return with a status code of zero, that's means it was not an real
-error.
+As well, the status will not be zero (like all programs which end
+unexpectedly with an error). If Buildout finish its job, and return
+with a status code of zero, that means anything you encountered along
+the way was not a real error.
 
-**When you have an error, read the error message!** If it say download
-error, try to download the file by yourself. Maybe the remote site is
-down or slow, or you internet connection is flicky. If you succed to
-download the file, try to run buildout again.
+**When you have an error, read the error message!** If it says
+'download error', try to download the file by yourself. Maybe the
+remote site is down or slow, or you internet connection is flaky. If
+you succed to download the file, try to run buildout again.
 
 Exemple of non-fatal errors:
 
 - Some download error from a site, or invalid URL. A different
   location for that pacakge will be tried.
 
-  Sometime fetching a package might take time if your internet or the
+  Sometimes fetching a package might take time if your internet or the
   remote site is slow.
 
-- Zope use Python Script which can be imported in ZODB. They are not
-  valid python files, and buildout try to compiles all python files
-  (to already have compiled code to run). So they fails to compile:
+- Zope uses Python Script which can be imported in the ZODB. These are
+  not valid python files, but buildout will try to compile them as
+  python files (in order to have compiled code to run). Doing this fails:
 
   .. code-block:: sh
 
@@ -48,9 +48,9 @@ Exemple of non-fatal errors:
         return printed
      SyntaxError: 'return' outside function
 
-- When you compile a Python extension, you can have warnings. They are
-  warning, not errors, like theirs names says. They are not intended
-  to you, but to the Python extension developers (so he can fix them):
+- When you compile a Python extension, you can have
+  **warnings**. These are *warnings*, not *errors*. These warnings are
+  not intended for you, but for the developer who made the  Python extension:
 
   .. code-block:: sh
 
@@ -59,23 +59,21 @@ Exemple of non-fatal errors:
      libImaging/Quant.c:311: warning: ‘test_sorted’ defined but not used
      libImaging/QuantHash.c:136: warning: ‘_hashtable_test’ defined but not used
 
-
 .. _development-headers:
 
 Development Headers
 -------------------
 
 If you need to install a Python extension which provides you the use
-of a protocol/software, you need to install that protocol
+of a protocol/software, you need to install that protocol's
 libraries/software before.
 
 For instance, you are going to install an LDAP client to be able to
 use LDAP in Python.
 
-Since you are installing the Python extension from the sources, you
-need to install the development headers of that software as well, if
-your distribution provides them separatly than the software. In those
-cases, they might be provided with packages named like
+Since you are installing the Python extension from the source, you
+need to install the development headers of that software. In those
+cases, they might be provided with package names like
 ``libsoftware-dev``, ``software-dev`` or ``software-devel``. Refer to
 the documentation of your system to find them.
 
@@ -97,7 +95,6 @@ If you don't install them you will get an error like:
 
 Of course the message can be slightly different.
 
-
 Installing MySQL-python
 ```````````````````````
 
@@ -111,10 +108,8 @@ Under Debian/Ubuntu:
 
   $ sudo apt-get install libmysqlclient15-dev
 
-
 Installing py-ldap
 ``````````````````
-
 
 You need to install the OpenLDAP client libraries, and
 :ref:`development-headers` for OpenLDAP if there are packaged
@@ -125,8 +120,6 @@ Under Debian/Ubuntu:
 .. code-block:: sh
 
   $ sudo apt-get install libldap-dev
-
-
 
 Installing psycopg or psycopg2
 ``````````````````````````````
@@ -140,7 +133,6 @@ Under Debian/Ubuntu:
 .. code-block:: sh
 
   $ sudo apt-get install postgresql-dev
-
 
 Version conflicts between system packages and Silva ones
 --------------------------------------------------------
