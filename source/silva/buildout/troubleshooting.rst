@@ -1,5 +1,5 @@
-Troubleshooting while using buildout
-====================================
+Troubleshooting using buildout
+==============================
 
 If your cannot solve your problem, please report a bug on
 https://bugs.launchpad.net/silva.
