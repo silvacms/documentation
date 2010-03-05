@@ -322,7 +322,8 @@ a major release of Silva).
 
 .. note::
 
-   Please refer to the specific upgrade notes for each version as well.
+   Please refer to the specific upgrade notes (UPGRADE.txt) located in
+   your Silva product directory.
 
 .. warning::
 
