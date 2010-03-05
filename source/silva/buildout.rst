@@ -327,13 +327,13 @@ a major release of Silva).
 
 .. warning::
 
-   It's recommended to do a backup of your data before any upgrade
-   operation.
+   It's recommended to backup of your data before attempting any
+   upgrade operation.
 
-After restarting your Zope instance, you can go in each of the Silva
-Root object you have in that Zope server, in ZMI, select the service
-tab, go on *service_extensions* and click on upgrade content. Not all
-upgrades requires that.
+When Zope has been restarted, in the ZMI go to each Silva root and
+navigate to the *service extenstions*
+(``silvaroot-url/service_extensions/manage_extensions``) page. Click
+on upgrade content. Not all upgrades require that.
 
 .. toctree::
    :maxdepth: 2

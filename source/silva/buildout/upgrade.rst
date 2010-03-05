@@ -10,20 +10,20 @@ Specific upgrades notes for specific Silva versions.
 Silva 2.2 upgrade notes
 -----------------------
 
-You have to install Silva using buildout first. After, *before*
-starting your instance, you have to run ``zodbupdate`` on every database
-you have:
+First install Silva using buildout. After the buildout has been
+installed but *before* starting your instance, run ``zodbupdate`` on
+every database you have:
 
 .. code-block:: sh
 
    $ ./bin/zodbupdate -f var/filestorage/Data.fs
 
-After, you can start Zope, and access, for each Silva root go to the
-URL ``silvaroot-url/service_extensions/manage_extensions`` and click
-on update content. Please type the URL in your browser (you can't get
-to it by clicking around). It's the first thing you need to do before
-trying to access any Silva interface or content. Don't click on
-refresh all first.
+After running ``zodbupdate`` now you can start Zope. Once Zope is
+running in the Zope Management Interface (ZMI) go to each Silva root
+and navigate to the *service extenstions*
+(``silvaroot-url/service_extensions/manage_extensions``) page. Click
+on upgrade content. This should be done *before* accessing any Silva
+Management Interface or any Silva content.
 
-If your add custom Python scripts in ZODB, you should problary fo the URL
+Recompile your python scripts in the ZODB by running
 ``zope-url/manage_addProduct/PythonScripts/recompile``.
