@@ -1,3 +1,5 @@
+.. _base:
+
 Creating content objects
 ========================
 
