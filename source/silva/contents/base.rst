@@ -77,8 +77,14 @@ All Silva base classes are located in Silva, ``Products.Silva``.
   cataloged version object should inherit of
   ``Version.CatalogedVersion``.
 
-Use Grok to register your content
----------------------------------
+Registering your content
+------------------------
+
+To register our content type we'll use the ``silva.core.conf``
+package.
+
+``silva.core.conf`` is an extension which lets you configure and
+register Silva contents and extensions using either Grok or ZCML.
 
 Regular content
 ~~~~~~~~~~~~~~~
@@ -91,6 +97,7 @@ Lets add some directives in your Python code:
 
 .. code-block:: python
 
+   from silva.core import conf as silvaconf
    from Products.Silva.Publication import Publication
 
    class Blog(Publication):
@@ -120,6 +127,7 @@ version of your content:
 
 .. code-block:: python
 
+   from silva.core import conf as silvaconf
    from Products.Silva.VersionedContent import VersionedContent
    from Products.Silva.Version import Version
 
@@ -160,8 +168,9 @@ file this file will register your new content type with Zope.
 
    </configure>
 
-This ``zcml`` file will not work because we have actually connected
-anything. But each configure.zcml must have at least the these tags.
+This ``zcml`` file will not work because we haven't actually connected
+anything. But each ``configure.zcml`` must have at least the these
+tags.
 
 Now in the ``configure.zcml`` add this to register your content type:
 
@@ -172,12 +181,10 @@ Now in the ``configure.zcml`` add this to register your content type:
     content=".blog.Blog"
     icon="blog.png"/>
 
-
 Versioned content
 ~~~~~~~~~~~~~~~~~
 
-In your ``configure.zcml`` add this to register your versioned content
-type:
+Now lets add the versioned content to your ``configure.zcml``.
 
 .. code-block:: xml
 
@@ -187,9 +194,6 @@ type:
     version=".article.ArticleVersion"
     icon="article.png"
     />
-
-Again, `icon` is optional.
-
 
 .. note::
 
