@@ -24,10 +24,10 @@ unexpectedly with an error). If Buildout finish its job, and return
 with a status code of zero, that means anything you encountered along
 the way was not a real error.
 
-**When you have an error, read the error message!** If it says
-'download error', try to download the file by yourself. Maybe the
-remote site is down or slow, or you internet connection is flaky. If
-you succed to download the file, try to run buildout again.
+**When you have an error, take the time to read the error message** If
+it says 'download error', try to download the file by yourself. Maybe
+the remote site is down or slow, or you internet connection is
+flaky. If you succed to download the file, try to run buildout again.
 
 Exemple of non-fatal errors:
 
@@ -72,12 +72,13 @@ For instance, you are going to install an LDAP client to be able to
 use LDAP in Python.
 
 Since you are installing the Python extension from the source, you
-need to install the development headers of that software. In those
-cases, they might be provided with package names like
-``libsoftware-dev``, ``software-dev`` or ``software-devel``. Refer to
-the documentation of your system to find them.
+need to install the development headers of that software. 
 
-If you don't install them you will get an error like:
+Development header can have names such as ``libsoftware-dev``,
+``software-dev`` or ``software-devel``.
+
+If you don't required development header packages install you will get
+an error like the following:
 
 .. code-block:: sh
 
@@ -93,16 +94,16 @@ If you don't install them you will get an error like:
      Getting distribution for 'software-extension'.
    Error: Couldn't install: software-extension version
 
-Of course the message can be slightly different.
+Of course the message can be slightly different depending on the
+missing package name.
 
 Installing MySQL-python
 ```````````````````````
 
-You need to install the MySQL client libraries, and
-:ref:`development-headers` for MySQL if there are packaged
-differently.
+To install MySQL you need to install the MySQL client libraries and
+:ref:`development-headers`:
 
-Under Debian/Ubuntu:
+Using Debian/Ubuntu:
 
 .. code-block:: sh
 
@@ -111,9 +112,8 @@ Under Debian/Ubuntu:
 Installing py-ldap
 ``````````````````
 
-You need to install the OpenLDAP client libraries, and
-:ref:`development-headers` for OpenLDAP if there are packaged
-differently.
+To install the OpenLDAP client libraries, and
+:ref:`development-headers` you do:
 
 Under Debian/Ubuntu:
 
@@ -124,9 +124,8 @@ Under Debian/Ubuntu:
 Installing psycopg or psycopg2
 ``````````````````````````````
 
-You need to install the PostGreSQL client libraries, and
-:ref:`development-headers` for PostGreSQL if there are packaged
-differently.
+Install the PostGreSQL client libraries, and
+:ref:`development-headers`:
 
 Under Debian/Ubuntu:
 
@@ -137,17 +136,16 @@ Under Debian/Ubuntu:
 Version conflicts between system packages and Silva ones
 --------------------------------------------------------
 
-It is possible that you already have installed packages required by
-Silva in your (system) Python in a different version and that buildout
-raise a conflict version because of that. In that case, you can run
-buildout again, and gives the option ``-S`` to Python, which prevent
-it to look at the extensions you installed in that same Python:
+It is possible that when you are installing Silva, a required package
+of Silva has already been installed in your system python
+(``/usr/lib/python2.x/[site/dist]-packages``), thereby creatig a
+conflict. If this happens run buildout again giving python the ``-S``
+option. This prevents python from looking into your system
+site/dist-packages.
 
 .. code-block:: sh
 
   $ python2.4 -S ./bin/buildout -v
-
-
 
 SVN 1.5 and buildout
 --------------------
@@ -182,10 +180,11 @@ Under Windows or Unix, with SVN 1.5:
   AssertionError
 
 
-You can fix it by upgrading setuptools to 0.6c9. If you installed it
-using a package provided by your system, refer to your system
-documentation to upgrade that package. If you installed it by running
-the ``ez_setup.py`` script, use the following command to upgrade it:
+You can fix this by upgrading setuptools to 0.6c9. If you installed
+setuptools using a package provided by your system, refer to your
+system documentation to upgrade the package. If you installed
+setuptools by running the ``ez_setup.py`` script, use the following
+command to upgrade it:
 
 .. code-block:: sh
 
@@ -202,7 +201,7 @@ Of course, if you installed ``easy_install`` in your Python, go in
 ``python-installation/lib/python2.4/site-packages`` instead to find
 the archive, or if you setup an egg cache, go in your egg cache.
 
-After with the explorer, unpack the archive
+Afterwards using explorer, unpack the archive
 ``setuptools-0.6c8-py2.4.egg`` in that same folder to the same
 folder. Delete the archive after. Edit the file
 ``setuptools-0.6c8-py2.4.egg\setuptools\commands\sdist.py``, add a
@@ -212,7 +211,5 @@ line at the top of it:
 
    from distutils import log
 
-Rerun buildout, and thanks setuptools' maintainers for a good test
+Rerun buildout, and thank setuptools' maintainers for good test
 coverage of their software.
-
-
