@@ -1,3 +1,4 @@
+.. _folders:
 
 Folderish Objects
 =================
