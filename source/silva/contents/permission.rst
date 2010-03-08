@@ -1,9 +1,9 @@
 Available Permissions
 =====================
 
-This page list all interesting permissions available in Silva to
-develop new extensions. This is Zope 3 permission. You can use them
-inside all rendering components, with ``silvaconf.require`` like this:
+This page list all permissions available in Silva for developing new
+extensions. You can use them inside all rendering components, with
+``silvaconf.require`` like this:
 
 .. code-block:: python
 
@@ -18,11 +18,11 @@ Permissions:
 
 ``zope2.Public``
 
-    Everybody have this permission
+    Everybody has this permission
 
 ``zope2.AccessContentsInformation``
 
-    Zope 2 access to contents information.
+    Zope 2 access to content information.
 
 ``zope2.View``
 
