@@ -133,13 +133,13 @@ version of your content:
    from Products.Silva.VersionedContent import VersionedContent
    from Products.Silva.Version import Version
 
+   class ArticleVersion(Version):
+       ...
+
    class Article(VersionedContent):
        ...
        # Register a directive.
        silvaconf.versionClass(ArticleVersion)
-
-   class ArticleVersion(Version):
-       ...
 
 Just like for regular content, you can provide a factory for your
 versioned content, *in* ``Article``:
