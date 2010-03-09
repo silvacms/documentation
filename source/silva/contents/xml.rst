@@ -1,3 +1,4 @@
+.. _xml:
 
 XML Import / Export
 ===================
@@ -47,6 +48,3 @@ This handler will be able to load content from the following XML file:
          xmlns:mysilvaproject="http://mydomain/namespace/mysilvaproject">
      <mysilvaproject:content id="xml_content" title="XML Content" />
   </silva>
-
-
-
