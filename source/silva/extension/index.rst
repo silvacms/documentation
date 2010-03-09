@@ -341,10 +341,10 @@ in the Silva root.
 Upgrade step
 ------------
 
-An upgrade step can be used to upgrade content between two versions
-of Silva. The upgrade method of the upgrader will be called against
-each content of the given content type. Here, a sample to upgrade
-`Silva Document` and `Silva Link` objects to Silva `2.1`:
+An upgrade step can be used to upgrade content between two versions of
+Silva. The upgrade method of the upgrader will be called against each
+content of the given content type. Here, a sample to upgrade `Silva
+Document` and `Silva Link` objects to Silva `2.1`:
 
 .. sourcecode:: python
 
@@ -361,4 +361,4 @@ each content of the given content type. Here, a sample to upgrade
   myUpgradeForLink = MyUpgrade(2.1, 'Silva Link') # This register the step for Silva Link
 
 ``AnyMetaType`` can be used to declare that the step would be run
-against all the contents, whatever are theirs meta type.
+against all the contents, whatever their meta types.
