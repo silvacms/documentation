@@ -1,4 +1,3 @@
-
 .. _creating-an-extension:
 
 Creating an extension
@@ -15,19 +14,18 @@ components with Silva:
 
 1. ZCML (Zope Configuration Markup Language),
 
-2. Grok. Grok is a kind of scanner which looks at your code and infers
-   what needs to be registered and registers it. If you want to use
-   Grok, we recommend to use only Grok, and to not try to mix Grok
-   with ZCML declaration.
+2. Grok. Grok is a kind of scanner which looks at your code and
+   figures out what should be registered, and then registers it. If
+   you want to use Grok, we recommend to use only Grok, and not mix
+   Grok with ZCML declaration.
 
 .. note::
 
    ZCML is a XML file format, in a file called ``configure.zcml`` by
    default. This file uses namespaced tags to be able to handle
-   different registration actions used by the Silva extension. In this
+   different registration actions used by Silva extensions. In this
    documentation, we will be making a ``configure.zcml`` file for the
-   blog product.
-
+   blog product shown here :ref:`base`.
 
 Creating a new extension as a Zope Product
 ------------------------------------------
@@ -35,13 +33,13 @@ Creating a new extension as a Zope Product
 In order to make a Silva extension it needs to be a Zope product. A
 Zope product consists of the following:
 
-- The product is a directory (with optional sub-directories and
+- The product is a directory (this can include sub-directories and
   files).
 
-- The product has a file called ``__init__.py`` in the root
-  directory. This file can be empty, but the advice is to put at least
-  a Python comment line in it (``#``), as some systems do not like
-  completely empty files.
+- The product must have a file called ``__init__.py`` in the root
+  directory. This file can be empty, but we advise to at least place
+  the Python comment ``#`` at the top of the page, because some
+  systems do not lik empty files.
 
 - The product directory is installed in a place that Zope looks for
   products, such as the Zope instance's ``Products`` directory. If you
@@ -50,15 +48,15 @@ Zope product consists of the following:
 
 - The name of your product directory must be the same as your product.
 
-Basically, a Zope product is a Python package. Calling the product as
-a python module with ``from`` or ``import`` looks like this:
-``Products.product_directory``. This is true even if your product is
+Basically, a Zope product is a Python package. You can Call the
+product like a python module with ``from`` or ``import``. For example:
+``Products.product_directory``. This is also true if your product is
 not located in a directory called ``Products``. This of course does
-not follow the requirements just listed for a Zope product. The truth
-of the matter is, where Zope looks for products can have any name, as
-long as it is registered to contain products. For the sake of Silva
-and Silva built using buildout all products should be located either
-in the ``Products`` directory of the Zope instance, or the
+not follow the requirements just listed above for a Zope product. The
+truth of the matter is, where Zope looks for products can have any
+name, as long as it is registered to contain products. For the sake of
+Silva and Silva's built using buildout, all products should be located
+either in the ``Products`` directory of the Zope instance, or the
 ``products`` directory of a buildout Zope instance.
 
 Creating a new extension As an `Egg`
@@ -118,20 +116,18 @@ to install those tools):
 
 .. warning::
 
-   *Project name* should be take the same value than
-   *namespace_package.namespace_package2.package*,
-   otherwise you might have errors.
-
+   *Project name* should be take the same value as
+   *namespace_package.namespace_package2.package*, otherwise you might
+   encounter errors.
 
 Here the Silva Blog product will reside in the newly created directory
-``silva.app.blog/silva/app/blog``, which is a Python
-package, accessible via ``silva.app.blog`` in your Python
-code. It will be as well the name of your product in Zope (there is no
-``Products``).
+``silva.app.blog/silva/app/blog``, which is a Python package,
+accessible in your Python code via ``silva.app.blog``. This will also
+be the name of your product in Zope (there is no ``Products``).
 
 You need to create a file called ``configure.zcml`` in this directory,
-to declare it as a Zope product. This is an XML file and should
-contains:
+to declare the extension as a Zope product. The ``configure.zcml`` is
+an XML file and should contain:
 
 .. code-block:: xml
 
@@ -142,12 +138,12 @@ contains:
     <five:registerPackage package="." />
   </configure>
 
-After, if you use buildout, you can update your ``buildout.cfg`` file:
+Now, if you use buildout, you can update your ``buildout.cfg`` file:
 
 .. code-block:: ini
 
   [buildout]
-  # Tells buildout that this egg exists.
+  # Tell buildout that this egg exists.
   develop +=
      src/silva.app.blog
 
@@ -167,35 +163,34 @@ And re-run ``buildout``:
   $ ./bin/buildout
 
 This will let you use your egg while you will develop it, otherwise
-you will have to install it each time you want to test your code using
-the command ``easy_install``.
-
+you would have to install it each time you want to test your code
+using the command ``easy_install``.
 
 .. note::
 
-  - Here used the `nested_namespace` template to create our egg.  If
-    you plan to create something called `silva.extension` (there is no
+  - Here use the `nested_namespace` template to create our egg. If you
+    plan to create something called `silva.extension` (there is no
     `app`), you can use the `basic_namespace` template of `paster`.
 
-  - Because of the use of specific Zope python package, only present
-    in a Zope environment, you may not be able to use your egg outside
-    Zope. That also means you can't create an egg called
-    `silva.mytech`, and `silva.mytech.extension`, if the first uses
-    some specific Zope package, otherwise operations on this egg
-    (building, uploading) may fail due to missing imports (these
-    operations are not done by Zope or in a Zope environment).
+  - Since you are using a specific Zope python package only present in
+    a Zope environment, you may not use your egg outside Zope. This
+    also means you cannot create and egg called `silva.mytech`, and
+    `silva.mytech.extension`, if the first extension uses a specific
+    Zope package, otherwise operations on the this egg (such as
+    building and uploading) may fail due to missing
+    imports. Operations like building and uploading are not handled by
+    Zope or in the Zope environment.
 
-
-From now, you should be able to restart your Zope instance, in ZMI, go
-on `Control_Panel`, them `Products Management` and you will see your
-extension in the listing.
+At this moment you should be able to restart your Zope instance and
+see your new extension. In the ZMI, go to the `Control_Panel`, then
+`Products Management` and the extension should be in the listing.
 
 Installation into the Silva Root
 --------------------------------
 
-You need to have an installer which is going to install our extension
-in the selected Silva root. An installer is a class that defines the
-following methods:
+To do this you need an installer which is going to install your
+extension in the selected Silva root. An installer is a class that
+defines the following methods:
 
 ``install``
 
@@ -209,30 +204,31 @@ following methods:
 
    Return ``True`` if the extension is installed, ``False`` otherwise.
 
-Then you have this class, you create a instance called ``install`` in
-the ``__init__.py`` file of your extension.
+You can code the installer directly into the ``__init__.py``. When the
+installer is coded in the same file you need to create an instance of
+the installer (see below).
 
 A default installer can be used, and extended. It provides the
 following installation steps:
 
-1. Add addable content (all Silva content, no version content) to the
-   list of addables of the Silva site.
+1. Add addable content (all Silva content, no versioned content) to
+   the list of addables of the Silva site.
 
-2. Register contents to the metadata service, to be able to set them
-   on our objects. All contents are registered, but for versioned
-   content objects, classes representing versions are registered
-   instead of the class representing the content itself.
+2. Register contents to the metadata service in order to be able to
+   set them on our objects. All contents are registered, but for
+   versioned content objects, classes representing versions are
+   registered instead of the class representing the content itself.
+
+3. If you have a ``views`` directory register it in the
+   ``service_views``.
 
 3. Eventually if you have one, register the ``views`` directory of
    your extension to the ``service_views``.
 
-You don't need anything else to build an extension that adds new
-content types to Silva.
-
 Also, this installer uses a marker interface on the
-``service_extensions`` to known if the extension is installed.
+``service_extensions`` to show if the extension is installed.
 
-So you can add to the ``__init__.py`` of our extension:
+Add this to ``__init__.py`` file of your extension:
 
 .. code-block:: python
 
@@ -244,23 +240,20 @@ So you can add to the ``__init__.py`` of our extension:
       to add more actions.
       """
 
-
   class IBlogExtension(Interface):
       """Marker interface for our extension.
       """
 
   install = BlogInstaller("SilvaBlog", IBlogExtension)
 
-
-The first argument to the installer is the name of our extension, the
-second is the marker interface.
+The first argument to the install object is the name of our extension
+`SilvaBlog`. The second is the marker interface.
 
 .. note::
 
-  Your installer can be as well a module ``install.py`` in your
-  extension, which defines the ``install``, ``uninstall`` and
-  ``is_installed`` functions.
-
+  Your installer can also be a module ``install.py`` in your
+  extension, which defines ``install``, ``uninstall`` and
+  ``is_installed`` as functions.
 
 Registration with Grok
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -286,7 +279,6 @@ This can be done with the help of a ZCML directive in the
 
 That's the last piece of required ZCML.
 
-
 Registration
 ````````````
 
@@ -300,20 +292,21 @@ Python code to register it to Silva:
   silvaconf.extensionName("SilvaBlog")
   silvaconf.extensionTitle("Silva Blog")
 
-The name will be used internally, and the title will displayed in
-``service_extension``. If your extension depends on another extension,
-like `Silva Document` add an ``extensionDepends`` directive to your
-the file:
+The extensionName will be used internally, and the extensionTitle will
+displayed in ``service_extension``. If your extension depends on
+another extension, like `Silva Document` add an ``extensionDepends``
+directive to your the file:
 
 .. code-block:: python
 
   silvaconf.extensionDepends("SilvaDocument")
 
-
 If your extension has multiple dependencies, ``extensionDepends``
 allows you to specify a tuple of strings.
 
+.. code-block:: python
 
+  silvaconf.extensionDepends(("SilvaDocument", "Foo", "Bar"))
 
 Registration with ZCML
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -334,23 +327,21 @@ In your extension directory, add the following ZCML directives to the
 
   </configure>
 
-You use the special ``silva:extension`` directive to specify the
-extension name. You also give an extension title, which is a brief
+Here you use the special ``silva:extension`` directive to specify the
+extension name. You can also give an extension title, which is a brief
 description describing what the extension is about.
-
 
 Reset point
 ~~~~~~~~~~~
 
 At this point, you should be able to restart your Zope instance, and
-be able to view, install and uninstall your extension using
-`service_extensions` in the Silva root.
-
+view, install, and uninstall your extension using `service_extensions`
+in the Silva root.
 
 Upgrade step
 ------------
 
-An upgrade step can be use to upgrade a content between two versions
+An upgrade step can be used to upgrade content between two versions
 of Silva. The upgrade method of the upgrader will be called against
 each content of the given content type. Here, a sample to upgrade
 `Silva Document` and `Silva Link` objects to Silva `2.1`:
@@ -368,7 +359,6 @@ each content of the given content type. Here, a sample to upgrade
 
   myUpgradeForDocument = MyUpgrade(2.1, 'Silva Document') # This register the step for Silva Document
   myUpgradeForLink = MyUpgrade(2.1, 'Silva Link') # This register the step for Silva Link
-
 
 ``AnyMetaType`` can be used to declare that the step would be run
 against all the contents, whatever are theirs meta type.
