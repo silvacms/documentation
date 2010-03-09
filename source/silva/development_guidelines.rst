@@ -127,6 +127,8 @@ There are only two cases where you must create new branches:
 
      After merging a branch it should be deleted.
 
+.. _setup-dev-env:
+
 Setting up a development environment
 ====================================
 

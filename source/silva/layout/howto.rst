@@ -1,35 +1,39 @@
-Creation of a Layout
-====================
+Create a Layout
+===============
 
 .. contents::
 
-We are going to create the new layout in a Python extension, as an
-egg. We are going to use Paster (see :ref:`installing-paster` to get that
-tool working on your computer).
+You are going to create a new layout as a Python egg. We are going to
+use Paster (see :ref:`installing-paster` to get the Paster tool
+working on your computer).
 
 .. code-block:: sh
 
   $ cd src
   $ paster create -t basic_namespace
   Selected and implied templates:
-    ZopeSkel#basic_namespace  A project with a namespace package
+    ZopeSkel#basic_namespace  A basic Python project with a namespace package
+
+  Selected and implied templates:
+    ZopeSkel#basic_namespace  A basic Python project with a namespace package
 
   Enter project name: silvatheme.demo
   Variables:
     egg:      silvatheme.demo
     package:  silvathemedemo
     project:  silvatheme.demo
-  Enter namespace_package (Namespace package (like plone)) ['plone']: silvatheme
-  Enter package (The package contained namespace package (like example)) ['example']: demo
-  Enter version (Version) ['1.0']:
-  Enter description (One-line description of the package) ['']: Demo
-  Enter long_description (Multi-line description (in reST)) ['']: Demo Layout for Silva 2.2
-  Enter author (Author name) ['']: Infrae
-  Enter author_email (Author email) ['']: info@infrae.com
-  Enter keywords (Space-separated keywords/tags) ['']: silvatheme demo
-  Enter url (URL of homepage) ['']:
-  Enter license_name (License name) ['GPL']: BSD
-  Enter zip_safe (True/False: if the package can be distributed as a .zip file) [False]:
+  Expert Mode? (What question mode would you like? (easy/expert/all)?) ['easy']: all
+  Namespace Package Name (Name of outer namespace package) ['silvatheme']: silvatheme
+  Package Name (Name of the inner namespace package) ['demo']: demo
+  Version (Version number for project) ['1.0']:
+  Description (One-line description of the project) ['']: Demo
+  Long Description (Multi-line description (in ReST)) ['']: Demo Layout for Silva 2.2
+  Author (Name of author for project) ['']: Infrae
+  Author Email (Email of author for project) ['']: info@infrae.com
+  Keywords (List of keywords, space-separated) ['']: silvatheme demo
+  Project URL (URL of the homepage for this project) ['http://svn.plone.org/svn/collective/']: 
+  Project License (Name of license for the project) ['GPL']: BSD
+  Zip-Safe? (Can this project be used as a zipped egg? (true/false)) [False]:
   Creating template basic_namespace
   Creating directory ./silvatheme.demo
     Recursing into +namespace_package+
@@ -42,33 +46,29 @@ tool working on your computer).
     Recursing into docs
       Creating ./silvatheme.demo/docs/
       Copying HISTORY.txt_tmpl to ./silvatheme.demo/docs/HISTORY.txt
-    Copying setup.cfg to ./silvatheme.demo/setup.cfg
     Copying setup.py_tmpl to ./silvatheme.demo/setup.py
-  Running /usr/local/bin/python2.4 setup.py egg_info
-
+  Running /usr/bin/python2.4 setup.py egg_info
 
 .. warning::
 
    *Project name* should be take the same value than
    *namespace_package.package*, otherwise you might have errors.
 
+Now in your ``src`` directory you should have a new Python package
+``silvatheme.demo`` with the following directory structure:
+``silvatheme.demo/silvatheme/demo``
 
-This will create a directory called
-``silvatheme.demo/silvatheme/demo`` in ``src`` which will be a Python
-package available as ``silvatheme.demo``. We will work there
-afterwards and refer to this place as your extension.
-
-After you need to register the new egg in your buildout.
+Now that the basic structure is in place you need to register the new
+egg in your buildout see (:ref:`setup-dev-env`).
 
 The next step is to :ref:`enable-grok-for-your-extension`.
 
 .. note::
 
-   By default we take the convention to make the egg using the
-   ``basic_namespace`` template, and to call it
-   ``silvatheme.layoutname``, where ``layoutname`` is the name of your
-   layout in lower case.
-
+   By default we use the convention to make the egg using the
+   ``basic_namespace`` template, and to call using the following
+   standard: ``silvatheme.layoutname``, where ``layoutname`` is the
+   name of your layout in lower case.
 
 .. note::
 
@@ -101,18 +101,17 @@ will contain the definition of our layout.
 
        grok.skin('Demo')
 
-
 On line 6, we define a new layer to collect resources for our
-theme. Basically it's just an interface which inherit form ``IPorto``,
+theme. Basically it's just an interface which inherit from ``IPorto``,
 since we want to reuse Porto layout resources. If you don't want those
-resources you sould create your layer by extending ``ISilvaLayer``
+resources you should create your layer by extending ``ISilvaLayer``
 which is defined in ``silva.core.layout.interfaces``.
 
-On line 10, we define the skin itself. It will include our layer, and
-``ISilvaSkin`` which define it as a skin. Line 14 register it with the
-name ``Demo``. It will make it available throught the interface so
-user can select it in the *settings* screen and apply it.
-
+On line 10, we define the skin itself. It will include your layer, and
+``ISilvaSkin`` which defines it as a skin. Line 14 registers the
+layout with the name ``Demo``. It will make it available throught the
+interface so user can select it in the SMI through the *settings* on
+`properties` page.
 
 Adding file resources
 ---------------------
