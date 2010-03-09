@@ -37,9 +37,9 @@ Installation under Linux Ubuntu/Debian
 
       $ sudo apt-get install zlib1g-dev
 
-   Silva uses the Python Imaging Library (PIL) to handle images. You
-   make sure that you have the ``libjpeg`` (``jpeglib.h``) library
-   installed otherwise, PIL cannot use jpeg images.  On Ubuntu/Debian
+   Silva uses the Python Imaging Library (PIL) to handle images. Make
+   sure that you have the ``libjpeg`` (``jpeglib.h``) library
+   installed otherwise, PIL cannot use jpeg images. On Ubuntu/Debian
    systems, run:
 
    .. code-block:: sh
