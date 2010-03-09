@@ -43,7 +43,7 @@ This section describes extending Silva's functionality.
 Interesting Links
 -----------------
 
-You might be interested to look at:
+You might be interested in the following links:
 
 - the Zope 2 documentation: http://docs.zope.org/zope2/
 
@@ -51,7 +51,7 @@ You might be interested to look at:
 
 - Silva website: http://infrae.com/products/silva
 
-As well, you can report your experience here:
+Also, please feel free to report your experience here:
 
 - Silva mailing lists: https://lists.infrae.com
 
