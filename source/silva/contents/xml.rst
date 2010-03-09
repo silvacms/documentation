@@ -5,9 +5,9 @@ XML Import / Export
 XML Import
 ----------
 
-You can provide a way to import your content from an XML file. For
-this, you are going to write an importer. Here a simple example to
-load the simple content of type `MyContent`:
+Silva makes it possible to import content from an XML file. Before it
+is possible to do this you must write an XML importer. Below is a
+simple example to load the simple content type 'MyContent'.
 
 .. code-block:: python
 
@@ -38,8 +38,7 @@ load the simple content of type `MyContent`:
       def endElementNS(self, name, qname):
           pass                             # Do nothing here.
 
-This handler will be able to load a content from the following XML
-file:
+This handler will be able to load content from the following XML file:
 
 .. code-block:: xml
 
