@@ -3,132 +3,129 @@ Development Guidelines for Silva
 
 .. contents::
 
-.. note:: That documentation is intended to Silva core developer. But
-   as development practice, they might be interesting to other people as
-   well.
+.. note:: That documentation is intended for Silva core
+   developers. But as development practice, this documentation may be
+   interesting for other people as well.
 
 Introduction
 ============
 
-You can develop on Silva 2.0, 2.1 and the trunk 2.2. They are
-hereafter referred to as *current versions* of Silva.
+You can develop on Silva 2.0, 2.1 and the Silva 2.2 trunk. These
+versions are consider as *current* and will be from hereafter referred
+to as such.
 
-To work on Silva, you are kindly request to setup it Silva using
-`buildout coming from SVN <https://svn.infrae.com/buildout/silva/>`_.
+To work on Silva we suggest setting up Silva using `buildout coming
+from SVN <https://svn.infrae.com/buildout/silva/>`_.
 
-Those instruction to work on Silva may seems boring and require a lot
-to do, but:
+Why do we use buildout?
 
-- It less us do a lot more release instead of one every one and half
-  year.
+- Installing Silva using this buildout procedure give us the
+  opportunity to release more often instead of once every year and
+  half.
 
-- It follow the rules that says: *until your code is delivered, it's
-  useless*. We like to write usefull code, so code used by People.
+- Our procedure follows the rule that states: *until your code is
+  delivered, it's useless*. We like to write useful code, so people
+  can use it.
 
-- This let us release lot of alpha or beta, but that's fine.
-
-It's somewhat like Steeve Alexander explained for Launchpad.
+- We can release more alpha and beta versions.
 
 There are three kinds of buildouts
 ----------------------------------
 
-1. The Trunk buildout, which is the lastest version of Silva.
+1. The Trunk buildout. This is the lastest version of Silva.
 
-2. Branch buildouts, which are older Silva versions (2.0 and 2.1 for
-   instance).
+2. Branch buildouts. These are older Silva versions (2.0 and 2.1).
 
-3. Tag buildouts, which are released version of Silva. *They must be
-   never changed*. If you want to fix an issue which affects a tag,
-   you must do it in the corresponding branch of Silva (if you want to
-   fix something in a 2.1 tag, you fix it on the 2.1 branch) and
-   release a new tag.
+3. Tag buildouts. Tags are released versions of Silva. Tags *must
+   never be changed!*. If there is an issue in a tag you should fix
+   the issue in the corresponding branch of Silva. For example if you
+   to fix something in a 2.1 tag, you should fix it on the 2.1 branch,
+   then release a new tag.
 
-There are three kinds of Silva components
------------------------------------------
+Silva components
+----------------
+
+Silva is made up of three kinds of components.
 
 1. Extensions that are direct dependencies of Silva, such as
-   Formulator, or ParsedXML, or Annotations. They should work for all
-   current versions of Silva.
+   Formulator, ParsedXML, or Annotations. These extensions should work
+   for all current versions of Silva.
 
-   If you work on one of those, you have to check that:
+   If you work on any of those extensions, be sure to check that:
 
    1. Your changes work with all current versions of Silva by
       setting up an environement and running the tests.
 
-   2. When you tag that extension, to update buildouts for *all
-      current branches* of Silva to use that new tag.
+   2. When you tag that extension, be sure to update all buildouts for
+   *all current branches* of Silva to use the newly tagged extension.
 
 2. Extensions that make up the core of Silva.
 
 3. Extensions that add features to Silva and may work on more than one
    current version of Silva:
 
-   - If an extension does not work for all current versions, you need
-     to port your changes on the newer version of that extension,
-     following the same pattern as you would for developing Silva
-     itself.
+   - If an extension does not work for all current Silva versions, you
+     need to port your changes to the more recent version of that
+     extension, following the same pattern as you would for developing
+     Silva itself.
 
-   - If an extension does work for more than one version of Silva, you
-     need to check that it's still working for others versions than
-     the one you developed your feature for. If it's not the case, you
-     need to create branches of the extension for those versions of
-     Silva.
+   - If an extension works for more than one Silva version, you need
+     to check that the extension still works for all others versions
+     besides the Silva version you developed your feature on. If this
+     is not the case, you must create branches of the extension for
+     those versions of Silva.
 
-All extensions have a trunk version, which should work with Silva
-trunk, and may have branches for other Silva versions, and tags for
-released versions. Like for buildouts, if you want to fix something on
-a tag, do it on the corresponding branch and make a new tag.
-
+All extensions have a trunk version, this should work with the Silva
+trunk. The extension may also have branches for other Silva versions,
+and tags for released versions. Like for buildouts, if you want to fix
+something on a tag, do it on the corresponding branch and make a new
+tag.
 
 .. warning::
 
-   All buildouts  should refer to tags  of Silva components.  To add a
-   new feature to a component, add  a new tag of that component to the
-   current versions buildouts.
-
+   All buildouts should refer to tags of Silva components. To add a
+   new feature to a component, add a new tag of that component to the
+   current buildouts versions.
 
 Porting rules
 =============
 
-- If you work on an feature or bug fix on (for) 2.0 you *must* provide
-  the same on (for) 2.1 and (for) the trunk. Also provide a unit test
-  if at all possible, to prevent regression errors.
+- If you work on an feature or bug fix on Silva 2.0 you *must* do the
+  same for Silva 2.1 and the Silva trunk. Also if possible provide a
+  unit test to prevent regression errors.
 
-- If you work on an feature or bug fix (for) 2.1 you *must* provide
-  the same on (for) the trunk. Also provide a unit test if at all
-  possible, to prevent regression errors.
+- If you work on a feature or bug fix for Silva 2.1 you *must* provide
+  the same for the Silva trunk. Also if possible provide a unit test
+  to prevent regression errors.
 
-- If you work on a bug fix (for) the trunk, you *must* provide the
-  same on (for) 2.1.
-
+- If you work on a bug fix for the Silva trunk, you *must* provide the
+  same on Silva 2.1.
 
 Creating new branches
 =====================
 
-There is only two cases where you want (and have) to create new
-branches:
+There are only two cases where you must create new branches:
 
-- You want to have a version of an extension which still work for a
-  previous version of Silva (backward incompatible changes): in that
+- You want to have a version of an extension which still works for a
+  previous version of Silva (backward incompatible changes): in this
   case the branch should be called ``extensionname-version``, for
-  example ``SilvaLayout-1.4``. They exists mainly to maintain that
-  extension for that specific older version of Silva (i.e. bug
-  fixes). Those branches are likely to stay forever in SVN.
+  example ``SilvaLayout-1.4``. These versions mainly exist for us to
+  maintain older versions of Silva, such as a bug fix. These branches
+  are meant to be permanently stored in SVN.
 
-- You want to make an experimentation, and your are not sure about the
-  ending of it. In that case the branch should be called with
-  ``yourname-why``, for example ``sylvain-database-distribution``.
+- You want to try an experiment, and your are not sure about the end
+  results. In situations like this you should create a branch
+  resembling this naming standard: ``yourname-why``, for example
+  ``sylvain-database-distribution``.
 
-  Those branches are likely to be merged as soon as they work and
-  you're happy with theirs changes. An experimentation of one year
-  old is already deprecated and too far difficult to merge, it should
-  just be deleted. If your are not happy with those changes you can
-  delete it right now.
+  These kinds of branches are likely to be merged as soon as they work
+  correctly. An experimently branch a year or older will be because it
+  would too difficult to merge to the trunk. If your are not happy
+  with the outcome of the experiment delete the branch.
 
   .. note::
 
-     All merged branches should be deleted right after.
-
+     After merging a branch it should be deleted.
 
 Setting up a development environment
 ====================================
@@ -174,16 +171,16 @@ Edit your ``buildout.cfg`` to add what you need:
     urls =
        svn urls
 
+If you plan to do a quick fix to a product or extension, just checkout
+the product or extension into ``products`` or ``svn`` directory. If
+you plan to add new features that are going to require a lot of
+changes/time to implement, create a branch for your buildout,
+configure it as explained above, putting all the needed configurations
+in ``buildout.cfg``. Add the ``buildout.cfg`` file to your SVN branch
+and commit it to SVN.
 
-If you plan to do a quick fix to product or extension, just do the
-checkout in ``products`` or ``svn``. If you plan to add new features
-that are going to require a lot of changes/time to implement, create a
-branch for your buildout, configure it as explained above, putting all
-the configuration in ``buildout.cfg``, add that file to your SVN
-branch (and commit).
-
-In order to let buildout use your version, you need to edit the file
-``profiles/versions.cfg`` and to comment the line which define the
+In order for buildout to access to your version, edit the file
+``profiles/versions.cfg`` and to comment the line which defines the
 version of the current package your are working on. *Do not commit
 those changes.*
 
@@ -193,21 +190,19 @@ Run buildout:
 
    $ ./bin/buildout
 
-
-
 Releasing and creating tags
 ===========================
 
-Before releasing a tag, make sure that all tests should work for Silva
-with this new version of your component:
+Before releasing a tag, make sure all tests run successfully with the
+new version of your component.
 
 .. code-block:: sh
 
    $ ./bin/instance test -s Products.Silva
 
-And run the tests of your extension (and any others which depend on
-it) if it has tests. (Which it should!)
-
+Knowing your extension has tests, run them and any other tests for
+extensions that depend on your extension. If your extension does not
+have test. *It should!*
 
 .. _tag-zope-product:
 
@@ -217,12 +212,13 @@ Creating a tag of a Zope product
 0. Run tests.
 
 1. Fill the ``HISTORY.txt`` using valid ReST. Replace the
-   ``(unreleased)`` at the end of line by the date of today *using the
-   following format* ``(year-month-day)``.
+   ``(unreleased)`` at the end of line with the current date *using
+   the following format* ``(year-month-day)``.
 
-2. Remove the ``(unreleased)`` in ``version.txt``, and double check
-   that the version number there and in ``HISTORY.txt`` are correct
-   (i.e. correspond to the branch and have not been released yet).
+2. Remove the ``(unreleased)`` in the ``version.txt`` file, and double
+   check that the version number there and in ``HISTORY.txt`` are
+   correct (i.e. corresponds to the branch and have not been released
+   yet).
 
 3. Do a ``svn commit``.
 
@@ -242,18 +238,17 @@ Creating a tag of a Zope product
 6. Edit ``version.txt`` to increase the version, and add
    ``(unreleased)`` at the end.
 
-
-Creating a tag of a Python-only extension
------------------------------------------
+Creating a Python-only extension tag
+------------------------------------
 
 0. Run the tests.
 
 1. Fill the ``HISTORY.txt`` using valid ReST. Replace the
-   ``(unreleased)`` at the end of line by the date of today *using the
-   following format* ``(year-month-day)``. Check that the
-   ``README.txt`` is up to date with the last information.
+   ``(unreleased)`` at the end of the line with the current date
+   *using the following format* ``(year-month-day)``. Check that the
+   ``README.txt`` is up to date with the latest information.
 
-2. Verify the validity of your documentation:
+2. Check the validity of your documentation:
 
    .. code-block:: sh
 
@@ -265,8 +260,8 @@ Creating a tag of a Python-only extension
 
       $ python2.x setup.py --long-description | rst2html > description.html
 
-   Should not either. Open ``description.html`` in your web browser
-   and check that this looks good.
+   This also should not produce and error. Open ``description.html``
+   in your web browser and check that the document is okay.
 
 3. Do a ``svn commit``.
 
@@ -283,10 +278,10 @@ Creating a tag of a Python-only extension
       $ svn co extension/tag/extension_name-version release
       $ cd release
 
-6. In that checkout, edit ``setup.py`` and remove the dev marker from
+6. In the checkout, edit ``setup.py`` and remove the dev marker from
    the version.
 
-7. Commit those changes (this is the *one* exception to the rule that
+7. Commit these changes (this is the *one* exception to the rule that
    you should never check in anything on a tag.):
 
    .. code-block:: sh
@@ -305,13 +300,12 @@ Creating a tag of a Python-only extension
       [pypi]
       username = user
       password = password
-                
+
       [infrae]
       username = user
       password = password
       repository = http://infrae.com/download
       realm = Zope
-
 
    Next, run the update
 
@@ -335,8 +329,7 @@ Creating a tag of a Python-only extension
 
       - ....
 
-12. Commit thoses changes: ``svn commit``
-
+12. Commit the changes: ``svn commit``
 
 Creating a tag of a Zope product packaged as an Python extension
 ----------------------------------------------------------------
@@ -346,7 +339,7 @@ Creating a tag of a Zope product packaged as an Python extension
 1. Create a tag of the Zope product like described before
    (see :ref:`tag-zope-product`).
 
-2. Verify the validity of your documentation:
+2. Check the validity of your documentation:
 
    .. code-block:: sh
 
@@ -358,8 +351,7 @@ Creating a tag of a Zope product packaged as an Python extension
 
       $ python2.4 setup.py --long-description | rst2html > description.html
 
-   Open ``description.html`` in your web browser and check this looks
-   good.
+   Open ``description.html`` in a web browser and check the documentation.
 
 3. Do a ``svn commit``.
 
@@ -376,7 +368,7 @@ Creating a tag of a Zope product packaged as an Python extension
       $ svn co extension/tag/extension_name-version release
       $ cd release
 
-6. In that checkout, edit ``setup.py`` and remove the dev marker from
+6. In the checkout, edit ``setup.py`` and remove the dev marker from
    the version.
 
 7. In the ``Products`` sub-folder, edit the ``svn:externals``
@@ -386,13 +378,13 @@ Creating a tag of a Zope product packaged as an Python extension
 
       $ svn propedit svn:externals Products
 
-8. Update to be sure to have the code of the tag:
+8. Update to be sure you have the latest code of the tag:
 
    .. code-block:: sh
 
       $ svn up
 
-9. Commit those changes (this is the *one* exception to the rule that
+9. Commit the changes (this is the *one* exception to the rule that
    you should never check in anything on a tag.):
 
    .. code-block:: sh
@@ -414,8 +406,7 @@ Creating a tag of a Zope product packaged as an Python extension
 
 12. Update the version in ``setup.py``.
 
-13. Commit thoses changes: ``svn commit``
-
+13. Commit the changes: ``svn commit``
 
 Creating a tag of the buildout
 ------------------------------
@@ -427,11 +418,10 @@ new release is easy:
 
    $ svn cp branch-or-trunk tag/Silva-version
 
+Updating a buildout with a new tag
+==================================
 
-Updating the buildout with a new tag
-====================================
-
-You have to either:
+To do this you have to either:
 
 - Edit ``profiles/base.cfg`` to refer to the tag you made for Zope
   based products.
