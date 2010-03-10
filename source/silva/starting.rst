@@ -28,18 +28,19 @@ URL:
     http://localhost:8080/manage_main
 
 Zope will prompt you for a username and password. Fill in the values
-you choose in the paster configuration step, and press the *OK*
-button. If you didn't fill anything while installing Silva, or choose
-the default values, those are username ``admin`` and password ``admin``.
+you chose in the paster configuration step, and press the *OK*
+button. If you didn't fill anything while installing Silva, or chose
+the default values, the username is ``admin`` and the password is
+``admin``.
 
 Now you are in the ZMI. Let's add a Silva site by selecting *Silva
 Root* from the drop down list on the top right of the screen.
 
-You should get a *Add Silva Root* page, fill in an id (f.e. ``silva``)
-and a title (f.e. ``My Silva Site``). You can check the *Add Silva
-Documentation* checkbox, so the Silva documentation get installed by
-default.  Now click the *Add and Edit* button, this may take a while
-(if *Add Silva Documentation* was chosen).
+You should get a *Add Silva Root* page, fill in an id (for example
+``silva``) and a title (for example ``My Silva Site``). You can check
+the *Add Silva Documentation* checkbox, so the Silva documentation
+gets installed by default. Now click the *Add and Edit* button, this
+may take a while (if *Add Silva Documentation* was chosen).
 
 Now you are back in the Zope Management Interface, but inside of the
 Silva site (check your URL). You can click on the *Silva / edit...*
@@ -61,7 +62,6 @@ adding ``/edit`` to the URL displayed in your web browser.
    You can add more than one *Silva Root* (or Silva instance) in one
    Zope instance and use them independently.
 
-
 Stopping and restarting your Silva Site
 ---------------------------------------
 
@@ -82,4 +82,3 @@ And the following command can tell you if Silva is running.
 .. code-block:: sh
 
    $ ./bin/instance status
-

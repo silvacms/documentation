@@ -19,7 +19,7 @@ option.
 
 .. note::
 
-  If your not using buildout, ``instance`` is called ``zopectl``.
+  If you are not using buildout, ``instance`` is called ``zopectl``.
 
 .. note::
 

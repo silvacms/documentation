@@ -36,14 +36,12 @@ retrieve it:
            provider.update()
            return provider.render()
 
-
-
 Adding viewlets and viewlet managers
 ------------------------------------
 
 You can define a new viewlet manager by inheriting from
 ``silvaviews.ViewletManager``. Here you can define a manager to
-contains page actions for instance:
+contain page actions:
 
 .. sourcecode:: python
 
@@ -54,9 +52,8 @@ contains page actions for instance:
    class MyPageActions(silvaviews.ViewletManager):
        grok.context(interfaces.ISilvaObject)
 
-
-Now, you can define some actions that will be rendered in your page
-actions manager:
+Now, you can define some actions that will be rendered in your page's
+action manager:
 
 .. sourcecode:: python
 
@@ -67,9 +64,8 @@ actions manager:
         def render(self):
             return u'Send by mail'
 
-
 By modifying the context, you can define actions that will appear only
-on some type of contents instead of all of them. For instance, you
+on some types of content instead of all of content. For instance, you
 want to be able to download only documents as PDF:
 
 .. sourcecode:: python
@@ -82,7 +78,6 @@ want to be able to download only documents as PDF:
 
         def render(self):
             return u'Document as PDF'
-
 
 .. sourcecode:: python
 

@@ -7,7 +7,7 @@ Infrae coding style
 Coding style
 ------------
 
-Silva, and others Infrae products should follow the coding style
+Silva, and other Infrae products should follow the coding style
 defined by `pep8`_, with the following enforcement.
 
 
@@ -24,7 +24,6 @@ Spaces
   utf-8 encoding should be used, with a coding cookie on the first
   line of the file (``# -*- coding: utf-8 -*-``),
 
-
 Doc string
 ~~~~~~~~~~
 
@@ -33,12 +32,10 @@ Doc string
 - In a method, the code should start right after the doc string,
   without an empty separating the both of them,
 
-
 Classes
 ~~~~~~~
 
 - All classes should inherit at least from ``object``.
-
 
 Imports
 ~~~~~~~
@@ -49,11 +46,10 @@ Imports
 
 - Unused imports should be removed.
 
-
 Example
 -------
 
-Here join an example:
+Here is an example:
 
 .. code-block:: python
 
@@ -92,10 +88,9 @@ The following tools can help you:
 
 - `pyflakes`_ help you to identify unused and missing imports,
 
-- `dependencychecker`_ does a similar job than `pyflakes`_ but is able
+- `dependencychecker`_ does a similar job as `pyflakes`_ but is able
   to identify missing requirements defined in your extension (by
   parsing the ``egg-info`` directory).
-
 
 .. _dependencychecker: http://pypi.python.org/pypi/z3c.dependencychecker
 .. _pyflakes: http://pypi.python.org/pypi/pyflakes

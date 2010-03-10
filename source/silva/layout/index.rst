@@ -23,52 +23,50 @@ First some vocabulary on visual themes:
       request, i.e. used.
 
    *skin*
-      A Skin is an Zope interface which inherit from a set of
-      layer. It a have a name, and can be considered as a visual theme
+      A Skin is an Zope interface which inherits from a set of
+      layers. It has a name, and can be considered as a visual theme
       in Silva, and can be selected as such in the SMI. Some people
       call this element layout as well, but layout will be used to
-      define an other object, so prefer to use the term skin or visual
-      theme.
+      define another object, so it is better to use the term skin or
+      visual theme.
 
    *view*
-      A view is a Python object, to which can be associated to a
-      template, mainly used to render a content as an HTML
+      A view is a Python object, to which can be associated a
+      template, mainly used to render content as an HTML
       page. Different views can be defined and used on the same
       content.
 
-      Interactions: A view is linked to a type of content, and a
-      layer (or a skin).
+      Interactions: This is a view is linked to a type of content, and
+      a layer (or a skin).
 
    *layout*
-      A layout is an Python object that can be attached to a layer (so
-      to a skin). It's going to be like *the main template* of your
+      A layout is a Python object that can be attached to a layer
+      (also to a skin). This will act like *the main template* of your
       visual theme, and render the main structure of your HTML pages,
       in which blanks will be filled with pages or content providers.
-      You can as well register different layout for different type of
+      You can as well register different layouts for different type of
       content.
 
    *page*
-      A page is a view, which is designed to render a web page of the
-      site, at a given URL. It is going to look for a layout object,
-      to render itself inside it (in order to reuse the HTML structure
+      A page is a view, which is designed to render a web page of a
+      site, at a given URL. A page will look for a layout object, to
+      render itself inside it (in order to reuse the HTML structure
       defined by the layout). For instance, the default page ``index``
-      will be used to display your content itself, and extra pages,
-      like ``search.html`` or ``detailed.html`` can be added reusing
-      the visual design defined by the layout object.
+      will be used to display your content, and extra pages, like
+      ``search.html`` or ``detailed.html`` can be added reusing the
+      visual design defined by the layout object.
 
 To define a new visual theme, you need to define define two new
-interfaces: one layer to attach your resources, and one skin to use
-them.
+interfaces: a layer to attach your resources, and a skin to use them.
 
-You can extend an already existing theme, by having your layer
-inheriting of the theme layer. For instance you can reuse default
-theme definition done in the Porto layout.
-
+You can extend an already existing theme, by having your layer inherit
+the theme layer. For instance you can reuse default theme definitions
+done in the Porto layout.
 
 Visual theme elements
 ---------------------
 
-You dispose of a few more elements to build your theme:
+You use a few more elements to build your theme:
 
 .. glossary::
 
@@ -78,7 +76,7 @@ You dispose of a few more elements to build your theme:
          :align: right
 
       A content provider is a named piece of Python code, with a
-      template which render a piece of HTML for a given content type,
+      template which renders a piece of HTML for a given content type,
       layer and page. You can register the same template code for
       different pages or type contents, and only change the HTML
       rendered by the content provider on those pages or contents by
@@ -88,43 +86,39 @@ You dispose of a few more elements to build your theme:
 
       For instance, you could imagine a content provider called
       ``content``, which is going to display the name and email of
-      people for the imaginary *Subscription* content type on the
+      people for an imaginary *Subscription* content type on the
       ``index`` page. On the ``search`` page of the same content type,
-      it an another content provider of the same name will render a
+      is an another content provider of the same name, will render a
       search box to search people in the subscription type.
 
    *viewlet manager*
       A viewlet manager is basicly a content provider which can
-      contains viewlets.
+      contain viewlets.
 
    *viewlet*
       .. image:: viewlets.png
          :alt: Viewlets
          :align: right
 
-      A viewlet is a template, or Python code, which render a piece of
-      HTML which can be inserted in a viewlet manager, for a given
+      A viewlet is a template, or Python code, which renders a piece
+      of HTML which can be inserted in a viewlet manager, for a given
       template and content type. The typical use is when you want to
-      have blocks where actions, or other codes can register freely to
+      have blocks where actions, or other code can freely register
       it. You could imagine having a colunm on your layout, where
-      layout parts can register dependly of the content.
-
+      layout parts can register dependently of the content.
 
 The Porto Layout
 ----------------
 
-It's a default and simple layout shipped with
-``silva.core.layout``. Its purpose is to contains default CSS for
-Silva Documents, and be easilly overriden to implement your own
-layout.
-
+Is a default and simple layout shipped with ``silva.core.layout``. Its
+purpose is to contain default CSS for Silva Documents, and be easily
+overriden to implement your own layout.
 
 Layout Howto
 ------------
 
-The next part will document the layout framework as more or like an
-howto. It will the reference on how to build a new layout for Silva as
-well.
+The next part will document the layout framework as a howto. It will
+be a reference on how to build a new layout for Silva as well.
 
 .. toctree::
    :maxdepth: 2

@@ -118,13 +118,12 @@ Adding file resources
 
 In your skin extension, you can create a directory called
 ``static``. This should not be a Python package, but just a
-directory. Files in that directory will exported through Zope using
+directory. Files in that directory will be exported through Zope using
 the following URL
 ``http://zope-url/++resources++silvatheme.demo/file.css`` where
 ``silvatheme.demo`` is the Python name of your extension, and
 ``file.css`` is a file in the static directory. You can export any
 type of file you want like this.
-
 
 Automatic inclusion of ressource files on a layer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,7 +131,7 @@ Automatic inclusion of ressource files on a layer
 If you use the Porto layout, you can automatically include CSS and
 Javascript files in your layout. For that, we assume you put those
 resources in the ``static`` sub-directory. After, on your layer, you
-can mention them to get them included:
+can call ``resource`` to get include the resource file:
 
 .. sourcecode:: python
 
@@ -144,11 +143,10 @@ can mention them to get them included:
 
        silvaconf.resource('demo.css')
 
-If you run your Zope instance in debug mode, the CSS cache won't be
-cached, so you can work safely on the filesystem and refresh directly
-in the browser to your changes. In production mode, the CSS file might
-be merged with others, and cached by Zope and your web browser.
-
+If you run your Zope instance in debug mode, the CSS won't be cached,
+so you can work safely on the filesystem and refresh directly in the
+browser to see your changes. In production mode, the CSS file might be
+merged with others, and cached by Zope and your web browser.
 
 CSS files as resources
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -162,42 +160,40 @@ If you want to include a CSS file by hand, a nice trick is to use the
     @import url(http://zope-url/++resources++silvatheme.demo/file.css);
   </style>
 
-After all resources refered in the imported CSS will be look by
-default in the same folder that the CSS which will be the exported
+Now all resources refered in the imported CSS will be looked at by
+default in the same folder that the CSS, which will be the exported
 resources directory.
 
 .. note::
 
      If you include CSS and JS by hand, it is recommanded to include
-     the CSS first and JS after, as this usually improve the loading
-     speed of those resources by current web browsers.
-
+     the CSS first and JS after, as this usually improves the loading
+     speed of the resources by current web browsers.
 
 Changing the HTML code of the layout
 ------------------------------------
 
 The default Porto layout defines some content provider with which you
-can overrides some HTML parts for the ``<body>`` HTML tag content. You
-have by default:
+can overrides some HTML content of the ``<body>`` tag. You have by
+default:
 
 *header*
-   Top section of the site. It itself include by default a
-   *breadcrumbs* provider that define a breadcrums navigation.
+   Top section of the site. It is included by default a *breadcrumbs*
+   provider that define a breadcrums navigation.
 
 *navigation*
-   Right after the top section this provider define a generic
-   navigation code. Use can customize its behavior by inheriting it
+   Right after the top section this provider defines generic
+   navigation code. Use can customize this behavior by inheriting it
    and settings some configuration attributes on it.
 
 *footer*
    Bottom section of the site.
 
-
-All those three content providers are themselves included in a more
-global one, *layout* which englobe all the body tag. If you whish
-replace all the HTML code inside the body section, you can overrides
-that last one. For layouts which doesn`t follow the described
-structure it is the best way to implement them.
+The three content providers are themselves included in a more global
+one, *layout* which encompasses the entire body tag. If you wish to
+replace all the HTML code inside the body section, you can override
+the last one. For layouts which don`t follow the described structure
+it is best to implement them.
 
 .. note::
 
@@ -205,10 +201,10 @@ structure it is the best way to implement them.
      layout object. The layout object in the Porto layout is called
      *mainlayout*. If you whish to replace that one, you can, but you
      will have to call the content provider *resources* yourself if
-     you whish to use the automatic inclusion of CSS/JS resources.
+     you wish to use the automatic inclusion of CSS/JS resources.
 
-
-So if we back in our ``demo.py`` file, we can add at the bottom:
+So if we go back to in your ``demo.py`` file, you can add at the
+bottom:
 
 .. sourcecode:: python
    :linenos:
@@ -221,12 +217,12 @@ So if we back in our ``demo.py`` file, we can add at the bottom:
        pass
 
 
-This code declare a new content provider *layout* which just extends
+This code declares a new content provider *layout* which just extends
 the one from the Porto layout.
 
 Now we can create an another directory called ``demo_templates`` in
-our skin extensions, like we did for ``static``. It will be used to
-add our *layout* template: like for templates associated with a view,
+our skin extensions, like we did for ``static``. This will be used to
+add your *layout* template: like for templates associated with a view,
 they are by default stored in a directory which starts with the name
 of the Python module where they are and where you append
 ``_templates``.

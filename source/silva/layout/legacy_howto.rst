@@ -3,7 +3,7 @@ Legacy site design and templates
 
 .. note::
 
-   This document describes the 'legacy' layout system. That ZODB-based
+   This document describes the 'legacy' layout system. This ZODB-based
    approach has been superseded by the SilvaLayout product and
    silva.core.layout. If you're creating a new layout we recommend
    using silva.core.layout. However you can use the legacy layout for

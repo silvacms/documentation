@@ -2,13 +2,13 @@ Creating a new Silva service
 ============================
 
 Services are configurable utilities. By utilities they are helpers
-which are not content-specific. By configurable, those helpers can be
-configured to behave differently.
+which are not content-specific. By configurable, they are helpers that
+can be configured to behave differently.
 
 For instance, we could imagine a sorting service, which sorts Silva
 items. We could configure its sorting criteria (by ids, title or
 modification date) and sorting algorithm (bubble sort, quick sort) in
-that service. After contents or views can request that service to sort
+that service. The contents or views can request that service to sort
 a bunch of items.
 
 You can create a service object like this:
@@ -25,7 +25,8 @@ You can create a service object like this:
       silvaconf.factory('manage_addMySortingServiceForm')
       silvaconf.factory('manage_addMySortingService')
 
-If your service need to be folderish, you can inherit from ``Folder``:
+If your service needs to be folderish, you can inherit from
+``Folder``:
 
 .. code-block:: python
 
@@ -56,7 +57,7 @@ module:
       __name__='manage_addMySortingServiceForm')
 
 You need to create a file ``www/mySortingServiceAdd.zpt`` for your
-create form. For an example, please to refer to one of Silva in the
+create form. For an example, please refer to one in Silva in the
 ``Products/Silva/www`` directory (and don't forget to make your form
 submitting to ``manage_addMySortingService``).
 
@@ -74,14 +75,12 @@ You can define view on your service for administration tasks:
       silvaconf.context(MySortingService)
       silvaconf.name('manage_sorting')
 
-
-
-Rules on ZMI views are exactly the same than on public views, however
-there is no ``content`` attribute on them (since it's not for a
+Rules on ZMI views are exactly the same as on public views, however
+there is no ``content`` attribute on them (since it's not for
 content). You still have to add your view name to the
 ``manage_options`` of your service.
 
-If you need to write template, your can use the following skeleton:
+If you need to write a template, your can use the following skeleton:
 
 .. code-block:: html
 
@@ -96,7 +95,6 @@ If you need to write template, your can use the following skeleton:
       </div>
     </body>
   </html>
-
 
 Edit forms
 ----------
@@ -117,8 +115,7 @@ defines a file service:
                               required=True,
                               vocabulary="File Storage Type")
 
-
-You can defined an edition form like this:
+You can define an edit form like this:
 
 .. code-block:: python
 
@@ -131,15 +128,14 @@ You can defined an edition form like this:
 
       form_fields = grok.Fields(IFilesService)
 
-
 Regular forms
 -------------
 
-Like edition forms, you can create regular formlib-forms.
+Like edit forms, you can create regular formlib-forms.
 
-As example, a migration form for the previous service. First you need
-to define an interface which declare which fields (information) are
-needed by your form:
+As an example, a migration form for the previous service. First you
+need to define an interface which declares which fields (information)
+are needed by your form:
 
 .. code-block:: python
 
@@ -164,7 +160,6 @@ And then the form:
       def migrate(self, path):
           # do stuff
           pass
-
 
 This works exactly like content-based forms.
 
