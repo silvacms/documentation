@@ -1,10 +1,13 @@
 Configuring Apache to present your site to the world
 ====================================================
 
-Zope is runs its own web server. It can host multiple Silva sites with
-different URLs. However it is difficult to configure which URLs the
-Zope will, with which Silva site. To solve this problem use Apache to
-handle *routing*.
+By default Zope have its own web server, which can host multiple Silva
+sites. However it is difficult to configure to which URLs Zope is
+going to reply, and with which Silva site.
+
+To solve this, people uses for instance Apache in proxy mode, that
+will let them rewrite URLs and *route* them to the correct Silva site
+within Zope.
 
 Configuring rewrite rules in Apache
 -----------------------------------
@@ -17,9 +20,10 @@ First enable the following modules in Apache:
   authorize any proxy operation because it denies everything by
   default.
 
-After you've enable the Apache modules open the apache configuration
-file. In your configuration you can use the following lines to enable
-processing requests to Zope:
+After you can edit your Apache configuration to define virtual hosts
+for your site(s). With ``mod_rewrite`` you will be able to effectively
+to define the redirection to your Zope server and your Silva site
+within:
 
 .. code-block:: apache
    :linenos:
@@ -36,9 +40,11 @@ Explanation:
 
 - On line 3, we redirect all requests to Zope.
 
-In our case, Zope listens to localhost on port 8080. Apache relocates
-the URL to our Zope server ``http://localhost:8080/``. VirtualHostBase
-is with Zope and is responsible for rewriting the links with Zope.
+In our case, Zope listens on localhost, port 8080. Apache relocates
+the received request to our Zope server on
+``http://localhost:8080/``. After we specify ``VirtualHostBase`` in
+our rewritten URL to tell Zope to use its URL rewrite engine, that will
+make Zope generate links with the desired host name and path.
 
 This means that ``http://localhost:8080/silva`` will be accessible
 using the URL ``http://your-site.com``.
