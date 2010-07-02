@@ -300,7 +300,7 @@ instance:
 
       $ cd Silva
       $ ./bin/instance stop
-      $ svn switch https://svn.infrae.com/buildout/silva/tags/Silva-2.1.1b1
+      $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.1.1b1
       $ ./bin/buildout
       $ ./bin/instance start
 
