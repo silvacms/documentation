@@ -13,6 +13,7 @@ related to Silva.
    buildout
    starting
    apache
+   wsgi
 
 Products
 --------

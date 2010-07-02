@@ -97,7 +97,7 @@ or ``-=`` to remove existing ones.
    To re-create your environment you just need to keep your
    ``buildout.cfg`` file. You can do a Subversion checkout of a new
    Buildout tree, put your ``buildout.cfg`` in that directory, run
-   ``python2.4 bootstrap.py`` and after ``./bin/buildout`` to
+   ``python2.6 bootstrap.py`` and after ``./bin/buildout`` to
    re-create exactly the same environment.
 
 Adding new softwares to your setup
@@ -289,7 +289,7 @@ re-use:
 .. code-block:: sh
 
    $ mv buildout.cfg mycorp.cfg
-   $ python2.4 bootstrap.py --buildout-profile mycorp.cfg
+   $ python2.6 bootstrap.py --buildout-profile mycorp.cfg
 
 .. note::
 

@@ -4,18 +4,18 @@ Requirements to install Silva
 Installation under Linux Ubuntu/Debian
 --------------------------------------
 
-1. Python 2.4
+1. Python 2.6
 
-   Silva 2.x requires Python 2.4, this is probably already present on
+   Silva 2.3+ requires Python 2.6, this is probably already present on
    your system. If not, you can compile it yourself or install it
    using the package manager of your operating system. For example, on
    Ubuntu/Debian systems, type:
 
    .. code-block:: sh
 
-      $ sudo apt-get install python2.4
+      $ sudo apt-get install python2.6
 
-2. Python 2.4 headers and development add-ons
+2. Python 2.6 headers and development add-ons
 
    On UNIX systems, the buildout will also need the python header
    files. If you compiled python by hand, these files are already on
@@ -24,7 +24,7 @@ Installation under Linux Ubuntu/Debian
 
    .. code-block:: sh
 
-      $ sudo apt-get install python2.4-dev build-essential
+      $ sudo apt-get install python2.6-dev build-essential
 
    You will also need a working C compiler (gcc), which is what the
    ``build-essential`` package will install.

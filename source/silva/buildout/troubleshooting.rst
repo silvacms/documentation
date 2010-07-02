@@ -43,7 +43,7 @@ Exemple of non-fatal errors:
 
   .. code-block:: sh
 
-     "/somewhere/Products.GenericSetup-1.3.4-py2.4.egg/Products/GenericSetup/doc/SampleSite/profiles/default/siteroot/bar.py",
+     "/somewhere/Products.GenericSetup-1.3.4-py2.6.egg/Products/GenericSetup/doc/SampleSite/profiles/default/siteroot/bar.py",
      line 22
         return printed
      SyntaxError: 'return' outside function
@@ -145,71 +145,5 @@ site/dist-packages.
 
 .. code-block:: sh
 
-  $ python2.4 -S ./bin/buildout -v
+  $ python2.6 -S ./bin/buildout -v
 
-SVN 1.5 and buildout
---------------------
-
-Under Windows or Unix, with SVN 1.5:
-
-.. code-block:: sh
-
-  unrecognized .svn/entries format; skipping .
-  Traceback (most recent call last):
-    File "c:\docume~1\arthur\locals~1\temp\tmpnmclvm", line 11, in ?
-      execfile('C:\\silva-trunk\\src/five.grok\\setup.py')
-    [...]
-    File "c:\silva-trunk\eggs\setuptools-0.6c8-py2.4.egg\setuptools\command\s
-  dist.py", line 98, in entries_finder
-  NameError: global name 'log' is not defined
-  While:
-    Installing.
-    Processing develop directory 'C:\\silva-trunk\\src/five.grok'.
-
-  An internal error occured due to a bug in either zc.buildout or in a
-  recipe being used:
-  Traceback (most recent call last):
-    File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-  c\buildout\buildout.py", line 1477, in main
-    File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-  c\buildout\buildout.py", line 324, in install
-    File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-  c\buildout\buildout.py", line 556, in _develop
-    File "c:\docume~1\arthur\locals~1\temp\tmpgckuer\zc.buildout-1.1.1-py2.4.egg\z
-  c\buildout\easy_install.py", line 866, in develop
-  AssertionError
-
-
-You can fix this by upgrading setuptools to 0.6c9. If you installed
-setuptools using a package provided by your system, refer to your
-system documentation to upgrade the package. If you installed
-setuptools by running the ``ez_setup.py`` script, use the following
-command to upgrade it:
-
-.. code-block:: sh
-
-   C:\Silva-trunk> easy_install -U setuptools==0.6c9
-
-If you can't, you have to fix it by hand. In a shell, do:
-
-.. code-block:: sh
-
-   C:\Silva-trunk>cd eggs
-   C:\Silva-trunk\eggs>move setuptools-0.6c8-py2.4.egg setuptools-0.6c8-py2.4.egg.zip
-
-Of course, if you installed ``easy_install`` in your Python, go in
-``python-installation/lib/python2.4/site-packages`` instead to find
-the archive, or if you setup an egg cache, go in your egg cache.
-
-Afterwards using explorer, unpack the archive
-``setuptools-0.6c8-py2.4.egg`` in that same folder to the same
-folder. Delete the archive after. Edit the file
-``setuptools-0.6c8-py2.4.egg\setuptools\commands\sdist.py``, add a
-line at the top of it:
-
-.. code-block:: python
-
-   from distutils import log
-
-Rerun buildout, and thank setuptools' maintainers for good test
-coverage of their software.

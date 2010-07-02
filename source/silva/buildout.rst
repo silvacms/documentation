@@ -69,14 +69,14 @@ with the python version you want to use. For example under Unix:
 
    $ cd /tmp
    $ wget http://peak.telecommunity.com/dist/ez_setup.py
-   $ sudo python2.4 ez_setup.py
+   $ sudo python2.6 ez_setup.py
 
 Now that we have the setuptools installed, we can use
 ``easy_install``. Just run the following command:
 
 .. code-block:: sh
 
-   $ sudo easy_install-2.4 -U ZopeSkel
+   $ sudo easy_install-2.6 -U ZopeSkel
 
 If you are using Mac OS X, we recommend to use the option ``-s``. By
 default ``easy_install`` puts all scripts in the same directory as
@@ -86,7 +86,7 @@ the same directory than Mac Ports softwares:
 
 .. code-block:: sh
 
-   $ sudo easy_install-2.4 -s /opt/local/bin -U ZopeSkel
+   $ sudo easy_install-2.6 -s /opt/local/bin -U ZopeSkel
 
 .. note::
 
@@ -170,7 +170,7 @@ script to automaticly pull in the Silva code and configure it.
 .. code-block:: sh
 
    $ cd 'project name'
-   $ python2.4 bootstrap.py
+   $ python2.6 bootstrap.py
    $ ./bin/buildout
 
 After this the command ``bin/instance`` will be available. It will let
@@ -238,7 +238,7 @@ sub-directory of your Buildout tree. Below we will use the
 
 .. code-block:: sh
 
-   $ python2.4 bootstrap.py --buildout-profile profiles/simple-instance.cfg
+   $ python2.6 bootstrap.py --buildout-profile profiles/simple-instance.cfg
 
 Running this command creates important files, most importantly one
 called ``buildout.cfg``. The ``buildout.cfg`` file is a default
