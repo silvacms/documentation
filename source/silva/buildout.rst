@@ -23,10 +23,13 @@ Installing quick drive Silva with Paster and ZopeSkel
 -----------------------------------------------------
 
 If you want to take Silva for a quick test drive you can install Silva
-using `Paster`_ and `ZopeSkel`_. For setting up a production or
-development environment we recommend you do a SVN check out of the
-Buildout located in the Infrae `SVN
-<https://svn.infrae.com/buildout/silva/>`_. This will let you upgrade
+`Paster`_ and `ZopeSkel`_.
+
+To set up a production or development environment we recommend you do
+a SVN check out of the Buildout located in the Infrae `SVN
+<https://svn.infrae.com/buildout/silva/>`_.
+
+This will let you track more easily your changes, and let you upgrade
 your Silva instance more easily at a later date.
 
 .. glossary::
@@ -46,7 +49,7 @@ your Silva instance more easily at a later date.
 Installing Paster and ZopeSkel
 ``````````````````````````````
 
-First install Python Setuptools which is needed to install
+First you need to install Setuptools which is needed to install
 `ZopeSkel`_. On UNIX systems, this can be installed through your OS
 package manager, for example on Ubuntu / Debian systems, run:
 
@@ -60,7 +63,7 @@ Under Mac OS X, you can use MacPorts:
 
   $ sudo port install py-setuptools
 
-Otherwise you can install setuptools manually by downloading the
+Otherwise you can install Setuptools manually by downloading the
 ``ez_setup`` script from
 http://peak.telecommunity.com/dist/ez_setup.py and then running it
 with the python version you want to use. For example under Unix:
@@ -100,7 +103,7 @@ the same directory than Mac Ports softwares:
 Creating a Silva Buildout tree
 ``````````````````````````````
 
-The ZopeSkel package installed a script called ``paster`` on your
+The ZopeSkel package installs a script called ``paster`` on your
 system. This can be used to install several CMS products including
 Silva. First we'll test if the Silva templates are present by running:
 
@@ -164,8 +167,8 @@ environment in the ``project name`` directory.
 Running the installation
 ````````````````````````
 
-Now that we have a Silva project environment, we can run the Buildout
-script to automaticly pull in the Silva code and configure it.
+Now that you have a Silva project environment, you can run the
+Buildout script to install Silva:
 
 .. code-block:: sh
 
@@ -179,11 +182,11 @@ you start and use Silva: :ref:`starting-creating-silva-site`.
 Installing Silva from SVN for development or production
 -------------------------------------------------------
 
-For production deployment or development we recommend you use a SVN
-checkout of the Infrae buildout for Silva.
+For production deployment or development we recommend you install
+Silva by getting it from the Infrae subversion.
 
-You are going to need to install subversion if it's not already
-installed on your system.
+You need to install subversion if it's not already installed on your
+system.
 
 There are different buildout SVN trees for different Silva
 versions. An SVN tag corresponds to a specific release of Silva, the
@@ -300,7 +303,7 @@ instance:
 
       $ cd Silva
       $ ./bin/instance stop
-      $ svn switch https://svn.infrae.com/buildout/silva/tags/Silva-2.1.1b1
+      $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.1.1b1
       $ ./bin/buildout
       $ ./bin/instance start
 
