@@ -134,9 +134,9 @@ Solution
 ~~~~~~~~
 
 To avoid this we suggest adding Silva Links at the root of your site
-redirecting you to the correct content. For instance, in this example
-you would create a Silva Link called ``alias``, which points to
-``http://www.mysite.com/inside``.
+to redirect the visitor to the correct content. For instance, in this
+example you would create a Silva Link called ``alias``, which points
+to ``http://www.mysite.com/inside``.
 
 
 .. _Nginx: http://nginx.org/
