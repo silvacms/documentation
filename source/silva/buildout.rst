@@ -289,61 +289,80 @@ setup:
 
    buildout/extending
 
-Upgrading your setup
-````````````````````
 
-Before starting an upgrade first stop your Zope instance, change the
-version of Silva you are running, rerun buildout and restart your Zope
-instance:
+Upgrading your installation
+---------------------------
 
-- If you have an SVN checkout, you can switch Silva versions by
-  running ``svn switch``:
+The generic procedure to upgrade a Silva site is:
+
+1. to stop your Zope instance,
+
+2. change the version of Silva you are running on the file-system,
+
+3. re-run buildout to get the new version,
+
+4. verify the :ref:`upgrade-notes` for the version you are upgrading
+   and follow them,
+
+5. if there was no upgrade notes, restart your Zope instance, visit
+   each Silva Root you have and access the *service extensions* in ZMI
+   (*Zope Management Interface*)
+   (``silvaroot-url/service_extensions/manage_extensions``), click on
+   the button upgrade content.
+
+You cannot upgrade only one instance of Silva inside a Zope instance
+to a specific version. All Silva sites in a Zope instance run the same
+version of Silva (which the one installed on the file-system).
+
+Downgrade of versions is not supported. After you upgraded a Silva
+site, the only way to get back to the old version you were running is
+to restore a backup.
+
+To change the version of Silva your are running on the file-system:
+
+- if you have an SVN checkout, you can switch Silva versions by
+  running ``svn switch``, for instance to upgrade to the version
+  ``2.1.10``:
 
    .. code-block:: sh
 
       $ cd Silva
       $ ./bin/instance stop
-      $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.1.1b1
+      $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.1.10
       $ ./bin/buildout
-      $ ./bin/instance start
 
-- If you made your own buildout profile that refers directly to the
+- if you made your own buildout profile that refers directly to the
   Silva Buildout configuration using buildout's ``extends`` option be
   sure to update the URL used.
 
 .. warning::
 
    If you are using any specific extra and/or custom extensions with
-   Silva, you should check that they are compatible with the upgrad
-   version of Silva. Failing to test these extension may break your
-   site and cause the upgrade to fail.
+   Silva, you should check that they are compatible with the version
+   of Silva you want to upgrade to. Failing to test these extensions
+   may break your site and cause the upgrade to fail.
 
 As standard upgrade procedure, we recommend to first copy your site as
 a test site, and then do the upgrade procedure on the copy. After
-checking that everything on your sitee works, you can do the same
-procedure on your production site. This is especially recommended fo
-upgrades that jump between versions with several changes (for instance
-a major release of Silva).
+checking that everything on your site works, you can do the same
+procedure on your production site. This is especially recommended for
+upgrades that jump between versions, and for major release of Silva.
 
 .. note::
 
-   Please refer to the specific upgrade notes (UPGRADE.txt) located in
-   your Silva product directory.
-
-.. warning::
-
-   It's recommended to backup of your data before attempting any
-   upgrade operation.
-
-When Zope has been restarted, in the Zope Management Interface (ZMI)
-go to each Silva root and navigate to the *service extenstions*
-(``silvaroot-url/service_extensions/manage_extensions``) page. Click
-on upgrade content. Not all upgrades require that.
+   Please refer to the specific upgrade notes for the version you are
+   upgrading to.
 
 .. toctree::
    :maxdepth: 2
 
    buildout/upgrade
+
+
+.. warning::
+
+   It's recommended to backup of your data before attempting any
+   upgrade operation.
 
 Using Buildout
 --------------

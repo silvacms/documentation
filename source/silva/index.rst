@@ -1,11 +1,13 @@
 Silva Documentation
 ===================
 
+.. contents::
+
 Installation and Administration
 -------------------------------
 
 This section describes installation and system administration tasks
-related to Silva.
+related to Silva:
 
 .. toctree::
    :maxdepth: 2
@@ -15,20 +17,21 @@ related to Silva.
    apache
    wsgi
 
-Products
---------
+.. Products
+.. --------
 
-This section has a number of documents about specific Silva products.
+.. This section has a number of documents about specific Silva products:
 
-.. toctree::
-   :maxdepth: 2
+.. .. toctree::
+..    :maxdepth: 2
 
-   silva_products/index
+..    silva_products/index
 
 Developer documentation
 -----------------------
 
-This section describes extending Silva's functionality.
+This section describes extending Silva's functionality. This is
+intended to developer who have at least knowledge on Python.
 
 .. toctree::
    :maxdepth: 2
@@ -51,6 +54,8 @@ You might be interested in the following links:
 - the Grok documentation: http://grok.zope.org/doc/current/reference/
 
 - Silva website: http://infrae.com/products/silva
+
+- Buildout documentation: http://www.buildout.org
 
 Also, please feel free to report your experience here:
 
