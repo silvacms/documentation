@@ -20,8 +20,8 @@ instance, run ``zodbupdate`` on every database you have:
    $ ./bin/zodbupdate -f var/filestorage/Data.fs
 
 
-Only after this step, you can start Zope. Before using your site
-access, for each Silva Root you have go to the URL
+Only after this step, you can start your Zope instance. Before using
+your site, access, for each Silva Root, the URL
 ``silvaroot-url/service_extensions/manage_extensions`` and click on
 the button update content.
 
