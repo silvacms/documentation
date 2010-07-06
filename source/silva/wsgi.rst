@@ -93,6 +93,9 @@ Starting and Stopping your site
 -------------------------------
 
 Now Silva is directly embed in Apache. To *restart* Silva, you need to
-restart Apache. To *stop* Silva, you need to stop Apache. You **should
-not** use the installed Silva daemon while Silva is running within
-Apache.
+restart Apache. To *stop* Silva, you need to stop Apache.
+
+.. warning::
+
+  You **should not** use the installed Silva daemon while Silva is
+  running within Apache.
