@@ -59,13 +59,34 @@ make Zope generate URLs for the site URL you configured
    </VirtualHost>
 
 
+Explanation
+~~~~~~~~~~~
+
+On line 1 we define a process to run our Silva site in WSGI. We says
+that it will run with the user ``username`` and group ``username`` on
+the file-system. These user **should** be the non-privileged user you
+used to install Silva. We says that are going to have 4 threads to
+serve requests. **You should not** configure more than 7 threads in
+any case. After we says that we want to renew our WSGI process every
+10000 requests.
+
 
 Multiple processus
 ~~~~~~~~~~~~~~~~~~
 
 If you wish to configure multiple WSGI processus, you need first to
 install a ZEO server. You **cannot** configure multiple processus
-without a ZEO server or might corrupt your Zope database.
+without a ZEO server or you might corrupt your Zope database.
+
+In this configuration, all Zope processus will use the same Zope
+configuration to connect to the ZEO server.
+
+Precaution must be taken if you wish to use Blobs with this setup: the
+blob storage directory **must be shared** between all Zope processus
+connected to the ZEO server. That means either all the Zope processus
+have to run on the same computer or the directory needs to be shared
+between computers, like with NFS. Sharing Blobs over the network
+doesn't bring any downside on the performances.
 
 
 Starting and Stopping your site

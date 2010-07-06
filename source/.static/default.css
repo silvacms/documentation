@@ -626,10 +626,14 @@ p.rubric {
 /* "Topics" */
 
 div.topic {
-    background-color: #eee;
+    background-color: #efc;
     border: 1px solid #ccc;
     padding: 0 7px 0 7px;
     margin: 10px 0 10px 0;
+}
+
+div.topic a:hover {
+    font-weight: bold;
 }
 
 p.topic-title {
