@@ -5,35 +5,34 @@ Using your Silva instance
 
 .. _starting-creating-silva-site:
 
-Starting your instance and creating a Silva site
-------------------------------------------------
+Starting your Zope instance and creating a Silva site
+-----------------------------------------------------
 
-After having installed your Silva environment, you should get a
-``bin/instance`` script in your installation directory. You can use to
+After having installed your Silva environment, you should have a
+``bin/paster`` script in your installation directory. You can use it to
 start the Zope instance:
 
 .. code-block:: sh
 
-   $ bin/instance start
+   $ bin/paster serve deploy.ini start
 
 After few seconds, the server should be running, so open a web browser and
 type in the server location:
 
     http://localhost:8080
 
-This should return the 'Zope Quick Start' page. You can log into the
-Zope administration interface (*ZMI*) by adding ``manage_main`` to the
-URL:
+You should see a 'Zope Quick Start' page. You can log into the Zope
+administration interface (*ZMI*) by adding ``manage_main`` to the URL:
 
     http://localhost:8080/manage_main
 
 Zope will prompt you for a username and password. Fill in the values
-you chose in the paster configuration step, and press the *OK*
-button. If you didn't fill anything while installing Silva, or chose
-the default values, the username is ``admin`` and the password is
-``admin``.
+you chose in the paster configuration step or in your buildout
+configuration, and press the *OK* button. If you didn't fill anything
+while installing Silva, or chose the default values, the username is
+``admin`` and the password is ``admin``.
 
-Now you are in the ZMI. Let's add a Silva site by selecting *Silva
+Now you are in the *ZMI*. Let's add a Silva site by selecting *Silva
 Root* from the drop down list on the top right of the screen.
 
 You should get a *Add Silva Root* page, fill in an id (for example
@@ -62,23 +61,65 @@ adding ``/edit`` to the URL displayed in your web browser.
    You can add more than one *Silva Root* (or Silva instance) in one
    Zope instance and use them independently.
 
-Stopping and restarting your Silva Site
----------------------------------------
+Stopping and restarting your Zope instance
+------------------------------------------
 
 You can stop your Silva instance with:
 
 .. code-block:: sh
 
-   $ ./bin/instance stop
+   $ ./bin/paster serve deploy.ini stop
 
 You can restart directly the instance with:
 
 .. code-block:: sh
 
-   $ ./bin/instance restart
+   $ ./bin/paster serve deploy.ini restart
 
 And the following command can tell you if Silva is running.
 
 .. code-block:: sh
 
-   $ ./bin/instance status
+   $ ./bin/paster serve deploy.ini status
+
+
+Running in development mode
+---------------------------
+
+If you wish to do development, you can run Silva in development
+mode. For this you can use the configuration ``debug.ini`` instead of
+``deploy.ini``. In development mode all caches will be disabled, and a
+interactive debugger will help your do debug your errors.
+
+You can for instance run Zope in foreground mode and debug like this:
+
+.. code-block:: sh
+
+  $ ./bin/paster serve debug.ini
+
+.. note::
+
+   It is not because Zope is running in foreground mode it will be in
+   mode debug. It is because you used the configuration file
+   ``debug.ini`` instead of ``deploy.ini``.
+
+.. warning::
+
+   In any case you should not use the development mode as a production
+   mode, this would be a serious security issue, due to the
+   interactive debugger.
+
+
+More information
+----------------
+
+You used Paste Deploy to manage your Zope instance. You can have more
+information on the command or on the configuration file:
+
+- by consulting the help of the command:
+
+  .. code-block:: sh
+
+     $ ./bin/paster serve --help
+
+- by reading the official documentation: http://pythonpaste.org/deploy/
