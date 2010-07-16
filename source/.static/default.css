@@ -3,8 +3,8 @@
  */
 
 body {
-  font-family:"Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
-  font-size: 83%;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size: 0.9em;
   background-color: #11303d;
   color: #000;
   margin: 0;
@@ -96,7 +96,6 @@ div.related a {
 
 /* ::: TOC :::: */
 div.sphinxsidebar h3 {
-  font-family: 'Trebuchet MS', sans-serif;
   color: #534D66;
   font-size: 1.1em;
   font-weight: normal;
@@ -105,7 +104,6 @@ div.sphinxsidebar h3 {
 }
 
 div.sphinxsidebar h4 {
-  font-family: 'Trebuchet MS', sans-serif;
   color: #534D66;
   font-size: 1.1em;
   font-weight: normal;
@@ -770,7 +768,7 @@ th {
 }
 
 pre {
-    font-size: 120%;
+    font-size: 1.1em;
     padding: 5px;
     background-color: #efc;
     color: #333;
