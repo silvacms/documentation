@@ -66,3 +66,13 @@ access the URL ``zope-url/manage_addProduct/PythonScripts/recompile``.
 
 You can upgrade directly from Silva 2.1 to Silva 2.3 following those
 last notes.
+
+
+.. warning::
+
+   On large databases, lot of temporary files might be created. If you
+   ``/tmp`` directory is too small you will get an error. You can
+   specify an another directory to create temporary files with the
+   ``TMPDIR`` environment variable
+
+
