@@ -7,9 +7,8 @@ Installation under Linux Ubuntu/Debian
 1. Python 2.6
 
    Silva 2.3+ requires Python 2.6, this is probably already present on
-   your system. If not, you can compile it yourself or install it
-   using the package manager of your operating system. For example, on
-   Ubuntu/Debian systems, type:
+   your system. If you can install it using the package manager (or
+   compile it by hand):
 
    .. code-block:: sh
 
@@ -20,7 +19,7 @@ Installation under Linux Ubuntu/Debian
    On UNIX systems, the buildout will also need the python header
    files. If you compiled python by hand, these files are already on
    your system, otherwise you can install them using the package
-   manager, on Ubuntu/Debian systems, run:
+   manager:
 
    .. code-block:: sh
 
@@ -70,7 +69,7 @@ http://silva.mine.ch/Silva-Installation-under-Linux-Fedora-Centos-Redhat
 Installation under Mac OS X
 ---------------------------
 
-Silva 2.x needs Python 2.4 to work. First you need to install `XCode
+Silva 2.3+ needs Python 2.6 to work. First you need to install `XCode
 <http://developer.apple.com/tools/xcode/>`_ in order to have a working
 compiler.
 
@@ -87,7 +86,7 @@ components:
 
 .. code-block:: sh
 
-   $ sudo port -v install python24
+   $ sudo port -v install python26
 
 You can install the ``libjpeg``:
 
@@ -103,18 +102,10 @@ And ``libxml2``/``libxslt``:
    $ sudo port -v install libxslt
 
 
-Mac OS X Snow Leopard
-~~~~~~~~~~~~~~~~~~~~~
-
-Python 2.4 is a bit old for Snow Leopard. But you can refer to this
-documentation to install it:
-
-http://silva.mine.ch/Silva-Installation-under-MacOSX-Snow-Leopard
-
 Installation under FreeBSD
 --------------------------
 
-Silva 2.x needs Python 2.4 to work, this is probably already present
+Silva 2.3+ needs Python 2.6 to work, this is probably already present
 on your system. You can install it using the FreeBSD ports.
 
 .. note::
@@ -124,11 +115,11 @@ on your system. You can install it using the FreeBSD ports.
    *Configure* menu, select *Distributions*, then select the ``ports``
    distribution. Press tab to go on ``Okay`` and press enter.
 
-Installing Python 2.4:
+Installing Python 2.6:
 
 .. code-block:: sh
 
-   $ cd /usr/ports/lang/python24
+   $ cd /usr/ports/lang/python26
    $ make install
    $ make distclean
 
@@ -153,8 +144,8 @@ Installation under Windows
 
 We don't recommend (nor support) Windows as a production environment.
 
-1. First you need to install `Python 2.4
-   <http://www.python.org/ftp/python/2.4.4/python-2.4.4.msi>`_.
+1. First you need to install `Python 2.6
+   <http://www.python.org/ftp/python/2.6.5/python-2.6.5.msi>`_.
 
    .. warning::
 
@@ -166,7 +157,7 @@ We don't recommend (nor support) Windows as a production environment.
    *Manage*. Click on the *Advanced* tab, and click on the button
    *Environment variable*. Here you select *Path*, and click on
    modify. You append your path to your Python binary here, so
-   ``C:\Python24`` for the default installation path.
+   ``C:\Python26`` for the default installation path.
 
    Now if you start a shell (click on *Start*, *Run*, type ``cmd``
    and enter), you should be able to run ``python``.
@@ -186,7 +177,7 @@ We don't recommend (nor support) Windows as a production environment.
    ``gcc`` in a newly created shell.
 
    In your Python installation path plus ``\Lib\distutils`` (so
-   ``C:\Python24\Lib\distutils`` for the default installation path)
+   ``C:\Python26\Lib\distutils`` for the default installation path)
    create a file called ``distutils.cfg`` which contains:
 
    .. code-block:: ini
@@ -197,15 +188,14 @@ We don't recommend (nor support) Windows as a production environment.
    This will tell Python to use MinGW to compile needed extensions.
 
 3. We need Subversion. You can download and install it from the `Slik
-   distribution page <http://www.sliksvn.com/en/download>`_ (select
-   the version 1.5.2).
+   distribution page <http://www.sliksvn.com/pub/Slik-Subversion-1.5.6-win32.msi>`_.
 
    After, you should be able to type ``svn help`` in a newly created
    shell.
 
-   We recommand to install `PySVN for Windows, Python 2.4 and SVN
-   1.5.2
-   <http://pysvn.tigris.org/files/documents/1233/43646/py24-pysvn-svn152-1.6.1-1024.exe>`_.
+   We recommand to install `PySVN for Windows, Python 2.6 and SVN
+   1.5.6
+   <http://pysvn.tigris.org/files/documents/1233/47202/py26-pysvn-svn156-1.7.2-1280.exe>`_.
 
 4. You can download and install ``libjpeg`` from the `GNUWin32
    Sourceforge page <http://gnuwin32.sourceforge.net/downlinks/jpeg.php>`_.
@@ -215,7 +205,7 @@ We don't recommend (nor support) Windows as a production environment.
    exactly the same installation path.
 
 5. You also need to install `pywin32
-   <http://sourceforge.net/projects/pywin32/>`_, for Python 2.4.
+   <http://sourceforge.net/projects/pywin32/>`_, for Python 2.6.
 
 .. warning::
 
