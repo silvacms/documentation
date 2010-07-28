@@ -197,14 +197,7 @@ We don't recommend (nor support) Windows as a production environment.
    1.5.6
    <http://pysvn.tigris.org/files/documents/1233/47202/py26-pysvn-svn156-1.7.2-1280.exe>`_.
 
-4. You can download and install ``libjpeg`` from the `GNUWin32
-   Sourceforge page <http://gnuwin32.sourceforge.net/downlinks/jpeg.php>`_.
-
-   *You need to select the same path as MinGW for installation*, and
-   remove any ``GNUWin32`` append to that installation path, to get
-   exactly the same installation path.
-
-5. You also need to install `pywin32
+4. You also need to install `pywin32
    <http://sourceforge.net/projects/pywin32/>`_, for Python 2.6.
 
 .. warning::
