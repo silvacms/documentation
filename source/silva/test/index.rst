@@ -1,5 +1,5 @@
-Test in Silva
-=============
+Tests in Silva
+==============
 
 To run the Silva tests you can use the ``test`` subcommand of
 ``instance`` (or the script used to control your Zope instance). So,
