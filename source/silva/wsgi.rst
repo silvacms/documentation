@@ -41,7 +41,7 @@ make Zope generate URLs for the site URL you configured
 .. code-block:: apache
    :linenos:
 
-   WSGIDaemonProcess mysite user=username group=username threads=4 maximum-requests=10000 python-eggs=/tmp/python-eggs
+   WSGIDaemonProcess mysite user=username group=username threads=4 maximum-requests=1000000 python-eggs=/tmp/python-eggs
 
    <VirtualHost *:80>
       ServerName www.mysite.com
