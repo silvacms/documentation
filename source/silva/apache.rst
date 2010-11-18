@@ -3,18 +3,23 @@ Configuring Apache to present your site to the world
 
 By default Zope has its own web server, which can host multiple Silva
 sites. However it is difficult to configure to which URLs (like
-http://mysite.com) Zope is going to reply, and with which Silva site.
+``http://mysite.com``) Zope is going to reply, and with which Silva site.
 
-To solve this, people uses Apache in proxy mode, to *route* requests
-to the correct Silva site within Zope: for instance
-http://www.mysite.com to the Silva site http://localhost:8080/mysite
-which have been created in Zope. We are going to *rewrite URLs* them
-because we want Zope to generate URLs starting with
-http://www.mysite.com/ instead of http://localhost:8080/mysite.
+To solve this problem, you can use Apache in proxy mode, to *redirect*
+HTTP requests to the correct Silva site within Zope, for instance the
+Apache host ``www.mysite.com`` to the Silva site called ``mysite``
+into the local Zope service listening on the port 8080
+(``http://localhost:8080/mysite``).
 
-You are free to use other proxy software if they support rewriting of
-URLs. You can use `Nginx`_ or directly `Squid`_ if you want to do
-caching as well.
+As well, Apache is going to *rewrite URLs* to make Zope generate URLs
+starting with ``http://www.mysite.com`` instead of
+``http://localhost:8080/mysite``, so generated URLs will go through Apache
+as well.
+
+
+.. note:: You are free to use other proxy software if they support
+  rewriting of URLs. You can use `Nginx`_ or directly `Squid`_ if you
+  want to do caching as well.
 
 Configuring rewrite rules in Apache
 -----------------------------------
@@ -28,8 +33,8 @@ First you need enable the following modules in Apache:
 
 After you can edit your Apache configuration to define a virtual host
 for your site. With ``mod_rewrite`` you will be able to effectively
-define the redirection from your site (http://mysite.com) to your Zope
-server and your Silva site within (http://localhost:8080/mysite):
+define the redirection from your site (``http://mysite.com``) to your Zope
+server and your Silva site within (``http://localhost:8080/mysite``):
 
 .. code-block:: apache
    :linenos:
@@ -128,6 +133,8 @@ It is buggy because:
   less efficient, as more caches will have to be created. Visitors
   will have to re-download CSS and images many times, and will make
   the site slower to browser for them.
+
+**We recommend not to use rewrite rules to do this, this will created lot of problems in your sites.**
 
 
 Solution

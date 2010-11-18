@@ -16,6 +16,7 @@ related to Silva:
    starting
    apache
    wsgi
+   cluster/index
 
 .. Products
 .. --------

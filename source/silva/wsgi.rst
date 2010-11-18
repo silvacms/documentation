@@ -3,7 +3,7 @@ Configuring Apache's mod_wsgi to present your site to the world
 
 Silva now support WSGI. You can use Apache's ``mod_wsgi`` to directly
 serve it, without having it running in a different daemon and proxing
-request to it.
+request to it. This is the recommend way to use Silva.
 
 .. contents::
 
@@ -75,18 +75,24 @@ Multiple processus
 ~~~~~~~~~~~~~~~~~~
 
 If you wish to configure multiple WSGI processus, you need first to
-install a ZEO server. You **cannot** configure multiple processus
-without a ZEO server or you might corrupt your Zope database.
+install a ZEO server or a RelStorage.
+
+You **cannot** configure multiple processus without a ZEO server or a
+RelStorage or you might corrupt your Zope database.
 
 In this configuration, all Zope processus will use the same Zope
-configuration to connect to the ZEO server.
+configuration to connect to the ZEO server, which means there will be
+only one Zope instance created with the same settings.
 
 Precaution must be taken if you wish to use Blobs with this setup: the
 blob storage directory **must be shared** between all Zope processus
 connected to the ZEO server. That means either all the Zope processus
-have to run on the same computer or the directory needs to be shared
-between computers, like with NFS. Sharing Blobs over the network
-doesn't bring any downside on the performances.
+have to run on the same computer **or** the Blob directory needs to be
+shared between computers (using NFS for instance). Sharing Blobs over the
+network doesn't bring any downside on the performances.
+
+Moreover, if you setup a ZEO or a RealStorage, you need to install
+*and* configure memcached.
 
 
 Starting and Stopping your site

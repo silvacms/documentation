@@ -582,13 +582,12 @@ div.body p, div.body dd, div.body li {
 div.body ul li a {
   color: #20435C;
   text-decoration: none;
-  font-size: 120%;
-  font-weight: bold;
+  font-size: 1.1em;
 }
 
 div.body ul li ul li a {
   color: #20435C;
-  font-size: 110%;
+  font-size: 1.1em;
   font-weight: normal;
   text-decoration: none;
 }
@@ -792,10 +791,9 @@ table.highlighttable td.linenos {
 }
 
 tt {
-    border-color: #aacc99;
+    border-color: #333333;
     padding: 0 1px 0 1px;
-    font-size: 120%;
-    font-weight: bold;
+    font-size: 1.1em;
 }
 
 em.property {
