@@ -13,20 +13,11 @@ related to Silva:
    :maxdepth: 2
 
    buildout
-   starting
+   buildout/extending
+   getting-starting-with-silva
    apache
    wsgi
    cluster/index
-
-.. Products
-.. --------
-
-.. This section has a number of documents about specific Silva products:
-
-.. .. toctree::
-..    :maxdepth: 2
-
-..    silva_products/index
 
 Developer documentation
 -----------------------
@@ -39,7 +30,6 @@ intended to developer who have at least knowledge on Python.
 
    extension/index
    layout/index
-   mobilelayout/index
    contents/index
    code_source/index
    services

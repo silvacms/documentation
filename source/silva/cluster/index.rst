@@ -1,10 +1,18 @@
+.. _silva-high-availability-installation:
+
 Silva High-Availability Installation
 ====================================
 
-For site with lot of traffic, having only Zope instance to handle all
-the traffic might not be enough. You have to setup a cluster in this case.
+For site with lot of traffic, having only one Zope server to handle
+all the incoming traffic might not be enough. You have to setup a cluster in
+this case. The cluster will be composed of a database server, multiple
+Zope servers using this database and of a load balancer that
+distributes the incoming traffic among the different Zope servers.
 
-Depending of your requirements, different installations are possible.
+Each of those components can be installed on different servers.
+
+Depending of your requirements, you can set the database server
+differently:
 
 .. toctree::
    :maxdepth: 2
@@ -13,7 +21,7 @@ Depending of your requirements, different installations are possible.
    relstorage
 
 
-Moreover, if you have more than one Zope instance using the database,
+Moreover, if you have more than one Zope server using the same database,
 we recommend to install and configure ``memcached`` for Silva:
 
 .. toctree::
@@ -22,4 +30,17 @@ we recommend to install and configure ``memcached`` for Silva:
    memcached
 
 
+As a load balancer in front, you can use:
 
+- Apache `mod_proxy_balancer`_,
+
+- `Pound`_,
+
+- `Squid`_,
+
+- An hardware solution (usually expensive).
+
+
+.. _mod_proxy_balancer: http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html
+.. _Squid: http://www.squid-cache.org/
+.. _Pound: http://www.apsis.ch/pound/

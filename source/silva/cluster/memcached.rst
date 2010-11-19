@@ -16,7 +16,7 @@ You can download and install `memcached`_ using a the buildout recipe
 `hexagonit.recipe.cmmi`_. In your buildout you can add the following
 sections:
 
-.. code-block:: ini
+.. code-block:: buildout
 
    [libevent]
    recipe = hexagonit.recipe.cmmi
@@ -49,8 +49,7 @@ C library ``libmemached`` that you need to install as well.
 
 In your buildout you can add the following sections:
 
-.. code-block:: ini
-
+.. code-block:: buildout
 
   [libmemcached]
   recipe = hexagonit.recipe.cmmi
@@ -69,7 +68,7 @@ In your buildout you can add the following sections:
 After you need in your instance section to add ``pylibmc`` to the list
 of dependencies to see it included in Zope:
 
-.. code-block:: ini
+.. code-block:: buildout
 
   [instance]
   eggs +=

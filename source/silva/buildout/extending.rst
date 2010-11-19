@@ -1,105 +1,165 @@
 .. _extending-and-customising-your-installation:
 
-Extending and customising your installation
-===========================================
+Extending and customising your installation with Buildout
+=========================================================
 
-Add additional configuration information in the ``buildout.cfg``
-file.
+You can additional configuration information in the ``buildout.cfg``
+file, or create your own default configuration to use in
+``buildout.cfg``.
+
+.. contents::
 
 Buildout configuration file format
 ----------------------------------
 
 The ``buildout.cfg`` file follows a format like Windows INI files,
-using 'sections'. For example a part looks like this:
+using *sections*. For example a part looks like this:
 
-.. code-block:: ini
+.. code-block:: buildout
 
    [buildout]
-   ...
+   # options ...
 
 Each section is responsible for the installing a part of the software,
 usually in the ``parts`` directory of the buildout. For example a
-``[zope2]`` section takes care of installing Zope 2. An ``[instance]``
+``zope2`` section takes care of installing Zope 2. An ``instance``
 section takes care of creating a Zope instance. See the example taken
 from ``profiles/base.cfg``:
 
-.. code-block:: ini
+.. code-block:: buildout
+   :linenos:
 
    [buildout]
-   ...
+   # options ...
 
    [zope2]
-   ...
+   recipe = other.recipe
+   name = Zope 2
+   # options ...
 
    [instance]
-   ...
+   recipe = some.recipe
+   long_option = this is a
+      multi
+      line
+      option
+   replaced_option = this options uses ${zope2:name}.
+   # options ...
+   # other options ...
 
-   ...
+Within each sections are *options*. Options are parameters to help to
+define what gets installed and how. They can be defined on multiple
+lines (see line 11 to 14), and by so considered as a list of
+options. They can reuse values of other options, located in a
+different section (see line 15). In that case, the reference to the
+option is just replaced by its value.
 
-Within each sections are *options*. Options define what gets installed
-and how. The *recipe* option of the section define a piece of code
-that will be responsible to install the part of the software described
-in the section. Those pieces of code are called *recipes* and are
-usually packaged in standalone extensions. You can find lot of
-buildout recipes on the `PyPi`_ repository.
+The *recipe* option of the section define a piece of code that will be
+responsible to install the part of the software described in the
+section. Those pieces of code are called *recipes* and are usually
+packaged in standalone extensions. You can find lot of buildout
+recipes on the `PyPi`_ repository.
 
-.. code-block:: ini
+.. code-block:: buildout
 
    [zope2]
    recipe = plone.recipe.zope2install
-   ...
+
 
 .. note::
 
-   The ``[buildout]`` section is used as an aggregator to combine all the
+   The ``buildout`` section is used as an aggregator to combine all the
    other sections, it should never be assigned a ``recipe`` option.
 
+Extending a buildout configuration file
+---------------------------------------
+
 A configuration file can be extended by another configuration file,
-modifying its behavior. We use it to implement Buildout profiles:
-different typical default configuration. Example of profiles can be a
-configuration for production, a configuration for development with
-more development tools and debug mode activated, a configuration to
-test such or such extension.
+modifying its behavior. This is done by specifying an existing file
+using the ``extends`` option of the ``buildout`` section:
 
-The ``buildout.cfg`` file extends the profile development.cfg located
-in the ``profiles`` directory.
-
-.. code-block:: ini
+.. code-block:: buildout
 
    [buildout]
    extends = profile/development.cfg
 
-The most important  sections defined in the Silva Buildout is:
 
-``instance``
-   Your Zope 2 instance. You may want to add/customize settings
-   here. All available options are referenced `on the zope2instance
-   recipe description page
-   <http://pypi.python.org/pypi/plone.recipe.zope2instance>`_.
+If the path to include is not absolute, the relative position is
+interpreted from the directory containing the file use the option
+``extends`` (i.e. a file located in a directory called ``profiles``
+using ``extends`` with the filename ``base.cfg`` will open the file
+``profiles/base.cfg``). Remote HTTP URLs also do work as include path.
 
-To extend or modify options of a section when you extend a buildout
-configuration file, add the option to the correct section. For
-instance to change the port number of your zope instance to 8086, you
-can add this to your configuration file ``buildout.cfg``:
+This feature is used to implement Buildout profiles : different
+typical default configuration provided with Silva. Example of profiles
+can be a configuration for production, one for development with more
+development tools and debug mode activated, a configuration to test
+some generic extension.
 
-.. code-block:: ini
+Using this feature, you can create your own buildout configuration
+file that extends one of Silva. Like this, you can add or override
+options defined in the configuration you extends:
 
-  [instance]
-  http-address = 8086
+.. code-block:: buildout
+   :linenos:
 
-Some configuration options accept more than one value. In those case
-they are mentioned as one value per line. You can extend existing
-options using the ``+=`` operator instead of ``=`` to add new values,
-or ``-=`` to remove existing ones.
+   [buildout]
+   extends = profiles/base.cfg
+
+   [instance]
+   http-address = 9000
+   fast-mode = true
+
+Here we change the value of the ``http-address`` option to 9000 on
+line 5, and set the previously not set option ``fast-mode`` to true on
+line 6.
+
+If you redefine an option using multiple lines, you can use ``+=`` and
+``-=`` to add or remove lines from the base configuration:
+
+.. code-block:: buildout
+   :linenos:
+
+   [buildout]
+   extends = profiles/base.cfg
+
+   [instance]
+   products -=
+      ${buildout:directory}/products
+   eggs +=
+      silvatheme.multiflex
+
+
+On line 6 we remove the value ``${buildout:directory}/products`` from
+the list of products. On line 8 we add the egg
+``silvatheme.multiflex`` to the list already present of eggs to
+install.
 
 .. note::
 
-   To re-create your environment you just need to keep your
-   ``buildout.cfg`` file. You can do a Subversion checkout of a new
-   Buildout tree, put your ``buildout.cfg`` in that directory, run
+   To re-create your environment you just need to keep your buildout
+   configuration file. You can do a Subversion checkout of a new Silva
+   buildout tree, put your ``buildout.cfg`` in that directory, run
    ``python2.6 bootstrap.py`` and after ``./bin/buildout`` to
    re-create exactly the same environment.
 
+
+Default Silva buildout configuration files
+------------------------------------------
+
+A number of buildout configuration provided with Silva can be extended:
+
+- ``profiles/base.cfg``: base configuration for all Silva installation,
+
+- ``profiles/development.cfg``: base configuration for development. Debug mode
+  is activated, some extra debugging tools are installed.
+
+- ``profiles/simple-instance.cfg``: base configuration for production. This
+  install a simple Zope instance with Silva in production mode.
+
+Each of those configuration defines a section ``instance`` that will
+be responsible to create the Zope instance with Silva. Changing
+options in this section will affect your Zope and Silva installation.
 
 Adding new softwares to your setup
 ----------------------------------
@@ -112,14 +172,14 @@ just Subversion. This is not covered by this documentation.
 
 * Software packaged as a tarball:
 
-  To add software packaged as a tarball, add a ``[distros-extra]``
-  part to the ``buildout.cfg`` and use the `distros recipe
+  To add software packaged as a tarball, add a ``distros-extra``
+  section to the ``buildout.cfg`` and use the `distros recipe
   <http://pypi.python.org/pypi/plone.recipe.distros>`_.
 
   For example to install `PASRaduis
   <http://www.zope.org/Members/shimizukawa/PASRadius>`_:
 
-  .. code-block:: ini
+  .. code-block:: buildout
 
      [distros-extra]
      recipe = plone.recipe.distros
@@ -135,13 +195,13 @@ just Subversion. This is not covered by this documentation.
 * Software coming from a Subversion repository:
 
   Just like for a tarball-distributed package, add a new part:
-  ``[svn-extra]`` using the `subversion recipe
+  ``svn-extra`` using the `subversion recipe
   <http://pypi.python.org/pypi/infrae.subversion>`_ and refer it to
   our instance.
 
   Here we use the SilvaMailing product trunk as an example:
 
-  .. code-block:: ini
+  .. code-block:: buildout
 
      [svn-extra]
      recipe = infrae.subversion
@@ -163,9 +223,11 @@ just Subversion. This is not covered by this documentation.
 
 * Software packaged as a Python egg:
 
-  Simply reference the packages in your ``instance`` section:
+  Simply reference the packages in your ``instance`` section, and it
+  will be downloaded from the `PyPi`_ or the `Infrae package index`_ and
+  installed:
 
-  .. code-block:: ini
+  .. code-block:: buildout
 
      [instance]
      eggs +=
@@ -174,7 +236,26 @@ just Subversion. This is not covered by this documentation.
          silva.app.base
 
   The ``eggs`` directive adds it to the Zope environment, the
-  ``zcml`` lets Zope load its Zope 3 configuration.
+  ``zcml`` lets Zope load its configuration.
+
+* Software packaged as a Python egg located on your computer:
+
+  You can use the option `develop` of the `buildout` section to tell
+  buildout that your software is already on your computer. For
+  instance, if you have two extension in the ``src`` folder of your
+  buildout:
+
+  .. code-block:: buildout
+
+     [buildout]
+     develop +=
+         src/silvatheme.mycompany
+         src/silva.app.mycompany
+
+     [instance]
+     eggs +=
+         silvatheme.mycompany
+         silva.app.mycompany
 
 Others recipes can be used to install software differently. To find
 more recipes, search them on the `PyPi`_.
@@ -196,7 +277,7 @@ MaildropHost tarball using `infrae maildrophost
 <http://pypi.python.org/pypi/infrae.maildrophost>`_ recipe. We also
 get the MySQL-python and silva.pas.base eggs.
 
-.. code-block:: ini
+.. code-block:: buildout
 
   [buildout]
   extends = profiles/simple-instance.cfg
@@ -238,20 +319,19 @@ Changing your Zope instance settings
 ------------------------------------
 
 You can change a couple of settings in the Zope instance, by adding
-options to the ``[instance]`` part. Most popular settings are:
+options to the ``instance`` part. Most popular settings are:
 
 ``http-address``
-   Address/Port the instance should listen to.
+   Address or port the instance should listen to.
 
-``effective-user``
-   Which user Zope should try to become if it's started as root.
+You can have a complete listing of available options on the
+`zope2instance recipe`_ description page.
 
-``debug-mode``
-   Toggle the debug mode on or off.
-
-You can have a complete listing of available options `on the
-zope2instance recipe description page
-<http://pypi.python.org/pypi/plone.recipe.zope2instance>`_.
-
+.. warning:: If you use a WSGI server, not all server configuration
+  settings described by the `zope2instance recipe`_ will work, as those
+  settings applies to the Zope server which is not use in that kind of
+  setup.
 
 .. _PyPi: http://pypi.python.org/pypi
+.. _zope2instance recipe: http://pypi.python.org/pypi/plone.recipe.zope2instance
+.. _Infrae package index: http://infrae.com/download/simple

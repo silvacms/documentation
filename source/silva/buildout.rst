@@ -433,7 +433,7 @@ To create a cache you need to create a ``.buildout`` directory in your
 home directory, which contains a ``default.cfg`` file. The content of
 this file is:
 
-.. code-block:: ini
+.. code-block:: buildout
 
   [buildout]
   eggs-directory = /path/to/your/cache/eggs

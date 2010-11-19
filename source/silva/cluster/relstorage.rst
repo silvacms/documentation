@@ -30,7 +30,36 @@ Currently, the following SQL servers are supported:
 Installation with buildout
 --------------------------
 
-XXX
+We need to modify the ``instance`` section in buildout to use
+`RelStorage`_:
+
+.. code-block:: buildout
+   :linenos:
+
+   [instance]
+   eggs +=
+     RelStorage
+   rel-storage =
+     type mysql
+     host localhost
+     db zodb
+     user root
+     passwd admin
+     blob-dir ${buildout:directory}/var/files
+     cache-local-mb 100
+
+
+The line 5 configure the type of SQL database to use. ``postgresql``
+and ``oracle`` are valid options. Line 44 to 47 defines how to connect
+to the MySQL server. Options to connect to PostGreSQl and Oracle are
+different, refer to the documentation of `RelStorage`_ for those.
+
+Line 10 specify the directory to store Blobs files. *All* Zope servers
+connected to the SQL database should share the *same* Blobs directory.
+
+Line 11 define a in memory cache. Don't abuse of this option, install
+`memcached`_ instead.
+
 
 Using memcached to improve performances
 ---------------------------------------
@@ -45,20 +74,27 @@ client library to your instance dependencies. You can refer to
 After in your buildout configuration, you need to add the following
 configuration to the relstorage section:
 
-.. code-block:: ini
+
+.. code-block:: buildout
    :linenos:
 
    [instance]
    rel-storage =
-      [normal rel-storage options]
+      # normal rel-storage options
       cache-module-name relstorage.pylibmc_wrapper
       cache-servers localhost:11211
 
-We recommend to use a different memcache instance than the one used
-for Silva to cache `RelStorage`_ data.
+On line 4, we configure RelStorage to use `pylibmc`_, the memcached
+client library we installed. On line 5, we specify the address of the
+memcached server.
 
-XXX
+We recommend to use a different memcache instance than the one used
+for Silva to cache RelStorage data. *All* Zope server connected
+to the same SQL database should share the *same* memcached
+server.
+
 
 
 .. _RelStorage: http://pypi.python.org/pypi/RelStorage
 .. _memcached: http://www.memcached.org
+.. _pylibmc: http://pypi.python.org/pypi/pylibmc/1.1.1

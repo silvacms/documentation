@@ -26,10 +26,10 @@ Configuring rewrite rules in Apache
 
 First you need enable the following modules in Apache:
 
-- ``mod_rewrite``.
+- `mod_rewrite`_.
 
-- ``mod_proxy`` (actually ``mod_proxy_http``). You don't need to
-  authorize any proxy operation.
+- `mod_proxy`_ and `mod_proxy_http`_. You don't need to authorize any
+  proxy operation.
 
 After you can edit your Apache configuration to define a virtual host
 for your site. With ``mod_rewrite`` you will be able to effectively
@@ -58,8 +58,8 @@ Explanation:
 
 .. _zope-virtual_host_monster:
 
-Zope Virtual Host Rewrite Engine
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How the Zope Virtual Host Rewrite Engine work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In our case, Zope listens on localhost, port 8080. Apache relocates
 the received request to our Zope server on
@@ -108,12 +108,13 @@ Here is an example:
 2. You set a rewrite rule so that you can access ``inside`` via the URL
    ``http://www.mysite.com/alias``.
 
-Now in your Silva site, in ``inside`` you have a link to ``outside``. Zope
-cannot compute the URL ``http://www.mysite.com/outside``, because for Zope the
-site begins at ``inside`` represented by ``alias``
-(http://www.mysite.com/alias) and that ``outside`` is not inside
-``inside``. Probably, by acquisition Zope might be able to create the
-buggy URL: ``http://www.mysite.com/alias/outside``.
+Now in your Silva site, in ``inside`` you have a link to
+``outside``. Zope cannot compute the URL
+``http://www.mysite.com/outside``, because for Zope the site begins at
+``inside`` represented by ``alias`` (``http://www.mysite.com/alias``)
+and that ``outside`` is not inside ``inside``. Probably, by
+acquisition Zope might be able to create the buggy URL:
+``http://www.mysite.com/alias/outside``.
 
 It is buggy because:
 
@@ -148,3 +149,6 @@ to ``http://www.mysite.com/inside``.
 
 .. _Nginx: http://nginx.org/
 .. _Squid: http://www.squid-cache.org/
+.. _mod_proxy: http://httpd.apache.org/docs/2.2/mod/mod_proxy.html
+.. _mod_proxy_http: http://httpd.apache.org/docs/2.2/mod/mod_proxy_http.html
+.. _mod_rewrite: http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html

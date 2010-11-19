@@ -575,19 +575,17 @@ a.headerlink:hover {
 }
 
 div.body p, div.body dd, div.body li {
-    line-height: 130%;
+    line-height: 1.5em;
     color: #225577;
 }
 
 div.body ul li a {
   color: #20435C;
   text-decoration: none;
-  font-size: 1.1em;
 }
 
 div.body ul li ul li a {
   color: #20435C;
-  font-size: 1.1em;
   font-weight: normal;
   text-decoration: none;
 }
@@ -627,6 +625,7 @@ div.topic {
     border: 1px solid #ccc;
     padding: 0 7px 0 7px;
     margin: 10px 0 10px 0;
+    border-radius: 10px;
 }
 
 div.topic a:hover {
@@ -741,10 +740,6 @@ dd {
     color: #060;
 }
 
-dt:target,
-.highlight {
-    background-color: #fbe54e;
-}
 
 dl.glossary dt {
     font-weight: bold;
@@ -772,7 +767,12 @@ pre {
     background-color: #efc;
     color: #333;
     border: 1px solid #ac9;
+    border-radius: 10px;
     overflow: auto;
+}
+
+div.highlight {
+    background: none;
 }
 
 td.linenos pre {
