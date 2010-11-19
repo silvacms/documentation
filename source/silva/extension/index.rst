@@ -140,7 +140,7 @@ an XML file and should contain:
 
 Now, if you use buildout, you can update your ``buildout.cfg`` file:
 
-.. code-block:: ini
+.. code-block:: buildout
 
   [buildout]
   # Tell buildout that this egg exists.
@@ -159,7 +159,6 @@ And re-run ``buildout``:
 
 .. code-block:: sh
 
-  $ cd ..                            # Come back to the root directory of your buildout tree
   $ ./bin/buildout
 
 This will let you use your egg while you will develop it, otherwise
@@ -287,26 +286,28 @@ Python code to register it to Silva:
 
 .. code-block:: python
 
-  from silva.core import conf as silvaconf
+   from silva.core import conf as silvaconf
 
-  silvaconf.extensionName("SilvaBlog")
-  silvaconf.extensionTitle("Silva Blog")
+   silvaconf.extension_name("SilvaBlog")
+   silvaconf.extension_title("Silva Blog")
 
-The extensionName will be used internally, and the extensionTitle will
-displayed in ``service_extension``. If your extension depends on
-another extension, like `Silva Document` add an ``extensionDepends``
-directive to your the file:
+The ``extension_name`` will represent the name of the extension, and
+the ``extension_title`` will displayed in the Silva interfaces (like
+in ``service_extension``).
 
-.. code-block:: python
-
-  silvaconf.extensionDepends("SilvaDocument")
-
-If your extension has multiple dependencies, ``extensionDepends``
-allows you to specify a tuple of strings.
+If your extension depends on others extensions, like `Silva Document`
+you can use the ``extension_depends`` directive to declare this:
 
 .. code-block:: python
 
-  silvaconf.extensionDepends(("SilvaDocument", "Foo", "Bar"))
+   silvaconf.extension_depends("SilvaDocument")
+
+If your extension has multiple dependencies, ``extension_depends``
+allows you to specify a tuple:
+
+.. code-block:: python
+
+   silvaconf.extension_depends(("SilvaDocument", "Foo", "Bar"))
 
 Registration with ZCML
 ~~~~~~~~~~~~~~~~~~~~~~

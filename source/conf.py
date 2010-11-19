@@ -26,8 +26,7 @@ import sys, os
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
-    'sphinxcontrib.infrae',
-    'repoze.sphinx.autointerface']
+    'sphinxcontrib.infrae']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']

@@ -14,12 +14,11 @@ The security interface defines all security related methodes.
 .. autointerface:: silva.core.interfaces.ISecurity
 
 
-Base Silva Object interface
----------------------------
+Silva Object interface
+----------------------
 
-The base Silva Object let you have dublin core-related information
-(creation date, modification date, title) about an object, and to
-methodes to display it.
+The Silva Object let you have dublin core-related information
+(creation date, modification date, title) about an object.
 
 .. autointerface:: silva.core.interfaces.ISilvaObject
 

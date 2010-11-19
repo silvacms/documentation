@@ -3,12 +3,14 @@ Adding public views
 
 .. contents::
 
-Creating a view
----------------
+Creating a default view
+-----------------------
 
-To show your content to the public we'll use Grok views. For instance
-if we take our blog content type illustrated here :ref:`base` we can
-create a public view like this:
+A view class is able to display (or render) your content to the
+public. It will have to display *only* your content, the layout system
+will include the layout around the HTML produced by the view.
+
+As example, in a ``blog.py`` file you can define:
 
 .. sourcecode:: python
    :linenos:
@@ -18,48 +20,44 @@ create a public view like this:
    from five import grok
 
    class Blog(Publication):
-       ...
+       pass
 
    class BlogPublicView(silvaviews.View):
-
        grok.context(Blog)
 
        def title(self):
             return self.content.get_title()
 
 The class ``BlogPublicView`` represents your view. It inherits from
-``silva.core.conf.View`` (aliased as ``silvaviews``) *(line 8)*. The
-configuration directive ``grok.context`` tells the view which class to
-work on *(line 10)*. You can specify an interface with your content as
-well (for example *IBlog*, assuming you have created and IBlog
-interface that has been implemented in the Blog class).
+``silva.core.views.views.View`` (aliased as ``silvaviews.View``, *line 8)*.
 
-Now you can create a template that will use your view.
+The configuration directive ``grok.context`` tells the view which
+content to render *(line 10)*. You can specify either directly the
+content class or an interface implemented by this last one.
+
+You can associate a page template to your view class, that will be
+rendered, using that last one. To do this you need to:
 
 1. Create a directory called ``blog_templates``. The name of the
-   directory is prefixed with the module name where your view code is
-   located ``blog``. Append to the module name ``_templates``.
+   directory is prefixed with the module name where your view class is
+   located: ``blog``. Append to the module name ``_templates``.
 
-2. In this directory, add a file called ``silvablogpublicview.pt``,
-   this will be your template. This template will be linked to your
-   view class, since it's the same filename as your class (in lower
-   case). This file contains:
+2. In this directory, you can add a file called
+   ``silvablogpublicview.pt``, this will be your template file. It
+   will be linked to your view class, since its filename is the same
+   as your view class (in lower case). For instance, it can contains:
 
    .. sourcecode:: xml
 
       <div>My Blog <tal:replace tal:replace="view/title" /></div>
 
-   The default language used to write templates is ZPT (`Zope Page
-   Template`_) where, ``context`` is mapped to the object on which you
-   apply the view, and ``view`` to your view class.
+   This is the Zope Page Template Markup language, called ZPT for
+   short.
 
-   You can define some helpers for your template as methods on your
-   view class.
+Template Namespace
+------------------
 
-Namespace
----------
-
-In page templates, you have the following variables available:
+In page templates, you have access to the following variables:
 
 ``context``
 
@@ -99,13 +97,12 @@ Tips
     :linenos:
 
     class BlogPublicView(silvaviews.View):
-
         grok.context(Blog)
 
         def render(self):
             return u'<div> Hello %s !</div>' % self.content.get_value()
 
-  The ``content`` attribute on the class *(line 6)* refers to the
+  The ``content`` attribute on the class *(line 5)* refers to the
   object to render, like the ``content`` variable available in page
   templates.
 
@@ -138,7 +135,6 @@ Tips
   .. sourcecode:: python
 
     class RSSBlogView(BlogPublicView):
-
          grok.name('rss.xml')
 
   After you create the template ``rsssilvablogview.pt`` in the
@@ -147,10 +143,20 @@ Tips
   ``BlogPublicView``, it will automatically be a view for ``Blog``
   objects, and have all the helpers you defined before.
 
+Adding more views with the layout
+---------------------------------
+
+XXX
+
+Adding more views without the layout
+------------------------------------
+
+XXX
+
 Getting the URL of an object
 ----------------------------
 
-In python code you can do:
+From a python file, you can use the function ``absoluteURL``:
 
 .. sourcecode:: python
 
@@ -161,7 +167,7 @@ In python code you can do:
 ``self.context`` is the object you want the URL from, and
 ``self.request`` is the request for which you want to get the URL for.
 
-In a page template, you can use ``context/@@absolute_url``:
+From a page template, you can use the view ``absolute_url``:
 
 .. sourcecode:: html
 

@@ -761,6 +761,7 @@ th {
     padding-right: 5px;
 }
 
+dl.interface,
 pre {
     padding: 5px;
     background-color: #efc;
@@ -796,23 +797,17 @@ tt {
 }
 
 em.property {
-    color: #20435C;
-    font-style: normal;
-    font-size: 1.2em;
+    font-size: 1.1em;
+    color: #225577;
     font-weight: bold;
 }
 
 tt.descname,
 tt.descclassname {
-    color: #20435C;
+    color: #0e84b5;
     font-weight: bold;
-    font-size: 1.2em;
 }
 
-tt.xref, a tt {
-    background-color: transparent;
-    font-weight: bold;
-}
 
 blockquote {
     margin-right: 0px;
