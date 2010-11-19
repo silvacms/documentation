@@ -9,8 +9,10 @@ soon as you have more than one Zope instance to host the same Silva site.
 You need of course first to install memcached, either on your system,
 or with the help of buildout.
 
-Installation memcached using buildout
--------------------------------------
+.. contents::
+
+Install memcached using buildout
+--------------------------------
 
 You can download and install `memcached`_ using a the buildout recipe
 `hexagonit.recipe.cmmi`_. In your buildout you can add the following
@@ -40,8 +42,8 @@ and stop the `memcached`_ server using the template located in the
 
 XXX
 
-Installation a memcached client library
----------------------------------------
+Install a memcached client library using buildout
+-------------------------------------------------
 
 We recommend to use the client library ``pylibmc``. Other are
 supported, but are slower and have bugs. This client library uses the
@@ -75,8 +77,8 @@ of dependencies to see it included in Zope:
      ${pylibmc:eggs}
 
 
-Configuring Silva to use your memcached server
-----------------------------------------------
+Configure Silva to use your memcached server
+--------------------------------------------
 
 XXX
 
