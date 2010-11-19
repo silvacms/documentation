@@ -19,6 +19,7 @@ You can download and install `memcached`_ using a the buildout recipe
 sections:
 
 .. code-block:: buildout
+   :linenos:
 
    [libevent]
    recipe = hexagonit.recipe.cmmi
@@ -45,13 +46,14 @@ XXX
 Install a memcached client library using buildout
 -------------------------------------------------
 
-We recommend to use the client library ``pylibmc``. Other are
+We recommend to use the client library `pylibmc`_. Other are
 supported, but are slower and have bugs. This client library uses the
 C library ``libmemached`` that you need to install as well.
 
 In your buildout you can add the following sections:
 
 .. code-block:: buildout
+  :linenos:
 
   [libmemcached]
   recipe = hexagonit.recipe.cmmi
@@ -80,8 +82,32 @@ of dependencies to see it included in Zope:
 Configure Silva to use your memcached server
 --------------------------------------------
 
-XXX
+The last thing you need to do is to configure Silva to use your
+`memcached`_ server. To do this, you add in your buildout
+configuration:
+
+.. code-block:: buildout
+   :linenos:
+
+   [instance]
+   memcache-address = localhost:11211
+   zope-conf-additional =
+     <product-config silva.core.cache>
+       default.type ext:memcached
+       default.lock_dir ${buildout:directory}/var/cache/lock/default
+       default.url ${instance:memcache-address}
+       auth.type ext:memcached
+       auth.lock_dir ${buildout:directory}/var/cache/lock/auth
+       auth.url ${instance:memcache-address}
+     </product-config>
+
+
+On line 2 we define for convenience an option ``memcache-address``. We
+will reuse it after in the product configuration for
+`silva.core.cache`_ line 4 to 11.
 
 
 .. _memcached: http://www.memcached.org
 .. _hexagonit.recipe.cmmi: http://pypi.python.org/pypi/hexagonit.recipe.cmmi
+.. _pylibmc: http://pypi.python.org/pypi/pylibmc/1.1.1
+.. _silva.core.cache: http://infrae.com/download/silva_all/silva.core.cache
