@@ -9,9 +9,11 @@ the server itself.
 
 Exemples of assets are files and images.
 
+.. contents::
 
-Asset interface
----------------
+
+Asset Objects
+-------------
 
 .. autointerface:: silva.core.interfaces.INonPublishable
 
@@ -19,13 +21,23 @@ Asset interface
 .. autointerface:: silva.core.interfaces.IAsset
 
 
-File interface
---------------
+File Objects
+------------
+
+Silva File provides the following API:
 
 .. autointerface:: silva.core.interfaces.IFile
 
+This API is shared by all existing file implementation in Silva:
 
-Image interface
----------------
+.. autointerface:: silva.core.interfaces.IZODBFile
+
+.. autointerface:: silva.core.interfaces.IBlobFile
+
+.. autointerface:: silva.core.interfaces.IFileSystemFile
+
+
+Image Objects
+-------------
 
 .. autointerface:: silva.core.interfaces.IImage

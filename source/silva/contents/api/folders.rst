@@ -6,17 +6,24 @@ Folderish Objects
 All container objects have to implement at least the container
 interface.
 
-Container interface
--------------------
+.. contents::
+
+Container Objects
+-----------------
 
 .. autointerface:: silva.core.interfaces.IContainer
 
-Folder interface
-----------------
+Folder Objects
+--------------
 
 .. autointerface:: silva.core.interfaces.IFolder
 
-Publication interface
----------------------
+Publication Objects
+-------------------
 
 .. autointerface:: silva.core.interfaces.IPublication
+
+Root Objects
+------------
+
+.. autointerface:: silva.core.interfaces.IRoot
