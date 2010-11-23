@@ -65,18 +65,46 @@ recipes on the `PyPi`_ repository.
    [zope2]
    recipe = plone.recipe.zope2install
 
-
 .. note::
 
-   The ``buildout`` section is used as an aggregator to combine all the
-   other sections, it should never be assigned a ``recipe`` option.
+   The ``buildout`` section is used to set Buildout settings. It
+   doesn't use a ``recipe`` option, and it doesn't install any
+   software part.
+
+Buildout will install the software parts of the sections mentioned in
+the ``parts`` option of the section ``buildout``, in the order they
+are mentioned:
+
+.. code-block:: buildout
+   :linenos:
+
+   [buildout]
+   parts =
+      zope2
+      products
+      instance
+
+   [zope2]
+   # options
+
+   [products]
+   # options
+
+   [instance]
+   # options
+
+Line 2 to 5 will trigger the installation of the ``zope2`` section, then
+of the ``products`` section and at last of the ``instance`` section.
+
 
 Extending a buildout configuration file
 ---------------------------------------
 
 A configuration file can be extended by another configuration file,
-modifying its behavior. This is done by specifying an existing file
-using the ``extends`` option of the ``buildout`` section:
+modifying its behavior. You can see it as well as including the
+configuration file you are extending. This is done by specifying an
+existing file using the ``extends`` option of the ``buildout``
+section:
 
 .. code-block:: buildout
 

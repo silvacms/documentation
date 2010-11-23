@@ -15,138 +15,136 @@ physical servers than the server.
 
 You can define a ZEO-setup with the help of Buildout.
 
+.. contents::
+
+.. _zeo-server-installation:
+
 ZEO server installation
 -----------------------
 
-XXX
-
 In the ``profiles`` sub-directory of your Buildout tree is defined a
 ``zeo-instance.cfg`` profile. It defines a new part, called
-``[zeoserver]``. This will be the ZEO server. It's created with the
-help of the `zodbrecipes recipe
-<http://pypi.python.org/pypi/zc.zodbrecipes>`_. After running buildout
+``zeoserver``. This will be the ZEO server. It is created with the
+help of the `zodbrecipes recipe`_. After running Buildout
 this will create a script called ``bin/zeoserver`` which controls your
-ZEO server. By default it listen to port 8100.
+ZEO server. By default it listen to port 8100, and store its database
+into the directory ``var/filestorage``, like for a regular Zope
+instance.
+
+For instance, if you wish to setup a ZEO server on a different port,
+8888 you can extend the profile like this:
+
+.. code-block:: buildout
+
+   [buildout]
+   extends = profiles/zeo-instance.cfg
+   parts =
+      zeoserver
+
+   [zeoserver]
+   zeo-address = 8888
+
+.. warning::
+
+   You cannot use at the same time a Zope instance and a ZEO server
+   using the same database if the Zope instance is not a client of the
+   ZEO server.
+
+.. note::
+
+   For questions about Buildout configuration, please refer to
+   :ref:`extending-and-customising-your-installation`.
 
 
 ZEO client installation
 -----------------------
 
-XXX
+Like for the :ref:zeo-server-installation, you can extend the
+``zeo-instance.cfg`` Buildout profile, and reuse the ``instance``
+section defined there.
 
-Your ZEO setup can be distributed on more than one computer, so in
-fact we are going to build a profile for your setup which can then be
-extended locally for each computer to select only what you want to
-run.
+The ``zeo-address`` of the ``instance`` will determine to which ZEO
+server the Zope instance must connect. If your setup is distributed
+across different computers, you will have to specify the address of
+the ZEO server using this option, the format being ``hostname:port``.
 
-After extending the ZEO configuration like explained, you add all the
-desired options in your ``buildout.cfg`` file, like for a normal Zope
-instance (add a reference to new Products, Python extensions and so
-on). Rename it to the name you want, it will be your base profile to
-re-use:
+.. warning::
 
-.. code-block:: sh
+   If you use Blobs, the blob directory *must* be accessible from all
+   the Zope instance at the same path. On Unix, you can share it to
+   the computer running the Zope instances using NFS for instance.
 
-   $ mv buildout.cfg mycorp.cfg
-   $ python2.6 bootstrap.py --buildout-profile mycorp.cfg
+
+For instance, if you wish create a Zope instance that connect to the
+ZEO server running on a computer called ``webdb`` in the network, on
+port 8888 you can extend the ``zeo-instance.cfg`` Buildout profile
+like this:
+
+.. code-block:: buildout
+
+   [buildout]
+   extends = profiles/zeo-instance.cfg
+   parts =
+     instance
+
+   [instance]
+   zeo-address = webdb:8888
+
+
+Multiple ZEO clients in one Buildout
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can within the same buildout install multiple Zope instances
+connected to the same ZEO server. To do so, you can use a special
+syntax of buildout:
+
+.. code-block:: buildout
+   :linenos:
+
+   [buildout]
+   extends = profiles/zeo-instance.cfg
+   parts =
+     client1
+     client2
+     client3
+     client4
+
+   [instance]
+   zeo-address = webdb:8888
+
+   [client1]
+   <= instance
+   http-address = 8081
+
+   [client2]
+   <= instance
+   http-address = 8082
+
+   [client3]
+   <= instance
+   http-address = 8083
+
+   [client4]
+   <= instance
+   http-address = 8084
+
+On line 3 to 7, you indicate you want to install the
+``client1``. ``client2``, ``client3`` and ``client4`` sections. On
+line 10, you specify the address of the ZEO server.
+
+Line 13 is a special syntax of Buildout that says that the current
+section (``client1``) reuse all the options of the ``instance``
+section. This let you define from line 12 to 26 all the client
+sections mentioned by the ``part`` option of the ``buildout`` section,
+changing each time the ``http-address`` option.
+
+Of course you can use this technique to add as many clients you like
+in a Buildout configuration file.
 
 .. note::
 
-   You need to keep this new profile file with your ``buildout.cfg``
-   to be able to re-create your environment. It is a good idea to back
-   up the file somewhere 'off server' and if possible to keep it under
-   version control, to be able to go back to earlier set ups.
+   For questions about Buildout configuration, please refer to
+   :ref:`extending-and-customising-your-installation`.
 
-Now, it's going to be slightly more complicated. We want to have more
-than one instance with the same configuration, so more than one part
-with the same options, but we don't want to copy them more than once,
-in order to prevent synchronization errors between them. Our
-``instance`` section will become our configuration, and we are going
-to use the `macro recipe
-<http://pypi.python.org/pypi/zc.recipe.macro>`_ to create several Zope
-instances with the same configuration.
 
-We are going to say that ``instance`` is just used as a configuration
-entry in our profile, and define 6 Zope instances, with special
-settings for each of them.
-
-.. code-block:: ini
-
-   [instance]
-   recipe = zc.recipe.macro:empty
-   http-address = $${:port}
-
-   [client1-conf]
-   port = 8080
-
-   [client2-conf]
-   port = 8082
-
-   [client3-conf]
-   port = 8084
-
-   [client4-conf]
-   port = 8086
-
-   [client5-conf]
-   port = 8088
-
-   [client6-conf]
-   port = 8090
-
-Now we make a part for each Zope instance, always in the same profile
-file:
-
-.. code-block:: ini
-
-   [zeoclients]
-   recipe = zc.recipe.macro
-   macro = instance
-   result-recipe = plone.recipe.zope2instance
-   targets =
-      client1:client1-conf
-      client2:client2-conf
-      client3:client3-conf
-      client4:client4-conf
-      client5:client5-conf
-      client6:client6-conf
-
-We can now use the profile. Use the ``buildout.cfg`` file to control
-the creation of the Zeo server and clients. The following example
-creates a Zeo server with 2 clients.
-
-.. code-block:: ini
-
-   [buildout]
-   extends = mycorp.cfg
-   parts =
-       zope2
-       silva-all
-       zeoserver
-       zeoclients
-       client1
-       client2
-
-Again, here we state that we want to install Zope 2, Silva, a ZEO
-server, create ZEO clients and setup two Zope instances ``client1``,
-and ``client2``.
-
-On another computer, using another ``buildout.cfg`` we can run four
-ZEO clients connected on the ZEO server located on the computer called
-``zeoserver.mycorp`` in the DNS:
-
-.. code-block:: ini
-
-   [buildout]
-   extends = mycorp.cfg
-   parts =
-        zope2
-        silva-all
-        zeoclients
-        client1
-        client2
-        client3
-        client4
-
-   [instance]
-   zeo-address = zeoserver.mycorp:8100
+.. _zodbrecipes recipe: http://pypi.python.org/pypi/zc.zodbrecipes

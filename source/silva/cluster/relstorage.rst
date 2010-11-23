@@ -19,12 +19,16 @@ Currently, the following SQL servers are supported:
 - Oracle.
 
 
-.. warning:: Those data are not exploitable by other system than Zope,
-   and should not be touched by anything else than Zope.
+.. warning::
+
+   Those data are not exploitable by other system than Zope, and
+   should not be touched by anything else than Zope.
 
 
-.. warning:: If you wish to use ZEO *and* RelStorage, the ZEO server
-   should be the only client connected the SQL server.
+.. warning::
+
+   If you wish to use ZEO *and* RelStorage, the ZEO server should be
+   the only client connected the SQL server.
 
 
 Installation with buildout

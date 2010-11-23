@@ -50,31 +50,53 @@ Now lets go on to create another module call 'blog.py'. In the
 Available Silva bases classes
 -----------------------------
 
-All Silva base classes are located in Silva, ``Products.Silva``.
+All Silva base classes usable to create Silva content are located in
+Silva, ``Products.Silva``:
+
+``Publishabled.NonPublishable``
+  Base for Silva content that should not directly appear to the
+  public. You need to use this base class with either
+  ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` depending if
+  you wish to a non-folderish or folderish type of content. You can
+  refer to the
+  :py:interface:`silva.core.interfaces.content.INonPublishable`
+  interface for more information.
 
 ``Asset.Asset``
-  ``File`` and ``Image`` are subclasses of the ``Assets`` class.
-
-``Folder.Folder``
-  Base for Silva folderish item. A Publication
-  (``Publication.Publication``) is a subclass of ``Folder``, and is
-  recommended for your main application container.
+  ``File`` and ``Image`` are subclasses of the ``Assets`` class. Refer
+  to the :py:interface:`silva.core.interfaces.content.IAsset`
+  interface for more information.
 
 ``Content.Content``
-  Base for non Silva folderish content. Note that to directly use this
-  base class, you still to inherit as well of
-  ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder``.
+  Base for non Silva folderish content that should be publicly
+  viewable. Note that to directly use this base class, you still to
+  inherit as well of ``OFS.SimpleItem.SimpleItem`` or
+  ``OFS.Folder.Folder`` depending if you wish a non-folderish or
+  folderish type of content. You can refer to the
+  :py:interface:`silva.core.interfaces.content.IContent` interface for
+  more information.
 
 ``VersionedContent.VersionedContent``
-  Base for versioned content. For each versioned content, you have to
-  create a version content inheriting of ``Version.Version``.
+  Base for publicly viewable Silva versioned content. For each
+  versioned content, you have to create a version content inheriting
+  of ``Version.Version``, that should be used to effectively store the
+  content data. You can refer to the interfaces
+  :py:interface:`silva.core.interfaces.content.IVersionedContent` and
+  :py:interface:`silva.core.interfaces.content.IVersion` for more
+  information.
+
+
+``Folder.Folder``
+  Base for publicly viewable Silva folderish item. A Publication
+  (``Publication.Publication``) is a subclass of ``Folder``, and is
+  recommended for your main application container. Refer to the
+  :py:interface:`silva.core.interfaces.content.IFolder` and
+  :py:interface:`silva.core.interfaces.content.IPublication`
+  interfaces for more information.
 
 
 Registering your content
 ------------------------
-
-To register our content type we'll use the ``silva.core.conf``
-package.
 
 ``silva.core.conf`` is an extension which lets you configure and
 register Silva contents and extensions using either Grok or ZCML.
@@ -145,8 +167,8 @@ Use ZCML to register your content
 Regular content
 ~~~~~~~~~~~~~~~
 
-First in the products directory you must create a 'configure.zcml'
-file this file will register your new content type with Zope.
+In the products directory you must create a ``configure.zcml`` file
+this file will register your new content type with Zope.
 
 .. code-block:: xml
 
