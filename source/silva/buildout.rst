@@ -7,23 +7,31 @@ Installing Silva with Buildout
    *Buildout*
      Buildout is a tool used to automate software
      deployment. Installing and upgrading Silva using buildout can
-     greatly reduce the chances of errors.
+     greatly reduce the chances of errors. You can find lot of
+     information on the official site http://www.buildout.org.
+
 
 Requirements
 ------------
 
-Please refer to the section regarding your system.
+You need to install all the requirements corresponding to your
+operating system:
 
 .. toctree::
    :maxdepth: 2
 
    buildout/requirements
 
+.. warning::
+
+   Those are requirements. If they are not installed, you won't be to
+   install Silva.
+
 Installing quick drive Silva with Paster and ZopeSkel
 -----------------------------------------------------
 
 If you want to take Silva for a quick test drive you can install Silva
-`Paster`_ and `ZopeSkel`_.
+:term:`Paster` and :term:`ZopeSkel`.
 
 To set up a production or development environment we recommend you do
 a SVN check out of the Buildout located in the Infrae `SVN
@@ -34,6 +42,10 @@ your Silva instance more easily at a later date.
 
 .. glossary::
 
+  *Setuptools*
+     Setuptools is a Python extension to help packaging and
+     distributing Python packages.
+
   *Paster*
      `Paster`_ is a multi-purpose tool. One use is to create a project
      skeleton out of a configurable template. Paster helps you to get
@@ -41,7 +53,7 @@ your Silva instance more easily at a later date.
      project.
 
   *ZopeSkel*
-     `ZopeSkel`_ is a set of templates for `Paster`_ which are Python,
+     `ZopeSkel`_ is a set of templates for :term:`Paster` which are Python,
      Zope, Plone and Silva related.
 
 .. _installing-paster:
@@ -50,8 +62,9 @@ Installing Paster and ZopeSkel
 ``````````````````````````````
 
 First you need to install Setuptools which is needed to install
-`ZopeSkel`_. On UNIX systems, this can be installed through your OS
-package manager, for example on Ubuntu / Debian systems, run:
+:term:`ZopeSkel`. On Unix systems, this can be installed through your
+operating system package manager, for example on Ubuntu / Debian
+systems, you can do:
 
 .. code-block:: sh
 
@@ -63,8 +76,8 @@ Under Mac OS X, you can use MacPorts:
 
   $ sudo port install py-setuptools
 
-Otherwise you can install Setuptools manually by downloading the
-``ez_setup`` script from
+Otherwise you can install :term:`Setuptools` manually by downloading
+the ``ez_setup`` script from
 http://peak.telecommunity.com/dist/ez_setup.py and then running it
 with the python version you want to use. For example under Unix:
 
@@ -74,18 +87,19 @@ with the python version you want to use. For example under Unix:
    $ wget http://peak.telecommunity.com/dist/ez_setup.py
    $ sudo python2.6 ez_setup.py
 
-Now that we have the setuptools installed, we can use
-``easy_install``. Just run the following command:
+Now that :term:`Setuptools` is installed, you can use the newly
+installed script ``easy_install`` to install :term:`ZopeSkel`:
 
 .. code-block:: sh
 
    $ sudo easy_install-2.6 -U ZopeSkel
 
-If you are using Mac OS X, we recommend to use the option ``-s``. By
-default ``easy_install`` puts all scripts in the same directory as
-Python, which is hidden inside a framework on Mac OS X. By specifying
-``-s /opt/local/bin`` installed scripts are going to be installed in
-the same directory than Mac Ports softwares:
+If you are using Mac OS X, you can use the option ``-s`` to specify a
+installation directory for scripts installed with a package. By
+default ``easy_install`` install all packages scripts in the same
+directory as Python, which is hidden inside a framework directory on
+Mac OS X. By specifying ``-s /opt/local/bin`` scripts are going to be
+installed in the same directory than Mac Ports softwares:
 
 .. code-block:: sh
 
@@ -93,36 +107,36 @@ the same directory than Mac Ports softwares:
 
 .. note::
 
-    This install can take a while. ``easy_install`` will download some
-    python packages from external software repositories like
-    `sourceforge.net <http://sourceforge.net/>`_. It could be that
-    one of these servers is temporarily unavailable. In that case you
-    will get a connection timeout error, but you can try it again,
+    This installation step can take a while. ``easy_install`` will
+    download some Python packages from external software repositories
+    like `sourceforge.net <http://sourceforge.net/>`_. It could be
+    that one of these servers is temporarily unavailable. In that case
+    you will get a connection timeout error, but you can try it again,
     until the command succeeds.
 
 Creating a Silva Buildout tree
 ``````````````````````````````
 
-The ZopeSkel package installs a script called ``paster`` on your
-system. This can be used to install several CMS products including
-Silva. First we'll test if the Silva templates are present by running:
+The :term:`ZopeSkel` package installs a script called ``paster`` on
+your system. This can be used to install several CMS products
+including Silva. You can list all available products like this:
 
 .. code-block:: sh
 
    $ paster create --list-templates
 
-Paster will now print a list of templates, this list should contain an
-entry called ``silva_buildout``.
+Paster will print a list of templates, which should contain an entry
+called ``silva_buildout``.
 
-Now we will create a Silva environment with paster.  First go to a
-directory where you want to install Silva, then run the paster script
-with the following arguments:
+You can now create a Silva environment with the ``paster`` script.
+First go to a directory where you want to install Silva, then run the
+``paster`` script with the following arguments:
 
 .. code-block:: sh
 
    $ paster create -t silva_buildout
 
-Paster will now ask you the following questions:
+Paster will ask you the following questions:
 
 ``Enter project name``
 
@@ -161,7 +175,7 @@ Paster will now ask you the following questions:
 
   Again, really only useful in a development context.
 
-After replying to these questions, paster will generate a Silva
+After replying to those questions, ``paster`` will generate a Silva
 environment in the ``project name`` directory.
 
 Running the installation
@@ -176,16 +190,16 @@ Buildout script to install Silva:
    $ python2.6 bootstrap.py
    $ ./bin/buildout
 
-After this the command ``bin/instance`` will be available. It will let
+As result, the command ``bin/paster`` will be created. It will let
 you start and use Silva: :ref:`starting-creating-silva-site`.
 
 Installing Silva from SVN for development or production
 -------------------------------------------------------
 
-For production deployment or development we recommend you install
+For production deployment or development we recommend you to install
 Silva by getting it from the Infrae subversion.
 
-You need to install subversion if it's not already installed on your
+You need to install Subversion if it's not already installed on your
 system.
 
 There are different buildout SVN trees for different Silva

@@ -13,3 +13,4 @@ from the interfaces definitions.
    versions
    assets
    folders
+   events

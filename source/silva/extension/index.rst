@@ -3,72 +3,41 @@
 Creating an extension
 =====================
 
-There are two different ways to create a Silva extension:
+You can create a Silva extension as a regular Python package, that can
+be distributed as an :term:`Egg`.
 
-1. As a standard Zope product
+.. glossary::
 
-2. As an egg
+   *Egg*
+     Format in which a Python package can distributed to other
+     users. This include all the code of the Python package, and some
+     metadata information, like version, description, installation
+     requirements ...
 
-After creating an extension there are two ways to register it, and its
-components with Silva:
+Within the extension, will need to write some registration code, to
+register your extension and its components in Silva. You can use two
+different systems for this:
 
-1. ZCML (Zope Configuration Markup Language),
+.. glossary::
 
-2. Grok. Grok is a kind of scanner which looks at your code and
-   figures out what should be registered, and then registers it. If
-   you want to use Grok, we recommend to use only Grok, and not mix
-   Grok with ZCML declaration.
+   *ZCML*
+     ZCML, or Zope Configuration Markup Language, is an XML based
+     configuration language. Each Zope extension contains usually a
+     ``configure.zcml`` file, which hold its configuration using this
+     language.
 
-.. note::
+   *Grok*
+     Grok is a configuration scanner which looks at your code detect
+     components and register them if needed. If you want to use Grok,
+     we recommend to use only Grok, and not mix Grok with :term:`ZCML`
+     based registration.
 
-   ZCML is a XML file format, in a file called ``configure.zcml`` by
-   default. This file uses namespaced tags to be able to handle
-   different registration actions used by Silva extensions. In this
-   documentation, we will be making a ``configure.zcml`` file for the
-   blog product shown here :ref:`base`.
 
-Creating a new extension as a Zope Product
+Creating a new extension as an :term:`Egg`
 ------------------------------------------
 
-In order to make a Silva extension it needs to be a Zope product. A
-Zope product consists of the following:
-
-- The product is a directory (this can include sub-directories and
-  files).
-
-- The product must have a file called ``__init__.py`` in the root
-  directory. This file can be empty, but we advise to at least place
-  the Python comment ``#`` at the top of the page, because some
-  systems do not lik empty files.
-
-- The product directory is installed in a place that Zope looks for
-  products, such as the Zope instance's ``Products`` directory. If you
-  are using buildout this would be the ``products`` directory in your
-  buildout instance of Zope.
-
-- The name of your product directory must be the same as your product.
-
-Basically, a Zope product is a Python package. You can Call the
-product like a python module with ``from`` or ``import``. For example:
-``Products.product_directory``. This is also true if your product is
-not located in a directory called ``Products``. This of course does
-not follow the requirements just listed above for a Zope product. The
-truth of the matter is, where Zope looks for products can have any
-name, as long as it is registered to contain products. For the sake of
-Silva and Silva's built using buildout, all products should be located
-either in the ``Products`` directory of the Zope instance, or the
-``products`` directory of a buildout Zope instance.
-
-Creating a new extension As an `Egg`
-------------------------------------
-
-`Eggs` are a way to provide and ship Python extensions in a automated
-way. The best way to use `eggs`, is to use them with the help of
-`buildout <https://svn.infrae.com/buildout/silva/INSTALL.txt>`_.
-
-You can create the structure of your `egg` with the help of the
-`paster` command, and `ZopeSkel
-<http://pypi.python.org/pypi/ZopeSkel>`_ (see :ref:`installing-paster`
+You can create the structure of your :ref:`Egg` with the help of the
+``paster`` command, and :term:`ZopeSkel` (see :ref:`installing-paster`
 to install those tools):
 
 .. code-block:: sh
@@ -76,25 +45,16 @@ to install those tools):
   $ cd src
   $ paster create -t nested_namespace
   Selected and implied templates:
-    ZopeSkel#nested_namespace  A project with two nested namespaces.
+    ZopeSkel#nested_namespace  A project with with a nested namespace (2 dots in name)
 
   Enter project name: silva.app.blog
   Variables:
     egg:      silva.app.blog
     package:  silvaappblog
     project:  silva.app.blog
-  Enter namespace_package (Namespace package (like plone)) ['plone']: silva
-  Enter namespace_package2 (Nested namespace package (like app)) ['app']: app
-  Enter package (The package contained namespace package (like example)) ['example']: blog
-  Enter version (Version) ['1.0']:
-  Enter description (One-line description of the package) ['']: My Extension
-  Enter long_description (Multi-line description (in reST)) ['']: Long description about my extension.
-  Enter author (Author name) ['']: Sylvain Viollon
-  Enter author_email (Author email) ['']: info@infrae.com
-  Enter keywords (Space-separated keywords/tags) ['']: silva app extension
-  Enter url (URL of homepage) ['']:
-  Enter license_name (License name) ['GPL']: ZPL 2.1
-  Enter zip_safe (True/False: if the package can be distributed as a .zip file) [False]:
+  Expert Mode? (What question mode would you like? (easy/expert/all)?) ['easy']:
+  Version (Version number for project) ['1.0']:
+  Description (One-line description of the project) ['']:
   Creating template nested_namespace
   Creating directory ./silva.app.blog
     Recursing into +namespace_package+
@@ -110,24 +70,18 @@ to install those tools):
     Recursing into docs
       Creating ./silva.app.blog/docs/
       Copying HISTORY.txt_tmpl to ./silva.app.blog/docs/HISTORY.txt
-    Copying setup.cfg to ./silva.app.blog/setup.cfg
     Copying setup.py_tmpl to ./silva.app.blog/setup.py
-  Running /usr/local/bin/python2.4 setup.py egg_info
+  Running /usr/local/bin/python2.6 setup.py egg_info
 
-.. warning::
-
-   *Project name* should be take the same value as
-   *namespace_package.namespace_package2.package*, otherwise you might
-   encounter errors.
 
 Here the Silva Blog product will reside in the newly created directory
 ``silva.app.blog/silva/app/blog``, which is a Python package,
 accessible in your Python code via ``silva.app.blog``. This will also
-be the name of your product in Zope (there is no ``Products``).
+be the name of your product in Zope.
 
-You need to create a file called ``configure.zcml`` in this directory,
-to declare the extension as a Zope product. The ``configure.zcml`` is
-an XML file and should contain:
+You need to create a :term:`ZCML` file called ``configure.zcml`` in
+this directory, to declare this package as a Zope product. It should
+contain:
 
 .. code-block:: xml
 
@@ -136,56 +90,53 @@ an XML file and should contain:
       xmlns:five="http://namespaces.zope.org/five">
 
     <five:registerPackage package="." />
+
   </configure>
 
-Now, if you use buildout, you can update your ``buildout.cfg`` file:
+In you buildout configuration ``buildout.cfg`` or your own profile
+file, you can add your newly created package to the Silva instance:
 
 .. code-block:: buildout
+   :linenos:
 
-  [buildout]
-  # Tell buildout that this egg exists.
-  develop +=
-     src/silva.app.blog
+   [buildout]
+   develop +=
+      src/silva.app.blog
 
-  [instance]
-  # Add your egg to your Zope instance.
-  eggs +=
-     silva.app.blog
-  # Load the ZCML for this egg.
-  zcml +=
-     silva.app.blog
+   [instance]
+   eggs +=
+      silva.app.blog
+   zcml +=
+      silva.app.blog
 
-And re-run ``buildout``:
+
+On line 3, you tell :term:`Buildout` that there is a package to use in
+the given directory. On line 7, you add the package you created as a
+dependency of Silva so it will be included in the Silva instance. On
+line 9 you load its configuration.
+
+You need ``buildout`` to apply the changes:
 
 .. code-block:: sh
 
   $ ./bin/buildout
 
-This will let you use your egg while you will develop it, otherwise
-you would have to install it each time you want to test your code
-using the command ``easy_install``.
-
 .. note::
 
-  - Here use the `nested_namespace` template to create our egg. If you
-    plan to create something called `silva.extension` (there is no
-    `app`), you can use the `basic_namespace` template of `paster`.
+   Here you used the ``nested_namespace`` template to create our
+   :term:`Egg`. If you plan to create something called
+   ``silva.extension`` (there is no ``app``, just one namespace
+   ``silva``), you can use the ``basic_namespace`` template of
+   ``paster``.
 
-  - Since you are using a specific Zope python package only present in
-    a Zope environment, you may not use your egg outside Zope. This
-    also means you cannot create and egg called `silva.mytech`, and
-    `silva.mytech.extension`, if the first extension uses a specific
-    Zope package, otherwise operations on the this egg (such as
-    building and uploading) may fail due to missing
-    imports. Operations like building and uploading are not handled by
-    Zope or in the Zope environment.
 
-At this moment you should be able to restart your Zope instance and
-see your new extension. In the ZMI, go to the `Control_Panel`, then
-`Products Management` and the extension should be in the listing.
+If you now start your Zope instance, it should contain the extension
+you created. You can verify it in the ZMI, in `Control_Panel`,
+`Products Management` the extension should be in the listing.
 
-Installation into the Silva Root
---------------------------------
+
+Installing your extension in Silva
+----------------------------------
 
 To do this you need an installer which is going to install your
 extension in the selected Silva root. An installer is a class that
@@ -254,17 +205,17 @@ The first argument to the install object is the name of our extension
   extension, which defines ``install``, ``uninstall`` and
   ``is_installed`` as functions.
 
-Registration with Grok
-~~~~~~~~~~~~~~~~~~~~~~
+Registration with :term:`Grok`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _enable-grok-for-your-extension:
 
-Enable Grok for your extension
+Enable Grok in your extension
 ``````````````````````````````
 
-If you want to use Grok, you need to enable it in your extension.
-This can be done with the help of a ZCML directive in the
-``configure.zcml`` file located in your extension directory:
+If you want to use :term:`Grok`, you need to enable it in your extension.
+This can be done with the help of a :term:`ZCML` directive in your
+``configure.zcml`` file of your Python package:
 
 .. code-block:: xml
 
@@ -276,7 +227,7 @@ This can be done with the help of a ZCML directive in the
 
   </configure>
 
-That's the last piece of required ZCML.
+If you use Grok, is the last required piece of :term:`ZCML`.
 
 Registration
 ````````````
@@ -309,11 +260,12 @@ allows you to specify a tuple:
 
    silvaconf.extension_depends(("SilvaDocument", "Foo", "Bar"))
 
-Registration with ZCML
-~~~~~~~~~~~~~~~~~~~~~~
+Registration with :term:`ZCML`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In your extension directory, add the following ZCML directives to the
-``configure.zcml``, or create the file if it doesn't exist yet:
+In your extension directory, add the following :term:`ZCML` directives
+to the ``configure.zcml`` file, or create the file if it doesn't exist
+yet:
 
 .. code-block:: xml
 
@@ -336,7 +288,7 @@ Reset point
 ~~~~~~~~~~~
 
 At this point, you should be able to restart your Zope instance, and
-view, install, and uninstall your extension using `service_extensions`
+view, install, and uninstall your extension using ``service_extensions``
 in the Silva root.
 
 Upgrade step
@@ -344,8 +296,8 @@ Upgrade step
 
 An upgrade step can be used to upgrade content between two versions of
 Silva. The upgrade method of the upgrader will be called against each
-content of the given content type. Here, a sample to upgrade `Silva
-Document` and `Silva Link` objects to Silva `2.1`:
+content of the given content type. Here, a sample to upgrade ``Silva
+Document`` and ``Silva Link`` contents to Silva ``2.1``:
 
 .. sourcecode:: python
 

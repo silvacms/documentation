@@ -23,7 +23,9 @@ Developer documentation
 -----------------------
 
 This section describes extending Silva's functionality. This is
-intended to developer who have at least knowledge on Python.
+intended to developer who have at least knowledge on Python, and
+if possible on Zope.
+
 
 .. toctree::
    :maxdepth: 2

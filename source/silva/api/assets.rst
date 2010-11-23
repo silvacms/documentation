@@ -1,7 +1,7 @@
 .. _assets:
 
-Asset Objects
-=============
+Non Publishable and Asset Objects
+=================================
 
 Assets are non-publishable objects used only to hold data. That data
 can be uploaded, transformed, and download, but usually not edited on
@@ -12,11 +12,14 @@ Exemples of assets are files and images.
 .. contents::
 
 
-Asset Objects
--------------
+Non Publishable Objects
+-----------------------
 
 .. autointerface:: silva.core.interfaces.INonPublishable
 
+
+Asset Objects
+-------------
 
 .. autointerface:: silva.core.interfaces.IAsset
 
