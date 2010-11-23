@@ -52,13 +52,6 @@ Available Silva bases classes
 
 All Silva base classes are located in Silva, ``Products.Silva``.
 
-.. toctree::
-   :maxdepth: 1
-
-   api/assets
-   api/folders
-   api/versions
-
 ``Asset.Asset``
   ``File`` and ``Image`` are subclasses of the ``Assets`` class.
 

@@ -142,7 +142,9 @@ Check out a fresh buildout for your development, and bootstrap it:
 Edit your ``buildout.cfg`` to add what you need:
 
 - Check out your Zope products in ``products``, **or** define a new
-  section::
+  section:
+
+  .. code-block:: buildout
 
     [dev-products]
     recipe = plone.recipe.distros
@@ -152,26 +154,30 @@ Edit your ``buildout.cfg`` to add what you need:
     [instance]
     products += ${dev-products:location}
 
-- For python based extensions, check them out in ``src``, and::
+- For python based extensions, check them out in ``src``, and:
 
-    [buildout]
-    develop +=
-       src/my.extension
+  .. code-block:: buildout
 
-    [instance]
-    eggs +=
-       my.extension
-    zcml +=
-       my.extension
+     [buildout]
+     develop +=
+        src/my.extension
 
-  **Or** use infrae.subversion::
+     [instance]
+     eggs +=
+        my.extension
+     zcml +=
+        my.extension
 
-    [devel]
-    recipe = infrae.subversion
-    as_eggs = True
-    location = devel
-    urls =
-       svn urls
+  **Or** use infrae.subversion:
+
+  .. code-block:: buildout
+
+     [devel]
+     recipe = infrae.subversion
+     as_eggs = True
+     location = devel
+     urls =
+        svn urls
 
 If you plan to do a quick fix to a product or extension, just checkout
 the product or extension into ``products`` or ``svn`` directory. If
@@ -453,48 +459,50 @@ Installing
 ----------
 
 Offcourse you need mercurial installed, you also need to install
-an extension called `hgsubversion`. You can get this from bitbucked
+an extension called `hgsubversion`. You can get this from bitbucked:
 
 .. code-block:: sh
 
   > hg clone https://jsproc@bitbucket.org/durin42/hgsubversion
 
-You need to be sure that hgsubversion is in your python path, so just 
-install it using the setup.py
+You need to be sure that hgsubversion is in your python path, so just
+install it using the ``setup.py``:
 
 .. code-block:: sh
 
-  > cd hgsubversion
-  > sudo python setup.py install
+  $ cd hgsubversion
+  $ sudo python setup.py install
 
 hgsubversion depends on a python package called subvertpy, to build this you
 need the development headers for svn and apache (apr), so on ubuntu run:
 
 .. code-block:: sh
 
-  > sudo apt-get install libsvn-dev libapr1-dev
+  $ sudo apt-get install libsvn-dev libapr1-dev
 
-Next, we need to enable the extension, so open the `~/.hgrc` file and add the
-following:
+Next, we need to enable the extension, so open the ``~/.hgrc`` file and
+add the following:
 
 .. code-block:: ini
 
   [extensions]
   hgsubversion =
 
-Run the following command and make sure that hgsubversion is in the 
+Run the following command and make sure that hgsubversion is in the
 enabled extensions list
 
 .. code-block:: sh
 
-  > hg help extensions
+  $ hg help extensions
 
 Configuring
 -----------
 
-When the conversion starts, hgsubversion will convert the `tags` directory from svn to tags in Mercurial. However, in many projects this directory is called `tag` instead of `tags`.
-You can tell hgsubversion how the tag folder is called, by putting the
-following lines in the ~/.hgrc config file 
+When the conversion starts, hgsubversion will convert the ``tags``
+directory from svn to tags in Mercurial. However, in many projects
+this directory is called ``tag`` instead of ``tags``.  You can tell
+hgsubversion how the tag folder is called, by putting the following
+lines in the ~/.hgrc config file
 
 .. code-block:: ini
 
@@ -508,7 +516,7 @@ To start the conversion run the following command
 
 .. code-block:: sh
 
-  > hg clone svn:https://svn.infrae.com/PACKAGE
+  $ hg clone svn:https://svn.infrae.com/PACKAGE
 
 This will create a Mercurial repository based on the Subversion revisions.
 When the conversion is finished go in to the new mercurial repository and
@@ -516,7 +524,7 @@ run the following command
 
 .. code-block:: sh
 
-  > hg tags
+  $ hg tags
 
 You should now see a list of all the tags from the project.
 
@@ -525,16 +533,19 @@ command:
 
 .. code-block:: sh
 
-  > hg svn genignore
+  $ hg svn genignore
 
-This should produce a file called `.hgignore` with all the ignores in it.
+This should produce a file called ``.hgignore`` with all the ignores in it.
 
-Converting the branches is a bit problematic, you need to copy the `branch` directory in subversion to `branches`. You can also specify a `branchmap` in the config file to rename the branches to something more sensible. See the 
-hgsubversion help for more options
+Converting the branches is a bit problematic, you need to copy the
+``branch`` directory in subversion to ``branches``. You can also
+specify a ``branchmap`` in the configuration file to rename the
+branches to something more sensible. See the hgsubversion help for
+more options
 
 .. code-block:: sh
 
-  > hg help hgsubversion
+  $ hg help hgsubversion
 
 Creating the centralized Mercurial repository
 ---------------------------------------------
@@ -547,9 +558,9 @@ with the `create_mercurial.sh` script
 
 .. code-block:: sh
 
-  > ssh titan.infrae.com
-  > cd /home/infrae/mercurial/repositories
-  > sudo -u www-data ./create_mercurial.sh <repo name>
+  $ ssh titan.infrae.com
+  $ cd /home/infrae/mercurial/repositories
+  $ sudo -u www-data ./create_mercurial.sh <repo name>
 
 Look at the output of the script, it will show you a couple of lines that
 can be copied to the trac configuration, so your project becomes visible at
@@ -567,7 +578,7 @@ Last step is to do the actual push in the local repository:
 
 .. code-block:: sh
 
-  > hg push
+  $ hg push
 
 
 

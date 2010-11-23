@@ -1,73 +1,78 @@
 Tests in Silva
 ==============
 
-To run the Silva tests you can use the ``test`` subcommand of
-``instance`` (or the script used to control your Zope instance). So,
-assuming the current working directory is your Zope
-instance/buildout::
 
-  ./bin/instance test -s Products.Silva
+How to run the Silva test suite
+-------------------------------
 
-Use the ``-m`` option to run a single test module.::
+If you used the Buildout profile ``development.cfg`` or
+``silva-development.cfg`` you should have tests scripts installed in
+the ``bin`` folder of your Buildout directory.
 
-  ./bin/instance test -m Products.Silva.test.test_silvaviews
+To run all the Silva tests you can use the ``test-all`` script:
 
-To see the other options for the test subcommand use the ``--help``
-option.
+.. code-block:: sh
 
-  ./bin/instance test --help
+  $ ./bin/test-all
 
-.. note::
+You can use the ``test`` script to run only one extension test, using
+the option ``-s``:
 
-  If you are not using buildout, ``instance`` is called ``zopectl``.
+.. code-block:: sh
 
-.. note::
+  $ ./bin/test -s Products.Silva
 
-  Using the buildout, will generate a script in bin call ``test``.
-  The ``tests`` script will run all the tests for Silva without
-  passing any options.
+Or if you which to run tests only in a file, you can use the same
+``test`` script, with the ``-m`` option:
+
+.. code-block:: sh
+
+  $ ./bin/test -m Products.Silva.tests.test_file
+
+
+To see the other options, you can use the ``--help`` option of the
+``test`` script:
+
+.. code-block:: sh
+
+  $ ./bin/test --help
+
 
 Writing a new test
 ------------------
 
 All test modules should have the prefix ``test_`` in the module name,
-and be located in a ``tests`` directory of the package that you want
-to test. Hereby a example of a test:
+and be located in a ``tests`` sub-package of the package that you want
+to test.
+
+Hereby a example of a functional test that need a Silva site:
 
 .. code-block:: python
+  :linenos:
 
-  from Products.Silva.tests import SilvaTestCase
+  from Products.Silva.testing import FunctionalLayer
+  import unittest
 
-  class TestSilvaTestCase(SilvaTestCase.SilvaTestCase):
+  class RootSilvaTestCase(unittest.TestCase):
+      layer = FunctionalLayer
 
-      def afterSetUp(self):
-          pass
+      def setUp(self):
+          self.root = self.layer.get_application()
+          self.layer.login('author')
 
-      def test_hasRoot(self):
-          assert hasattr(self.app, 'root')
+      def test_has_root(self):
+          assert hasattr(self.root, 'root')
 
   def test_suite():
-      import unittest
       suite = unittest.TestSuite()
       suite.addTest(unittest.makeSuite(TestSilvaTestCase))
       return suite
 
-Within the test module you need to create a test class as shown above
-in ``TestSilvaTestCase``. To inherit important testing functionality
-it is always a good idea to pass the ``SilvaTestCase.SilvaTestCase``
-class. Inside the test class are methods. These methods are your
-actual tests. Each test method must begin with the prefix ``test_``.
 
-You can get more information about writing tests in Python on the
-`Python website <http://docs.python.org/lib/module-unittest.html>`_.
+The default Python ``unittest`` framework is used for testing. You can
+get more information about writing tests in Python on the `Python
+website <http://docs.python.org/lib/module-unittest.html>`_.
 
-Useful information:
-
-  * Zope root: ``self.app``,
-
-  * Silva root: ``self.root``,
-
-  * Role of default user: ``ChiefEditor``.
 
 Documentation on test API
 -------------------------
@@ -75,6 +80,4 @@ Documentation on test API
 .. toctree::
    :maxdepth: 2
 
-   silvatestcase
    helpers
-   silvabrowser

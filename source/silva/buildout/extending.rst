@@ -114,8 +114,9 @@ Here we change the value of the ``http-address`` option to 9000 on
 line 5, and set the previously not set option ``fast-mode`` to true on
 line 6.
 
-If you redefine an option using multiple lines, you can use ``+=`` and
-``-=`` to add or remove lines from the base configuration:
+If you redefine a list of options (option on multiple lines), you can
+use ``+=`` and ``-=`` to add or remove options (lines) specified in
+the base configuration:
 
 .. code-block:: buildout
    :linenos:
@@ -190,7 +191,7 @@ just Subversion. This is not covered by this documentation.
      products +=
          ${distros-extra:location}
 
-  You can use more than one URL of course.
+  You can use a list of URLs on multiple lines to install multiples products.
 
 * Software coming from a Subversion repository:
 
@@ -219,7 +220,8 @@ just Subversion. This is not covered by this documentation.
 
      We recommend not to use a *trunk* version of any software SVN
      repository if you want to setup a production instance. Best
-     practice is to use a *tag* version of the software.
+     practice is to use a *tag* version of the software, to be sure to
+     have a repeatable Buildout configuration
 
 * Software packaged as a Python egg:
 
@@ -235,15 +237,16 @@ just Subversion. This is not covered by this documentation.
      zcml +=
          silva.app.base
 
-  The ``eggs`` directive adds it to the Zope environment, the
-  ``zcml`` lets Zope load its configuration.
+  The ``eggs`` option adds the packages to the Zope environment. If
+  those packages needs to have ZCML configuration files to be loaded,
+  the ``zcml`` option let Zope load theirs configuration.
 
 * Software packaged as a Python egg located on your computer:
 
   You can use the option `develop` of the `buildout` section to tell
   buildout that your software is already on your computer. For
-  instance, if you have two extension in the ``src`` folder of your
-  buildout:
+  instance, if you have two extension in the ``src`` directory of your
+  Buildout:
 
   .. code-block:: buildout
 
@@ -256,6 +259,12 @@ just Subversion. This is not covered by this documentation.
      eggs +=
          silvatheme.mycompany
          silva.app.mycompany
+     zcml +=
+         silvatheme.mycompany
+         silva.app.mycompany
+
+  This will look for an extension in those directories, and use them
+  if they are required.
 
 Others recipes can be used to install software differently. To find
 more recipes, search them on the `PyPi`_.

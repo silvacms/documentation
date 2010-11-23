@@ -31,6 +31,7 @@ intended to developer who have at least knowledge on Python.
    extension/index
    layout/index
    contents/index
+   api/index
    code_source/index
    services
    test/index

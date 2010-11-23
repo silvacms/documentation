@@ -11,4 +11,3 @@ Creating content types
    forms
    xml
    permission
-   api/index
