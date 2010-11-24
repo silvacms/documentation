@@ -20,7 +20,7 @@ using *sections*. For example a part looks like this:
    [buildout]
    # options ...
 
-Each section is responsible for the installing a part of the software,
+Each section is responsible for installing a part of the software,
 usually in the ``parts`` directory of the buildout. For example a
 ``zope2`` section takes care of installing Zope 2. An ``instance``
 section takes care of creating a Zope instance. See the example taken
@@ -55,9 +55,9 @@ different section (see line 15). In that case, the reference to the
 option is just replaced by its value.
 
 The *recipe* option of the section define a piece of code that will be
-responsible to install the part of the software described in the
+responsible for installing the part of the software described in the
 section. Those pieces of code are called *recipes* and are usually
-packaged in standalone extensions. You can find lot of buildout
+packaged in standalone extensions. You can find lots of buildout
 recipes on the `PyPi`_ repository.
 
 .. code-block:: buildout
@@ -94,7 +94,7 @@ are mentioned:
    # options
 
 Line 2 to 5 will trigger the installation of the ``zope2`` section, then
-of the ``products`` section and at last of the ``instance`` section.
+the ``products`` section and lastly the ``instance`` section.
 
 
 Extending a buildout configuration file
@@ -109,23 +109,23 @@ section:
 .. code-block:: buildout
 
    [buildout]
-   extends = profile/development.cfg
+   extends = profiles/development.cfg
 
 
-If the path to include is not absolute, the relative position is
-interpreted from the directory containing the file use the option
+If the path is not absolute, the relative position is
+interpreted from the directory containing the file that use the option
 ``extends`` (i.e. a file located in a directory called ``profiles``
 using ``extends`` with the filename ``base.cfg`` will open the file
-``profiles/base.cfg``). Remote HTTP URLs also do work as include path.
+``profiles/base.cfg``). Remote HTTP URLs are also valid include path.
 
-This feature is used to implement Buildout profiles : different
-typical default configuration provided with Silva. Example of profiles
+This feature is used to implement Buildout profiles : several
+typical configurations provided with Silva. An example the use of profiles
 can be a configuration for production, one for development with more
 development tools and debug mode activated, a configuration to test
 some generic extension.
 
 Using this feature, you can create your own buildout configuration
-file that extends one of Silva. Like this, you can add or override
+file that extends one of Silva's. This way, you can add or override
 options defined in the configuration you extends:
 
 .. code-block:: buildout
@@ -187,14 +187,14 @@ A number of buildout configuration provided with Silva can be extended:
   install a simple Zope instance with Silva in production mode.
 
 Each of those configuration defines a section ``instance`` that will
-be responsible to create the Zope instance with Silva. Changing
+be responsible for creating a Zope instance with Silva. Modifying
 options in this section will affect your Zope and Silva installation.
 
 Adding new softwares to your setup
 ----------------------------------
 
 You can add packaged software to your setup which can come from either
-a tarball on a website, an Subversion server, or a Python egg.
+a tarball or a website, a Subversion server, or a Python egg.
 
 You can also install software from other Version Control Systems, not
 just Subversion. This is not covered by this documentation.
@@ -300,7 +300,7 @@ more recipes, search them on the `PyPi`_.
 Example
 ```````
 
-Here, is a full example of a buidout configuration with new
+Here is a full example of a buidout configuration with new
 software. Not handled by the buildout file we put the `ZMysqlDA
 <http://www.zope.org/Members/adustman/Products/ZMySQLDA>`_ adapter
 into the ``products`` folder of the Buildout tree.
@@ -365,9 +365,10 @@ You can have a complete listing of available options on the
 `zope2instance recipe`_ description page.
 
 .. warning:: If you use a WSGI server, not all server configuration
-  settings described by the `zope2instance recipe`_ will work, as those
-  settings applies to the Zope server which is not use in that kind of
-  setup.
+  settings defined by the `zope2instance recipe`_ will work, as those
+  settings apply to the Zope server which is not use in that kind of
+  setup. However, any setting related to zodb configuration for example
+  stays valid.
 
 .. _PyPi: http://pypi.python.org/pypi
 .. _zope2instance recipe: http://pypi.python.org/pypi/plone.recipe.zope2instance
