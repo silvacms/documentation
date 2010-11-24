@@ -1,19 +1,20 @@
 Silva events
 ============
 
-When action in Silva are done Zope events are triggered. You can
-listen to those, and execute the code you wish them actions are done
+When action in Silva are done, Zope events are triggered. You can
+listen to those, and execute the code you wish when actions are done
 in Silva.
 
 .. glossary::
 
    *Zope event*
-     An event is basically a :term:`Zope interface`. You can *listen*
-     to them, and get *notified* when they are *triggered*. Like
-     interfaces, events can inherit from each others. In that case, if
-     you listen to an event, and an another event, who inherit from
-     the one you listening to, is triggered, you will be notified as
-     well.
+     An event is an another concept of the :term:`Zope Component
+     Architecture`. It is basically a :term:`Zope interface`
+     identifying a real world event. You can *listen* to them, and get
+     *notified* when they are *triggered*. Like interfaces, events can
+     inherit from each others. In that case, if you listen to an
+     event, and an another event, who inherit from the one you are
+     listening to, is triggered, you will be notified as well.
 
 .. contents::
 

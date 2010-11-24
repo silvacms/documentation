@@ -33,9 +33,9 @@ if possible on Zope.
    extension/index
    layout/index
    contents/index
+   services
    api/index
    code_source/index
-   services
    test/index
    development_guidelines
 

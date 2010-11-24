@@ -32,4 +32,3 @@ you can create and edit in Silva.
 
 .. autointerface:: silva.core.interfaces.ISilvaObject
 
-

@@ -1,5 +1,5 @@
-Adding public views
-===================
+Rendering your content to the public
+====================================
 
 .. contents::
 
@@ -12,7 +12,7 @@ will include the layout around the HTML produced by the view.
 
 As example, in a ``blog.py`` file you can define:
 
-.. sourcecode:: python
+.. code-block:: python
    :linenos:
 
    from Products.Silva.Publication import Publication
@@ -54,28 +54,31 @@ rendered, using that last one. To do this you need to:
    This is the Zope Page Template Markup language, called ZPT for
    short.
 
+
 Template Namespace
 ------------------
 
 In page templates, you have access to the following variables:
 
 ``context``
-
-   Refers to the object request in the URL, for example in the
-   :ref:`base` code this would be a blog Article.
+   Content object on which the rendering is done. This is the same as
+   the ``context`` attribute on the view.
 
 ``content``
-
-   Refers to the object on which the view is actually registered,
-   which may not be the same as context. For example in :ref:`base`
-   code a blog ArticleVersion.
+   Content or version that should be rendered. This is different than
+   ``context``, in that in case of a versioned content, it will be the
+   published version (or editable version if you are previewing it),
+   and not the versioned content itself. To collect information to
+   display, you should always use this ``content`` instead of
+   ``context``.
 
 ``view``
+   Refers to your view class to which the template is associated. You
+   can add method helper on your class, and use them in your
+   template. For instance, if you defined a method ``fetch_articles``
+   on your view, you can in your template use it:
 
-   Refers to your view class that you defined above. You can add
-   method helper on your class, and use them in your templates:
-
-   .. sourcecode:: xml
+   .. code-block:: xml
 
       <tal:repeat tal:repeat="article view/fetch_articles">
         <a href="#"
@@ -84,8 +87,16 @@ In page templates, you have access to the following variables:
       </tal:repeat>
 
 ``template``
+   Refers to your template (this can be used if you define TAL macros
+   in your template, to reuse them in that same template).
 
-   Refers to your template.
+.. warning::
+
+   TAL macros are difficult to maintain and by so should be avoided to
+   share template code between two views. In a good design, a
+   :term:`Content Provider` or a :term:`Viewlet` can accomplish the
+   same thing more neatly.
+
 
 Tips
 ~~~~
@@ -158,20 +169,58 @@ Getting the URL of an object
 
 From a python file, you can use the function ``absoluteURL``:
 
-.. sourcecode:: python
+.. code-block:: python
 
    from zope.traversing.browser import absoluteURL
 
-   object_url = absoluteURL(self.context, self.request)
+   absoluteURL(self.context, self.request)
+
 
 ``self.context`` is the object you want the URL from, and
 ``self.request`` is the request for which you want to get the URL for.
 
+In a view class, you can use the ``url`` method, that return the URL
+for the given object, or the current one if none is given:
+
+.. code-block:: python
+
+   class MyView(silvaviews.View):
+
+       def update(self):
+           self.my_url = self.url()
+           self.publication_url = self.url(self.context.get_publication())
+
+
 From a page template, you can use the view ``absolute_url``:
 
-.. sourcecode:: html
+.. code-block:: html
 
    <a href="#"
       tal:attributes="href context/@@absolute_url">My link</a>
+
+
+.. warning::
+
+   The Zope 2 method ``absolute_url`` on a content object is
+   deprecated and should not be used anymore.
+
+
+Getting the root object of the current site
+-------------------------------------------
+
+From a python file, you can use the
+:py:interface:`silva.core.views.interfaces.IVirtualSite` adapter:
+
+.. code-block:: python
+
+   from silva.core.views.interfaces import IVirtualSite
+
+   class MyView(silvaviews.View):
+
+       def update(self):
+           site_info = IVirtualSite(self.request)
+           self.root = site.get_root()
+           self.root_url = site.get_root_url()
+
 
 .. _Zope Page Template: http://docs.zope.org/zope2/zope2book/ZPT.html

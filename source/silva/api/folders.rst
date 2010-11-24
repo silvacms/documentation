@@ -11,19 +11,34 @@ interface.
 Container Objects
 -----------------
 
-.. autointerface:: silva.core.interfaces.IContainer
+.. autointerface:: silva.core.interfaces.content.IContainer
 
 Folder Objects
 --------------
 
-.. autointerface:: silva.core.interfaces.IFolder
+.. autointerface:: silva.core.interfaces.content.IFolder
 
 Publication Objects
 -------------------
 
-.. autointerface:: silva.core.interfaces.IPublication
+.. autointerface:: silva.core.interfaces.content.IPublication
 
 Root Objects
 ------------
 
-.. autointerface:: silva.core.interfaces.IRoot
+.. autointerface:: silva.core.interfaces.content.IRoot
+
+
+Site information
+~~~~~~~~~~~~~~~~
+
+.. module:: silva.core.interfaces.content
+
+You often wish to retrieve the root content of your current site in a
+layout. We don't recommend to use ``get_root`` from
+:py:interface:`IRoot`. You should more use the following :term:`Zope
+adapter`:
+
+.. autointerface:: silva.core.views.interfaces.IVirtualSite
+
+.. versionadded:: 2.2

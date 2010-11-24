@@ -55,7 +55,7 @@ Group objects can be retrieve using the ``service_groups``:
 Accessing and editing authorizations settings
 ---------------------------------------------
 
-On any Silva Object, you can use the following adapter in order to
+On any Silva Object, you can use the following adapters in order to
 retrieve authorizations settings:
 
 .. autointerface:: silva.core.interfaces.auth.IAuthorizationManager

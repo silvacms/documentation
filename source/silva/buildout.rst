@@ -61,10 +61,10 @@ your Silva instance more easily at a later date.
 Installing Paster and ZopeSkel
 ``````````````````````````````
 
-First you need to install Setuptools which is needed to install
-:term:`ZopeSkel`. On Unix systems, this can be installed through your
-operating system package manager, for example on Ubuntu / Debian
-systems, you can do:
+First you need to install :term:`Setuptools` which is needed to
+install :term:`ZopeSkel`. On Unix systems, this can be installed
+through your operating system package manager, for example on Ubuntu /
+Debian systems, you can do:
 
 .. code-block:: sh
 

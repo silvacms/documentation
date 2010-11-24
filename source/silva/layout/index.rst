@@ -70,7 +70,7 @@ You use a few more elements to build your theme:
 
 .. glossary::
 
-   *content provider*
+   *Content Provider*
       .. image:: contentproviders.png
          :alt: Content providers
          :align: right
@@ -91,11 +91,11 @@ You use a few more elements to build your theme:
       is an another content provider of the same name, will render a
       search box to search people in the subscription type.
 
-   *viewlet manager*
+   *Viewlet Manager*
       A viewlet manager is basicly a content provider which can
       contain viewlets.
 
-   *viewlet*
+   *Viewlet*
       .. image:: viewlets.png
          :alt: Viewlets
          :align: right
