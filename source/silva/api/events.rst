@@ -17,10 +17,33 @@ in Silva.
 
 .. contents::
 
+
+Listening to events
+-------------------
+
+With, :term:`Grok`, you can *listen* for those events and execute some
+Python code. For instance, if you wish do something when a content is
+added to a folder:
+
+.. code-block:: python
+
+   from five import grok
+   from silva.core.interfaces import IContainer
+   from zope.container.interfaces import IContainerModifiedEvent
+
+   @grok.subscribe(IContainer, IContainerModifiedEvent)
+   def container_modified(container, event):
+       # Add your custom action here.
+       pass
+
+
 Zope events
 -----------
 
-All of the content-related Zope events are used:
+All of the content-related Zope events are used.
+
+Creation and content modification events
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoevent:: zope.lifecycleevent.interfaces.IObjectCreatedEvent
    :nodocstring:
@@ -40,12 +63,33 @@ All of the content-related Zope events are used:
    Warning: it is not yet pasted somewhere in Zope, it only in memory,
    not in the database, so you don't have the acquisition.
 
-.. autoevent:: zope.container.interfaces.IObjectMovedEvent
+
+Containers events
+~~~~~~~~~~~~~~~~~
+
+.. autoevent:: zope.lifecycleevent.interfaces.IObjectMovedEvent
    :nodocstring:
 
    A content have been moved from a container to an another.
 
-.. autoevent:: zope.container.interfaces.IObjectAddedEvent
+.. warning::
+
+   When a container is moved, you will received a moved event for the
+   container and all content contained within it, recursively. If you
+   wish to be sure that the event you receive is really about a
+   document which moved, you can do the following test:
+
+   .. code-block:: python
+
+      from Products.SilvaDocument.interfaces import IDocument
+
+      @grok.subscribe(IDocument, IObjectAddedEvent)
+      def document_added(document, event):
+          if document == event.object:
+              # Really document do something
+              pass
+
+.. autoevent:: zope.lifecycleevent.interfaces.IObjectAddedEvent
    :nodocstring:
 
    A content have been added in a container, either because it have
@@ -57,7 +101,23 @@ All of the content-related Zope events are used:
 
    - ``newName`` is the identifier of the content within its new container.
 
-.. autoevent:: zope.container.interfaces.IObjectRemovedEvent
+.. warning::
+
+   When a content is moved, you will receive an added event as
+   well. If you want only to match event for newly added content, and
+   not moved, you can verify that ``oldParent`` is None:
+
+   .. code-block:: python
+
+      from Products.SilvaDocument.interfaces import IDocument
+
+      @grok.subscribe(IDocument, IObjectAddedEvent)
+      def document_added(document, event):
+          if event.oldParent is None:
+              # This event was really trigger by adding a content, not moving it.
+              pass
+
+.. autoevent:: zope.lifecycleevent.interfaces.IObjectRemovedEvent
    :nodocstring:
 
    A content have been removed from a container.
@@ -70,49 +130,30 @@ All of the content-related Zope events are used:
    - ``oldName`` is the identifier of the content in the container it
      have been removed.
 
-.. autoevent:: zope.container.interfaces.IContainerModifiedEvent
-   :nodocstring:
-
-   A content have been either added or removed from a container. This
-   event is triggered on the container, not on the content like for
-   :py:event:`zope.container.interfaces.IObjectAddedEvent` and
-   :py:event:`zope.container.interfaces.IObjectRemoved`.
-
-
-Listening to events
-~~~~~~~~~~~~~~~~~~~
-
-With, :term:`Grok`, you can *listen* for those events and execute some
-Python code. For instance, if you wish do something when a content is
-added to a folder:
-
-.. code-block:: python
-
-   from five import grok
-   from silva.core.interfaces import IContainer
-   from zope.container.interfaces import IContainerModifiedEvent
-
-   @grok.subscribe(IContainer, IContainerModifiedEvent)
-   def container_modified(container, event):
-       # Do some updated on container
-       pass
-
 .. warning::
 
-   When a container is moved, you will received a moved event for the
-   container and all content contained within it, recursively. If you wish
-   to be sure that the event you receive is really about the container
-   which moved, you can do the following test:
+   When a content is moved, you will receive an removed event as
+   well. If you want only to match event for definitively removed
+   content, and not moved, you can verify that ``newParent`` is None:
 
    .. code-block:: python
 
       from Products.SilvaDocument.interfaces import IDocument
 
       @grok.subscribe(IDocument, IObjectAddedEvent)
-      def document_added(document, event):
-          if document == event.object:
-              # Really document do something
+      def document_removed(document, event):
+          if event.newParent is None:
+              # This event was really trigger by deleting a content, not moving it.
               pass
+
+
+.. autoevent:: zope.container.interfaces.IContainerModifiedEvent
+   :nodocstring:
+
+   A content have been either added or removed from a container. This
+   event is triggered on the container, not on the content like for
+   :py:event:`zope.lifecycleevent.interfaces.IObjectAddedEvent` and
+   :py:event:`zope.lifecycleevent.interfaces.IObjectRemovedEvent`.
 
 
 Silva events
