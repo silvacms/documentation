@@ -64,21 +64,20 @@ Like for the :ref:zeo-server-installation, you can extend the
 section defined there.
 
 The ``zeo-address`` of the ``instance`` will determine to which ZEO
-server the Zope instance must connect. If your setup is distributed
+server the Zope instance connects to. If your setup is distributed
 across different computers, you will have to specify the address of
 the ZEO server using this option, the format being ``hostname:port``.
 
 .. warning::
 
-   If you use Blobs, the blob directory *must* be accessible from all
+   If you use Blobs, the blob directory **must** be accessible from all
    the Zope instance at the same path. On Unix, you can share it to
    the computer running the Zope instances using NFS for instance.
 
 
-For instance, if you wish create a Zope instance that connect to the
+For instance, if you want create a Zope instance that connect to the
 ZEO server running on a computer called ``webdb`` in the network, on
-port 8888 you can extend the ``zeo-instance.cfg`` Buildout profile
-like this:
+port 8888 you can extend the ``zeo-instance.cfg`` Buildout profile:
 
 .. code-block:: buildout
 
