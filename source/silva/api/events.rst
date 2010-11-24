@@ -2,25 +2,85 @@ Silva events
 ============
 
 When action in Silva are done Zope events are triggered. You can
-listen to them, and execute some code when they are triggered.
+listen to those, and execute the code you wish them actions are done
+in Silva.
+
+.. glossary::
+
+   *Zope event*
+     An event is basically a :term:`Zope interface`. You can *listen*
+     to them, and get *notified* when they are *triggered*. Like
+     interfaces, events can inherit from each others. In that case, if
+     you listen to an event, and an another event, who inherit from
+     the one you listening to, is triggered, you will be notified as
+     well.
+
+.. contents::
 
 Zope events
 -----------
 
-All of the basic Zope events are used:
+All of the content-related Zope events are used:
 
-- :py:interface:`zope.lifecycleevent.interfaces.IObjectCreatedEvent`,
+.. autoevent:: zope.lifecycleevent.interfaces.IObjectCreatedEvent
+   :nodocstring:
 
-- :py:interface:`zope.lifecycleevent.interfaces.IObjectModifiedEvent`,
+   A content have been created.
 
-- :py:interface:`zope.lifecycleevent.interfaces.IObjectCopiedEvent`,
+.. autoevent:: zope.lifecycleevent.interfaces.IObjectModifiedEvent
+   :nodocstring:
 
-- :py:interface:`zope.container.interfaces.IObjectAddedEvent`,
+   A content have been modified.
 
-- :py:interface:`zope.container.interfaces.IObjectRemovedEvent`,
+.. autoevent:: zope.lifecycleevent.interfaces.IObjectCopiedEvent
+   :nodocstring:
 
-- :py:interface:`zope.container.interfaces.IContainerModifiedEvent`,
+   A content have been copied.
 
+   Warning: it is not yet pasted somewhere in Zope, it only in memory,
+   not in the database, so you don't have the acquisition.
+
+.. autoevent:: zope.container.interfaces.IObjectMovedEvent
+   :nodocstring:
+
+   A content have been moved from a container to an another.
+
+.. autoevent:: zope.container.interfaces.IObjectAddedEvent
+   :nodocstring:
+
+   A content have been added in a container, either because it have
+   been created or copied, either because it have been moved.
+
+   On the event object:
+
+   - ``newParent`` is the new container of the content,
+
+   - ``newName`` is the identifier of the content within its new container.
+
+.. autoevent:: zope.container.interfaces.IObjectRemovedEvent
+   :nodocstring:
+
+   A content have been removed from a container.
+
+   On the event object:
+
+   - ``oldParent`` is the container from which the content have been
+     removed.
+
+   - ``oldName`` is the identifier of the content in the container it
+     have been removed.
+
+.. autoevent:: zope.container.interfaces.IContainerModifiedEvent
+   :nodocstring:
+
+   A content have been either added or removed from a container. This
+   event is triggered on the container, not on the content like for
+   :py:event:`zope.container.interfaces.IObjectAddedEvent` and
+   :py:event:`zope.container.interfaces.IObjectRemoved`.
+
+
+Listening to events
+~~~~~~~~~~~~~~~~~~~
 
 With, :term:`Grok`, you can *listen* for those events and execute some
 Python code. For instance, if you wish do something when a content is
@@ -40,13 +100,97 @@ added to a folder:
 .. warning::
 
    When a container is moved, you will received a moved event for the
-   container and all content contained within it, recursively. If you
-   wish to be sure that the event you receive is really about the
-   container which moved, you can do the following test:
+   container and all content contained within it, recursively. If you wish
+   to be sure that the event you receive is really about the container
+   which moved, you can do the following test:
 
    .. code-block:: python
 
-      if container == event.object:
-          # Really container
-      else:
-          # A parent of the container moved.
+      from Products.SilvaDocument.interfaces import IDocument
+
+      @grok.subscribe(IDocument, IObjectAddedEvent)
+      def document_added(document, event):
+          if document == event.object:
+              # Really document do something
+              pass
+
+
+Silva events
+------------
+
+To the default Zope events, some more events are triggered by Silva.
+
+
+Publication related events
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All those events are defined and used by the versioning and
+publication system of Silva:
+
+
+.. autoevent:: silva.core.interfaces.events.IPublishingEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IApprovalEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentApprovedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentUnApprovedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IRequestApprovalEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IRequestApprovalFailedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentRequestApprovalEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentApprovalRequestCanceledEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentApprovalRequestRefusedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentPublishedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentClosedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.IContentExpiredEvent
+
+
+Content import and export events
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoevent:: silva.core.interfaces.events.IContentImportedExported
+
+
+.. autoevent:: silva.core.interfaces.events.IContentImported
+
+
+.. autoevent:: silva.core.interfaces.events.IContentExported
+
+
+Security settings modification events
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoevent:: silva.core.interfaces.events.ISecurityEvent
+
+
+.. autoevent:: silva.core.interfaces.events.ISecurityRestrictionModifiedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.ISecurityRoleChangedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.ISecurityRoleAddedEvent
+
+
+.. autoevent:: silva.core.interfaces.events.ISecurityRoleRemovedEvent
+
+

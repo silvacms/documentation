@@ -578,6 +578,7 @@ th {
 /* Code examples */
 
 dl.interface,
+dl.event,
 pre {
     padding: 5px;
     background-color: #efc;
