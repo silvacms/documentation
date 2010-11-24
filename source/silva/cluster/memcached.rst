@@ -47,8 +47,8 @@ Install a memcached client library using buildout
 -------------------------------------------------
 
 We recommend to use the client library `pylibmc`_. Other are
-supported, but are slower and have bugs. This client library uses the
-C library ``libmemached`` that you need to install as well.
+supported, but are slower and have known bugs. This client library uses the
+C library ``libmemcached`` that you need to install as well.
 
 In your buildout you can add the following sections:
 

@@ -3,16 +3,16 @@
 Silva High-Availability Installation
 ====================================
 
-For site with lot of traffic, having only one Zope server to handle
+For sites with lots of traffic, only one Zope server to handle
 all the incoming traffic might not be enough. You have to setup a cluster in
-this case. The cluster will be composed of a database server, multiple
+that case. The cluster will be composed of a database server, multiple
 Zope servers using this database and of a load balancer that
 distributes the incoming traffic among the different Zope servers.
 
-Each of those components can be installed on different servers.
+Each of those components can be installed on separate servers.
 
-Depending of your requirements, you can set the database server
-differently:
+Depending on your requirements, you can configure the database server
+in two different ways:
 
 .. toctree::
    :maxdepth: 2
