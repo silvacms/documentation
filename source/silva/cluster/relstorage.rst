@@ -92,11 +92,13 @@ On line 4, we configure RelStorage to use `pylibmc`_, the memcached
 client library we installed. On line 5, we specify the address of the
 memcached server.
 
-We recommend to use a different memcache instance than the one used
-for Silva to cache RelStorage data. *All* Zope server connected
-to the same SQL database should share the *same* memcached
-server.
 
+.. warning::
+
+    We recommend to use a different memcache instance than the one used
+    for Silva to cache RelStorage data. *All* Zope server connected
+    to the same SQL database should share the *same* memcached
+    server.
 
 
 .. _RelStorage: http://pypi.python.org/pypi/RelStorage
