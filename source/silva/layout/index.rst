@@ -1,4 +1,6 @@
 
+.. _creating-a-new-visual:
+
 Creating a new visual theme
 ===========================
 
