@@ -10,4 +10,5 @@ Creating content types
    xsltrender
    forms
    xml
+   fields
    permission

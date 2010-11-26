@@ -35,8 +35,15 @@ installation defaults are ``admin`` and ``admin`` if you didn't specify
 otherwise while creating your Zope instance before.
 
 When the Silva site is created, you will be redirected to its
-management interface (SMI, Silva Management Interface). You can
-rely on the user documentation to be guided through it.
+management interface, the :term:`SMI`. You can rely on the user
+documentation to be guided through it.
+
+.. glossary::
+
+   *SMI*
+     The SMI, or Silva Management Interface, is the user interface
+     where an author or editor can add, delete and modify content in
+     the Silva site.
 
 .. note::
 

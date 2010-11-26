@@ -49,11 +49,26 @@ look up:
 How to retrieve a Zope multiple-adapter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. currentmodule:: silva.core.views.interfaces
+
 Some adapters requires multiple objects to adapt in order to provide a
 new :term:`Zope interface`.
 
 You can look for those adapters using
-``zope.component.getMultiAdapter``.
+``zope.component.getMultiAdapter``. For instance if you look the
+multi-adapter :py:interface:`IVirtualSite`:
+
+.. code-block:: python
+
+   from silva.core.views.interfaces import IVirtualSite
+   from zope.component import getMultiAdapter
+
+   adapter = getMultiAdapter((context, request), IVirtualSite)
+
+Like for single adapter, if no adapter is found for the request
+:term:`Zope interface`, an exception is raised. If you wish to receive
+``None`` as result instead, you can use
+``zope.component.queryMultiAdapter``.
 
 
 Defining a new Zope Adapter

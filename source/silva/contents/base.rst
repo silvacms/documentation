@@ -205,7 +205,7 @@ addable from ZMI:
    one. If you need to execute some code on your content after its
    creation, the best is to listen the
    :py:event:`IObjectCreatedEvent<zope.lifecycleevent.interfaces.IObjectCreatedEvent>`
-   to do it.
+   event to do it.
 
 
 Versioned content
@@ -289,5 +289,18 @@ Python code add a new content in the container of your choice:
    factory.manage_addArticle('identifier', u'My content')
 
 On line 1, we look for the factories of our extension, we called
-*silva.app.blog* during the :ref:`registering-extension-using-grok`.
-On line 2, we invoke the factory to create a new *Article* content.
+*silva.app.blog* during the :ref:`registering-extension-using-grok` of
+the extension. On line 2, we invoke the factory to create a new
+*Article* content.
+
+.. note::
+
+   Not only extension content are added into Zope like this, official
+   Silva content as well. For instance to add a new folder, you should
+   do:
+
+   .. code-block:: python
+
+      factory = container.manage_addProduct['Silva']
+      factory.manage_addFolder('folder', u'My Folder')
+
