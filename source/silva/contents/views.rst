@@ -146,8 +146,8 @@ Tips about Views
    in the *View* and your content would be the *Model*.
 
 
-Adding more views with the layout
----------------------------------
+Adding more views using the site layout
+---------------------------------------
 
 You can write a new page on your content using a
 ``silva.core.views.views.Page`` (alias to ``silvaviews.Page`` in the
@@ -190,8 +190,8 @@ For all other details, a ``silvaviews.Page`` provides the same API
 than a ``silvaviews.View``.
 
 
-Adding more views without the layout
-------------------------------------
+Adding more views not using the site layout
+-------------------------------------------
 
 If you write a ``silvaviews.View`` and give a name to it, using the
 Grok directive ``grok.name``, like, ``view.html`` it will make it
