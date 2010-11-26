@@ -39,9 +39,11 @@ look up:
 
    adapter = IAutorizationManager(content, None)
    if adapter is None:
-      # No adapter have been found
+      # No adapter have been found, fallback code
+      pass
    else:
-      # Can use adapter.
+      # Can use adapter
+      pass
 
 
 How to retrieve a Zope multiple-adapter
@@ -52,6 +54,18 @@ new :term:`Zope interface`.
 
 You can look for those adapters using
 ``zope.component.getMultiAdapter``.
+
+
+Defining a new Zope Adapter
+---------------------------
+
+You can define a new :term:`Zope adapter` by creating a new class
+inheriting of :py:class:`grok.Adapter`. To create a multiple adapter,
+you can inherit of :py:class:`grok.MultiAdapter` instead.
+
+.. warning::
+
+   You need to import ``grok`` from the namespace ``five``.
 
 
 How to retrieve a Zope utility
@@ -75,3 +89,21 @@ If the utility is not found, an exception will be raised. If you wish
 just to test if an utility is available, you can use
 ``zope.component.queryUtility`` that will return ``None`` is no
 utility is found.
+
+
+Defining a new Zope utility
+---------------------------
+
+You can define a new :term:`Zope utility` by creating a new class
+inheriting of :py:class:`grok.GlobalUtility`.
+
+.. note::
+
+   A global utility is not a Silva service, but just an utility that
+   can provide you with some useful methods, but no configuration. To
+   create a new Silva service, please refer to
+   :ref:`creating-a-new-silva-service`.
+
+.. warning::
+
+   You need to import ``grok`` from the namespace ``five``.

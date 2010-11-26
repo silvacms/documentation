@@ -25,7 +25,13 @@ import sys, os
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
     'sphinxcontrib.infrae']
+
+intersphinx_mapping = {
+    'grok': ('http://grok.zope.org/doc/1.2.1', None),
+    'python': ('http://docs.python.org/release/2.6.6/', None),
+    }
 
 # inheritance_graph_attrs = dict(rankdir="TB", size='"20, 20"', fontsize=14)
 

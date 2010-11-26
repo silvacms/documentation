@@ -1,3 +1,6 @@
+
+.. _creating-a-new-silva-service:
+
 Creating a new Silva service
 ============================
 
