@@ -32,7 +32,7 @@ Root Objects
 Site information
 ~~~~~~~~~~~~~~~~
 
-.. module:: silva.core.interfaces.content
+.. currentmodule:: silva.core.interfaces.content
 
 You often wish to retrieve the root content of your current site in a
 layout. We don't recommend to use ``get_root`` from

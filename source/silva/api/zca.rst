@@ -11,7 +11,7 @@ a look at: http://www.muthukadan.net/docs/zca.html.
 How to retrieve a Zope adapter
 ------------------------------
 
-.. module:: silva.core.interfaces.auth
+.. currentmodule:: silva.core.interfaces.auth
 
 If you wish to retrieve an adapter of the functionality provided by an
 adapter, for instance :py:interface:`IAuthorizationManager`, you can
@@ -71,7 +71,7 @@ you can inherit of :py:class:`grok.MultiAdapter` instead.
 How to retrieve a Zope utility
 ------------------------------
 
-.. module:: silva.core.services.interfaces
+.. currentmodule:: silva.core.services.interfaces
 
 If you wish to retrieve an utility, you can use
 ``zope.component.getUtility``. For instance to retrieve Silva's

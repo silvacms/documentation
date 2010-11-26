@@ -391,7 +391,7 @@ div.body div.topic {
 }
 
 div.body div.toctree-wrapper {
-  background-color: #deeade;
+  background-color: #f6f9ec;
 }
 
 div.body p.topic-title {
@@ -578,15 +578,24 @@ th {
 
 /* Code examples */
 
+dl.class,
 dl.interface,
 dl.event,
 pre {
-    padding: 5px;
-    background-color: #efc;
-    color: #333;
-    border: 1px solid #ac9;
-    border-radius: 10px;
-    overflow: auto;
+  padding: 5px;
+  background-color: #efc;
+  color: #333;
+  border: 1px solid #ac9;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+dl.class {
+  background-color: #edf3f6;
+}
+
+dl.event {
+  background-color: #deeade;
 }
 
 div.highlight {

@@ -143,15 +143,12 @@ extension in the selected Silva root. An installer is a class that
 defines the following methods:
 
 ``install``
-
-   Is used to install the extension.
+   Install the extension.
 
 ``uninstall``
-
-   Is used to uninstall the extension.
+   Uninstall the extension.
 
 ``is_installed``
-
    Return ``True`` if the extension is installed, ``False`` otherwise.
 
 You can code the installer directly into the ``__init__.py``. When the
@@ -171,9 +168,6 @@ following installation steps:
 
 3. If you have a ``views`` directory register it in the
    ``service_views``.
-
-3. Eventually if you have one, register the ``views`` directory of
-   your extension to the ``service_views``.
 
 Also, this installer uses a marker interface on the
 ``service_extensions`` to show if the extension is installed.
@@ -218,36 +212,53 @@ This can be done with the help of a :term:`ZCML` directive in your
 ``configure.zcml`` file of your Python package:
 
 .. code-block:: xml
+   :linenos:
 
-  <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:grok="http://namespaces.zope.org/grok">
+   <configure
+     xmlns="http://namespaces.zope.org/zope"
+     xmlns:grok="http://namespaces.zope.org/grok">
 
-    <grok:grok package="." />
+     <include package="five.grok" />
+     <grok:grok package="." />
 
-  </configure>
+   </configure>
+
+On line 5, we include the `five.grok`_ extension that let use grok to
+register our code. On line 6, we trigger that will go read our code
+and register our components.
 
 If you use Grok, is the last required piece of :term:`ZCML`.
+
+.. _registering-extension-using-grok:
 
 Registration
 ````````````
 
-In the ``__init__.py`` of your extension, you can use the following
-Python code to register it to Silva:
+.. glossary::
+
+   *Grok directive*
+      Grok directives are functions called at a module or a class level
+      to set configuration settings on those modules or classes.
+
+In the ``__init__.py`` of your extension, you can use Grok directives
+to register it to Silva:
 
 .. code-block:: python
+   :linenos:
 
    from silva.core import conf as silvaconf
 
-   silvaconf.extension_name("SilvaBlog")
+   silvaconf.extension_name("silva.app.blog")
    silvaconf.extension_title("Silva Blog")
 
-The ``extension_name`` will represent the name of the extension, and
-the ``extension_title`` will displayed in the Silva interfaces (like
-in ``service_extension``).
+On line 3, the ``extension_name`` directive will set the name of the
+extension, and on line 4 the ``extension_title`` directive will set
+the title of extension, displayed in the Silva User Interface (like in
+``service_extension``).
 
-If your extension depends on others extensions, like `Silva Document`
-you can use the ``extension_depends`` directive to declare this:
+If your extension depends on others extensions, like on `Silva
+Document` you can use the ``extension_depends`` directive to declare
+this:
 
 .. code-block:: python
 
@@ -273,6 +284,7 @@ yet:
     xmlns="http://namespaces.zope.org/zope"
     xmlns:silva="http://infrae.com/ns/silvaconf">
 
+    <include package="silva.core.conf" />
     <silva:extension
       name="SilvaBlog"
       title="Silva Blog"
@@ -315,3 +327,5 @@ Document`` and ``Silva Link`` contents to Silva ``2.1``:
 
 ``AnyMetaType`` can be used to declare that the step would be run
 against all the contents, whatever their meta types.
+
+.. _five.grok: http://pypi.python.org/pypi/five.grok
