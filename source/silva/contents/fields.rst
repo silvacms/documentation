@@ -83,10 +83,14 @@ All the following schema fields are provided by default in Zope:
    requires an ``source`` argument set to a :term:`Zope vocabulary`,
    expressing the different possible choices.
 
-   If you want to have a multiple choice fields, you need build a list
-   (or tuple, set) of choice (see :ref:`collection-zope-schema`
-   below).
+   If you want to have a multiple choice schema field, you need build
+   a list (or tuple, set) of choice.
 
+   .. seealso::
+
+      - :ref:`defining-zope-vocabulary`
+
+      - :ref:`collection-zope-schema`
 
 .. glossary::
 
@@ -96,6 +100,12 @@ All the following schema fields are provided by default in Zope:
      serializable string that can be transmitted over HTTP, and a
      *title* that will be displayed to the user.
 
+
+The useful package `z3c.schema`_ provides the following fields:
+
+.. class:: z3c.schema.email.RFC822MailAddress
+
+   Input and validate an email address.
 
 Silva provides the following extra schema fields for use in the
 :term:`SMI`:
@@ -152,6 +162,8 @@ default:
 
    Input a set of values.
 
+
+.. _defining-zope-vocabulary:
 
 Defining a Zope vocabulary
 --------------------------
@@ -230,3 +242,4 @@ On lines 6 to 12 we dynamically construct the vocabulary using values
 fetched from the ``context`` content object.
 
 .. _JQueryUI: http://jqueryui.com/
+.. _z3c.schema: http://pypi.python.org/pypi/z3c.schema

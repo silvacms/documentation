@@ -2,15 +2,16 @@
 Adding forms to your content
 ============================
 
+.. module:: zeam.form.silva
+
 To be able to add your content from the :term:`SMI`, you need to
 create an *add form*. Probably you want to have an *edit form* to
 modify your content as well.
 
 .. contents::
 
-
-Creating an interface
----------------------
+Creating a form descrption
+--------------------------
 
 To create a form, you need first to create a :term:`Zope interface`
 that will describe which fields your form should contains, using
@@ -25,14 +26,17 @@ that will describe which fields your form should contains, using
      required, what is its English name...). Those schema fields are a
      particularly useful standard way to describe form fields.
 
+In case of an add form, you can make your field definition interface
+inherit from those interfaces, who defined an ``id`` and a ``title``
+for your content:
+
+.. autointerface:: silva.core.conf.interfaces.IIdentifiedContent
+
+.. autointerface:: silva.core.conf.interfaces.ITitledContent
 
 
-Outdated documentation of code we don't to see anymore
-------------------------------------------------------
-
-You can create forms from your Python code for your content. To do
-this you need an interface that defines which fields are on your
-object.
+Creating an add form
+--------------------
 
 .. code-block:: python
 
@@ -49,168 +53,110 @@ object.
            title=u"Contact URL",
            required=True)
 
-.. note::
 
-   The Python package ``zope.schema`` defines many different field
-   types. You can find other form libraries on the Cheeseshop.
+.. class:: SMIAddForm
 
-Your content needs to implement this interface. You can implement
-these fields with the help of a ``FieldProperty``.
+   Create an add form. The form already have *Cancel*, *Save* and
+   *Save and edit* actions.
 
-.. code-block:: python
-
-  from zope.schema.fieldproperty import FieldProperty
-
-  class MyContent(...):
-       ...
-       interface.implements(IMyContent)
-       email = FieldProperty(IMyContent['email'])
-       contact_url = FieldProperty(IMyContent['contact_url'])
-
-So now your object can use the ``email`` and ``contact_url``
-attributes, as you have declared in your interface.
-
-Now, define an add form:
-
-.. code-block:: python
-
-   from silva.core import conf as silvaconf
-   from silva.core.views import forms as silvaforms
-
-   class MyContentAddForm(silvaforms.AddForm):
-
-       silvaconf.context(IMyContent)
-       silvaconf.name("My Content")
-
-``silvaconf.name`` must be the meta type of your content type. As you
-can see, your interface doesn't provide any fields for the required
-``id``, and ``title``, but these will be added automatically.
-
-.. note::
-
-   An add form is a Zope 3 factory, registered for the given Zope 2
-   meta type. If you register your own factory, it will be used when
-   you create your content via the Silva Management Interface.
-
-If you have versioned content, you should have two interfaces: one for
-your content and one for your version. Since yours fields should be
-versioned, they should be defined on the version's interface:
-
-.. code-block:: python
-
-  class IMyVersionContent(interface.Interface):
-      """A version of my content object.
-      """
-
-      info = schema.Text(title=u"General information")
-      ...       # Add others fields
-
-On your add form, you have to explicitly say that form fields are
-going to be created using your version's interface *(line 8)*:
-
-.. code-block:: python
-  :linenos:
-
-  from five import grok
-
-  class MyContentAddForm(silvaforms.AddForm):
-
-     silvaconf.context(IMyContent)
-     silvaconf.name("My Content")
-
-     form_fields = grok.Fields(IMyVersionContent)
-
-After creating the new content, the add form is going to fill values
-for these fields on the *editable* object, returned by your content.
-
-You can create an edit form by doing the following:
-
-.. code-block:: python
-
-   from silva.core import conf as silvaconf
-
-   class MyContentEditForm(silvaforms.EditForm):
-
-        silvaconf.context(IMyContent)
-
-That's it. The ``id`` and ``title`` fields are not provided, and
-should not by provided: an object can be renamed from its parent
-container, and the title is managed via the properties tab.
-
-As we saw with the add form, when you have versioned content, you
-should create form fields using the version's interface *(line 5)*:
-
-.. code-block:: python
-  :linenos:
-
-  class MyContentEditForm(silvaforms.EditForm):
-
-       silvaconf.context(IMyContext)
-
-       form_fields = grok.Fields(IMyVersionContent)
+   The form will effectively add, and edit the content.
 
 
-You can override any form from the SMI. We define a new interface with
-settings fields:
+   .. method:: _add()
 
-.. code-block:: python
+      Override this method if you whish to customize the creation of
+      the content.
 
-   class IMyContentSettings(interface.Interface):
-       """Settings for my content.
-       """
+   .. method:: _edit()
 
-       hide_email = schema.Bool(
-           title=u"Hide email address",
-           default=True,
-           required=False)
-
-And after you can use this interface for your form:
-
-.. code-block:: python
-
-   from five import grok
-
-   class MyContentSettingsForm(silvaforms.PageForm):
-
-       silvaconf.context(IMyContent)
-       silvaconf.name("tab_settings")
-
-       # Set form fields using our new interface
-       form_fields = grok.Fields(IMyContentSettings)
-
-       # Define one action
-       @grok.action(u"Send information")
-       def action_send(self, hide_email):
-            # hide_email contain the validated form value
-            pass
-
-``silvaconf.name`` is used here to define the name of the form. Here
-it will defined as ``tab_settings``, which is accessible via the
-``properties`` tab in SMI.
-
-.. hint::
-
-   You can define new actions for adding and edit forms as well, like
-   settings custom fields. For more information about that, please
-   refer to the formlib documentation.
+      Overide this method, if you didn't override :py:meth:`_add`
+      and whish to customize the edition of the new content.
 
 
-Another option you can use Z3C Forms Formlib library.
+Creating an edit form
+---------------------
 
-Here is a simple example of an add form for some versioned content:
+.. class:: SMIEditForm
 
-.. code-block:: python
+   Create an edit form. The form already have *Cancel* and *Save*
+   actions.
 
-   from silva.core import silvaconf
-   from silva.core.views import z3cforms as silvaz3cforms
-   from z3c.forms import field
 
-   class MyContentAddForm(silvaz3cforms.AddForm):
+Creating a public form
+----------------------
 
-       silvaconf.context(IMyContent)
-       silvaconf.name("My Content")
+A public form is a form that won't be displayed in the :term:`SMI` but
+to the public as a public view. Like for a public view, the layout
+system will include the layout around the form.
 
-       fields = field.Fields(IMyVersionContent)
+For this create your form by inheriting from:
 
-For more information about Z3C Forms `here
-<http://docs.carduner.net/z3c.form/>`_.
+.. class:: PublicForm
+
+   Create a form for the public front-end of the site.
+
+Apart from the class which you have to inherit from, public form works
+the same way than the other forms.
+
+Embedding a public form in a existing view
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can embbed a form as a :term:`Content Provider` or a
+:term:`Viewlet` in a public view. To do this you can create your form
+by inheriting from one of those classes:
+
+.. class:: PublicViewletForm
+
+   Create a form in a :term:`Viewlet`.
+
+.. class:: PublicContentProviderForm
+
+   Create a form in a :term:`Content Provider`.
+
+.. seealso::
+
+   :ref:`creating-a-default-view`
+
+
+Using Complex forms
+-------------------
+
+More complicated forms can be created, like it is done for the access
+tab in the :term:`SMI`.
+
+Complex form components that can be used in the :term:`SMI` are:
+
+.. class:: SMIComposedForm
+
+   Create a composed form: the form is composed of other sub forms,
+   that can interact between each of them.
+
+.. class:: SMISubForm
+
+   Create a sub form. It have to be associated to a
+   :py:class:`SMIComposedForm` or a :py:class:`SMISubFormGroup` in
+   order to be used.
+
+.. class:: SMISubFormGroup
+
+   Create a group of sub form inside a :py:class:`SMIComposedForm`.
+
+.. class:: SMISubTableForm
+
+   Create a sub form that can work on multiple items at once. This
+   create a table in the user interface, with each table columns
+   representing each form fields, and each line representing each
+   content.  This form can host table actions, that are executed
+   against each selected lines upon form submission.
+
+   Like for :py:class:`SMISubForm`, it have to be associated to a
+   :py:class:`SMIComposedForm` or a :py:class:`SMISubFormGroup` in
+   order to be used.
+
+.. class:: SMIViewletForm
+
+   Create a form as a :term:`Viewlet` in the :term:`SMI`.
+
+.. class:: SMIContentProviderForm
+
+   Create a form as a :term:`Content Provider` in the :term:`SMI`.
