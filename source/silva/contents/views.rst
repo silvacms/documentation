@@ -37,8 +37,8 @@ On line 5, the class ``BlogView`` implement your view. It inherits
 from ``silva.core.views.views.View`` (aliased as ``silvaviews.View``,
 *line 8*).
 
-On line 10, the configuration directive ``grok.context`` tells the
-view which content to render, here the ``Blog`` content type.
+On line 10, the :term:`Grok directive` :py:func:`grok.context` tells
+the view which content to render, here the ``Blog`` content type.
 
 You can associate a page template to your view class, that will be
 used to generate the HTML output:
@@ -57,7 +57,9 @@ used to generate the HTML output:
       <div>My Blog <tal:replace tal:replace="view/title" /></div>
 
 As your template have the extension ``.pt``, it will interpreted as a
-`Zope Page Template`_.
+`Zope Page Template`_. If you don't know anything about that template
+markup language, you can refer for the `Zope Page Template`_
+documentation for more information.
 
 Template Namespace
 ~~~~~~~~~~~~~~~~~~
@@ -171,16 +173,19 @@ Following the previous example given in
                # Create a new article using title and text
                pass
 
-- On line 2, we says that our page will be available on ``Blog`` content type.
+- On line 2, we use the :term:`Grok directive` :py:func:`grok.context`
+  to associate our page to the ``Blog`` content type.
 
-- On line 3, we says that it will be called ``post.html``.
+- On line 3, we use the :term:`Grok directive` :py:func:`grok.name` to
+  name our page ``post.html``.
 
-- On line 4, we require the user to have at least the security
-  permission ``silva.ChangeSilvaContent`` to be able to see this
-  page. You can refer to :ref:`available-permissions` to have a full
-  listing of all available permissions. If you don't specify any
-  security restriction, the default permission required to see a page
-  (or a view) is ``zope2.View``.
+- On line 4, we use the :term:`Grok directive` :py:func:`grok.require`
+  to require the user to have at least the security permission
+  ``silva.ChangeSilvaContent`` to be able to see this page. You can
+  refer to :ref:`available-permissions` to have a full listing of all
+  available permissions. If you don't specify any security
+  restriction, the default permission required to see a page (or a
+  view) is ``zope2.View``.
 
 - On line 6, in the ``update`` method, we take two parameters that
   could have been posted by a HTML form, to create an article in the
@@ -263,8 +268,8 @@ From a page template, you can use the view ``absolute_url``:
    deprecated and should not be used anymore.
 
 
-Getting the content object of the current site
-----------------------------------------------
+Getting the root content of the current site
+--------------------------------------------
 
 The root content if your site might not be the Silva root, if you
 create sub-site using publication, so the method ``get_root`` will not
@@ -285,5 +290,5 @@ From a python file, you can use the
            self.root_url = site.get_root_url()
 
 
-.. _Zope Page Template: thtp://docs.zope.org/zope2/zope2book/ZPT.html
+.. _Zope Page Template: http://docs.zope.org/zope2/zope2book/ZPT.html
 .. _Model-View-Controller: http://en.wikipedia.org/wiki/Model-View-Controller
