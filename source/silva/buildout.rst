@@ -6,9 +6,9 @@ Installing Silva with Buildout
 
    *Buildout*
      Buildout is a tool used to automate software
-     deployment. Installing and upgrading Silva using buildout can
-     greatly reduce the chances of errors. You can find lot of
-     information on the official site http://www.buildout.org.
+     deployment. Installing and upgrading Silva using buildout will
+     greatly reduce the chance of errors. You can find lots of
+     information on the official site http://www.buildout.org/.
 
 
 Requirements
@@ -24,7 +24,7 @@ operating system:
 
 .. warning::
 
-   Those are requirements. If they are not installed, you won't be to
+   These are all required. If they are not installed, you won't be to
    install Silva.
 
 Installing quick drive Silva with Paster and ZopeSkel
@@ -37,8 +37,8 @@ To set up a production or development environment we recommend you do
 a SVN check out of the Buildout located in the Infrae `SVN
 <https://svn.infrae.com/buildout/silva/>`_.
 
-This will let you track more easily your changes, and let you upgrade
-your Silva instance more easily at a later date.
+This will let you track your changes, and let you easily upgrade
+your Silva instance at a later date.
 
 .. glossary::
 
@@ -99,7 +99,7 @@ installation directory for scripts installed with a package. By
 default ``easy_install`` install all packages scripts in the same
 directory as Python, which is hidden inside a framework directory on
 Mac OS X. By specifying ``-s /opt/local/bin`` scripts are going to be
-installed in the same directory than Mac Ports softwares:
+installed in the same directory as the MacPorts software:
 
 .. code-block:: sh
 
@@ -146,11 +146,11 @@ Paster will ask you the following questions:
 ``Enter zope2_install``
 
    Path to an existing Zope 2 setup, leave this blank to download and
-   create new one.
+   create a new one.
 
 ``Enter silva_distribution``
 
-   Choose to install stable version of Silva.
+   Choose to install the stable version of Silva.
 
 ``Enter zope_user``
 
@@ -191,7 +191,7 @@ Buildout script to install Silva:
    $ ./bin/buildout
 
 As result, the command ``bin/paster`` will be created. It will let
-you start and use Silva: :ref:`starting-creating-silva-site`.
+you start and use Silva. See: :ref:`starting-creating-silva-site`.
 
 Installing Silva from SVN for development or production
 -------------------------------------------------------
@@ -257,19 +257,19 @@ sub-directory of your Buildout tree. Below we will use the
 
    $ python2.6 bootstrap.py --buildout-profile profiles/simple-instance.cfg
 
-Running this command creates important files, most importantly one
+Running this command creates essential files, most importantly one
 called ``buildout.cfg``. The ``buildout.cfg`` file is a default
-Buildout configuration file, it controls what you want install, and
+Buildout configuration file. It controls what you want installed, and
 how. To extend your buildout see
 :ref:`extending-and-customising-your-installation`.
 
-After generating the buildout files run the installation:
+After generating the buildout files, run the installation:
 
 .. code-block:: sh
 
    $ ./bin/buildout
 
-Now the command ``bin/instance`` will be available. It will let
+When finished the command ``bin/instance`` will be available. It will let
 you start and use Silva: :ref:`starting-creating-silva-site`.
 
 Available profiles
@@ -284,7 +284,7 @@ The following profiles are available in the ``profiles`` directory:
 
 ``simple-instance.cfg``
 
-   Recommanded profiles for a production instance.
+   Recommanded profile for a production instance.
 
 ``zeo-instance.cfg``
 
@@ -309,16 +309,17 @@ Upgrading your installation
 
 The generic procedure to upgrade a Silva site is:
 
-1. to stop your Zope instance,
+1. stop your Zope instance,
 
-2. change the version of Silva you are running on the file-system,
+2. change the version of Silva you are running on the file-system (see
+   below).
 
 3. re-run buildout to get the new version,
 
 4. verify the :ref:`upgrade-notes` for the version you are upgrading
    and follow them,
 
-5. if there was no upgrade notes, restart your Zope instance, visit
+5. if there are no upgrade notes, restart your Zope instance, visit
    each Silva Root you have and access the *service extensions* in ZMI
    (*Zope Management Interface*)
    (``silvaroot-url/service_extensions/manage_extensions``), click on
@@ -326,9 +327,9 @@ The generic procedure to upgrade a Silva site is:
 
 You cannot upgrade only one instance of Silva inside a Zope instance
 to a specific version. All Silva sites in a Zope instance run the same
-version of Silva (which the one installed on the file-system).
+version of Silva (which is the one installed on the file-system).
 
-Downgrade of versions is not supported. After you upgraded a Silva
+Downgrade of versions is not supported. After you upgrade a Silva
 site, the only way to get back to the old version you were running is
 to restore a backup.
 
@@ -360,7 +361,7 @@ As standard upgrade procedure, we recommend to first copy your site as
 a test site, and then do the upgrade procedure on the copy. After
 checking that everything on your site works, you can do the same
 procedure on your production site. This is especially recommended for
-upgrades that jump between versions, and for major release of Silva.
+upgrades that jump between versions, and for major releases of Silva.
 
 .. note::
 
@@ -375,8 +376,8 @@ upgrades that jump between versions, and for major release of Silva.
 
 .. warning::
 
-   It's recommended to backup of your data before attempting any
-   upgrade operation.
+   It's recommended to backup your data before attempting any
+   upgrade operations.
 
 Using Buildout
 --------------
@@ -400,14 +401,14 @@ A Buildout tree contains the following sub-directories:
 
 ``bin``
 
-   Contains all generated scripts to use installed software. This
+   Contains all generated scripts for using the installed software. This
    should contain start/stop scripts for your Zope/ZEO
    instance/server, maildrophost server.
 
 ``parts``
 
-   Contains software components. **This directory could be deleted**
-   when you re-run buildout to upgrade your tree. You should not make
+   Contains software components. When you re-run buildout to upgrade
+   your tree **this directory might be deleted**. You should not make
    any changes inside it.
 
 ``products``
@@ -421,14 +422,14 @@ A Buildout tree contains the following sub-directories:
 
 ``var``
 
-   Contains all data created and used by the
-   software. ``var/filestorage`` contains the Zope database. **This is
-   the directory you want to backup** (for backing up your website).
+   Contains all data created and used by the software. The
+   ``var/filestorage`` dir contains the Zope database. For backing
+   up your website **This is the directory you want to backup**.
 
    ``var/log`` contains all the logs generated by Zope and Silva. You
    might want to install a tool like `logrotate
    <http://linuxcommand.org/man_pages/logrotate8.html>`_ in order to
-   rotate them to control their sizes.
+   rotate them and control their sizes.
 
 .. _configuring-a-cache-for-buildout:
 
@@ -462,8 +463,8 @@ your ``cache`` directory.
 Troubleshooting
 ```````````````
 
-Please refer first to those sections of this document in case of any
-problems or questions while running Buildout or see the link below.
+Please refer first to those sections in case of any
+problems or questions while running Buildout, or see the link below.
 
 .. toctree::
    :maxdepth: 2
