@@ -13,7 +13,17 @@ Creating an interface
 ---------------------
 
 To create a form, you need first to create a :term:`Zope interface`
-that will describe which fields your form should contains.
+that will describe which fields your form should contains, using
+:term:`Zope schema fields`.
+
+.. glossary::
+
+   *Zope schema fields*
+     A Zope schema field is a :term:`Zope interface` attribute that
+     describe the type of this attribute (is it a string, an
+     integer...), and gives information about its properties (is it
+     required, what is its English name...). Those schema fields are a
+     particularly useful standard way to describe form fields.
 
 
 

@@ -2,7 +2,7 @@
 Available Zope schema fields
 ============================
 
-Each fields accept at least the following parameters:
+Each Zope schema fields accept at least the following parameters:
 
 ``title``
    Title of the field, displayed in the form as field label. This must
@@ -18,6 +18,8 @@ Each fields accept at least the following parameters:
 
 General Zope schema fields
 --------------------------
+
+All the following schema fields are provided by default in Zope:
 
 .. class:: zope.schema.Int
 
@@ -66,7 +68,8 @@ General Zope schema fields
 
 .. class:: zope.schema.Datetime
 
-   Input a :py:class:`datetime.datetime` object.
+   Input a :py:class:`datetime.datetime` object. In the :term:`SMI`,
+   this will render a date time popup widget using `JQueryUI`_.
 
 
 .. class:: zope.schema.Time
@@ -76,14 +79,154 @@ General Zope schema fields
 
 .. class:: zope.schema.Choice
 
+   Select a choice among a fixed list of possibilities. Choice fields
+   requires an ``source`` argument set to a :term:`Zope vocabulary`,
+   expressing the different possible choices.
+
+   If you want to have a multiple choice fields, you need build a list
+   (or tuple, set) of choice (see :ref:`collection-zope-schema`
+   below).
+
+
+.. glossary::
+
+   *Zope vocabulary*
+     A Zope vocabulary is a defined set of values that you can
+     use. For each value, you have an associated *token* that is a
+     serializable string that can be transmitted over HTTP, and a
+     *title* that will be displayed to the user.
+
+
+Silva provides the following extra schema fields for use in the
+:term:`SMI`:
+
+.. class:: silva.core.conf.schema.ID
+
+   Input a Silva content object identifier. When used in a form, the
+   validation of this field will only work when the identifier will
+   not be in used in the container on which the form have been called
+   on.
+
+.. class:: silva.core.references.schema.Reference
+
+   Input a reference to an object. In :term:`SMI`, it will create a
+   `JQueryUI`_ popup that will let you select an object to refer to. The
+   widget will return a content reference id, than is understandable
+   by the reference mechanism.
+
+.. _collection-zope-schema:
 
 Collection Zope schema fields
 -----------------------------
 
+All collection fields have a required parameter ``value_type``,
+describing the type of the contained value.
+
+For example, to have a list of strings you will write:
+
+.. code-block:: python
+
+   names = schema.List(title=u"People  names",
+                       value_type=schema.TextLine(required=True),
+                       required=True)
+
+For each collection type, usually a widget containing *Add* and
+*Remove* buttons are generated, that let you add or remove values to
+the collection.
+
+
+Zope provides you with the following collection schema fields by
+default:
+
 .. class:: zope.schema.List
+
+   Input  a list of values.
+
 
 .. class:: zope.schema.Tuple
 
+   Input a tuple of values.
+
+
 .. class:: zope.schema.Set
 
+   Input a set of values.
 
+
+Defining a Zope vocabulary
+--------------------------
+
+If you want to define a new vocabulary, you have to build it using
+``zope.schema.vocabulary.SimpleVocabulary`` and
+``zope.schema.vocabulary.SimpleTerm``:
+
+.. code-block:: python
+   :linenos:
+
+   from zope.schema.vocabulary import SimpleTerm
+   from zope.schema.vocabulary import SimpleVocabulary
+
+   @apply
+   def weather_type():
+       terms = []
+       for value, token, title in [(1, 'sunny', u'Sunny'),
+                                   (2, 'raining', u'Raining'),
+                                   (3, 'snowing', u'Snowing')]:
+           terms.append(SimpleTerm(value=value, token=token, title=title))
+       return SimpleVocabulary(terms)
+
+
+On line 4, we use the Python decorator ``apply`` to set as value to
+``weather_type`` the result of calling it, i.e it will do:
+
+.. code-block:: python
+
+   weather_type = weather_type()
+
+On lines 6 through 11 we create the vocabulary dynamically. Of course,
+for a static vocabulary you could have wrote:
+
+.. code-block:: python
+
+   weather_type = SimpleVocabulary(
+      SimpleTerm(value=1, token='sunny', title=u'Sunny'),
+      SimpleTerm(value=2, token='raining', title=u'Raining'),
+      SimpleTerm(value=1, token='sunny', title=u'Sunny'))
+
+
+Defining a context-dependent Zope vocabulary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some vocabularies need to know where they are used in the site in
+order to be able to provide a list of terms. You can implement them as
+a function providing the interface
+``zope.schema.interfaces.IContextSourceBinder``:
+
+.. code-block:: python
+   :linenos:
+
+   from zope.schema.interfaces import IContextSourceBinder
+   from five import grok
+
+   @grok.provider(IContextSourceBinder)
+   def addable_silva_types(context):
+       terms = []
+       for addable in context.get_container().get_silva_addables():
+           terms.append(SimpleTerm(
+               value=addable['instance'],
+               token=addable['name'],
+               title=addable['name']))
+       return SimpleVocabulary(terms)
+
+On line 4, we use the Grok Python decorator :py:func:`grok.provider`
+to register the fact that our function implement the
+``IContextSourceBinder`` interface.
+
+On line 5, we define our vocabulary, as a function who takes one
+argument, ``context`` which will in case of a form its context, the
+content object on which the form have been called.
+
+On lines 6 to 12 we dynamically construct the vocabulary using values
+fetched from the ``context`` content object.
+
+.. _JQueryUI: http://jqueryui.com/
