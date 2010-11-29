@@ -63,6 +63,8 @@ to it.
 Available Silva bases content classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. XXX the next line doesn't work and need to be changed
+
 .. currentmodule:: silva.core.interfaces.content
 
 All those base classes are usable to create new Silva content:

@@ -2,8 +2,6 @@
 Adding forms to your content
 ============================
 
-.. module:: zeam.form.silva
-
 To be able to add your content from the :term:`SMI`, you need to
 create an *add form*. Probably you want to have an *edit form* to
 modify your content as well.
@@ -54,13 +52,12 @@ Creating an add form
            required=True)
 
 
-.. class:: SMIAddForm
+.. class:: zeam.form.silva.SMIAddForm
 
    Create an add form. The form already have *Cancel*, *Save* and
    *Save and edit* actions.
 
    The form will effectively add, and edit the content.
-
 
    .. method:: _add()
 
@@ -76,7 +73,7 @@ Creating an add form
 Creating an edit form
 ---------------------
 
-.. class:: SMIEditForm
+.. class:: zeam.form.silva.SMIEditForm
 
    Create an edit form. The form already have *Cancel* and *Save*
    actions.
@@ -91,7 +88,7 @@ system will include the layout around the form.
 
 For this create your form by inheriting from:
 
-.. class:: PublicForm
+.. class:: zeam.form.silva.PublicForm
 
    Create a form for the public front-end of the site.
 
@@ -105,11 +102,11 @@ You can embbed a form as a :term:`Content Provider` or a
 :term:`Viewlet` in a public view. To do this you can create your form
 by inheriting from one of those classes:
 
-.. class:: PublicViewletForm
+.. class:: zeam.form.silva.PublicViewletForm
 
    Create a form in a :term:`Viewlet`.
 
-.. class:: PublicContentProviderForm
+.. class:: zeam.form.silva.PublicContentProviderForm
 
    Create a form in a :term:`Content Provider`.
 
@@ -126,22 +123,24 @@ tab in the :term:`SMI`.
 
 Complex form components that can be used in the :term:`SMI` are:
 
-.. class:: SMIComposedForm
+.. class:: zeam.form.silva.SMIComposedForm
 
    Create a composed form: the form is composed of other sub forms,
    that can interact between each of them.
 
-.. class:: SMISubForm
+.. class:: zeam.form.silva.SMISubForm
 
    Create a sub form. It have to be associated to a
-   :py:class:`SMIComposedForm` or a :py:class:`SMISubFormGroup` in
+   :py:class:`SMIComposedForm<zeam.form.silva.SMIComposedForm>` or a
+   :py:class:`SMISubFormGroup<zeam.form.silva.SMISubFormGroup>` in
    order to be used.
 
-.. class:: SMISubFormGroup
+.. class:: zeam.form.silva.SMISubFormGroup
 
-   Create a group of sub form inside a :py:class:`SMIComposedForm`.
+   Create a group of sub form inside a
+   :py:class:`SMIComposedForm<zeam.form.silva.SMIComposedForm>`.
 
-.. class:: SMISubTableForm
+.. class:: zeam.form.silva.SMISubTableForm
 
    Create a sub form that can work on multiple items at once. This
    create a table in the user interface, with each table columns
@@ -149,14 +148,16 @@ Complex form components that can be used in the :term:`SMI` are:
    content.  This form can host table actions, that are executed
    against each selected lines upon form submission.
 
-   Like for :py:class:`SMISubForm`, it have to be associated to a
-   :py:class:`SMIComposedForm` or a :py:class:`SMISubFormGroup` in
+   Like for :py:class:`SMISubForm<zeam.form.silva.SMISubForm>`, it
+   have to be associated to a
+   :py:class:`SMIComposedForm<zeam.form.silva.SMIComposedForm>` or a
+   :py:class:`SMISubFormGroup<zeam.form.silva.SMISubFormGroup>` in
    order to be used.
 
-.. class:: SMIViewletForm
+.. class:: zeam.form.silva.SMIViewletForm
 
    Create a form as a :term:`Viewlet` in the :term:`SMI`.
 
-.. class:: SMIContentProviderForm
+.. class:: zeam.form.silva.SMIContentProviderForm
 
    Create a form as a :term:`Content Provider` in the :term:`SMI`.
