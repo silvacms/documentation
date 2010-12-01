@@ -63,10 +63,6 @@ to it.
 Available Silva bases content classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. XXX the next line doesn't work and need to be changed
-
-.. currentmodule:: silva.core.interfaces.content
-
 All those base classes are usable to create new Silva content:
 
 .. class:: Products.Silva.Publishabled.NonPublishable
@@ -75,13 +71,15 @@ All those base classes are usable to create new Silva content:
   public. You need to use this base class with either
   ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` depending if
   you wish to a non-folderish or folderish type of content. You can
-  refer to the :py:interface:`INonPublishable` interface for more
-  information.
+  refer to the
+  :py:interface:`~silva.core.interfaces.content.INonPublishable`
+  interface for more information.
 
 .. class:: Products.Silva.Asset.Asset
 
   ``File`` and ``Image`` are subclasses of this base class. Refer to
-  the :py:interface:`IAsset` interface for more information.
+  the :py:interface:`~silva.core.interfaces.content.IAsset`
+  interface for more information.
 
 .. class:: Products.Silva.Content.Content
 
@@ -90,35 +88,39 @@ All those base classes are usable to create new Silva content:
   Note that to directly use this base class, you still to inherit as
   well of ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder``
   depending if you wish a non-folderish or folderish type of
-  content. You can refer to the :py:interface:`IContent` interface for
-  more information.
+  content. You can refer to the
+  :py:interface:`~silva.core.interfaces.content.IContent`
+  interface for more information.
 
 .. class:: Products.Silva.VersionedContent.VersionedContent
 
   Base class for publicly viewable versioned content. For each
   versioned content, you have to create a version content inheriting
-  of :py:class:`Version<Products.Silva.Version.Version>`, that should
+  of :py:class:`~Products.Silva.Version.Version`, that should
   be used to effectively store the content data. You can refer to the
-  :py:interface:`IVersionedContent` interface for more information.
+  :py:interface:`~silva.core.interfaces.content.IVersionedContent`
+  interface for more information.
 
 .. class:: Products.Silva.Version.Version
 
   Base class for a version of a versioned content. A version have no
   meaning if it is not associated to a versioned content, see
-  :py:class:`VersionedContent<Products.Silva.VersionedContent.VersionedContent>`.
-  You can refer to :py:interface:`IVersion` interface for more
-  information.
+  :py:class:`~Products.Silva.VersionedContent.VersionedContent`.  You
+  can refer to :py:interface:`~silva.core.interfaces.content.IVersion`
+  interface for more information.
 
 
 .. class:: Products.Silva.Folder.Folder
 
   Base class for containers publicly viewable. Refer to the
-  :py:interface:`IFolder` interface for more information.
+  :py:interface:`~silva.core.interfaces.content.IFolder` interface for
+  more information.
 
 .. class:: Products.Silva.Publication.Publication
 
   Base class for publicly viewable main application container. Refer
-  to the :py:interface:`IPublication` interface for more information.
+  to the :py:interface:`~silva.core.interfaces.content.IPublication`
+  interface for more information.
 
 Registering a new content with Grok
 -----------------------------------

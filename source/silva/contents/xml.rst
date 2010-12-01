@@ -1,50 +1,88 @@
 .. _xml:
 
-XML Import / Export
-===================
+XML Import and Export
+=====================
 
-XML Import
-----------
+If you want to have your content, or a folder containing your content
+work with the XML import and export feature of Silva, you need to
+write an XML importer and an XML exporter.
 
-Silva makes it possible to import content from an XML file. Before it
-is possible to do this you must write an XML importer. Below is a
-simple example to load the simple content type 'MyContent'.
+.. xml import and export non-API sucks
+
+.. _xml-importer:
+
+XML Importer
+------------
+
+Silva makes possible to import content from an XML file. To have this
+feature, you need to write an XML importer. Below is a simple example
+to load the simple content type *Blog*:
 
 .. code-block:: python
+   :linenos:
 
-  from Products.Silva.silvaxml.xmlimport import SilvaBaseHandler
-  from silva.core import conf as silvaconf
+   from Products.Silva.silvaxml.xmlimport import SilvaBaseHandler
+   from silva.core import conf as silvaconf
 
-  # You need a namespace definition for your XML file
-  NS_URI = 'http://mydomain/namespace/mysilvaproject'
-  # You tell that's all importers in this Python module are going to use this namespace
-  silvaconf.namespace(NS_URI)
+   NS_URI = 'http://mydomain/namespace/blog'
+   silvaconf.namespace(NS_URI)
 
-  class MyContentHandler(SilvaBaseHandler):
+   class BlogImporter(SilvaBaseHandler):
+       silvaconf.name('blog')
 
-      silvaconf.name('content')            # Name of the tag representing your content.
+       def startElementNS(self, name, qname, attrs):
+           if name == (NS_URI, 'blog'):
+               # Get the folder where the element should be, and create the content.
+               folder = self.parent()
+               blog_id = self.generateOrReplaceId(attrs[(None,'id')])
+               factory = folder.manage_addProduct['silva.app.blog']
+               factory.manage_addBlog(blog_id, '')
 
-      def startElementNS(self, name, qname, attrs):
-          if name == (NS_URI, 'content'):
-              # Get the folder where the element should be, and create the content.
-              folder = self.parent()
-              content_id = self.generateOrReplaceId(attrs[(None,'id')])
-              content_title = attrs[(None, 'title')]
-              folder.manage_addProduct['Blog'].manage_addMyContent(content_id, content_title)
+               self.setResultId(content_id)
 
-              # This is the new current element, them a handler will
-              # process sub-tag it will get this element with self.parent()
-              self.setResult(getattr(folder, content_id))
+       def endElementNS(self, name, qname):
+           if name == (NS_URI, 'blog'):
+               self.storeMetadata()
+               self.notifyImport()
 
-      def endElementNS(self, name, qname):
-          pass                             # Do nothing here.
 
-This handler will be able to load content from the following XML file:
+This importer will be able to create a blog from the following XML file:
 
 .. code-block:: xml
 
   <?xml version="1.0" encoding="UTF-8" ?>
-  <silva xmlns="http://infrae.com/ns/silva"
-         xmlns:mysilvaproject="http://mydomain/namespace/mysilvaproject">
-     <mysilvaproject:content id="xml_content" title="XML Content" />
+  <silva xmlns="http://infrae.com/namespace/silva"
+         xmlns:silva-content="http://infrae.com/namespace/metadata/silva-content"
+         xmlns:silva-blog="http://mydomain/namespace/blog">
+    <silva-blog:blog id="technical_blog">
+      <metadata>
+        <set id="silva-content">
+          <silva-content:maintitle>
+            Technical Blog.
+          </silva-content:maintitle>
+        </set>
+      </metadata>
+    </silva-blog:blog>
   </silva>
+
+
+XML Exporter
+------------
+
+To create the previous XML file shown in the :ref:`xml-importer` you
+need to write an XML exporter:
+
+.. code-block:: python
+   :linenos:
+
+   from Products.Silva.silvaxml.xmlexport import SilvaBaseProducer
+   from five import grok
+   from zope.interface import Interface
+
+   class BlogExporter(SilvaBaseProducer):
+         grok.adapts(Blog, Interface)
+
+         def sax(self):
+             self.startElement('blog', {'id': self.context.getId()})
+             self.metadata()
+             self.endElement('blog')

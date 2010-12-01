@@ -1,4 +1,6 @@
 
+.. _available-zope-schema-fields:
+
 Available Zope schema fields
 ============================
 
@@ -119,10 +121,12 @@ Silva provides the following extra schema fields for use in the
 
 .. class:: silva.core.references.schema.Reference
 
-   Input a reference to an object. In :term:`SMI`, it will create a
-   `JQueryUI`_ popup that will let you select an object to refer to. The
-   widget will return a content reference id, than is understandable
-   by the reference mechanism.
+   Input a reference to a content. In :term:`SMI`, it will create a
+   `JQueryUI`_ popup that will let you select a content to refer
+   to. The widget will return a content reference id, than is
+   understandable by the reference mechanism. You can use the
+   parameter ``interface`` to restrict the content to one who
+   implements the given :term:`Zope interface`.
 
 .. _collection-zope-schema:
 

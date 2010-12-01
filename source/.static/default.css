@@ -590,6 +590,10 @@ pre {
   overflow: auto;
 }
 
+pre {
+  margin: 0px;
+}
+
 dl.class {
   background-color: #edf3f6;
 }

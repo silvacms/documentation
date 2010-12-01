@@ -7,8 +7,8 @@ Creating content types
 
    base
    views
-   xsltrender
    forms
    xml
+   xsltrender
    fields
    permission
