@@ -34,7 +34,7 @@ Site information
 
 .. currentmodule:: silva.core.interfaces.content
 
-You often wish to retrieve the root content of your current site in a
+You often need to retrieve the root content of your current site in a
 layout. We don't recommend to use ``get_root`` from
 :py:interface:`IRoot`. You should more use the following :term:`Zope
 adapter`:

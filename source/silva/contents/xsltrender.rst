@@ -2,6 +2,9 @@
 XSLT Renderer
 =============
 
+An :term:`XLST Renderer` can be used to customize the rendering of a
+:term:`Silva Document` or any other inheriting content type.
+
 You can create a new `XSLT <http://www.w3.org/TR/xslt>`_ renderer to
 transform your public view in a new way:
 

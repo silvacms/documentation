@@ -4,19 +4,18 @@ XML Import and Export
 =====================
 
 If you want to have your content, or a folder containing your content
-work with the XML import and export feature of Silva, you need to
+to work with the XML import and export feature of Silva, you need to
 write an XML importer and an XML exporter.
 
-.. xml import and export non-API sucks
 
 .. _xml-importer:
 
 XML Importer
 ------------
 
-Silva makes possible to import content from an XML file. To have this
+Silva makes possible to import content from an XML file. To enable this
 feature, you need to write an XML importer. Below is a simple example
-to load the simple content type *Blog*:
+to handle import the simple content type *Blog*:
 
 .. code-block:: python
    :linenos:

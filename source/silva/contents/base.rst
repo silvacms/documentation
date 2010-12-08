@@ -125,7 +125,6 @@ Registering a new content with Grok
 -----------------------------------
 
 You can register a new content using either :term:`Grok` or :term:`ZCML`.
-Content registration is discussed later on.
 
 .. note::
 

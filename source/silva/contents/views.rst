@@ -1,7 +1,7 @@
-Rendering your content to the public
-====================================
+Rendering your content
+======================
 
-You can display your content to the public by writing a view. This
+You can display your content by writing a view. This
 follows the well know pattern `Model-View-Controller`_.
 
 .. contents::
@@ -37,10 +37,10 @@ On line 5, the class ``BlogView`` implement your view. It inherits
 from ``silva.core.views.views.View`` (aliased as ``silvaviews.View``,
 *line 8*).
 
-On line 10, the :term:`Grok directive` :py:func:`grok.context` tells
+On line 9, the :term:`Grok directive` :py:func:`grok.context` tells
 the view which content to render, here the ``Blog`` content type.
 
-You can associate a page template to your view class, that will be
+You can associate a page template to your view class, it will be
 used to generate the HTML output:
 
 1. Create a template directory called ``blog_templates``. The name of
@@ -57,9 +57,14 @@ used to generate the HTML output:
       <div>My Blog <tal:replace tal:replace="view/title" /></div>
 
 As your template have the extension ``.pt``, it will interpreted as a
-`Zope Page Template`_. If you don't know anything about that template
-markup language, you can refer for the `Zope Page Template`_
-documentation for more information.
+`Zope Page Template`_. You can refer for the `Zope Page Template`_
+documentation for more information about using the template language.
+
+You might also want to use the ``.cpt`` extension which stands for
+`Chameleon Page Template`_. It is really close to the `Zope Page Template`_
+template language but has a more modern implementation and you may find
+it more flexible.
+
 
 Template Namespace
 ~~~~~~~~~~~~~~~~~~
@@ -292,3 +297,4 @@ From a python file, you can use the
 
 .. _Zope Page Template: http://docs.zope.org/zope2/zope2book/ZPT.html
 .. _Model-View-Controller: http://en.wikipedia.org/wiki/Model-View-Controller
+.. `Chameleon Page Template`_: http://chameleon.repoze.org/docs/latest/

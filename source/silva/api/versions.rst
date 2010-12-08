@@ -4,7 +4,7 @@ Versioned content Objects
 =========================
 
 Versioned content objects extends regular content objects to support
-different version of the same contents, and all related operations
+different version of the same content, and all related operations
 (like creating a new version, publishing, expiration of older,
 comparaisons).
 

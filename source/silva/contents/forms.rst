@@ -167,7 +167,7 @@ process you can do it:
 Creating an edit form
 ---------------------
 
-To create an edit form in :term:`SMI`, you need your content to edit
+To create an edit form in :term:`SMI`, you need a content to edit
 and a form description describing content fields. You can reuse the
 same content description than the add form, knowing that:
 
@@ -191,18 +191,18 @@ So you can create your edit form:
 
 On line 1, we create the edit form by inheriting from
 :py:class:`~zeam.form.silva.SMIEditForm`. Like for the add
-form, this class will be read by :term:`Grok` and register as an
+form, this class will be read by :term:`Grok` and registered as a
 :term:`SMI` edit form for you content. Like for the add form, the
 class *needs* to have a docstring to be published (Zope 2
 requirement).
 
 On line 4, we use the :term:`Grok directive` :py:func:`grok.context`
-to associate our edit form to our content. We don't change here the
+to associate our edit form to our content. We don't change the
 name of the form using the :term:`Grok directive`
 :py:func:`grok.name`, which by default is ``tab_edit`` (default
 :term:`SMI` edit form name).
 
-On line 6, we define which fields will be edited. Unlike for the add
+On line 6, we define which fields will be edited. Unlike the add
 form, we didn't used
 :py:interface:`~silva.core.conf.interfaces.ITitledContent`, we only
 used our content fields (``name``, ``comment`` and ``email``).
@@ -261,7 +261,7 @@ For this create your form by inheriting from:
       Form actions. Your form is not required to define actions using
       this attribute.
 
-   The next API can be used by actions to work on the form:
+   The following API can be used by actions to work on the form:
 
    .. attribute:: status
 
@@ -279,7 +279,7 @@ For this create your form by inheriting from:
       :return: a tuple containing the data and a list of potential errors.
 
 
-As example, we can make a contact form. We need first a form description:
+As example, we are creating a contact form. We first need a form description:
 
 .. code-block:: python
    :linenos:
@@ -353,7 +353,7 @@ and return a failure marker. If everything went alright, we have a
 Python :py:class:`dict` containing the form data, that we can work with.
 
 Apart from the class which you have to inherit from, public form works
-the same way than the other forms.
+the same way than other forms.
 
 Embedding a public form in a existing view
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -372,7 +372,7 @@ by inheriting from one of those classes instead of
 
    Create a form in a :term:`Viewlet`.
 
-Of course, you will to use the :term:`Grok directive`
+Of course, you will have to use the :term:`Grok directive`
 :py:func:`grok.view` and possibly :py:func:`grok.viewletmanager` to
 register them correctly.
 
@@ -384,7 +384,7 @@ register them correctly.
 Using more complex forms
 ------------------------
 
-More complicated forms can be created, like it is done for the access
+More complex forms can be created, it is for the access
 tab in the :term:`SMI`.
 
 Complex form components that can be used in the :term:`SMI` are:
@@ -392,7 +392,7 @@ Complex form components that can be used in the :term:`SMI` are:
 .. class:: zeam.form.silva.SMIComposedForm
 
    Create a composed form: the form is composed of other sub forms,
-   that can interact between each of them.
+   that can interact between each other.
 
 .. class:: zeam.form.silva.SMISubForm
 
@@ -413,7 +413,7 @@ Complex form components that can be used in the :term:`SMI` are:
    content.  This form can host table actions, that are executed
    against each selected lines upon form submission.
 
-   Like for :py:class:`~zeam.form.silva.SMISubForm`, it have to be
+   Like for :py:class:`~zeam.form.silva.SMISubForm`, it has to be
    associated to a :py:class:`~zeam.form.silva.SMIComposedForm` or a
    :py:class:`~zeam.form.silva.SMISubFormGroup` in order to be used.
 

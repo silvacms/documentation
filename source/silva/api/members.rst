@@ -2,7 +2,7 @@
 Security and User information
 =============================
 
-This described how to search and access member information, and change
+This document describes how to search and access member information, and change
 security settings.
 
 .. contents::
@@ -41,7 +41,7 @@ A group is defined by:
 .. versionadded:: 2.3
 
 
-Group objects can be retrieve using the ``service_groups``:
+Group objects can be retrieved using the ``service_groups``:
 
 .. autointerface:: silva.core.services.interfaces.IGroupService
 
