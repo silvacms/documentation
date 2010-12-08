@@ -6,7 +6,7 @@ Creating new Silva content
 Create a new content
 --------------------
 
-To create a new Silva content, you need to define a class that inherit
+To create a new Silva content, you need to define a class that inherits
 from one of the base content class of Silva, for instance
 :py:class:`Products.Silva.Asset.Asset`:
 
@@ -30,11 +30,11 @@ Creating a new versioned content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Versioned content are bit more tricky, as they are composed of two
-parts: the content class, and the version class. The first one
+parts: the **content** class, and the **version** class. The first one
 implements all content related behavior, and the later will just store
 the data.
 
-As example, you can imagine a blog article:
+As an example, you can imagine a blog article:
 
 .. code-block:: python
    :linenos:
@@ -69,9 +69,9 @@ All those base classes are usable to create new Silva content:
 
   Base for Silva content that should not directly appear to the
   public. You need to use this base class with either
-  ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` depending if
-  you wish to a non-folderish or folderish type of content. You can
-  refer to the
+  ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` if you want
+  your content to behave like a folder.
+  You can refer to the
   :py:interface:`~silva.core.interfaces.content.INonPublishable`
   interface for more information.
 
@@ -85,10 +85,10 @@ All those base classes are usable to create new Silva content:
 
   Base class for simple publicly viewable content.
 
-  Note that to directly use this base class, you still to inherit as
-  well of ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder``
-  depending if you wish a non-folderish or folderish type of
-  content. You can refer to the
+  Note that to directly use this base class, you still need to inherit from
+  ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` if you want
+  your content to behave like a folder.
+  You can refer to the
   :py:interface:`~silva.core.interfaces.content.IContent`
   interface for more information.
 
@@ -96,7 +96,7 @@ All those base classes are usable to create new Silva content:
 
   Base class for publicly viewable versioned content. For each
   versioned content, you have to create a version content inheriting
-  of :py:class:`~Products.Silva.Version.Version`, that should
+  :py:class:`~Products.Silva.Version.Version`. This should
   be used to effectively store the content data. You can refer to the
   :py:interface:`~silva.core.interfaces.content.IVersionedContent`
   interface for more information.
@@ -108,7 +108,6 @@ All those base classes are usable to create new Silva content:
   :py:class:`~Products.Silva.VersionedContent.VersionedContent`.  You
   can refer to :py:interface:`~silva.core.interfaces.content.IVersion`
   interface for more information.
-
 
 .. class:: Products.Silva.Folder.Folder
 
@@ -126,6 +125,7 @@ Registering a new content with Grok
 -----------------------------------
 
 You can register a new content using either :term:`Grok` or :term:`ZCML`.
+Content registration is discussed later on.
 
 .. note::
 
@@ -152,8 +152,8 @@ registered for you. You customize the registration using
 
 On line 6, the ``silvaconf.icon`` directive sets the pathname to an
 icon file (``GIF`` or ``PNG``) to use as content icon. On line 7, the
-priority of the content in the addable menu is changed with the help
-of ``silvaconf.priority``.
+priority of the content in the addable menu is changed with the directive
+``silvaconf.priority``.
 
 
 By default Silva will create a factory for your content.
@@ -166,7 +166,7 @@ By default Silva will create a factory for your content.
 
 However, you can still provide yourself your own factory function to
 customize the creation of your content. You have some responsibilities
-if you do it, as triggering some :term:`Zope event`:
+if you so, like triggering some :term:`Zope event`:
 
 .. code-block:: python
 
@@ -215,9 +215,9 @@ addable from ZMI:
 Versioned content
 ~~~~~~~~~~~~~~~~~
 
-Registering a new versioned content in Silva works exactly registering
+Registering a new versioned content in Silva works exactly like registering
 a regular content, except there is an additional :term:`Grok
-directive` needed to associate the version class to the versioned
+directive` is needed to associate the content class to the versioned
 content class:
 
 .. code-block:: python
@@ -243,7 +243,7 @@ Registering a new content with ZCML
 -----------------------------------
 
 :term:`Grok` registration should be preferred over :term:`ZCML`
-registration, but if you wish, you can still use :term:`ZCML` to
+registration, but if you want to, you can still use :term:`ZCML` to
 register your contents.
 
 
@@ -283,7 +283,7 @@ regular content to be registered:
 Adding a new content using Python code
 --------------------------------------
 
-After you created and registered your content in Zope, you can, in
+After you created and registered your content in Zope, you can, with
 Python code add a new content in the container of your choice:
 
 .. code-block:: python
@@ -299,9 +299,8 @@ the extension. On line 2, we invoke the factory to create a new
 
 .. note::
 
-   Not only extension content are added into Zope like this, official
-   Silva content as well. For instance to add a new folder, you should
-   do:
+   Not only extension content are added into Zope this way, official
+   Silva content as well. For instance, here follows how to add a new folder.
 
    .. code-block:: python
 
