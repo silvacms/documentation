@@ -297,4 +297,4 @@ From a python file, you can use the
 
 .. _Zope Page Template: http://docs.zope.org/zope2/zope2book/ZPT.html
 .. _Model-View-Controller: http://en.wikipedia.org/wiki/Model-View-Controller
-.. `Chameleon Page Template`_: http://chameleon.repoze.org/docs/latest/
+.. _Chameleon Page Template: http://chameleon.repoze.org/docs/latest/
