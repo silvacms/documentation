@@ -3,11 +3,8 @@
 Creating content objects
 ========================
 
-Okay, the favorite. Lets make a simple blog in Silva!
-
-To start we'll create a module called 'article.py'. in the products
-directory of your Builout tree. The article.py will function as a blog
-article.
+To illustrate that, lets create a module called `article.py` in your
+product. This module will contain a new content object for Silva:
 
 .. code-block:: python
 
@@ -20,25 +17,14 @@ article.
   class ArticleVersion(CatalogedVersion):
       meta_type = 'Silva Blog Article Version'
 
-The first thing we do here is import two Classes that handle cataloged
-content meaning it will be 'searchable'.
+We assume here that you want to create a versioned content object.
+Versioned content types consist of a versioned object (``Article`` in
+this example) and associated version objects (``ArticleVersion``). The
+``meta_type`` is a class attribute identifying a content type in Zope
+2, and should be unique for each content type.
 
-.. note::
-
-   Cataloging has nothing to do with *saving* objects.
-
-Since most blogs allow for searchable content, we'll create that same
-functionality for our example.
-
-Versioned content types consist of a versioned object, in this example
-``Article``, which is associated to versions of an object
-(``ArticleVersion``). ``meta_type`` is a class attribute that
-identifies a content type in Zope2. The ``meta_type`` class attribute
-should be unique for each content type you create.
-
-Now lets go on to create another module call 'blog.py'. In the
-``blog.py`` module we'll create a non-versioned 'container' or
-'folderish' type (see :ref:`folders`).
+We are going to create a second module ``blog.py`` which is going to
+contain a non-versioned folderish type:
 
 .. code-block:: python
 
@@ -47,59 +33,48 @@ Now lets go on to create another module call 'blog.py'. In the
   class Blog(Publication):
       meta_type = 'Silva Blog'
 
-Available Silva bases classes
------------------------------
 
-All Silva base classes are located in Silva, ``Products.Silva``.
+Available bases classes
+-----------------------
 
-.. toctree::
-   :maxdepth: 1
-
-   api/assets
-   api/folders
-   api/versions
+All these class are located in Silva, ``Products.Silva`` python package.
 
 ``Asset.Asset``
 
-  ``File`` and ``Image`` are subclasses of the ``Assets`` class.
+  Basic asset, like file (``File.File``) or image (``Image.Image``).
 
 ``Folder.Folder``
 
   Basic folderish item. A Publication (``Publication.Publication``) is
-  a subclass of Folder, and is recommended for main application container.
+  a subclass of it, and is recommended for main application container.
 
 ``VersionedContent.VersionedContent``
 
-  Basic versioned content. You have to create a version object
+  A basic versioned content. You have to create a version object
   inheriting of ``Version.Version``.
 
 ``VersionedContent.CatalogedVersionedContent``
 
   Extension of the basic versioned content to support catalog. The
-  cataloged version object should inherit of
-  ``Version.CatalogedVersion``.
+  version object should inherit of ``Version.CatalogedVersion``.
 
-Registering your content
-------------------------
 
-To register our content type we'll use the ``silva.core.conf``
-package.
 
-``silva.core.conf`` is an extension which lets you configure and
-register Silva contents and extensions using either Grok or ZCML.
+
+Use Grok to register your content
+---------------------------------
 
 Regular content
 ~~~~~~~~~~~~~~~
 
-All content in Silva inherits from ``Asset`` or ``Folder`` so when
-making your own content you simply have to inherit from a Silva
-content object.
+If your content inherit from ``Asset`` or ``Folder``, that's done. All
+content in Silva does, so you just have to inherit from one Silva
+content to make yours.
 
-Lets add some directives in your Python code:
+You can add some directive in your Python code:
 
 .. code-block:: python
 
-   from silva.core import conf as silvaconf
    from Products.Silva.Publication import Publication
 
    class Blog(Publication):
@@ -123,33 +98,31 @@ set `title` on it using the Silva method ``set_title``.
 Versioned content
 ~~~~~~~~~~~~~~~~~
 
-This works like regular content, your content must inherit from
-VersionedContent. You must specify which class should be used as
-version of your content:
+This work like a regular content, your content have to inherit of
+VersionedContent. You have to specify in this last one which class
+should be used as version of your content:
 
 .. code-block:: python
 
-   from silva.core import conf as silvaconf
    from Products.Silva.VersionedContent import VersionedContent
    from Products.Silva.Version import Version
 
    class ArticleVersion(Version):
-       ...
+      ...
 
    class Article(VersionedContent):
-       ...
-       # Register a directive.
-       silvaconf.versionClass(ArticleVersion)
+      ...                                  # Other registration directives
+      silvaconf.versionClass(ArticleVersion)
 
-Just like for regular content, you can provide a factory for your
-versioned content, *in* ``Article``:
+
+Like for regular content, you can as well provide a factory for your
+version content, *in* ``Article``:
 
 .. code-block:: python
 
-   class Article(VersionedContent):
-       ...
-       # Register a factory.
-       silvaconf.versionFactory('manage_addArticleVersion')
+
+      silvaconf.versionFactory('manage_addArticleVersion')
+
 
 Use ZCML to register your content
 ---------------------------------
@@ -157,36 +130,23 @@ Use ZCML to register your content
 Regular content
 ~~~~~~~~~~~~~~~
 
-First in the products directory you must create a 'configure.zcml'
-file this file will register your new content type with Zope.
-
-.. code-block:: xml
-
-   <configure
-     xmlns="http://namespaces.zope.org/zope"
-     xmlns:five="http://namespaces.zope.org/five"
-     xmlns:silva="http://infrae.com/ns/silvaconf"
-     xmlns:browser="http://namespaces.zope.org/browser">
-
-   </configure>
-
-This ``zcml`` file will not work because we haven't actually connected
-anything. But each ``configure.zcml`` must have at least the these
-tags.
-
-Now in the ``configure.zcml`` add this to register your content type:
+In your ``configure.zcml`` add this to register your content type:
 
 .. code-block:: xml
 
   <silva:content
     extension_name="SilvaBlog"
     content=".blog.Blog"
-    icon="blog.png"/>
+    icon="blog.png"
+    />
+
+The `icon` attribute may be left out.
 
 Versioned content
 ~~~~~~~~~~~~~~~~~
 
-Now lets add the versioned content to your ``configure.zcml``.
+In your ``configure.zcml`` add this to register your versioned content
+type:
 
 .. code-block:: xml
 
@@ -196,6 +156,9 @@ Now lets add the versioned content to your ``configure.zcml``.
     version=".article.ArticleVersion"
     icon="article.png"
     />
+
+Again, `icon` is optional.
+
 
 .. note::
 

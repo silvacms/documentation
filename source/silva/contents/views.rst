@@ -28,7 +28,7 @@ create a public view like this:
             return self.content.get_title()
 
 The class ``BlogPublicView`` represents your view. It inherits from
-``silva.core.conf.View`` (aliased as ``silvaviews``) *(line 8)*. The
+``silva.core.views.views.View`` (aliased as ``silvaviews``) *(line 8)*. The
 configuration directive ``grok.context`` tells the view which class to
 work on *(line 10)*. You can specify an interface with your content as
 well (for example *IBlog*, assuming you have created and IBlog

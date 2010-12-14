@@ -12,7 +12,7 @@ Specific upgrades notes for specific Silva versions
 Silva 2.2 upgrade notes
 -----------------------
 
-First install Silva using buildout. After, *before* starting your
+First install Silva using buildout. After, *before* starting your Zope
 instance, run ``zodbupdate`` on every database you have:
 
 .. code-block:: sh
