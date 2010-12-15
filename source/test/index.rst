@@ -43,7 +43,8 @@ To see the other options, you can use the ``--help`` option of the
 Writing a new test
 ------------------
 
-Tests are written using the Python :py:mod:`unittest` framework.
+Tests are written using the Python :py:mod:`unittest` framework. To
+run the tests, `zope.testrunner`_ is used.
 
 All modules containing tests should have the prefix ``test_`` in their
 module name, and be located in a ``tests`` sub-package of the tested
@@ -104,3 +105,6 @@ Documentation on test API
 
    layers
    helpers
+
+.. _zope.testrunner: http://pypi.python.org/pypi/zope.testrunner
+
