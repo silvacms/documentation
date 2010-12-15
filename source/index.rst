@@ -57,3 +57,9 @@ Also, please feel free to report your experience here:
 - Silva mailing lists: https://lists.infrae.com
 
 - IRC chat: ``#silva`` on irc.freenode.net
+
+Appendices
+----------
+
+* :ref:`genindex`
+* :ref:`search`

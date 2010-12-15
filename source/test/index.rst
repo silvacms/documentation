@@ -1,6 +1,8 @@
 Tests in Silva
 ==============
 
+.. contents::
+
 
 How to run the Silva test suite
 -------------------------------
@@ -41,11 +43,13 @@ To see the other options, you can use the ``--help`` option of the
 Writing a new test
 ------------------
 
-All test modules should have the prefix ``test_`` in the module name,
-and be located in a ``tests`` sub-package of the package that you want
-to test.
+Tests are written using the Python :py:mod:`unittest` framework.
 
-Hereby a example of a functional test that need a Silva site:
+All modules containing tests should have the prefix ``test_`` in their
+module name, and be located in a ``tests`` sub-package of the tested
+package.
+
+In a testing module, you can rewrite a test case like this:
 
 .. code-block:: python
   :linenos:
@@ -53,7 +57,7 @@ Hereby a example of a functional test that need a Silva site:
   from Products.Silva.testing import FunctionalLayer
   import unittest
 
-  class RootSilvaTestCase(unittest.TestCase):
+  class SilvaTestCase(unittest.TestCase):
       layer = FunctionalLayer
 
       def setUp(self):
@@ -65,13 +69,31 @@ Hereby a example of a functional test that need a Silva site:
 
   def test_suite():
       suite = unittest.TestSuite()
-      suite.addTest(unittest.makeSuite(TestSilvaTestCase))
+      suite.addTest(unittest.makeSuite(SilvaTestCase))
       return suite
 
+On line 4, we create a new test case by inheriting from the
+:py:class:`unittest.TestCase` class. On line 5, we set the :term:`test
+layer` to be the Silva
+:py:data:`~Products.Silva.testing.FunctionalLayer`, that will create a
+Silva test site for our testing.
 
-The default Python ``unittest`` framework is used for testing. You can
-get more information about writing tests in Python on the `Python
-website <http://docs.python.org/lib/module-unittest.html>`_.
+On line 7 to 9, we set up ``self.root`` to be the root of the Silva
+site, and we logged into Zope as the user *author*.
+
+On line 14 to 17, we declare in a ``test_suite`` function which test
+case we want to be run. This is not required, if we didn't do that,
+all classes inheriting from :py:class:`unittest.TestCase` from the
+current would have been considered as test case to run while running
+the tests.
+
+.. glossary::
+
+   *test layer*
+      A test layer factorize in a class all the code needed to set up
+      and cleanup the test environment before and after the test is
+      run. This let you reuse and extend at will complex set up code
+      need to be able to run your test.
 
 
 Documentation on test API
@@ -80,4 +102,5 @@ Documentation on test API
 .. toctree::
    :maxdepth: 2
 
+   layers
    helpers

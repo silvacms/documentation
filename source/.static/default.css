@@ -581,6 +581,8 @@ th {
 dl.class,
 dl.interface,
 dl.event,
+dl.function,
+dl.data,
 pre {
   padding: 5px;
   background-color: #efc;
