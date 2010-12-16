@@ -4,14 +4,15 @@ Tests in Silva
 .. contents::
 
 
-How to run the Silva test suite
--------------------------------
+Running existing Silva tests
+----------------------------
 
-If you used the Buildout profile ``development.cfg`` or
+If you used the :term:`Buildout` profile ``development.cfg`` or
 ``silva-development.cfg`` you should have tests scripts installed in
-the ``bin`` folder of your Buildout directory.
+the ``bin`` folder of your :term:`Buildout` directory.
 
-To run all the Silva tests you can use the ``test-all`` script:
+To run all the existing Silva tests you can just run the ``test-all``
+script:
 
 .. code-block:: sh
 
@@ -24,8 +25,8 @@ the option ``-s``:
 
   $ ./bin/test -s Products.Silva
 
-Or if you which to run tests only in a file, you can use the same
-``test`` script, with the ``-m`` option:
+Or if you which to run only a test file, you can use the same ``test``
+script, with the ``-m`` option:
 
 .. code-block:: sh
 
@@ -39,12 +40,54 @@ To see the other options, you can use the ``--help`` option of the
 
   $ ./bin/test --help
 
+.. _creating-a-test-script:
+
+Creating a new test script in Buildout
+--------------------------------------
+
+If you whish to test a new extension, you need to create a
+`zope.testrunner`_ script to run this extension tests. You can do this
+in :term:`Buildout` by adding a new section using the
+`zc.recipe.testrunner`_ recipe:
+
+.. code-block:: buildout
+   :linenos:
+
+   [buildout]
+   parts +=
+      blog_tests
+
+   [blog_tests]
+   recipe = zc.recipe.testrunner
+   eggs =
+      silva.app.blog
+   defaults = ['-v']
+
+On line 5 through 9 we define a section which create our test script,
+``blog_tests``. On line 7 we give a list of extension we want to test,
+here ``silva.app.blog``. On line 9, we give some default options to
+the test runner, here to be verbose by default.
+
+To know more about the test script options, you can use ``--help`` on
+the created script:
+
+.. code-block:: sh
+
+   $ ./bin/blog_tests --help
+
+To run the tests, like for the existing Silva tests, just un the script:
+
+.. code-block:: sh
+
+   $ ./bin/blog_tests
+
 
 Writing a new test
 ------------------
 
 Tests are written using the Python :py:mod:`unittest` framework. To
-run the tests, `zope.testrunner`_ is used.
+run them, `zope.testrunner`_ is used (please refer to
+:ref:`creating-a-test-script` in order to know how to run them).
 
 All modules containing tests should have the prefix ``test_`` in their
 module name, and be located in a ``tests`` sub-package of the tested
@@ -107,4 +150,4 @@ Documentation on test API
    helpers
 
 .. _zope.testrunner: http://pypi.python.org/pypi/zope.testrunner
-
+.. _zc.recipe.testrunner: http://pypi.python.org/pypi/zc.recipe.testrunner
