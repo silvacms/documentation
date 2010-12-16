@@ -279,6 +279,8 @@ regular content to be registered:
      / >
 
 
+.. _adding-a-content-python:
+
 Adding a new content using Python code
 --------------------------------------
 

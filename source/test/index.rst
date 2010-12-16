@@ -82,6 +82,8 @@ To run the tests, like for the existing Silva tests, just un the script:
    $ ./bin/blog_tests
 
 
+.. _writing-a-new-test:
+
 Writing a new test
 ------------------
 
@@ -146,7 +148,7 @@ Documentation on test API
 .. toctree::
    :maxdepth: 2
 
-   layers
+   api
    helpers
 
 .. _zope.testrunner: http://pypi.python.org/pypi/zope.testrunner

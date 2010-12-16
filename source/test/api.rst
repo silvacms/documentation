@@ -85,11 +85,76 @@ Layer definition
    and more.
 
 
+Functional testing
+------------------
+
+With the test layer, you can easily write functional tests. The method
+:py:meth:`SilvaLayer.get_brower` will let you retrieve a Python web
+browser: mangable via your test script, it will behave like a real web
+browser from the point of view of the Silva application (without
+Javascript support however).
+
+Using this browser, you will be able to browser your application,
+login, logout, fill and post forms and analyze page content in order
+to verify that application behave like expected.
+
+As an example:
+
+.. code-block:: python
+   :linenos:
+
+   import unittest
+   from Products.Silva.testing import FunctionalLayer, smi_settings
+
+   class FunctionalTestCase(unittest.TestCase):
+       layer = FunctionalLayer
+
+       def setUp(self):
+           self.root = self.layer.get_application()
+           self.layer.login('author')
+
+       def test_folder_smi(self):
+           factory = self.root.manage_addProduct['Silva']
+           factory.manage_addFolder('folder', 'Folder')
+           browser = self.layer.get_browser(smi_settings)
+           self.assertEqual(browser.open('/folder/edit'), 401)
+           browser.login('author')
+           self.assertEauql(browser.open('/folder/edit'), 200)
+
+Up to line 11, we define a new test case like we did in
+:ref:`writing-a-new-test`. Line 11 to 17 represent our functional
+test. Fist we add a folder into our test site (line 12 and 13),
+following what we explained in :ref:`adding-a-content-python`.
+
+On line 14, we create a browser to test our application, using the smi
+settings. First on line 15 we are going to try to access the SMI for
+the created folder, but fail are we are not authenticated with our
+browser.
+
+.. warning::
+
+   Authentication in the test case done with
+   :py:class:`SilvaLayer.login` doesn't apply on the test browser. You
+   can be logged in the test browser and not in the test case and vice
+   versa.
+
+On line 16 we login with the browser (set the authentication header in
+other words), and try again to access the SMI for the created folder
+on line 17, expected success this time.
+
+For a complete documentation about the browser API, please refer to
+the `infrae.testbrowser.browser.Browser`_ documentation.
+
 Mail testing
 ------------
 
-Test might need to test email features. For this, the Silva
-``service_mailhost`` have been mocked using the following classes:
+You might want to test code that sends emails. For this, the Silva
+mail service (``service_mailhost``) have been mocked using
+:py:class:`MockMailHost`. After testing your code, you can use the
+`service_mailhost` to check if your code did send the messages like
+expected, and if the content of those messages is correct.
+
+The API for your tests provided by the mock email service is:
 
 .. py:class:: MockMailHost
 
@@ -111,6 +176,8 @@ Test might need to test email features. For this, the Silva
 
       Return the last sent message, or None. If messages where sent,
       they are all removed.
+
+Sent email messages are represented with:
 
 .. py:class:: MockMail
 
