@@ -75,13 +75,13 @@ And the following command can tell you if Silva is running.
 Running in development mode
 ---------------------------
 
-If you want use you silva instance for development, you can run Silva in 
+If you want use you silva instance for development, you can run Silva in
 development mode. To achieve this, you have to use ``debug.ini``
 configuration file instead of ``deploy.ini`` when starting paster.
 In development mode all caches are disabled, and a interactive debugger
 can help your do debug errors by allowing you to introspect python backtrace.
 
-You can for instance run Zope in foreground mode and debug::
+You can for instance run Zope in foreground mode and debug:
 
 .. code-block:: sh
 
