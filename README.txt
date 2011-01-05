@@ -1,7 +1,7 @@
 
 How to create the documentation ?
 
- $ python2.4 bootstrap.py
+ $ python2.6 bootstrap.py
  $ ./bin/buildout
  $ make html
 
