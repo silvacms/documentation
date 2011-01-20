@@ -34,7 +34,7 @@ Some helpers can be used in your test to accomplish some common actions:
 
 .. function:: test_filename(filename, globs=None)
 
-   :param filename: name of the file in the ``data` sub-directory of the current python module
+   :param filename: name of the file in the ``data`` sub-directory of the current python module
    :param globs: globals of the current python module to determine the position of the ``data`` sub-directory
 
    Return the full path to the given test file.
