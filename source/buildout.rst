@@ -24,8 +24,8 @@ operating system:
 
 .. warning::
 
-   These are all required. If they are not installed, you won't be to
-   install Silva.
+   These are all required. If they are not installed, you won't be
+   able to install Silva.
 
 Installing quick drive Silva with Paster and ZopeSkel
 -----------------------------------------------------
