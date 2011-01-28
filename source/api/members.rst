@@ -23,13 +23,16 @@ Some members have the right to modify their own information:
 
 .. versionadded:: 2.2
 
-.. autoexception:: silva.core.services.interfaces.MemberLookupError
-
-.. versionadded:: 2.3.1
 
 Those members objects can be retrieved using the ``service_members``:
 
 .. autointerface:: silva.core.services.interfaces.IMemberService
+
+This error can be triggered:
+
+.. autoexception:: silva.core.services.interfaces.MemberLookupError
+
+.. versionadded:: 2.3.1
 
 
 Group Objects
