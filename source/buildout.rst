@@ -220,7 +220,7 @@ Run the following command to fetch files from SVN:
 
 .. code-block:: sh
 
-   $ svn co https://svn.infrae.com/buildout/silva/tag/Silva-2.1 Silva
+   $ svn co https://svn.infrae.com/buildout/silva/tag/Silva-2.2 Silva
 
 You can consult the ``README.txt`` file in the newly created ``Silva``
 directory which contains additional information for the specific Silva
@@ -320,13 +320,13 @@ To change the version of Silva your are running on the file-system:
 
 - if you have an SVN checkout, you can switch Silva versions by
   running ``svn switch``, for instance to upgrade to the version
-  ``2.1.10``:
+  ``2.2.1``:
 
    .. code-block:: sh
 
       $ cd Silva
       $ ./bin/instance stop
-      $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.1.10
+      $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.2.1
       $ ./bin/buildout
 
 - if you made your own buildout profile that refers directly to the
