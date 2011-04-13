@@ -188,7 +188,7 @@ Add this to ``__init__.py`` file of your extension:
       """Marker interface for our extension.
       """
 
-  install = BlogInstaller("SilvaBlog", IBlogExtension)
+  install = BlogInstaller("silva.app.blog", IBlogExtension)
 
 The first argument to the install object is the name of our extension
 `SilvaBlog`. The second is the marker interface.
@@ -286,7 +286,7 @@ yet:
 
     <include package="silva.core.conf" />
     <silva:extension
-      name="SilvaBlog"
+      name="silva.app.blog"
       title="Silva Blog"
       />
 
