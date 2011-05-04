@@ -941,7 +941,15 @@ form.comment textarea {
     background: #fff;
     font-size: 12pt;
   }
-  .bodywrapper {
+  div.documentwrapper {
+    margin: 0;
+    margin-left: 2%;
+    padding-top: 1em;
+    border-top: 1px solid #930;
+    background-color: #fff;
+    width : 100%;
+  }
+  div.bodywrapper {
     width: auto;
     margin: 0 5%;
     padding: 0;
@@ -952,14 +960,6 @@ form.comment textarea {
   }
   div.body {
     background-color: #fff;
-  }
-  div.documentwrapper {
-    margin: 0;
-    margin-left: 2%;
-    padding-top: 1em;
-    border-top: 1px solid #930;
-    background-color: #fff;
-    width : 100%;
   }
   a:link, a:visited {
     color: #520;
