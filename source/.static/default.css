@@ -747,11 +747,6 @@ form.comment textarea {
     content: " (" attr(href) ") ";
     font-size: 90%;
   }
-  /*
-  .document a[href^="/"]:after {
-    content: " (http://docs.infrae.com" attr(href) ") ";
-  }
-*/
 
   div.sphinxsidebar,
   div.related,
