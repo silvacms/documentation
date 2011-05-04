@@ -955,7 +955,7 @@ form.comment textarea {
   }
   div.documentwrapper {
     margin: 0;
-    margin-left: 10%;
+    margin-left: 2%;
     padding-top: 1em;
     border-top: 1px solid #930;
     background-color: #fff;
@@ -971,11 +971,6 @@ form.comment textarea {
     content: " (" attr(href) ") ";
     font-size: 90%;
   }
-  /*
-  .document a[href^="/"]:after {
-    content: " (http://docs.infrae.com" attr(href) ") ";
-  }
-*/
 
   div.sphinxsidebar,
   div.related,
