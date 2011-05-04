@@ -712,18 +712,58 @@ form.comment textarea {
 
 /* :::: PRINT :::: */
 @media print {
-    div.document,
-    div.documentwrapper,
-    div.bodywrapper {
-        margin: 0;
-        width : 100%;
-    }
 
-    div.sphinxsidebar,
-    div.related,
-    div.footer,
-    div#comments div.new-comment-box,
-    #top-link {
-        display: none;
-    }
+  body {
+    background: white;
+    font-size: 12pt;
+  }
+
+  a:link, a:visited {
+    color: #520;
+    background: transparent;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  /*
+     .document a[href^="/"]:after {
+    content: " (http://docs.infrae.com" attr(href) ") ";
+  }
+  */
+
+  .document a:link:after, .document a:visited:after {
+    content: " (" attr(href) ") ";
+    font-size: 90%;
+  }
+
+  div.document {
+    background-color: #fff;
+  }
+
+  div.bodywrapper {
+    margin-left: 10%;
+    padding-top: 1em;
+    border-top: 1px solid #930;
+  }
+
+  div.body {
+    background-color: #fff;
+  }
+
+  div.document,
+  div.documentwrapper,
+  div.bodywrapper {
+    margin: 0;
+    width : 100%;
+  }
+
+  div.sphinxsidebar,
+  div.related,
+  div.footer,
+  div#comments div.new-comment-box,
+  #disqus_thread,
+  #top-link,
+  img {
+    display: none;
+  }
 }
