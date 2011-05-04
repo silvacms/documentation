@@ -937,50 +937,47 @@ form.comment textarea {
 /* :::: PRINT :::: */
 @media print {
 
-
   body {
-    background: white;
+    background: #fff;
     font-size: 12pt;
   }
-
+  div.document {
+    margin: 0;
+    width : 100%;
+  }
+  .bodywrapper, .documentwrapper {
+    width: auto;
+    margin: 0 5%;
+    padding: 0;
+    border: 0;
+    float: none !important;
+    color: black;
+    background: transparent none;
+  }
+  div.body {
+    background-color: #fff;
+  }
+  div.document {
+    margin-left: 10%;
+    padding-top: 1em;
+    border-top: 1px solid #930;
+    background-color: #fff;
+  }
   a:link, a:visited {
     color: #520;
     background: transparent;
     font-weight: bold;
     text-decoration: underline;
   }
-
-  /*
-     .document a[href^="/"]:after {
-    content: " (http://docs.infrae.com" attr(href) ") ";
-  }
-  */
-
   .document a:link:after, .document a:visited:after {
     content: " (" attr(href) ") ";
     font-size: 90%;
   }
-
-  div.document {
-    background-color: #fff;
+  /*
+  .document a[href^="/"]:after {
+    content: " (http://docs.infrae.com" attr(href) ") ";
   }
-
-  div.bodywrapper {
-    margin-left: 10%;
-    padding-top: 1em;
-    border-top: 1px solid #930;
-  }
-
-  div.body {
-    background-color: #fff;
-  }
-
-  div.document,
-  div.documentwrapper,
-  div.bodywrapper {
-    margin: 0;
-    width : 100%;
-  }
+*/
 
   div.sphinxsidebar,
   div.related,
@@ -991,6 +988,5 @@ form.comment textarea {
   img {
     display: none;
   }
-
 
 }
