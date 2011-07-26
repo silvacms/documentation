@@ -101,6 +101,11 @@ And ``libxml2``/``libxslt``:
    $ sudo port -v install libxml2
    $ sudo port -v install libxslt
 
+As well we recommand to install ``file`` in order to get ``libmagic``:
+
+.. code-block:: sh
+
+   $ sudo port -v install file
 
 Installation under FreeBSD
 --------------------------
