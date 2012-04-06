@@ -182,7 +182,7 @@ We also add some extra navigation code for this design to create a top menu:
                      'url': absoluteURL(content, self.request)}
 
 
-We create our advanced design based on porto.Layout):
+We create our advanced design based on porto.Layout:
 
 ::
 
