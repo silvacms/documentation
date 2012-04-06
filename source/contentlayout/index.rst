@@ -3,25 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Creating a content layout for different page designs
-====================================================
+Content Layout Demo product overview
+====================================
 
-The 'silva.demo.contentlayout' product contains several files and folders. The demo product makes it possible to set several page designs in Silva.
+The demo product makes it possible to get several page designs in Silva.
+The 'silva.demo.contentlayout' product contains several files and folders.
 
-templates
----------
+``templates``
 
-Folder where templates .pt, .cpt and .upt are located.
+  Folder where templates .pt, .cpt and .upt are located.
 
-static
-------
+``static``
 
-Folder where static resources like css and javascript files are located.
+  Folder where static resources like css and javascript files are located.
 
-templates.py
-------------
+``templates.py``
 
-A python file in which two designs are defined.
+  A python file in which two designs are defined.
 
 We start by setting a resource directory where the templates are located.
 
@@ -29,12 +27,12 @@ We start by setting a resource directory where the templates are located.
 
   grok.templatedir('templates')
 
-It also defines two designs, one simple design called 'OneColumn', and one slighly more complex design called 'TwoColumns'.
+The python file also defines two designs, a simple design called 'OneColumn', and a slightly more complex design with 'TwoColumns'.
 
 Simple design
 ~~~~~~~~~~~~~
 
-The simple design will use one template which gets filled by one slot.
+The simple design uses one template which gets filled by one slot:
 
 .. py:class:: OneColumn(Template)
 
@@ -49,14 +47,14 @@ The simple design will use one template which gets filled by one slot.
       description = _(u"A simple one column design")
       slots = {'main': Slot()}
 
-This simple design has it's own icon 'one_column.png' located in the root of the product, a description and one slot called 'main'. As the name is 'OneColumn' it will automatically use a template called 'onecolumn.upt' from the 'templates' folder. You can specify the ordering of components by setting the Grok.order('numeric value'). This order will be used in Silva for the design selection.
+This simple design has it's own icon 'one_column.png' located in the root of the product, a description and one slot called 'main'. As the name is 'OneColumn' it will automatically use a template called 'onecolumn.upt' from the 'templates' folder. You can specify the ordering of components by setting the ``Grok.order('numeric value')``. This order will be used in Silva for the design selection.
 
 Complex design
 ~~~~~~~~~~~~~~
 
 As with the first OneColumn design this second design will also use a CSS resource 'two_columns.css' and has two slots 'one' and 'two'.
 
-To add the css we must create an interface.
+To add the css we must create an interface:
 
 .. py:class:: ITwoColumnsResources(IDefaultBrowserLayer)
 
@@ -109,7 +107,7 @@ We set the design so it can only be set on a Page:
       """
       silvaconf.only_for(IPage)
 
-We register its CSS resource it will use:
+We register the CSS resource it will use:
 
 .. py:class:: IAdvancedResources(IDefaultBrowserLayer)
 
@@ -143,7 +141,7 @@ We set a marker for it:
 
       markers = [IAdvancedTemplate]
 
-We create a set of slots and apply restrictions on it:
+We create a set of slots and apply restrictions on them:
 
 ::
 
