@@ -32,6 +32,7 @@ if possible on Zope.
 
    extension/index
    layout/index
+   contentlayout/index
    contents/index
    services
    api/index
