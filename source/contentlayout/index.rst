@@ -3,25 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Content Layout Demo's Documentation
-==============================================
-
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-Content Layout Demo product overview
-====================================
+Creating a Content layout
+=========================
 
 The 'silva.demo.contentlayout' product contains several files and folders. The demo product makes it possible to set several page layouts in Silva.
 
