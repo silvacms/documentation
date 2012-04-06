@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Creating a Content layout
-=========================
+Creating a content layout for different page designs
+====================================================
 
-The 'silva.demo.contentlayout' product contains several files and folders. The demo product makes it possible to set several page layouts in Silva.
+The 'silva.demo.contentlayout' product contains several files and folders. The demo product makes it possible to set several page designs in Silva.
 
 templates
 ---------
