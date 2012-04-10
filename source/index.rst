@@ -3,6 +3,10 @@ Silva Documentation
 
 .. contents::
 
+If you find any bugs regarding this documentation, please report them
+on https://launchpad.net/silva-documentation.
+
+
 Installation and Administration
 -------------------------------
 
