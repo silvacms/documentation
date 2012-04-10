@@ -29,8 +29,8 @@ extensions = [
     'sphinxcontrib.infrae']
 
 intersphinx_mapping = {
-    'grok': ('http://grok.zope.org/doc/1.2.1', None),
-    'python': ('http://docs.python.org/release/2.6.6/', None),
+    'grok': ('http://grok.zope.org/doc/1.4.1', None),
+    'python': ('http://docs.python.org/release/2.7.2/', None),
     }
 
 # inheritance_graph_attrs = dict(rankdir="TB", size='"20, 20"', fontsize=14)
@@ -46,15 +46,15 @@ master_doc = 'index'
 
 # General substitutions.
 project = 'Infrae Documentation Center'
-copyright = '2008-2010, Infrae'
+copyright = '2008-2012, Infrae'
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
 #
 # The short X.Y version.
-version = '2.3'
+version = '3.0'
 # The full version, including alpha/beta/rc tags.
-release = '2.3'
+release = '3.0'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
