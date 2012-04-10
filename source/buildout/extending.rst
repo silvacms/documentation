@@ -3,6 +3,8 @@
 Extending and customising your installation with Buildout
 =========================================================
 
+TODO: this
+
 You can additional configuration information in the ``buildout.cfg``
 file, or create your own default configuration to use in
 ``buildout.cfg``.
@@ -21,20 +23,14 @@ using *sections*. For example a part looks like this:
    # options ...
 
 Each section is responsible for installing a part of the software,
-usually in the ``parts`` directory of the buildout. For example a
-``zope2`` section takes care of installing Zope 2. An ``instance``
-section takes care of creating a Zope instance. See the example taken
-from ``profiles/base.cfg``:
+usually in the ``parts`` directory of the buildout. For example An
+``instance`` section takes care of creating a Zope instance. See the
+example taken from ``profiles/base.cfg``:
 
 .. code-block:: buildout
    :linenos:
 
    [buildout]
-   # options ...
-
-   [zope2]
-   recipe = other.recipe
-   name = Zope 2
    # options ...
 
    [instance]
@@ -63,7 +59,7 @@ recipes on the `PyPi`_ repository.
 .. code-block:: buildout
 
    [zope2]
-   recipe = plone.recipe.zope2install
+   recipe = plone.recipe.zope2instance
 
 .. note::
 
@@ -80,12 +76,8 @@ are mentioned:
 
    [buildout]
    parts =
-      zope2
       products
       instance
-
-   [zope2]
-   # options
 
    [products]
    # options
@@ -93,8 +85,8 @@ are mentioned:
    [instance]
    # options
 
-Line 2 to 5 will trigger the installation of the ``zope2`` section, then
-the ``products`` section and lastly the ``instance`` section.
+Line 2 to 4 will trigger the installation of the ``products`` section
+and lastly the ``instance`` section.
 
 
 Extending a buildout configuration file
@@ -169,7 +161,7 @@ install.
    To re-create your environment you just need to keep your buildout
    configuration file. You can do a Subversion checkout of a new Silva
    buildout tree, put your ``buildout.cfg`` in that directory, run
-   ``python2.6 bootstrap.py`` and after ``./bin/buildout`` to
+   ``python2.7 bootstrap.py`` and after ``./bin/buildout`` to
    re-create exactly the same environment.
 
 

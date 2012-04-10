@@ -85,14 +85,14 @@ with the python version you want to use. For example under Unix:
 
    $ cd /tmp
    $ wget http://peak.telecommunity.com/dist/ez_setup.py
-   $ sudo python2.6 ez_setup.py
+   $ sudo python2.7 ez_setup.py
 
 Now that :term:`Setuptools` is installed, you can use the newly
 installed script ``easy_install`` to install :term:`ZopeSkel`:
 
 .. code-block:: sh
 
-   $ sudo easy_install-2.6 -U ZopeSkel
+   $ sudo easy_install-2.7 -U ZopeSkel
 
 If you are using Mac OS X, you can use the option ``-s`` to specify a
 installation directory for scripts installed with a package. By
@@ -103,7 +103,7 @@ installed in the same directory as the MacPorts software:
 
 .. code-block:: sh
 
-   $ sudo easy_install-2.6 -s /opt/local/bin -U ZopeSkel
+   $ sudo easy_install-2.7 -s /opt/local/bin -U ZopeSkel
 
 .. note::
 
@@ -187,7 +187,7 @@ Buildout script to install Silva:
 .. code-block:: sh
 
    $ cd 'project name'
-   $ python2.6 bootstrap.py
+   $ python2.7 bootstrap.py
    $ ./bin/buildout
 
 As result, the command ``bin/paster`` will be created. It will let
@@ -255,7 +255,7 @@ sub-directory of your Buildout tree. Below we will use the
 
 .. code-block:: sh
 
-   $ python2.6 bootstrap.py --buildout-profile profiles/simple-instance.cfg
+   $ python2.7 bootstrap.py --buildout-profile profiles/simple-instance.cfg
 
 Running this command creates essential files, most importantly one
 called ``buildout.cfg``. The ``buildout.cfg`` file is a default

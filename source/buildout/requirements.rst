@@ -4,17 +4,17 @@ Requirements to install Silva
 Installation under Linux Ubuntu/Debian
 --------------------------------------
 
-1. Python 2.6
+1. Python 2.7
 
-   Silva 2.3+ requires Python 2.6, this is probably already present on
+   Silva 3.0+ requires Python 2.7, this is probably already present on
    your system. If you can install it using the package manager (or
    compile it by hand):
 
    .. code-block:: sh
 
-      $ sudo apt-get install python2.6
+      $ sudo apt-get install python2.7
 
-2. Python 2.6 headers and development add-ons
+2. Python 2.7 headers and development add-ons
 
    On UNIX systems, the buildout will also need the python header
    files. If you compiled python by hand, these files are already on
@@ -23,7 +23,7 @@ Installation under Linux Ubuntu/Debian
 
    .. code-block:: sh
 
-      $ sudo apt-get install python2.6-dev build-essential
+      $ sudo apt-get install python2.7-dev build-essential
 
    You will also need a working C compiler (gcc), which is what the
    ``build-essential`` package will install.
@@ -69,7 +69,7 @@ http://silva.mine.ch/Silva-Installation-under-Linux-Fedora-Centos-Redhat
 Installation under Mac OS X
 ---------------------------
 
-Silva 2.3+ needs Python 2.6 to work. First you need to install `XCode
+Silva 3.0+ needs Python 2.7 to work. First you need to install `XCode
 <http://developer.apple.com/tools/xcode/>`_ in order to have a working
 compiler.
 
@@ -86,7 +86,7 @@ components:
 
 .. code-block:: sh
 
-   $ sudo port -v install python26
+   $ sudo port -v install python27
 
 You can install the ``libjpeg``:
 
@@ -111,7 +111,7 @@ As well we recommand to install ``file`` in order to get ``libmagic``:
 Installation under FreeBSD
 --------------------------
 
-Silva 2.3+ needs Python 2.6 to work, this is probably already present
+Silva 3.0+ needs Python 2.7 to work, this is probably already present
 on your system. You can install it using the FreeBSD ports.
 
 .. note::
@@ -121,11 +121,11 @@ on your system. You can install it using the FreeBSD ports.
    *Configure* menu, select *Distributions*, then select the ``ports``
    distribution. Press tab to go on ``Okay`` and press enter.
 
-Installing Python 2.6:
+Installing Python 2.7:
 
 .. code-block:: sh
 
-   $ cd /usr/ports/lang/python26
+   $ cd /usr/ports/lang/python27
    $ make install
    $ make distclean
 
@@ -150,8 +150,8 @@ Installation under Windows
 
 We don't recommend (nor support) Windows as a production environment.
 
-1. First you need to install `Python 2.6
-   <http://www.python.org/ftp/python/2.6.5/python-2.6.5.msi>`_.
+1. First you need to install `Python 2.7
+   <http://www.python.org/ftp/python/2.7.2/python-2.7.2.msi>`_.
 
    .. warning::
 
@@ -163,7 +163,7 @@ We don't recommend (nor support) Windows as a production environment.
    *Manage*. Click on the *Advanced* tab, and click on the button
    *Environment variable*. Here you select *Path*, and click on
    modify. You append your path to your Python binary here, so
-   ``C:\Python26`` for the default installation path.
+   ``C:\Python27`` for the default installation path.
 
    Now if you start a shell (click on *Start*, *Run*, type ``cmd``
    and enter), you should be able to run ``python``.
@@ -194,17 +194,17 @@ We don't recommend (nor support) Windows as a production environment.
    This will tell Python to use MinGW to compile needed extensions.
 
 3. We need Subversion. You can download and install it from the `Slik
-   distribution page <http://www.sliksvn.com/pub/Slik-Subversion-1.5.6-win32.msi>`_.
+   distribution page <http://www.sliksvn.com/pub/Slik-Subversion-1.7.4-win32.msi>`_.
 
    After, you should be able to type ``svn help`` in a newly created
    shell.
 
-   We recommand to install `PySVN for Windows, Python 2.6 and SVN
-   1.5.6
-   <http://pysvn.tigris.org/files/documents/1233/47202/py26-pysvn-svn156-1.7.2-1280.exe>`_.
+   We recommand to install `PySVN for Windows, Python 2.7 and SVN
+   1.7.3
+   <http://pysvn.tigris.org/files/documents/1233/49177/py27-pysvn-svn173-1.7.6-1457.exe>`_.
 
 4. You also need to install `pywin32
-   <http://sourceforge.net/projects/pywin32/>`_, for Python 2.6.
+   <http://sourceforge.net/projects/pywin32/>`_, for Python 2.7.
 
 .. warning::
 

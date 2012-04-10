@@ -43,7 +43,7 @@ Exemple of non-fatal errors:
 
   .. code-block:: sh
 
-     "/somewhere/Products.GenericSetup-1.3.4-py2.6.egg/Products/GenericSetup/doc/SampleSite/profiles/default/siteroot/bar.py",
+     "/somewhere/Products.GenericSetup-1.3.4-py2.7.egg/Products/GenericSetup/doc/SampleSite/profiles/default/siteroot/bar.py",
      line 22
         return printed
      SyntaxError: 'return' outside function
@@ -138,12 +138,14 @@ Version conflicts between system packages and Silva ones
 
 It is possible that when you are installing Silva, a required package
 of Silva has already been installed in your system python
-(``/usr/lib/python2.x/[site/dist]-packages``), thereby creatig a
-conflict. If this happens run buildout again giving python the ``-S``
-option. This prevents python from looking into your system
-site/dist-packages.
+(``/usr/lib/python2.x/[site/dist]-packages``), thereby creating a
+version conflict. You can run the buildout in a `virtualenv`_. You do
+this with the help of:
 
 .. code-block:: sh
 
-  $ python2.6 -S ./bin/buildout -v
+  $ python2.7 bootstrap.py --virtualenv
+  $ ./bin/buildout -v
 
+
+.. _virtualenv: http://pypi.python.org/pypi/virtualenv
