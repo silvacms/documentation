@@ -1,10 +1,6 @@
-.. Content layout demo documentation master file, created by
-   sphinx-quickstart on Thu Mar 29 13:55:40 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
-Content Layout Demo product overview
-====================================
+Content Layout
+==============
 
 The demo product makes it possible to get several page designs in Silva.
 The 'silva.demo.contentlayout' product contains several files and folders.

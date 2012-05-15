@@ -19,7 +19,7 @@ related to Silva:
 
    buildout
    buildout/extending
-   getting-starting-with-silva
+   getting-started-with-silva
    apache
    wsgi
    cluster/index
@@ -36,13 +36,13 @@ if possible on Zope.
    :maxdepth: 2
 
    extension/index
+   code_source/index
    layout/index
-   contentlayout/index
    contents/index
    services
    api/index
-   code_source/index
    test/index
+   addons/index
    development_guidelines
    changes/index
 

@@ -1,8 +1,8 @@
-Changes for the developer
+Changes for the Developer
 =========================
 
 This documentation tracks the major changes in the Silva API between
-each different version of Silva.
+each different major version of Silva.
 
 .. toctree::
    :maxdepth: 2

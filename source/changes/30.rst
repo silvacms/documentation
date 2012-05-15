@@ -7,13 +7,16 @@ Content
 - :term:`ZCML` based registration have been removed (because it was
   unused).
 
-- XSTL renderers have been removed (they were only available for
-  ``Producs.SilvaDocument`` that is deprecated and not available to
-  create new content in 3.0).
-
 - *SilvaViews* have been removed. All :term:`SMI` interfaces must be
   built using forms, in order to work in the new Javascript based
   interface.
+
+- *FileSystemSite* have been removed. The ``globals`` folder and
+   ``service_resources`` doesn't exist anymore.
+
+- XSTL renderers have been removed (they were only available for
+  ``Producs.SilvaDocument`` that is deprecated and not available to
+  create new content in 3.0).
 
 - ``CatalogedVersion`` and ``CatalogVersionedContent`` have been
   removed. Please use instead
@@ -27,6 +30,10 @@ Content
   ``@@content.html`` view on the content. The preview will be
   automatically selected if you are in preview mode.
 
+- Silva legacy layouts, built in ZODB, are no longer supported nor
+  available. None of the previously script creating in ZODB are
+  available.
+
 
 Code sources
 ------------
@@ -35,3 +42,13 @@ Code sources
 - ``REQUEST.model`` is no longer available. Code sources must rely on
   the parameters ``model`` and ``version`` that are given to them
   along the regular options.
+
+- Options are properly provided to code sources: a Formulator Boolean
+  field will give you a boolean in your script, not a string, same for
+  an integer, or a list of values. Reference fields returns directly
+  the object which have been selected, or None, or a list of selected
+  objects if the multiple option was previously activated in the
+  field.
+
+- LookupWindow Formulator field have been replaced with a Reference
+  Formulator field.
