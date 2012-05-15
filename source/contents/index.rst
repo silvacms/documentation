@@ -9,6 +9,5 @@ Creating content types
    views
    forms
    xml
-   xsltrender
    fields
    permission

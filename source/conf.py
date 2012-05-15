@@ -29,8 +29,8 @@ extensions = [
     'sphinxcontrib.infrae']
 
 intersphinx_mapping = {
-    'grok': ('http://grok.zope.org/doc/1.4.1', None),
-    'python': ('http://docs.python.org/release/2.7.2/', None),
+    'grok': ('http://grok.zope.org/doc/1.5/', None),
+    'python': ('http://docs.python.org/release/2.7.3/', None),
     }
 
 # inheritance_graph_attrs = dict(rankdir="TB", size='"20, 20"', fontsize=14)

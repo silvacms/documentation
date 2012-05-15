@@ -44,6 +44,7 @@ if possible on Zope.
    code_source/index
    test/index
    development_guidelines
+   changes/index
 
 Interesting Links
 -----------------

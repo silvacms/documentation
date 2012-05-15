@@ -1,0 +1,9 @@
+
+Changes in Silva 2.3 API
+========================
+
+Code sources
+------------
+
+- Code sources now takes two new parameters ``model`` and
+  ``version``. Those are to be used instead of ``REQUEST.model``.

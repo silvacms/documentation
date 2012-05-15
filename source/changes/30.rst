@@ -1,0 +1,37 @@
+Changes in Silva 3.0 API
+========================
+
+Content
+-------
+
+- :term:`ZCML` based registration have been removed (because it was
+  unused).
+
+- XSTL renderers have been removed (they were only available for
+  ``Producs.SilvaDocument`` that is deprecated and not available to
+  create new content in 3.0).
+
+- *SilvaViews* have been removed. All :term:`SMI` interfaces must be
+  built using forms, in order to work in the new Javascript based
+  interface.
+
+- ``CatalogedVersion`` and ``CatalogVersionedContent`` have been
+  removed. Please use instead
+  :py:class:`~Products.Silva.Version.Version` and
+  :py:class:`~Products.Silva.VersionedContent.VersionedContent`. They
+  are catalogued by default.
+
+- The method ``view`` and ``preview`` from
+  :py:interface:`~silva.core.interfaces.content.ISilvaObject` have
+  been removed. To render a content, please invoke the
+  ``@@content.html`` view on the content. The preview will be
+  automatically selected if you are in preview mode.
+
+
+Code sources
+------------
+
+
+- ``REQUEST.model`` is no longer available. Code sources must rely on
+  the parameters ``model`` and ``version`` that are given to them
+  along the regular options.

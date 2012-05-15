@@ -191,7 +191,7 @@ publication system of Silva:
 .. autoevent:: silva.core.interfaces.events.IContentRequestApprovalEvent
 
 
-.. autoevent:: silva.core.interfaces.events.IContentApprovalRequestCanceledEvent
+.. autoevent:: silva.core.interfaces.events.IContentApprovalRequestWithdrawnEvent
 
 
 .. autoevent:: silva.core.interfaces.events.IContentApprovalRequestRefusedEvent

@@ -26,6 +26,8 @@ It is all you need to do. On line 4, we set a ``meta_type``. It is a
 Zope 2 concept, and should identify uniquely your content type.
 
 
+.. _creating-a-versioned-content:
+
 Creating a new versioned content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,27 +72,25 @@ All those base classes are usable to create new Silva content:
   Base for Silva content that should not directly appear to the
   public. You need to use this base class with either
   ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` if you want
-  your content to behave like a folder.
-  You can refer to the
-  :py:interface:`~silva.core.interfaces.content.INonPublishable`
-  interface for more information.
+  your content to behave like a folder.  You can refer to the
+  :py:interface:`~silva.core.interfaces.content.INonPublishable` interface for
+  more information.
 
 .. class:: Products.Silva.Asset.Asset
 
   ``File`` and ``Image`` are subclasses of this base class. Refer to
-  the :py:interface:`~silva.core.interfaces.content.IAsset`
-  interface for more information.
+  the :py:interface:`~silva.core.interfaces.content.IAsset` interface for more
+  information.
 
 .. class:: Products.Silva.Content.Content
 
   Base class for simple publicly viewable content.
 
-  Note that to directly use this base class, you still need to inherit from
-  ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` if you want
-  your content to behave like a folder.
-  You can refer to the
-  :py:interface:`~silva.core.interfaces.content.IContent`
-  interface for more information.
+  Note that to directly use this base class, you still need to inherit
+  from ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` if you
+  want your content to behave like a folder.  You can refer to the
+  :py:interface:`~silva.core.interfaces.content.IContent` interface for more
+  information.
 
 .. class:: Products.Silva.VersionedContent.VersionedContent
 
@@ -124,7 +124,7 @@ All those base classes are usable to create new Silva content:
 Registering a new content with Grok
 -----------------------------------
 
-You can register a new content using either :term:`Grok` or :term:`ZCML`.
+You can register a new content using :term:`Grok`.
 
 .. note::
 
@@ -211,6 +211,8 @@ addable from ZMI:
    event to do it.
 
 
+.. _registring-a-versioned-content:
+
 Versioned content
 ~~~~~~~~~~~~~~~~~
 
@@ -237,46 +239,6 @@ content class:
 The extra directive is used on line 11, and takes as argument directly
 the version class.
 
-
-Registering a new content with ZCML
------------------------------------
-
-:term:`Grok` registration should be preferred over :term:`ZCML`
-registration, but if you want to, you can still use :term:`ZCML` to
-register your contents.
-
-
-Regular content
-~~~~~~~~~~~~~~~
-
-In your ``configure.zcml`` file, you need to use the ``silva:content``
-ZCML directive to register your content type:
-
-.. code-block:: xml
-   :linenos:
-
-   <silva:content
-     extension_name="SilvaBlog"
-     content=".blog.Blog"
-     icon="blog.png"
-     />
-
-
-Versioned content
-~~~~~~~~~~~~~~~~~
-
-A versioned content does not use the same ZCML directive than a
-regular content to be registered:
-
-.. code-block:: xml
-   :linenos:
-
-   <silva:versionedcontent
-     extension_name="SilvaBlog"
-     content=".article.Article"
-     version=".article.ArticleVersion"
-     icon="article.png"
-     / >
 
 
 .. _adding-a-content-python:

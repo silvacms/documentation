@@ -40,7 +40,7 @@ object. Silva services are in fact :term:`Zope utility`.
    :maxdepth: 2
 
    zca
-   silvaobjects
+   objects
    members
    contents
    versions

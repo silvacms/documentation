@@ -271,30 +271,6 @@ allows you to specify a tuple:
 
    silvaconf.extension_depends(("SilvaDocument", "Foo", "Bar"))
 
-Registration with :term:`ZCML`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In your extension directory, add the following :term:`ZCML` directives
-to the ``configure.zcml`` file, or create the file if it doesn't exist
-yet:
-
-.. code-block:: xml
-
-  <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:silva="http://infrae.com/ns/silvaconf">
-
-    <include package="silva.core.conf" />
-    <silva:extension
-      name="silva.app.blog"
-      title="Silva Blog"
-      />
-
-  </configure>
-
-Here you use the special ``silva:extension`` directive to specify the
-extension name. You can also give an extension title, which is a brief
-description describing what the extension is about.
 
 Reset point
 ~~~~~~~~~~~
