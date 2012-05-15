@@ -1,12 +1,13 @@
 
 .. _creating-a-new-silva-service:
 
-Creating a new Silva service
-============================
+Creating a Silva service
+========================
 
 Services are configurable utilities. By utilities they are helpers
 which are not content-specific. By configurable, they are helpers that
-can be configured to behave differently.
+can be configured to behave differently. The configuration can be done
+through the web, using the :term:`ZMI`.
 
 For instance, we could imagine a sorting service, which sorts Silva
 items. We could configure its sorting criteria (by ids, title or
@@ -125,7 +126,6 @@ You can define an edit form like this:
   from five import grok
 
   class FileServiceManagementView(silvaviews.ZMIEditForm):
-
       silvaconf.context(IFilesService)
       silvaconf.name('manage_filesservice')
 

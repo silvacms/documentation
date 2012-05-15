@@ -4,39 +4,39 @@ Creating an extension
 =====================
 
 You can create a Silva extension as a regular Python package, that can
-be distributed as an :term:`Egg`.
+be distributed as an :term:`egg`.
 
 .. glossary::
 
-   *Egg*
+   *egg*
      Format in which a Python package can distributed to other
      users. This include all the code of the Python package, and some
      metadata information, like version, description, installation
      requirements ...
 
 Within the extension, will need to write some registration code, to
-register your extension and its components in Silva. You can use two
-different systems for this:
+register your extension and its components in Silva. For this you will
+need to use a little bit of :term:`ZCML`, and :term:`Grok`.
 
 .. glossary::
 
    *ZCML*
      ZCML, or Zope Configuration Markup Language, is an XML based
-     configuration language. Each Zope extension contains usually a
-     ``configure.zcml`` file, which hold its configuration using this
-     language.
+     configuration language. The XML contains directives, that are
+     used to trigger configuration in Zope. Each Zope extension
+     contains usually a ``configure.zcml`` file, which hold its
+     configuration using this
 
    *Grok*
      Grok is a configuration scanner which looks at your code detect
-     components and register them if needed. If you want to use Grok,
-     we recommend to use only Grok, and not mix Grok with :term:`ZCML`
-     based registration.
+     components you wrote to extend Silva and register them if
+     needed. Grok is trigger by a directive in :term:`ZCML`.
 
 
-Creating a new extension as an :term:`Egg`
+Creating a new extension as an :term:`egg`
 ------------------------------------------
 
-You can create the structure of your :ref:`Egg` with the help of the
+You can create the structure of your :term:`egg` with the help of the
 ``paster`` command, and :term:`ZopeSkel` (see :ref:`installing-paster`
 to install those tools):
 
@@ -124,7 +124,7 @@ You need ``buildout`` to apply the changes:
 .. note::
 
    Here you used the ``nested_namespace`` template to create our
-   :term:`Egg`. If you plan to create something called
+   :term:`egg`. If you plan to create something called
    ``silva.extension`` (there is no ``app``, just one namespace
    ``silva``), you can use the ``basic_namespace`` template of
    ``paster``.

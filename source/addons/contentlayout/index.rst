@@ -2,187 +2,201 @@
 Content Layout
 ==============
 
-The demo product makes it possible to get several page designs in Silva.
-The 'silva.demo.contentlayout' product contains several files and folders.
+Content layout is a Silva Extension that provides new content types,
+like Silva Page, that let the editor build a web page using block that
+are inserted into a page design.
 
-``templates``
+.. toctree::
+   :maxdepth: 2
 
-  Folder where templates .pt, .cpt and .upt are located.
+   design
+   block
+   api
 
-``static``
 
-  Folder where static resources like css and javascript files are located.
 
-``templates.py``
 
-  A python file in which two designs are defined.
+.. The demo product makes it possible to get several page designs in Silva.
+.. The 'silva.demo.contentlayout' product contains several files and folders.
 
-We start by setting a resource directory where the templates are located.
+.. ``templates``
 
-::
+..   Folder where templates .pt, .cpt and .upt are located.
 
-  grok.templatedir('templates')
+.. ``static``
 
-The python file also defines two designs, a simple design called 'OneColumn', and a slightly more complex design with 'TwoColumns'.
+..   Folder where static resources like css and javascript files are located.
 
-Simple design
-~~~~~~~~~~~~~
+.. ``templates.py``
 
-The simple design uses one template which gets filled by one slot:
+..   A python file in which two designs are defined.
 
-.. py:class:: OneColumn(Template)
+.. We start by setting a resource directory where the templates are located.
 
-::
+.. ::
 
-  class OneColumn(Template):
-      silvaconf.icon("one_column.png")
-      grok.order(10)
-      grok.name('demo.one_column')
-      grok.title(_(u"One Column (standard)"))
+..   grok.templatedir('templates')
 
-      description = _(u"A simple one column design")
-      slots = {'main': Slot()}
+.. The python file also defines two designs, a simple design called 'OneColumn', and a slightly more complex design with 'TwoColumns'.
 
-This simple design has it's own icon 'one_column.png' located in the root of the product, a description and one slot called 'main'. As the name is 'OneColumn' it will automatically use a template called 'onecolumn.upt' from the 'templates' folder. You can specify the ordering of components by setting the ``Grok.order('numeric value')``. This order will be used in Silva for the design selection.
+.. Simple design
+.. ~~~~~~~~~~~~~
 
-Complex design
-~~~~~~~~~~~~~~
+.. The simple design uses one template which gets filled by one slot:
 
-As with the first OneColumn design this second design will also use a CSS resource 'two_columns.css' and has two slots 'one' and 'two'.
+.. .. py:class:: OneColumn(Template)
 
-To add the css we must create an interface:
+.. ::
 
-.. py:class:: ITwoColumnsResources(IDefaultBrowserLayer)
+..   class OneColumn(Template):
+..       silvaconf.icon("one_column.png")
+..       grok.order(10)
+..       grok.name('demo.one_column')
+..       grok.title(_(u"One Column (standard)"))
 
-::
+..       description = _(u"A simple one column design")
+..       slots = {'main': Slot()}
 
-  class ITwoColumnsResources(IDefaultBrowserLayer):
-      silvaconf.resource('two_columns.css')
+.. This simple design has it's own icon 'one_column.png' located in the root of the product, a description and one slot called 'main'. As the name is 'OneColumn' it will automatically use a template called 'onecolumn.upt' from the 'templates' folder. You can specify the ordering of components by setting the ``Grok.order('numeric value')``. This order will be used in Silva for the design selection.
 
-We'll use this interface in our design class:
+.. Complex design
+.. ~~~~~~~~~~~~~~
 
-.. py:class:: TwoColumns(Template)
+.. As with the first OneColumn design this second design will also use a CSS resource 'two_columns.css' and has two slots 'one' and 'two'.
 
-::
+.. To add the css we must create an interface:
 
-  class TwoColumns(Template):
-      silvaconf.icon("two_columns.png")
-      grok.order(20)
-      grok.name('demo.two_column')
-      grok.title(_(u"Two Columns (standard)"))
+.. .. py:class:: ITwoColumnsResources(IDefaultBrowserLayer)
 
-      description = _(u"A simple two columns design")
-      slots = {'one': Slot(),
-               'two': Slot()}
+.. ::
 
+..   class ITwoColumnsResources(IDefaultBrowserLayer):
+..       silvaconf.resource('two_columns.css')
 
-      def update(self):
-          need(ITwoColumnsResources)
+.. We'll use this interface in our design class:
 
-As with the simple design this design also has it's own icon 'two_column.png', a description. Additionally it has multiple slots and an extra css. The order has an increased value and it will use a template called 'twocolumns.upt' automatically.
+.. .. py:class:: TwoColumns(Template)
 
-advanced.py
------------
+.. ::
 
-This is an advanced design based on the 'porto' layout.
+..   class TwoColumns(Template):
+..       silvaconf.icon("two_columns.png")
+..       grok.order(20)
+..       grok.name('demo.two_column')
+..       grok.title(_(u"Two Columns (standard)"))
 
-Like for all designs we register the 'templates' resource directory:
+..       description = _(u"A simple two columns design")
+..       slots = {'one': Slot(),
+..                'two': Slot()}
 
-::
 
-  grok.templatedir('templates')
+..       def update(self):
+..           need(ITwoColumnsResources)
 
-We set the design so it can only be set on a Page:
+.. As with the simple design this design also has it's own icon 'two_column.png', a description. Additionally it has multiple slots and an extra css. The order has an increased value and it will use a template called 'twocolumns.upt' automatically.
 
-.. py:class:: IAdvancedTemplate(ICustomizableTag)
+.. advanced.py
+.. -----------
 
-::
+.. This is an advanced design based on the 'porto' layout.
 
-  class IAdvancedTemplate(ICustomizableTag):
-      """Advanced design template for Page
-      """
-      silvaconf.only_for(IPage)
+.. Like for all designs we register the 'templates' resource directory:
 
-We register the CSS resource it will use:
+.. ::
 
-.. py:class:: IAdvancedResources(IDefaultBrowserLayer)
+..   grok.templatedir('templates')
 
-::
+.. We set the design so it can only be set on a Page:
 
-  class IAdvancedResources(IDefaultBrowserLayer):
-      silvaconf.resource('advanced.css')
+.. .. py:class:: IAdvancedTemplate(ICustomizableTag)
 
-Like in the other designs we tell the design which template(s) and resource(s) to use. In this advanced design we also define and restrict slots, and give it an extra menu.
+.. ::
 
-We create a class, give it a grok order and a grok context which will set the context for this particular class:
+..   class IAdvancedTemplate(ICustomizableTag):
+..       """Advanced design template for Page
+..       """
+..       silvaconf.only_for(IPage)
 
-.. py:class:: AdvancedTemplate(Template)
+.. We register the CSS resource it will use:
 
-::
+.. .. py:class:: IAdvancedResources(IDefaultBrowserLayer)
 
-  class AdvancedDesign(Design):
-      grok.order(5)
-      grok.name('demo.advanced_template')
-      grok.title(_(u"Advanced design (StandardIssue)"))
+.. ::
 
-Like other designs we give it a description:
+..   class IAdvancedResources(IDefaultBrowserLayer):
+..       silvaconf.resource('advanced.css')
 
-::
+.. Like in the other designs we tell the design which template(s) and resource(s) to use. In this advanced design we also define and restrict slots, and give it an extra menu.
 
-      description = _(u'A design that uses a section from a layout')
+.. We create a class, give it a grok order and a grok context which will set the context for this particular class:
 
-We set a marker for it:
+.. .. py:class:: AdvancedTemplate(Template)
 
-::
+.. ::
 
-      markers = [IAdvancedTemplate]
+..   class AdvancedDesign(Design):
+..       grok.order(5)
+..       grok.name('demo.advanced_template')
+..       grok.title(_(u"Advanced design (StandardIssue)"))
 
-We create a set of slots and apply restrictions on them:
+.. Like other designs we give it a description:
 
-::
+.. ::
 
-      slots = {
-          'one': Slot(
-              restrictions=[
-                  restrictions.CodeSourceName('cs_citation')]),
-          'two': Slot(
-              restrictions=[
-                  restrictions.CodeSourceName('cs_toc'),
-                  restrictions.BlockAll()]),
-          'navigation': Slot(
-              restrictions=[
-                  restrictions.Content(IImage),
-                  restrictions.BlockAll()]),
-          'footer': Slot(css_class="horizontal-blocks")}
+..       description = _(u'A design that uses a section from a layout')
 
-Above you will notice that slot 'one' can only be filled with a Code Source named 'cs_citation', but all other Silva assets like images are still allowed. In slot 'two' you can only add a Code Source named 'cs_toc', and you can't add any other Silva assets. In slot three you can only add a Silva image.
+.. We set a marker for it:
 
-We define an update to set the root and the resources:
+.. ::
 
-::
+..       markers = [IAdvancedTemplate]
 
-      def update(self):
-          self.root = self.content.get_publication()
-          need(IAdvancedResources)
+.. We create a set of slots and apply restrictions on them:
 
-We also add some extra navigation code for this design to create a top menu:
+.. ::
 
-::
+..       slots = {
+..           'one': Slot(
+..               restrictions=[
+..                   restrictions.CodeSourceName('cs_citation')]),
+..           'two': Slot(
+..               restrictions=[
+..                   restrictions.CodeSourceName('cs_toc'),
+..                   restrictions.BlockAll()]),
+..           'navigation': Slot(
+..               restrictions=[
+..                   restrictions.Content(IImage),
+..                   restrictions.BlockAll()]),
+..           'footer': Slot(css_class="horizontal-blocks")}
 
-      def top_menu_items(self):
-          for content in self.root.get_ordered_publishables():
-              if not IPublication.providedBy(content):
-                  continue
-              yield {'title': content.get_title_or_id(),
-                     'css': content in self.request.PARENTS and 'active' or '',
-                     'url': absoluteURL(content, self.request)}
+.. Above you will notice that slot 'one' can only be filled with a Code Source named 'cs_citation', but all other Silva assets like images are still allowed. In slot 'two' you can only add a Code Source named 'cs_toc', and you can't add any other Silva assets. In slot three you can only add a Silva image.
 
+.. We define an update to set the root and the resources:
 
-We create our advanced design based on porto.Layout:
+.. ::
 
-::
+..       def update(self):
+..           self.root = self.content.get_publication()
+..           need(IAdvancedResources)
 
-  class AdvancedLayout(porto.Layout):
-      grok.context(IAdvancedTemplate)
-      grok.layer(IStandardIssue)
-      grok.name('layout')
+.. We also add some extra navigation code for this design to create a top menu:
+
+.. ::
+
+..       def top_menu_items(self):
+..           for content in self.root.get_ordered_publishables():
+..               if not IPublication.providedBy(content):
+..                   continue
+..               yield {'title': content.get_title_or_id(),
+..                      'css': content in self.request.PARENTS and 'active' or '',
+..                      'url': absoluteURL(content, self.request)}
+
+
+.. We create our advanced design based on porto.Layout:
+
+.. ::
+
+..   class AdvancedLayout(porto.Layout):
+..       grok.context(IAdvancedTemplate)
+..       grok.layer(IStandardIssue)
+..       grok.name('layout')

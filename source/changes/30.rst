@@ -1,6 +1,8 @@
 Changes in Silva 3.0 API
 ========================
 
+This document tracks the changes between Silva 2.3 and Silva 3.0.
+
 Content
 -------
 

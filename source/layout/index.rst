@@ -1,18 +1,22 @@
 
 .. _creating-a-new-visual:
 
-Creating a new visual theme
-===========================
+Creating a visual theme
+=======================
 
-You can create a new visual theme (or layout) as a filesystem-based
+You can create a visual theme (or layout) as a filesystem-based
 extension.
 
 You need first to create an extension (please refer to
-:ref:`creating-an-extension`). A full example will be provided in that
-documentation, otherwise you can look at the source of the `multiflex
-theme <https://svn.infrae.com/silvatheme.multiflex/trunk>`_, or
-`standard issue theme
-<https://svn.infrae.com/silvatheme.standardissue/trunk/>`_.
+:ref:`creating-an-extension`). A full example is provided in this
+documentation. If you wish to see more code examples, you can have a
+look at the default layout extensions that are provided by default
+with Silva. The code is available through Mercurial:
+
+- `standard issue theme <https://hg.infrae.com/silvatheme.standardissue>`_.,
+
+- `multiflex theme <https://hg.infrae.com/silvatheme.multiflex>`_.
+
 
 First some vocabulary on visual themes:
 
