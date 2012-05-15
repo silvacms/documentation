@@ -1,7 +1,7 @@
 Changes in Silva 3.0 API
 ========================
 
-This document tracks the changes between Silva 2.3 and Silva 3.0.
+This document tracks the major changes between Silva 2.3 and Silva 3.0.
 
 Content
 -------
@@ -14,7 +14,7 @@ Content
   interface.
 
 - *FileSystemSite* have been removed. The ``globals`` folder and
-   ``service_resources`` doesn't exist anymore.
+  ``service_resources`` doesn't exist anymore.
 
 - XSTL renderers have been removed (they were only available for
   ``Producs.SilvaDocument`` that is deprecated and not available to

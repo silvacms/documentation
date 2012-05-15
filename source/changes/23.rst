@@ -2,7 +2,7 @@
 Changes in Silva 2.3 API
 ========================
 
-This document tracks the changes between Silva 2.2 and Silva 2.3
+This document tracks the major changes between Silva 2.2 and Silva 2.3
 
 Code sources
 ------------
