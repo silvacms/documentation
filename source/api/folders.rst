@@ -87,6 +87,16 @@ the contents contained inside an :py:interface:`IOrderableContainer`:
 
 .. versionadded:: 3.0
 
+Managing local sites
+~~~~~~~~~~~~~~~~~~~~
+
+A :term:`Zope adapter` let you manage the status of the local site on
+a :py:interface:`IPublication`.
+
+.. autointerface:: silva.core.interfaces.adapters.ISiteManager
+
+.. versionadded:: 2.2
+
 Listing container trees
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -113,17 +123,6 @@ limitation than the standard Silva container types.
 .. autointerface:: silva.core.interfaces.adapters.IAddableContents
 
 .. versionadded:: 3.0
-
-
-Local site management
-~~~~~~~~~~~~~~~~~~~~~
-
-A :term:`Zope adapter` let you manage the status of the local site on
-a :py:interface:`IPublication`.
-
-.. autointerface:: silva.core.interfaces.adapters.ISiteManager
-
-.. versionadded:: 2.2
 
 Site information
 ~~~~~~~~~~~~~~~~

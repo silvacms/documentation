@@ -52,3 +52,4 @@ object. Silva services are in fact :term:`Zope utility`.
    assets
    folders
    events
+   errors

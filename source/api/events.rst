@@ -41,7 +41,7 @@ added to a folder:
 Zope events
 -----------
 
-All of the content-related Zope events are used.
+All of the content-related Zope events are used in Silva.
 
 Creation and content modification events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,6 +157,13 @@ Containers events
    :py:event:`zope.lifecycleevent.interfaces.IObjectRemovedEvent`.
 
 
+In addition to the default containers event provided by Zope, Silva
+provides an additional event when order of the content is modified in a
+:py:interface:`~silva.core.interfaces.content.IOrderedContainer`
+
+.. autoevent:: silva.core.interfaces.events.IContentOrderChangedEvent
+
+
 Silva events
 ------------
 
@@ -167,72 +174,101 @@ Publication related events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All those events are defined and used by the versioning and
-publication system of Silva:
-
+publication system of Silva. They are invoked on a
+:py:interface:`~silva.core.interfaces.content.IVersion`:
 
 .. autoevent:: silva.core.interfaces.events.IPublishingEvent
 
-
 .. autoevent:: silva.core.interfaces.events.IApprovalEvent
-
 
 .. autoevent:: silva.core.interfaces.events.IContentApprovedEvent
 
-
 .. autoevent:: silva.core.interfaces.events.IContentUnApprovedEvent
-
 
 .. autoevent:: silva.core.interfaces.events.IRequestApprovalEvent
 
-
 .. autoevent:: silva.core.interfaces.events.IRequestApprovalFailedEvent
-
 
 .. autoevent:: silva.core.interfaces.events.IContentRequestApprovalEvent
 
-
 .. autoevent:: silva.core.interfaces.events.IContentApprovalRequestWithdrawnEvent
-
 
 .. autoevent:: silva.core.interfaces.events.IContentApprovalRequestRefusedEvent
 
-
 .. autoevent:: silva.core.interfaces.events.IContentPublishedEvent
-
 
 .. autoevent:: silva.core.interfaces.events.IContentClosedEvent
 
-
 .. autoevent:: silva.core.interfaces.events.IContentExpiredEvent
-
-
-Content import and export events
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. autoevent:: silva.core.interfaces.events.IContentImportedExported
-
-
-.. autoevent:: silva.core.interfaces.events.IContentImported
-
-
-.. autoevent:: silva.core.interfaces.events.IContentExported
 
 
 Security settings modification events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autoevent:: silva.core.interfaces.events.ISecurityEvent
+Those events are triggered when the security settings are modified in
+Silva, on a Silva object
+(:py:interface:`~silva.core.interfaces.content.ISilvaObject`).
 
+.. autoevent:: silva.core.interfaces.events.ISecurityEvent
 
 .. autoevent:: silva.core.interfaces.events.ISecurityRestrictionModifiedEvent
 
-
 .. autoevent:: silva.core.interfaces.events.ISecurityRoleChangedEvent
 
-
 .. autoevent:: silva.core.interfaces.events.ISecurityRoleAddedEvent
-
 
 .. autoevent:: silva.core.interfaces.events.ISecurityRoleRemovedEvent
 
 
+Content import and export events
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Those events are triggered when Silva content is imported or exported
+from the :term:`SMI` in Silva.
+
+.. autoevent:: silva.core.interfaces.events.IContentImportedExported
+
+.. autoevent:: silva.core.interfaces.events.IContentImported
+
+.. autoevent:: silva.core.interfaces.events.IContentExported
+
+
+Upgrading content events
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+When Silva content is upgraded between Silva versions, an event is
+sent before, and one other after. This is usefull if you want to
+disable features during the upgrade process, that would make the
+upgrade slower otherwise, and would not make sense have this feature
+during the upgrade.
+
+An example would be disable a logging features that logs action done
+on the contents.
+
+.. autoevent:: silva.core.interfaces.events.IUpgradeEvent
+
+.. autoevent:: silva.core.interfaces.events.IUpgradeStartedEvent
+
+.. autoevent:: silva.core.interfaces.events.IUpgradeFinishedEvent
+
+
+Installation events
+~~~~~~~~~~~~~~~~~~~
+
+When a new Silva :py:interface:`~silva.core.interfaces.content.IRoot`
+object is created, events are triggered so extensions can install
+services, and other configuration in it by default. Those events are
+triggered during the installation process.
+
+.. autoevent:: silva.core.interfaces.events.IInstallEvent
+
+.. autoevent:: silva.core.interfaces.events.IInstallRootServicesEvent
+
+.. autoevent:: silva.core.interfaces.events.IInstallRootEvent
+
+Additionally, when an Silva extension, or a new Silva service is
+installed, an event is triggered after:
+
+.. autoevent:: silva.core.interfaces.events.IInstalledExtensionEvent
+
+.. autoevent:: silva.core.interfaces.events.IInstalledServiceEvent
