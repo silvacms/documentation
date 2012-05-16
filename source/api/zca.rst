@@ -8,6 +8,8 @@ a look at: http://www.muthukadan.net/docs/zca.html.
 .. contents::
 
 
+.. _query-a-zope-adapter:
+
 How to retrieve a Zope adapter
 ------------------------------
 
@@ -70,7 +72,7 @@ Like for a single adapter, if no adapter is found for the request
 ``zope.component.queryMultiAdapter``.
 
 
-Defining a new Zope Adapter
+Defining a new Zope adapter
 ---------------------------
 
 You can define a new :term:`Zope adapter` by creating a new class
@@ -81,6 +83,8 @@ you can inherit of :py:class:`grok.MultiAdapter` instead.
 
    You need to import ``grok`` from the namespace ``five``.
 
+
+.. _query-a-zope-utility:
 
 How to retrieve a Zope utility
 ------------------------------

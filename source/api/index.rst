@@ -8,19 +8,24 @@ All the API used the following Zope concepts:
    *Zope interface*
      An interface is a Zope concept used to describe what an object
      (or a class) provides (or implements) as methods and attributes,
-     and what are theirs signatures (argument list).
+     and what are theirs signatures (argument list). This is just a
+     verified definition of the API that an object provides.
 
    *Zope adapter*
      An adapter provides additional behavior (i.e. attributes and
      methods) to a content (or more generically an object) it
-     adapt. In practice, for a content providing a :term:`Zope
-     interface`, they can provides a different one.
+     adapts. In practice, for a content providing a :term:`Zope
+     interface`, they can provides a different one. In order to
+     retrieve an adapter, you can refer to
+     :ref:`query-a-zope-adapter`.
 
    *Zope utility*
      An utility is a non-content related object that provides a set of
      non-content related methods, or configuration attributes. In
      Silva, all *services* are utilities. Utilities are identified by
-     the :term:`Zope interface` they implements.
+     the :term:`Zope interface` they implements. in order to retrieve
+     an utility, or a Silva service, you can refer to
+     :ref:`query-a-zope-utility`.
 
    *Zope Component Architecture*
      The Zope Component Architecture, or *ZCA* for short, is the
