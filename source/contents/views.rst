@@ -83,6 +83,9 @@ In page templates, you have access to the following variables:
    display, you should always use this ``content`` instead of
    ``context``.
 
+``request``
+   Refers to the Zope request object.
+
 ``view``
    Refers to your view class to which the template is associated. You
    can add method helper on your class, and use them in your
@@ -133,15 +136,15 @@ Tips about Views
   view class. From the template, you will be able to access those
   attributes, using ``view/attribute_name``.
 
-- You can use the configuration directive ``grok.templatedir`` in
-  your module if you want to put your templates in a different
+- You can use the configuration directive :py:func:`grok.templatedir`
+  in your module if you want to put your templates in a different
   directory than ``name-of-your-python-module_templates``.
 
 - You can use a different templating system. The templating system
   used is selected using the extension of your template file. ``.pt``
   will be rendered by the `Zope Page Template`_ engine. You could use
-  for instance Chameleon with the help of `megrok.chameleon
-  <http://pypi.python.org/pypi/megrok.chameleon>`_, that provides Zope
+  for instance Chameleon with the help of `grokcore.chameleon
+  <http://pypi.python.org/pypi/grokcore.chameleon>`_, that provides Zope
   Page Template-like and Genshi-like templating system as well.
 
 .. note::

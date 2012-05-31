@@ -5,15 +5,16 @@ Available Permissions
 
 This page list all permissions available in Silva for developing new
 extensions. You can use them inside all rendering components, with
-``silvaconf.require`` like this:
+:py:func:`grok.require` like this:
 
-.. code-block:: python
+.. sourcecode:: python
 
    from silva.core.views import views as silvaviews
-   from silva.core import conf as silvaconf
+   from five import grok
 
    class MyView(silvaviews.View):
-       silvaconf.require('zope2.View')
+       five.require('zope2.View')
+
 
 Permissions reference
 ---------------------
