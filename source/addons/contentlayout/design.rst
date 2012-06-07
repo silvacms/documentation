@@ -142,12 +142,29 @@ Restricting your design
 -----------------------
 
 You can restrict the availability of a design to a given content with
-the help of the Grok directive :py:func:`grok.context`.
+the help of the Grok directive :py:func:`grok.context`:
+
+.. sourcecode:: python
+   :linenos:
+
+   from silva.core.contentlayout import Design
+   from silva.app.page.interfaces import IPage
+   from five import grok
+
+   class MyDesign(Design):
+       grok.context(IPage)
+
 
 You can restrict the availability of a design to editor users that
 have at least a given permission using the Grok directive
 :py:func:`grok.require`. You can refer to the list of Silva default's
 :ref:`available-permissions`.
+
+.. sourcecode:: python
+   :linenos:
+
+   class MyDesign(Design):
+       grok.require('silva.ManageSilvaContent')
 
 
 Restricting the slot of your design
@@ -160,7 +177,7 @@ to you slot:
    :linenos:
 
    from silva.core.interfaces import IImage
-   from silva.core.contentlayout import restrictions
+   from silva.core.contentlayout import Slot, restrictions
 
    slots = {
       'content': Slot(restrictions=[

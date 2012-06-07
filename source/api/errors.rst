@@ -21,6 +21,18 @@ This is implemented by:
 
 .. class:: ContentError
 
+.. autointerface:: ISecurityError
+
+This is implemented by:
+
+.. class:: SecurityError
+
+.. autointerface:: IUnauthorizedRoleAssignement
+
+This is implemented by:
+
+.. class:: UnauthorizedRoleAssignement
+
 .. autointerface:: IContainerError
 
 This is implemented by:
