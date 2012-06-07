@@ -89,6 +89,8 @@ with ``design.title``.
    associated with your design class.
 
 
+.. _adding-slot-to-your-design:
+
 Adding slot to your design
 --------------------------
 
@@ -100,8 +102,8 @@ this you need to define a variable ``slot`` in your design class:
    :linenos:
 
    slots = {
-      'first': Slot(),
-      'second': Slot(),
+      'first': Slot(css_class='first-slot'),
+      'second': Slot(css_class='second-slot'),
       'footer': Slot(tag='footer')}
 
 After you defined the slot on the design, you can refer to them inside
@@ -151,7 +153,36 @@ have at least a given permission using the Grok directive
 Restricting the slot of your design
 -----------------------------------
 
-You can use the following restriction within a slot:
+You can use the restrictions to restict the blocks that can be added
+to you slot:
+
+.. sourcecode:: python
+   :linenos:
+
+   from silva.core.interfaces import IImage
+   from silva.core.contentlayout import restrictions
+
+   slots = {
+      'content': Slot(restrictions=[
+             restrictions.Content(schema=IImage),
+             restrictions.BlockAll()]),
+      'navigation': Slot(tag='nav', restrictions=[
+             restrictions.CodeSourceName(allowed=['cs_toc']),
+             restrictions.BlockAll()]),
+      'footer': Slot(tag='footer', restrictions=[
+             restrictions.CodeSourceName(disallowed=['cs_portlet_element'])])
+      }
+
+- On line 5 to 7, we define a slot ``content`` that only authorizes
+  images to be added to it.
+
+- One line 8 to 10, we define a slot ``navigation`` that only
+  authorizes the code source ``cs_toc`` to be added to it.
+
+- Finally, on line 11 to 12, we define a slot ``footer``, where you
+  can add everything except the code source ``cs_portlet_element``.
+
+The following restrictions are available:
 
 .. class:: silva.core.contentlayout.slot.restictions.Content
 
@@ -167,6 +198,10 @@ You can use the following restriction within a slot:
 .. class:: silva.core.contentlayout.slot.restictions.BlockAll
 
    Restrict all blocks that where not previously authorized before.
+
+
+For more information about slots, please refer to
+:ref:`adding-slot-to-your-design`.
 
 
 Modifying your layout when your design is used
