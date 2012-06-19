@@ -40,7 +40,7 @@ parameters name, or the values associated to them that are stored in
 the Silva Document will be lost.
 
 When this is over, you can either start the upgrade process for each
-Silva instance located in your Zope instance via the
+Silva instance located in your Zope instance via the service
 ``service_extensions``, or stop your Zope instance and use the
 ``bin/silva`` script. We recommend to use the script if you have a
 large site.
@@ -66,10 +66,10 @@ database you have, with the flag ``-p Python``:
 
 
 After this, you can either start your Zope instance and access the
-*service extensions* to upgrade your content there *or* directly use
-the script ``silvaupdate``. **Do not start your Zope instance if you
-wish to use that script**. We recommend the script if you have a large
-site, as it might be more efficient.
+service ``service_extensions`` to upgrade your content there *or*
+directly use the script ``silvaupdate``. **Do not start your Zope
+instance if you wish to use that script**. We recommend the script if
+you have a large site, as it might be more efficient.
 
 .. code-block:: sh
 
