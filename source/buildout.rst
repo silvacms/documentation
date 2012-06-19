@@ -311,15 +311,17 @@ The generic procedure to upgrade a Silva site is:
 
 1. stop your Zope instance,
 
-2. change the version of Silva you are running on the file-system (see
-   below).
+2. do a backup of your whole Zope instance,
 
-3. re-run buildout to get the new version,
+3. change the version of Silva you are running on the file-system (see
+   below),
 
-4. verify the :ref:`upgrade-notes` for the version you are upgrading
+4. re-run buildout to get the new version,
+
+5. verify the :ref:`upgrade-notes` for the version you are upgrading
    and follow them,
 
-5. if there are no upgrade notes, restart your Zope instance, visit
+6. if there are no upgrade notes, restart your Zope instance, visit
    each Silva Root you have and access the *service extensions* in ZMI
    (*Zope Management Interface*)
    (``silvaroot-url/service_extensions/manage_extensions``), click on
