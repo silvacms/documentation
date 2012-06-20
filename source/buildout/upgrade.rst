@@ -45,12 +45,13 @@ Silva instance located in your Zope instance via the service
 ``bin/silva`` script. We recommend to use the script if you have a
 large site.
 
-For instance if you a Silva instance located at ``/mysite`` in your
-Zope instance, you can use the script like this:
+For instance if you have a Silva instance located at ``/mysite`` in
+your Zope instance, and to use the user ``admin`` in order to run the
+upgrade process, you can use the script like this:
 
 .. code-block:: sh
 
-   $ ./bin/silva -c parts/instance/etc/zope.conf upgrade /mysite
+   $ ./bin/silva -c parts/instance/etc/zope.conf upgrade -u admin /mysite
 
 
 Silva 2.3 upgrade notes

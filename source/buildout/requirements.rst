@@ -203,6 +203,21 @@ We don't recommend (nor support) Windows as a production environment.
    1.7.3
    <http://pysvn.tigris.org/files/documents/1233/49177/py27-pysvn-svn173-1.7.6-1457.exe>`_.
 
+   If you are installing a development version, you will need to
+   install Git and Mercurial for windows as well:
+
+   - For Git, you can install `Git for Windows
+     <http://msysgit.github.com/>`_. During the installation process,
+     select the option to add the Git command to the Windows
+     path. After the installation you should able to type ``git
+     --help`` in a newly created shell, like for svn.
+
+   - For Mercurial, you can follow `the official instruction
+     <http://mercurial.selenic.com/wiki/WindowsInstall>`_, installing
+     the latest version available. After this, you need to add the
+     installation path to the Windows path, so you can type ``hg
+     --help`` in a newly created shell as well.
+
 4. You also need to install `pywin32
    <http://sourceforge.net/projects/pywin32/>`_, for Python 2.7.
 
