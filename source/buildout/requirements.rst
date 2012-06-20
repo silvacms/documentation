@@ -58,6 +58,15 @@ Installation under Linux Ubuntu/Debian
 
       $ sudo apt-get install libxml2-dev libxslt1-dev
 
+3. Version control systems
+
+   If you want to install the development version, you will need to
+   install various control system:
+
+   .. code-block:: sh
+
+      $ sudo apt-get install subversion mercurial git-core
+
 
 Installation under Linux Fedora/Centos/Redhat
 ---------------------------------------------
@@ -107,6 +116,13 @@ As well we recommand to install ``file`` in order to get ``libmagic``:
 
    $ sudo port -v install file
 
+If you want to install a development version of Silva, you will need
+to install various version control systems:
+
+.. code-block:: sh
+
+   $ sudo port -v install subversion mercurial git-core
+
 
 Installation under FreeBSD
 --------------------------
@@ -144,6 +160,19 @@ And ``libxml2`` and ``libxslt``:
   $ cd /usr/ports/textproc/libxslt
   $ make install
   $ make distclean
+
+To install the development version, you will want to install various
+version control systems:
+
+.. code-block:: sh
+
+  $ cd /usr/ports/devel/subversion
+  $ make install distclean
+  $ cd /usr/ports/devel/git
+  $ make install distclean
+  $ cd /usr/ports/devel/mercurial
+  $ make install distclean
+
 
 Installation under Windows
 --------------------------
@@ -233,8 +262,8 @@ We don't recommend (nor support) Windows as a production environment.
 .. note::
 
    Windows doesn't use the same separator in paths, so rather than
-   typing ``bin/buildout`` in your shell, type ``bin\buildout``
-   instead.
+   typing ``bin/buildout`` in your shell, you need to type
+   ``bin\buildout`` instead.
 
 Installation notes for others systems
 -------------------------------------
