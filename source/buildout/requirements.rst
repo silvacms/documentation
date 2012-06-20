@@ -155,15 +155,17 @@ We don't recommend (nor support) Windows as a production environment.
 
    .. warning::
 
-      Don't install Python in a directory, this puts spaces in the
-      path and creates problems when selecting the binary file in the
-      future. The default installation path is perfect.
+      Don't install Python in a directory that have spaces in the
+      path, this migth create problems when searching for the Python
+      executable in the future. The default installation path is
+      perfect, don't change it.
 
    After, right-click on *My Computer* on your desktop, and select
    *Manage*. Click on the *Advanced* tab, and click on the button
    *Environment variable*. Here you select *Path*, and click on
-   modify. You append your path to your Python binary here, so
-   ``C:\Python27`` for the default installation path.
+   modify. You append your path to your Python binary here, and the
+   path plus ``Scripts`` as well, ``C:\Python27;C:\Python27\Scripts``
+   for the default installation path.
 
    Now if you start a shell (click on *Start*, *Run*, type ``cmd``
    and enter), you should be able to run ``python``.
@@ -183,7 +185,7 @@ We don't recommend (nor support) Windows as a production environment.
    ``gcc`` in a newly created shell.
 
    In your Python installation path plus ``\Lib\distutils`` (so
-   ``C:\Python26\Lib\distutils`` for the default installation path)
+   ``C:\Python27\Lib\distutils`` for the default installation path)
    create a file called ``distutils.cfg`` which contains:
 
    .. code-block:: ini
