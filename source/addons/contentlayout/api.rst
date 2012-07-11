@@ -52,6 +52,24 @@ This implementation can reuse the following class:
    Mixin class used to implement
    :py:interface:`~silva.core.contentlayout.interfaces.IPage`.
 
+Block features
+--------------
+
+Every :py:interface:`~silva.core.contentlayout.interfaces.IBlock` have
+a controller, that is used to manage and render it:
+
+.. autointerface:: silva.core.contentlayout.interfaces.IBlockController
+
+A :py:interface:`~silva.core.contentlayout.interfaces.IBlock` can be
+added in a couple of different scenarios. This is described with the
+help of a list of configurations. Each configuration will be listed to
+the user and add the block differently:
+
+.. autointerface:: silva.core.contentlayout.interfaces.IBlockConfigurations
+
+.. autointerface:: silva.core.contentlayout.interfaces.IBlockConfiguration
+
+
 Model contents
 --------------
 
