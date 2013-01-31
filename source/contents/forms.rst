@@ -298,7 +298,7 @@ As example, we are creating a contact form. We first need a form description:
        """Contact form fields.
        """
        name = schema.TextLine(title=u"Name", required=True)
-       company_name = schema.TextLine(title=u"Company", request=False)
+       company_name = schema.TextLine(title=u"Company", required=False)
        question = schema.Text(title=u"Question", required=True)
        question_type = schema.Choice(title=u"Question", source=question_type, required=False)
        email = RFC822MailAddress(title=u"Email", required=True)
