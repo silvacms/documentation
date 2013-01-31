@@ -59,8 +59,3 @@ This is implemented by:
 
 .. class:: ExternalReferenceError
 
-.. autointerface:: IImportError
-
-This is implemented by:
-
-.. class:: ImportError

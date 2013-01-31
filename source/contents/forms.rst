@@ -313,12 +313,14 @@ create a form with an action ``Contact``:
 .. code-block:: python
    :linenos:
 
+   from silva.core.interfaces import IContainer
    from zeam.form import silva as silvaforms
 
    class ContactForm(silvaforms.PublicForm):
         """Contact form.
         """
         grok.name('contact.html')
+        grok.context(IContainer)
 
         label = u'Contact'
         description = u'You can contact us using this form'
@@ -334,19 +336,20 @@ create a form with an action ``Contact``:
             self.status = u'Thank you for your request.'
             return silvaforms.SUCCESS
 
-On line 3, we define our form by inheriting from
+On line 4 we define our form by inheriting from
 :py:class:`~zeam.form.silva.PublicForm`. Like for other forms,
 :term:`Grok` will read our class and register it.
 
-On line 6, we use the :term:`Grok directive` :py:func:`grok.name` to
-name our form ``contact.html``: it will be available at the URL
-``/contact.html`` appended to any Silva content object URL.
+On line 7 and 8, we use the :term:`Grok directive`
+:py:func:`grok.name` and :py:func:`grok.context` to name our form
+``contact.html`` and it will be available at the URL ``/contact.html``
+appended to any Silva container.
 
-On line 8, we set a title, on 9 a description. On line 10 we create
+On line 10, we set a title, on 11 a description. On line 12 we create
 the form fields out of the field definition we defined before.
 
-On 12 to 20, we define a new form action *Contact us!*. The action is
-registered with the help of the decorator on line 12. On line 14, we
+On 14 to 22, we define a new form action *Contact us!*. The action is
+registered with the help of the decorator on line 14. On line 16, we
 extract the form data entered by the user from the Zope request, if
 there was an error, we set accordingly a status message on the form,
 and return a failure marker. If everything went alright, we have a
