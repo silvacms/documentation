@@ -60,7 +60,7 @@ Permissions reference
     screens and advanced options. Only administrators users should have
     this permission.
 
-``silva.ManageSettings``
+``silva.ManageSilvaSettings``
     Silva permission needed to manage site settings.
 
 
@@ -98,7 +98,7 @@ This table summarize the default attribution of permissions to Silva roles:
 +--------------------------------------+---------------+------------+------------+------------+-----------------+-------------+
 | ``zope2.ViewManagementScreens``      |               |            |            |            |                 | X           |
 +--------------------------------------+---------------+------------+------------+------------+-----------------+-------------+
-| ``silva.ManageSettings``             |               |            |            |            |                 | X           |
+| ``silva.ManageSilvaSettings``        |               |            |            |            |                 | X           |
 +--------------------------------------+---------------+------------+------------+------------+-----------------+-------------+
 
 
