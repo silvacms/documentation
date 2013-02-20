@@ -290,7 +290,7 @@ Example:
 
    from silva.core.contentlayout import Design
    from silva.core.layout.interfaces import ICustomizableTag
-   form silva.core.views import views as silvaviews
+   from silva.core.views import views as silvaviews
    from silva.app.page.interfaces import IPage
    from five import grok
 
