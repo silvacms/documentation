@@ -8,8 +8,8 @@ Non-error messages while running Buildout
 -----------------------------------------
 
 When you run Buildout, you can have non-fatal errors. **Don't panic**,
-it's not a problem. When you **do** have a real error, Buildout will
-stop and tell you:
+it's not a problem that will prevent you to install Silva. When you
+**do** have a real error, Buildout will stop and tell you:
 
 .. code-block:: sh
 
@@ -19,20 +19,20 @@ stop and tell you:
      Doing something.
    Error: Reason.
 
-As well, the status will not be zero (like all programs which end
-unexpectedly with an error). If Buildout finish its job, and return
-with a status code of zero, that means anything you encountered along
-the way was not a real error.
+As well, on Unix, the command line status will not be zero (like all
+programs which end unexpectedly with an error). If Buildout finishes
+its job, and return with a status code of zero, that means anything
+you encountered along the way was not a real problem.
 
 **When you have an error, take the time to read the error message** If
 it says 'download error', try to download the file by yourself. Maybe
 the remote site is down or slow, or you internet connection is
-flaky. If you succed to download the file, try to run buildout again.
+flaky. If you succeed to download the file, try to run buildout again.
 
-Exemple of non-fatal errors:
+Example of non-fatal errors:
 
 - Some download error from a site, or invalid URL. A different
-  location for that pacakge will be tried.
+  location for that package will be tried.
 
   Sometimes fetching a package might take time if your internet or the
   remote site is slow.
@@ -49,8 +49,9 @@ Exemple of non-fatal errors:
      SyntaxError: 'return' outside function
 
 - When you compile a Python extension, you can have
-  **warnings**. These are *warnings*, not *errors*. These warnings are
-  not intended for you, but for the developer who made the  Python extension:
+  **warnings**. Those are *warnings*, not *errors*. They are not
+  intended for you, but for the developer who made the Python
+  extension:
 
   .. code-block:: sh
 
@@ -87,7 +88,7 @@ an error like the following:
    software.c:n:n: error: software_error.h: No such file or directory
    [...]
    error: Setup script exited with error: command 'gcc' failed with exit status 1
-   An error occured when trying to install software-extension version. Look above
+   An error occurred when trying to install software-extension version. Look above
    this message for any errors that were output by easy_install.
    While:
      Installing zeoclient1.

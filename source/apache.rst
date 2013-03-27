@@ -6,15 +6,15 @@ sites. However it is difficult to configure to which URLs (like
 ``http://mysite.com``) Zope is going to reply, and with which Silva site.
 
 To solve this problem, you can use Apache in proxy mode, to *redirect*
-HTTP requests to the correct Silva site within Zope, for instance the
-Apache host ``www.mysite.com`` to the Silva site called ``mysite``
-into the local Zope service listening on the port 8080
-(``http://localhost:8080/mysite``).
+HTTP requests to the correct Silva site within Zope. For instance
+Apache can redirect requests for ``www.mysite.com`` to the Silva site
+called ``mysite`` served by the local Zope server listening on the
+port 8080 (``http://localhost:8080/mysite``).
 
 As well, Apache is going to *rewrite URLs* to make Zope generate URLs
 starting with ``http://www.mysite.com`` instead of
-``http://localhost:8080/mysite``, so generated URLs will go through Apache
-as well.
+``http://localhost:8080/mysite``, so future requests to the site will
+go through Apache as well.
 
 
 .. note:: You are free to use other proxy software if they support
@@ -63,30 +63,26 @@ How the Zope Virtual Host Rewrite Engine work
 
 In our case, Zope listens on localhost, port 8080. Apache relocates
 the received request to our Zope server on
-``http://localhost:8080/``. After this the URL is rewritten in the
-form of::
+``http://localhost:8080/``. After this the URL is going to be prefixed with::
 
-  VirtualHostBase/protocol/site-name/path/to/silva/site/VirtualHostRoot/rest
+  VirtualHostBase/protocol/site-name/path/to/silva/site/VirtualHostRoot
 
-``VirtualHostBase`` tells you that we are going to want to rewrite
-generated URLs by Zope. ``protocol`` defines which protocol the site
-is using (``http`` or ``https``). ``site-name`` is the name of your
-site (``www.mysite.com`` in our case). In the example we use the
-Apache variable ``%{SERVER_NAME}`` which is replaced by Apache to the
-site name mentioned in request (that should be the same than
-``ServerName``, but can be as well one of ``ServerAlias`` if you
-configured them and the visitor used it). After this,
-``path/to/silva/site`` represent the path in Zope to the Silva Root
-your created (``mysite`` in our case). ``VirtualHostRoot`` mark the
-end of this previously mentioned path, and so after Apache add the URL
-the visitor entered as ``rest`` (like for instance
-``/myfolder/in/silva``, if the visitor visited
-http://www.mysite.com/myfolder/in/silva).
+``VirtualHostBase`` tells Zope that you want to rewrite generated URLs
+in the produced HTML. ``protocol`` defines which protocol the new URLs
+should have (``http`` or ``https``). ``site-name`` is the domain name
+to use in those URLs (``www.mysite.com`` in our case). The previous
+example uses the Apache variable ``%{SERVER_NAME}`` which is replaced
+by Apache with the domain name mentioned in request (that should be
+the same than ``ServerName``, except if you used ``ServerAlias`` or if
+it is the default Apache site). After this, ``path/to/silva/site``
+represent the path in Zope to the Silva Root you
+created. ``VirtualHostRoot`` mark the end of this previously mentioned
+path.
 
 For more information on Apache configuration see `the official website
 <http://httpd.apache.org/docs>`_.
 
-If you want more details about the rewriting of URLs in apache, you
+If you want more details about the rewriting of URLs in Apache, you
 can have a look to `the official user guide for mod_rewrite
 <http://httpd.apache.org/docs/2.2/rewrite/>`_
 
@@ -98,6 +94,11 @@ Some people have the use case to have different URLs structure inside
 Silva and for the public.  This presents a problem because the URL
 rewriting system is not able to compute URLs that are not inside the
 virtual rewriting root.
+
+.. warning::
+
+  **We recommend not to use rewrite rules to do this, this will created
+  lot of problems in your sites.**
 
 Here is an example:
 
@@ -135,16 +136,15 @@ It is buggy because:
   will have to re-download CSS and images many times, and will make
   the site slower to browser for them.
 
-**We recommend not to use rewrite rules to do this, this will created lot of problems in your sites.**
-
 
 Solution
 ~~~~~~~~
 
-To avoid this we suggest adding Silva Links at the root of your site
-to redirect the visitor to the correct content. For instance, in this
-example you would create a Silva Link called ``alias``, which points
-to ``http://www.mysite.com/inside``.
+You can install and use the Silva extension `silva.app.forest`_, that
+have been built for this case. It will remove all this complicated
+configuration from your Apache configuration, and store this
+information in Zope. It supports multiple sites, with aliases and the
+equivalent of multiple rewrite rules inside a given site.
 
 
 .. _Nginx: http://nginx.org/
@@ -152,3 +152,4 @@ to ``http://www.mysite.com/inside``.
 .. _mod_proxy: http://httpd.apache.org/docs/2.2/mod/mod_proxy.html
 .. _mod_proxy_http: http://httpd.apache.org/docs/2.2/mod/mod_proxy_http.html
 .. _mod_rewrite: http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html
+.. _silva.app.forest: http://infrae.com/download/silva_all/silva.app.forest

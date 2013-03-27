@@ -14,7 +14,7 @@ Installation under Linux Ubuntu/Debian
 
       $ sudo apt-get install python2.7
 
-2. Python 2.7 headers and development add-ons
+2. Python 2.7 headers and development add-on
 
    On UNIX systems, the buildout will also need the python header
    files. If you compiled python by hand, these files are already on
@@ -254,7 +254,7 @@ We don't recommend (nor support) Windows as a production environment.
 
 .. warning::
 
-   It's recommanded to work in directories which don't have any spaces
+   It's recommended to work in directories which don't have any spaces
    in their paths. When you will be asked to checkout files from SVN
    to create your buildout directory, keep this in mind (or you will
    have problems).

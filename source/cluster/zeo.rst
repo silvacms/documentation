@@ -4,32 +4,60 @@
 Zope Enterprise Object Setup
 ============================
 
-Zope Enterprise Object, or ZEO is a database server that can be used
-to share the same Zope database between different Zope servers. The
-database server is often called ZEO server, and the regular Zope
-servers connected to it ZEO clients.
+.. glossary::
 
-The ZEO clients connects to the ZEO server using a regular network
-connection, so the clients can be on the same *or* on different
-physical servers than the server.
+   *ZEO*
+     Zope Enterprise Object, or ZEO is a database server that can be
+     used to share the same Zope database between different Zope
+     servers. The database server is often called ZEO server, and the
+     regular Zope servers connected to it ZEO clients.
+
+
+.. contents::
+
+
+ZEO concepts
+------------
+
+The ZEO clients connects to the ZEO server to access the database
+using a regular network connection. The ZEO clients can be installed
+on the same *or* on different physical servers than the ZEO server.
 
 You can define a ZEO-setup with the help of Buildout.
 
-.. contents::
 
 .. _zeo-server-installation:
 
 ZEO server installation
 -----------------------
 
-In the ``profiles`` sub-directory of your Buildout tree is defined a
-``zeo-instance.cfg`` profile. It defines a new part, called
-``zeoserver``. This will be the ZEO server. It is created with the
-help of the `zodbrecipes recipe`_. After running Buildout
-this will create a script called ``bin/zeoserver`` which controls your
-ZEO server. By default it listen to port 8100, and store its database
-into the directory ``var/filestorage``, like for a regular Zope
-instance.
+In the ``profiles`` sub-directory of your Buildout directory is
+defined a ``zeo-instance.cfg`` configuraiton file. It defines a new
+section, called ``zeoserver``. This will install a ZEO server. It is
+created with the help of the `zodbrecipes recipe`_. After running
+Buildout this will create a script called ``bin/zeoserver`` which
+controls your ZEO server. By default it listen to port 8100, and store
+its database into the directory ``var/filestorage``, like for a
+regular Zope instance.
+
+Starting and stopping the ZEO server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can start the ZEO server with the newly generated script:
+
+.. code-block:: sh
+
+   $ bin/zeoserver start
+
+You can stop the ZEO server with the same script:
+
+.. code-block:: sh
+
+   $ bin/zeoserver stop
+
+
+Changing the ZEO server configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For instance, if you wish to setup a ZEO server on a different port,
 8888 you can extend the profile like this:
@@ -38,8 +66,6 @@ For instance, if you wish to setup a ZEO server on a different port,
 
    [buildout]
    extends = profiles/zeo-instance.cfg
-   parts =
-      zeoserver
 
    [zeoserver]
    zeo-address = 8888
@@ -59,41 +85,40 @@ For instance, if you wish to setup a ZEO server on a different port,
 ZEO client installation
 -----------------------
 
-Like for the :ref:zeo-server-installation, you can extend the
+Like for the :ref:`zeo-server-installation`, you can extend the
 ``zeo-instance.cfg`` Buildout profile, and reuse the ``instance``
 section defined there.
 
 The ``zeo-address`` of the ``instance`` will determine to which ZEO
 server the Zope instance connects to. If your setup is distributed
-across different computers, you will have to specify the address of
+across different severs, you will have to specify the address of
 the ZEO server using this option, the format being ``hostname:port``.
 
-.. warning::
-
-   If you use Blobs, the blob directory **must** be accessible from all
-   the Zope instance at the same path. On Unix, you can share it to
-   the computer running the Zope instances using NFS for instance.
-
-
-For instance, if you want create a Zope instance that connect to the
-ZEO server running on a computer called ``webdb`` in the network, on
-port 8888 you can extend the ``zeo-instance.cfg`` Buildout profile:
+For instance, if you want create a ZEO client that connect to the ZEO
+server running on a server called ``webdb`` in the network, on port
+8888 you can extend the ``zeo-instance.cfg`` Buildout configuration
+like this to configure it:
 
 .. code-block:: buildout
 
    [buildout]
    extends = profiles/zeo-instance.cfg
-   parts =
-     instance
 
    [instance]
    zeo-address = webdb:8888
 
 
+.. warning::
+
+   If you use Blobs, the blob directory **must** be accessible from
+   all the ZEO clients under **the same path**. On Unix, you can share
+   it with the servers running the ZEO clients using NFS for instance.
+
+
 Multiple ZEO clients in one Buildout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can within the same buildout install multiple Zope instances
+You can within the same buildout install multiple ZEO clients that
 connected to the same ZEO server. To do so, you can use a special
 syntax of buildout:
 
@@ -127,11 +152,11 @@ syntax of buildout:
    <= instance
    http-address = 8084
 
-On line 3 to 7, you indicate you want to install the
-``client1``. ``client2``, ``client3`` and ``client4`` sections. On
-line 10, you specify the address of the ZEO server.
+Line 3 to 7 indicates you want to install the
+``client1``. ``client2``, ``client3`` and ``client4`` sections.  Line
+10 specifies the address of the ZEO server.
 
-Line 13 is a special syntax of Buildout that says that the current
+Line 13 is a special syntax of Buildout that makes the current
 section (``client1``) reuse all the options of the ``instance``
 section. This let you define from line 12 to 26 all the client
 sections mentioned by the ``part`` option of the ``buildout`` section,
@@ -145,5 +170,9 @@ in a Buildout configuration file.
    For questions about Buildout configuration, please refer to
    :ref:`extending-and-customising-your-installation`.
 
+.. note::
+
+   It is not needed to create multiple ZEO clients this if you use
+   ``mod_wsgi`` or ``uWSGI`` (:ref:`mod-wsgi-configuration`).
 
 .. _zodbrecipes recipe: http://pypi.python.org/pypi/zc.zodbrecipes
