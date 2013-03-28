@@ -3,8 +3,12 @@
 Creating an extension
 =====================
 
-You can create a Silva extension as a regular Python package, that can
-be distributed as an :term:`egg`.
+Silva extensions are regular Python packages. Like Python packages,
+they can be released and distributed as an :term:`egg`. The name of
+the Silva extension will often by the same name than the Python
+package holding it. For instance ``silva.app.document`` is a Silva
+extension that is defined inside a Python package
+``silva.app.document``.
 
 .. glossary::
 
@@ -14,87 +18,164 @@ be distributed as an :term:`egg`.
      metadata information, like version, description, installation
      requirements ...
 
-Within the extension, will need to write some registration code, to
-register your extension and its components in Silva. For this you will
-need to use a little bit of :term:`ZCML`, and :term:`Grok`.
+Within the Silva extension, you need to add some configuration in
+order to declare your extension and its components to Silva. For this
+you will need to use :term:`ZCML` and :term:`Grok`.
 
 .. glossary::
 
    *ZCML*
      ZCML, or Zope Configuration Markup Language, is an XML based
-     configuration language. The XML contains directives, that are
-     used to trigger configuration in Zope. Each Zope extension
-     contains usually a ``configure.zcml`` file, which hold its
-     configuration using this
+     configuration language. The XML contains lines, called
+     directives, that are used to trigger configuration in Zope. Each
+     Zope extension contains usually a ``configure.zcml``
+     configuration file, which hold its configuration in this format.
 
    *Grok*
-     Grok is a configuration scanner which looks at your code detect
-     components you wrote to extend Silva and register them if
-     needed. Grok is trigger by a directive in :term:`ZCML`.
+     Grok is a configuration scanner which analyze the Python code of
+     your extension in order to detect components extending Silva and
+     register them if needed. Grok is trigger by a directive in
+     :term:`ZCML`.
+
+   *Grok directive*
+      Grok directives are functions called inside a Python file at the
+      level of a module or a class level to set specific configuration on
+      those.
 
 
-Creating a new extension as an :term:`egg`
-------------------------------------------
+.. contents::
 
-You can create the structure of your :term:`egg` with the help of the
-``paster`` command, and :term:`ZopeSkel` (see :ref:`installing-paster`
-to install those tools):
+Creating a Silva extension
+--------------------------
 
-.. code-block:: sh
+To create a Silva extension, you will need to create a Python
+package. Using the same name is recommended. For instance you can
+create a Blog extension called ``silva.app.blog``.
 
-  $ cd src
-  $ paster create -t nested_namespace
-  Selected and implied templates:
-    ZopeSkel#nested_namespace  A project with with a nested namespace (2 dots in name)
+A Python package is a directory containing an ``__init__.py`` file. To
+create the extension ``silva.app.blog`` you need to create the
+corresponding directories and ``__init__.py`` files corresponding to
+the Python package::
 
-  Enter project name: silva.app.blog
-  Variables:
-    egg:      silva.app.blog
-    package:  silvaappblog
-    project:  silva.app.blog
-  Expert Mode? (What question mode would you like? (easy/expert/all)?) ['easy']:
-  Version (Version number for project) ['1.0']:
-  Description (One-line description of the project) ['']:
-  Creating template nested_namespace
-  Creating directory ./silva.app.blog
-    Recursing into +namespace_package+
-      Creating ./silva.app.blog/silva/
-      Recursing into +namespace_package2+
-        Creating ./silva.app.blog/silva/app/
-        Recursing into +package+
-          Creating ./silva.app.blog/silva/app/blog/
-          Copying __init__.py_tmpl to ./silva.app.blog/silva/app/blog/__init__.py
-        Copying __init__.py_tmpl to ./silva.app.blog/silva/app/__init__.py
-      Copying __init__.py_tmpl to ./silva.app.blog/silva/__init__.py
-    Copying README.txt_tmpl to ./silva.app.blog/README.txt
-    Recursing into docs
-      Creating ./silva.app.blog/docs/
-      Copying HISTORY.txt_tmpl to ./silva.app.blog/docs/HISTORY.txt
-    Copying setup.py_tmpl to ./silva.app.blog/setup.py
-  Running /usr/local/bin/python2.6 setup.py egg_info
+  silva/
+  silva/__init__.py
+  silva/app/
+  silva/app/__init__.py
+  silva/app/blog
+  silva/app/blog/__init__.py
+
+In order not to break any other Python packages sharing the Python
+package ``silva.app`` with you, you need to fill-in the
+``silva/__init__.py`` and ``silva/app/__init__.py`` files with the
+following Python code:
+
+.. code-block:: python
+
+   try:
+       __import__('pkg_resources').declare_namespace(__name__)
+   except ImportError:
+       from pkgutil import extend_path
+       __path__ = extend_path(__path__, __name__)
+
+This ``silva`` directory will constitute the source directory of your
+Silva extension
 
 
-Here the Silva Blog product will reside in the newly created directory
-``silva.app.blog/silva/app/blog``, which is a Python package,
-accessible in your Python code via ``silva.app.blog``. This will also
-be the name of your product in Zope.
+Creating an egg
+~~~~~~~~~~~~~~~
 
-You need to create a :term:`ZCML` file called ``configure.zcml`` in
-this directory, to declare this package as a Zope product. It should
-contain:
+An :term:`egg` is created with the help of a ``setup.py`` file. This
+file will call a setup function defined by `setuptools`_ with all the
+metadata about the Python package. Executing this file on the command
+line let you create and manage the Python package in order to release
+it.
+
+For clarity, we will put this ``setup.py`` file outside of the source
+directory. For instance, for the ``silva.app.blog`` extension we will
+get as final skeleton::
+
+  setup.py
+  src/silva/
+  src/ilva/__init__.py
+  src/silva/app/
+  src/silva/app/__init__.py
+  src/silva/app/blog
+  src/silva/app/blog/__init__.py
+
+The ``setup.py`` file will contain:
+
+.. code-block:: python
+   :linenos:
+
+   from setuptools import setup, find_packages
+
+   setup(name='silva.app.blog',
+         version='1.0',
+         description="Blog extension for Silva",
+         long_description="Blog extension for Silva",
+         classifiers=[
+            "Programming Language :: Python",
+         ],
+         keywords='silva blog',
+         author='You',
+         author_email='you@example.com',
+         url='',
+         license='BSD',
+         package_dir={'': 'src'},
+         packages=find_packages('src'),
+         namespace_packages=['silva', 'silva.app'],
+         include_package_data=True,
+         zip_safe=True,
+         install_requires=[
+             'Products.Silva',
+         ])
+
+- Line 3 and 4 defines the name of the Python extension and its version.
+
+- Line 15 defines which directory contains the Python extension,
+
+- Line 17 who are the Python packages used as namespace. In our case
+  it is ``silva`` and ``silva.app``. If you created a Python package
+  called ``silvatheme.rumba`` it would be ``silvatheme``.
+
+- Line 20 defines the requirements needed for this Python extension in
+  order to works. In our case it is Silva.
+
+Configuring a Silva extension
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You need to create a :term:`ZCML` file called ``configure.zcml``
+inside your Silva extension to declare it to Silva. It should contain:
 
 .. code-block:: xml
 
   <configure
       xmlns="http://namespaces.zope.org/zope"
-      xmlns:five="http://namespaces.zope.org/five">
+      xmlns:five="http://namespaces.zope.org/five"
+      xmlns:grok="http://namespaces.zope.org/grok">
 
-    <five:registerPackage package="." />
+     <include package="Products.Silva" />
+     <five:registerPackage package="." />
+     <grok:grok package="." />
 
   </configure>
 
-In you buildout configuration ``buildout.cfg`` or your own profile
-file, you can add your newly created package to the Silva instance:
+For the ``silva.app.blog`` example, the file should go inside the
+``src/silva/app/blog`` directory.
+
+Adding a Silva extension to an existing Buildout directory
+----------------------------------------------------------
+
+In you Buildout configuration file ``buildout.cfg`` or your own
+profile file, you can declare the extension using the ``develop``
+option of the ``buildout`` section. You can after add this extension
+to the Zope instance using the ``egg`` option of the ``instance``
+section and load its ZCML configuration with the ``zcml`` option of
+the same section.
+
+For the ``silva.app.blog`` example, if you created the Silva extension
+inside the sub directory ``src/silva.app.blog`` of the Buildout
+directory, you can configure it like this:
 
 .. code-block:: buildout
    :linenos:
@@ -110,138 +191,46 @@ file, you can add your newly created package to the Silva instance:
       silva.app.blog
 
 
-On line 3, you tell :term:`Buildout` that there is a package to use in
-the given directory. On line 7, you add the package you created as a
-dependency of Silva so it will be included in the Silva instance. On
-line 9 you load its configuration.
-
-You need ``buildout`` to apply the changes:
+After modifying the Buildout configuration, you need to run
+``buildout`` to apply the changes and restart your Zope instance:
 
 .. code-block:: sh
 
+  $ cd Silva
   $ ./bin/buildout
+  $ ./bin/paster serve debug.ini
 
 .. note::
 
-   Here you used the ``nested_namespace`` template to create our
-   :term:`egg`. If you plan to create something called
-   ``silva.extension`` (there is no ``app``, just one namespace
-   ``silva``), you can use the ``basic_namespace`` template of
-   ``paster``.
+  It is the recommended way to add a released Silva extension to your
+  Buildout directory, however it is the recommended way for Silva
+  extension that you are *developing*.
 
+Installing an extension in Silva with ``service_extension``
+-----------------------------------------------------------
 
-If you now start your Zope instance, it should contain the extension
-you created. You can verify it in the ZMI, in `Control_Panel`,
-`Products Management` the extension should be in the listing.
+In order to conditionally activate features in Silva, you might want
+to declare your extension to ``service_extension`` and create an
+installer that will activate your Silva extension on demand.
 
-
-Installing your extension in Silva
-----------------------------------
-
-To do this you need an installer which is going to install your
-extension in the selected Silva root. An installer is a class that
-defines the following methods:
-
-``install``
-   Install the extension.
-
-``uninstall``
-   Uninstall the extension.
-
-``is_installed``
-   Return ``True`` if the extension is installed, ``False`` otherwise.
-
-You can code the installer directly into the ``__init__.py``. When the
-installer is coded in the same file you need to create an instance of
-the installer (see below).
-
-A default installer can be used, and extended. It provides the
-following installation steps:
-
-1. Add addable content (all Silva content, no versioned content) to
-   the list of addables of the Silva site.
-
-2. Register contents to the metadata service in order to be able to
-   set them on our objects. All contents are registered, but for
-   versioned content objects, classes representing versions are
-   registered instead of the class representing the content itself.
-
-3. If you have a ``views`` directory register it in the
-   ``service_views``.
-
-Also, this installer uses a marker interface on the
-``service_extensions`` to show if the extension is installed.
-
-Add this to ``__init__.py`` file of your extension:
-
-.. code-block:: python
-
-  from silva.core.conf.installer import DefaultInstaller
-  from zope.interface import Interface
-
-  class BlogInstaller(DefaultInstaller):
-      """Installer for the blog extension. Override install, uninstall
-      to add more actions.
-      """
-
-  class IBlogExtension(Interface):
-      """Marker interface for our extension.
-      """
-
-  install = BlogInstaller("silva.app.blog", IBlogExtension)
-
-The first argument to the install object is the name of our extension
-`SilvaBlog`. The second is the marker interface.
+The Silva extension can be declared with the help of :term:`Grok
+directive` and a default installer can be used. It will let
+automatically activate and configure any content type that your Silva
+extension creates.
 
 .. note::
 
-  Your installer can also be a module ``install.py`` in your
-  extension, which defines ``install``, ``uninstall`` and
-  ``is_installed`` as functions.
+   Silva themes don't require to be activated via
+   ``service_extension``. If your Silva extension contains only a
+   theme, you are not required to declare your extension to
+   ``service_extension`` and provide an installer.
 
-Registration with :term:`Grok`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Registering an extension with ``service_extension``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _enable-grok-for-your-extension:
-
-Enable Grok in your extension
-``````````````````````````````
-
-If you want to use :term:`Grok`, you need to enable it in your extension.
-This can be done with the help of a :term:`ZCML` directive in your
-``configure.zcml`` file of your Python package:
-
-.. code-block:: xml
-   :linenos:
-
-   <configure
-     xmlns="http://namespaces.zope.org/zope"
-     xmlns:grok="http://namespaces.zope.org/grok">
-
-     <include package="five.grok" />
-     <grok:grok package="." />
-
-   </configure>
-
-On line 5, we include the `five.grok`_ extension that let use grok to
-register our code. On line 6, we trigger that will go read our code
-and register our components.
-
-If you use Grok, is the last required piece of :term:`ZCML`.
-
-.. _registering-extension-using-grok:
-
-Registration
-````````````
-
-.. glossary::
-
-   *Grok directive*
-      Grok directives are functions called at a module or a class level
-      to set configuration settings on those modules or classes.
-
-In the ``__init__.py`` of your extension, you can use Grok directives
-to register it to Silva:
+This configuration is done in Python, in the ``__init__.py`` file of
+your extension. For example in the case of the ``silva.app.blog``
+extension:
 
 .. code-block:: python
    :linenos:
@@ -251,57 +240,74 @@ to register it to Silva:
    silvaconf.extension_name("silva.app.blog")
    silvaconf.extension_title("Silva Blog")
 
-On line 3, the ``extension_name`` directive will set the name of the
-extension, and on line 4 the ``extension_title`` directive will set
-the title of extension, displayed in the Silva User Interface (like in
-``service_extension``).
+- On line 3, the ``extension_name`` directive set the name of the
+  extension.
+
+- On line 4 the ``extension_title`` directive will set the title of
+  extension, displayed in the :term:`ZMI`.
 
 If your extension depends on others extensions, like on `Silva
 Document` you can use the ``extension_depends`` directive to declare
-this:
+them:
 
 .. code-block:: python
 
-   silvaconf.extension_depends("SilvaDocument")
+   silvaconf.extension_depends("silva.app.document")
 
 If your extension has multiple dependencies, ``extension_depends``
 allows you to specify a tuple:
 
 .. code-block:: python
 
-   silvaconf.extension_depends(("SilvaDocument", "Foo", "Bar"))
+   silvaconf.extension_depends(("silva.app.document", "silva.app.subscriptions"))
 
 
-Reset point
-~~~~~~~~~~~
+Activating a Silva extension via ``service_extension``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You need to provide in the same ``__init__.py`` file that you declared
+your Silva extension an installer under the name of ``install``.
+
+You can extend the default installer provided by Silva. It will for
+any content type found in your Silva extension:
+
+- Register them in Zope,
+
+- Declare metadata set for them,
+
+- Define and configure permission to add them,
+
+- Declare them to the add menu,
+
+- Handle the status activated or un-activated of the extension.
+
+Add this to ``__init__.py`` file of your extension:
+
+.. code-block:: python
+
+  from silva.core.conf.installer import DefaultInstaller
+  from zope.interface import Interface
+
+  class BlogInstaller(DefaultInstaller):
+      """Installer for the blog extension.
+      """
+
+      def install_custom(self, root)
+          # Any custom installation action can be done here.
+          pass
+
+  class IBlogExtension(Interface):
+      """Marker interface for our extension.
+      """
+
+  install = BlogInstaller("silva.app.blog", IBlogExtension)
+
+The first argument to the install object is the name of our extension
+``silva.app.blog``. The second is the marker interface.
 
 At this point, you should be able to restart your Zope instance, and
 view, install, and uninstall your extension using ``service_extensions``
 in the Silva root.
 
-Upgrade step
-------------
-
-An upgrade step can be used to upgrade content between two versions of
-Silva. The upgrade method of the upgrader will be called against each
-content of the given content type. Here, a sample to upgrade ``Silva
-Document`` and ``Silva Link`` contents to Silva ``2.1``:
-
-.. sourcecode:: python
-
-  from Products.Silva.upgrade import BaseUpgrader, AnyMetaType
-
-  class MyUpgrade(BaseUpgrader):
-
-      def upgrade(self, obj):
-          """You can upgrade your content in this function.
-          """
-          pass
-
-  myUpgradeForDocument = MyUpgrade(2.1, 'Silva Document') # This register the step for Silva Document
-  myUpgradeForLink = MyUpgrade(2.1, 'Silva Link') # This register the step for Silva Link
-
-``AnyMetaType`` can be used to declare that the step would be run
-against all the contents, whatever their meta types.
-
 .. _five.grok: http://pypi.python.org/pypi/five.grok
+.. _setuptools: https://pypi.python.org/pypi/setuptools
