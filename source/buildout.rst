@@ -249,9 +249,9 @@ jump between major versions of Silva.
 Using Buildout
 --------------
 
-If you changed your configuration files, or updated your buildout
-tree, you need to re-run buildout and restart your instance to apply
-the changes:
+If you changed your configuration files or updated your buildout
+directory from SVN, you need to re-run buildout and restart your
+instance to apply the changes:
 
 .. code-block:: sh
 
@@ -262,13 +262,13 @@ the changes:
 
 .. note::
 
-   We highly recommend stopping your Zope instance(s) before running
+   We recommend stopping your Zope instance(s) before running
    buildout.
 
 What's in the buildout directory
 ````````````````````````````````
 
-A Buildout tree contains the following sub-directories:
+A Buildout directory contains the following sub-directories:
 
 ``bin``
 
@@ -279,8 +279,8 @@ A Buildout tree contains the following sub-directories:
 ``parts``
 
    Contains software components. When you re-run buildout to upgrade
-   your tree **this directory might be deleted**. You should not make
-   any changes inside it.
+   your installation **this directory might be deleted**. You should
+   not make any changes inside it.
 
 ``profiles``
 
@@ -304,18 +304,19 @@ A Buildout tree contains the following sub-directories:
 Configuring a cache
 ```````````````````
 
-Buildout downloads and install software in the ``download`` and
+Buildout downloads and installs software inside the ``download`` and
 ``eggs`` directories by default. When you have multiple Buildout
 directories on the same computer it is possible to share those
-directories between all the Buildout installation, preventing to
-download and install duplicate packages.
+directories between all the Buildout installations, preventing to
+download and install duplicate packages. This saves disk space and
+time.
 
 In a network setup, it is even possible to share the ``download``
 directory among different computers using NFS or something similar.
 
-To create a central directory you need to create a ``.buildout``
+To create those directories you need to create a ``.buildout``
 directory in your home directory, which contains a ``default.cfg``
-file. The content of this file is:
+configuration file. The content of this file is:
 
 .. code-block:: buildout
 
@@ -324,16 +325,16 @@ file. The content of this file is:
   download-cache = /path/to/your/cache/download
   download-directory = /path/to/your/cache/download
 
-In this example I used a directory called ``cache`` located in
-``/path/to/your`` directory. You will also see the directories
-``eggs`` and ``download``. You need to create these directories in
-your ``cache`` directory.
+In this example, a directory called ``cache`` located inside the
+``/path/to/your`` directory is used. You need to create inside it the
+sub directories ``eggs`` and ``download`` in advanced.
+
 
 Troubleshooting
 ```````````````
 
-Please refer first to those sections in case of any
-problems or questions while running Buildout, or see the link below.
+In case of any problems or questions while running Buildout, please
+refer to the link below before asking questions on the mailing-list.
 
 .. toctree::
    :maxdepth: 2

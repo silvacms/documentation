@@ -45,6 +45,12 @@ documentation to be guided through it.
      where an author or editor can add, delete and modify content in
      the Silva site.
 
+   *ZMI*
+     The ZMI, or Zope Management Interface, is the Zope user interface
+     were administrators (called Managers) can configure the advanced
+     settings of Silva. Regular Silva user don't have access to this
+     interface.
+
 .. note::
 
    You can add more than one *Silva Root* (or Silva instance) in one
