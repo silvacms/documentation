@@ -174,17 +174,25 @@ The generic procedure to upgrade a Silva site is:
    to test this before the migration might break your Silva site and
    make the upgrade fail.
 
-2. stop your Zope instance:
+   If you are a developer, you might want to consult the API changes
+   notes:
+
+   .. toctree::
+      :maxdepth: 2
+
+      changes/index
+
+2. Stop your Zope instance:
 
    .. code-block:: sh
 
       $ cd Silva
       $ ./bin/paster serve deploy.ini stop
 
-3. do a backup of your whole Buildout directory. Doing this will
+3. Do a backup of your whole Buildout directory. Doing this will
    permit you to restore your Silva site in case of problems,
 
-4. update the version of Silva you are running on the file-system:
+4. Update the version of Silva you are running on the file-system:
 
    - if you have an SVN checkout, you can switch to the new version by
      running ``svn switch`` in your Buildout directory. For instance
@@ -199,14 +207,14 @@ The generic procedure to upgrade a Silva site is:
      Silva Buildout configuration using buildout's ``extends`` option,
      you need update this URL.
 
-5. re-run buildout to get the new version:
+5. Re-run buildout to get the new version:
 
    .. code-block:: sh
 
       $ cd Silva
       $ bin/buildout -v
 
-6. verify the :ref:`upgrade-notes`. If a note is available for the
+6. Verify the :ref:`upgrade-notes`. If a note is available for the
    version you are upgrading to, you need to follow them:
 
    .. toctree::
@@ -214,7 +222,7 @@ The generic procedure to upgrade a Silva site is:
 
       buildout/upgrade
 
-7. if there is no upgrade note, restart your Zope instance, visit each
+7. If there is no upgrade note, restart your Zope instance, visit each
    Silva Root you have and access the *service extensions* in ZMI
    (*Zope Management Interface*)
    (``silvaroot-url/service_extensions/manage_extensions``), click on

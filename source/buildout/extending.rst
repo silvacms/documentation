@@ -3,19 +3,18 @@
 Extending and customising your installation with Buildout
 =========================================================
 
-TODO: this
-
-You can additional configuration information in the ``buildout.cfg``
-file, or create your own default configuration to use in
-``buildout.cfg``.
+You can edit the ``buildout.cfg`` configuration file in order to
+install more Silva extensions in your installation, or deactivate
+default ones. Alternatively, you can create your own base
+configuration file to use with ``buildout.cfg``.
 
 .. contents::
 
 Buildout configuration file format
 ----------------------------------
 
-The ``buildout.cfg`` file follows a format like Windows INI files,
-using *sections*. For example a part looks like this:
+The ``buildout.cfg`` configuration file follows a format like Windows
+INI files, using *sections*. For example a section looks like this:
 
 .. code-block:: buildout
 
@@ -23,9 +22,9 @@ using *sections*. For example a part looks like this:
    # options ...
 
 Each section is responsible for installing a part of the software,
-usually in the ``parts`` directory of the buildout. For example An
-``instance`` section takes care of creating a Zope instance. See the
-example taken from ``profiles/base.cfg``:
+usually in the ``parts`` directory of the buildout. For example an
+``instance`` section takes care of creating a Zope instance
+(server). See the example taken from ``profiles/base.cfg``:
 
 .. code-block:: buildout
    :linenos:
@@ -43,18 +42,17 @@ example taken from ``profiles/base.cfg``:
    # options ...
    # other options ...
 
-Within each sections are *options*. Options are parameters to help to
-define what gets installed and how. They can be defined on multiple
-lines (see line 11 to 14), and by so considered as a list of
-options. They can reuse values of other options, located in a
-different section (see line 15). In that case, the reference to the
-option is just replaced by its value.
+Within each sections are *options*. Options are parameters to
+configure what gets installed and how. They can be defined on one or
+multiple lines (see line 11 to 14) in order to define a value or
+multiple ones. They can reuse values of other options, located in the
+same or a different section (see line 15).
 
 The *recipe* option of the section define a piece of code that will be
-responsible for installing the part of the software described in the
-section. Those pieces of code are called *recipes* and are usually
-packaged in standalone extensions. You can find lots of buildout
-recipes on the `PyPi`_ repository.
+responsible for installing the part of the software, using the options
+of the section. Those pieces of code are called *recipes* and are
+usually packaged in standalone Python extensions. You can find lots of
+buildout recipes on the `PyPi`_ repository.
 
 .. code-block:: buildout
 
@@ -63,9 +61,9 @@ recipes on the `PyPi`_ repository.
 
 .. note::
 
-   The ``buildout`` section is used to set Buildout settings. It
-   doesn't use a ``recipe`` option, and it doesn't install any
-   software part.
+   The ``buildout`` section is used to set Buildout general
+   options. It doesn't use a ``recipe`` option, and it doesn't install
+   any software part.
 
 Buildout will install the software parts of the sections mentioned in
 the ``parts`` option of the section ``buildout``, in the order they
@@ -86,17 +84,17 @@ are mentioned:
    # options
 
 Line 2 to 4 will trigger the installation of the ``products`` section
-and lastly the ``instance`` section.
+and after the ``instance`` section.
 
 
 Extending a buildout configuration file
 ---------------------------------------
 
-A configuration file can be extended by another configuration file,
-modifying its behavior. You can see it as well as including the
-configuration file you are extending. This is done by specifying an
-existing file using the ``extends`` option of the ``buildout``
-section:
+An existing Buildout configuration file can be extended by another
+one, modifying its behavior. It can be seen as including an another
+configuration file. It is accomplished by specifying an existing local
+or remote configuration file with the help of the ``extends`` option
+of the ``buildout`` section:
 
 .. code-block:: buildout
 
@@ -104,39 +102,46 @@ section:
    extends = profiles/development.cfg
 
 
-If the path is not absolute, the relative position is
-interpreted from the directory containing the file that use the option
-``extends`` (i.e. a file located in a directory called ``profiles``
-using ``extends`` with the filename ``base.cfg`` will open the file
-``profiles/base.cfg``). Remote HTTP URLs are also valid include path.
+If the path is not absolute, it is interpreted from the directory
+containing the configuration file that used the option ``extends``
+(i.e. a file located in a directory called ``profiles`` using
+``extends`` with the filename ``base.cfg`` will open the file
+``profiles/base.cfg``). Remote files can be used with the help of an
+HTTP URL.
 
-This feature is used to implement Buildout profiles : several
-typical configurations provided with Silva. An example the use of profiles
-can be a configuration for production, one for development with more
-development tools and debug mode activated, a configuration to test
-some generic extension.
+This feature is used to implement Buildout profiles: generic
+configurations file that are meant to be extended for a specific
+usage. An example can be to extend a base configuration file
+installing a list of Silva extension you wish to use with:
 
-Using this feature, you can create your own buildout configuration
-file that extends one of Silva's. This way, you can add or override
-options defined in the configuration you extends:
+- different settings on your Zope instance for production,
+
+- extra development tools and debug mode activated on your Zope
+  instance for development,
+
+- extra configuration to test Silva extensions.
+
+Using this feature, you can create your own Buildout configuration
+file that extends one of Silva's. This way, you can have a Silva
+installation with exactly what you need:
 
 .. code-block:: buildout
    :linenos:
 
    [buildout]
-   extends = profiles/base.cfg
+   extends = profiles/simple-instance.cfg
 
    [instance]
    http-address = 9000
-   fast-mode = true
+   debug-mode = false
 
-Here we change the value of the ``http-address`` option to 9000 on
-line 5, and set the previously not set option ``fast-mode`` to true on
-line 6.
+Here you change the value of the ``http-address`` option of the
+``instance`` section to 9000 on line 5, and set the previously not set
+option ``debug-mode`` to false on line 6.
 
-If you redefine a list of options (option on multiple lines), you can
-use ``+=`` and ``-=`` to add or remove options (lines) specified in
-the base configuration:
+You have the possibility to redefine an existing list of options
+(option on multiple lines) with ``+=`` and ``-=`` in order to add or
+remove options (lines) specified in the parent configuration file:
 
 .. code-block:: buildout
    :linenos:
@@ -151,39 +156,39 @@ the base configuration:
       silvatheme.multiflex
 
 
-On line 6 we remove the value ``${buildout:directory}/products`` from
-the list of products. On line 8 we add the egg
-``silvatheme.multiflex`` to the list already present of eggs to
+On line 6 we remove the directory ``${buildout:directory}/products``
+from the list of products. On line 8 we add the egg
+``silvatheme.multiflex`` to the existing list of extensions to
 install.
 
 .. note::
 
-   To re-create your environment you just need to keep your buildout
-   configuration file. You can do a Subversion checkout of a new Silva
-   buildout tree, put your ``buildout.cfg`` in that directory, run
-   ``python2.7 bootstrap.py`` and after ``./bin/buildout`` to
-   re-create exactly the same environment.
+   To re-create your Silva installation you just need to keep your
+   Buildout configuration file. You can do a Subversion checkout of a
+   new Silva Buildout, put your ``buildout.cfg`` in that directory,
+   run ``python2.7 bootstrap.py`` and after ``./bin/buildout`` to
+   re-create exactly the same installation.
 
 
-Default Silva buildout configuration files
+Default Silva Buildout configuration files
 ------------------------------------------
 
 A number of buildout configuration provided with Silva can be extended:
 
 - ``profiles/base.cfg``: base configuration for all Silva installation,
 
-- ``profiles/development.cfg``: base configuration for development. Debug mode
-  is activated, some extra debugging tools are installed.
-
 - ``profiles/simple-instance.cfg``: base configuration for production. This
   install a simple Zope instance with Silva in production mode.
+
+- ``profiles/development.cfg``: base configuration for development. Debug mode
+  is activated, some extra debugging tools are installed.
 
 Each of those configuration defines a section ``instance`` that will
 be responsible for creating a Zope instance with Silva. Modifying
 options in this section will affect your Zope and Silva installation.
 
-Adding new softwares to your setup
-----------------------------------
+Adding new software to your setup
+---------------------------------
 
 You can add packaged software to your setup which can come from either
 a tarball or a website, a Subversion server, or a Python egg.
@@ -359,7 +364,7 @@ You can have a complete listing of available options on the
 .. warning:: If you use a WSGI server, not all server configuration
   settings defined by the `zope2instance recipe`_ will work, as those
   settings apply to the Zope server which is not use in that kind of
-  setup. However, any setting related to zodb configuration for example
+  setup. However, any setting related to ZODB configuration for example
   stays valid.
 
 .. _PyPi: http://pypi.python.org/pypi
