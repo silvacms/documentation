@@ -11,11 +11,14 @@ follows the well know pattern `Model-View-Controller`_.
 Creating a default view
 -----------------------
 
-A view class is able to display (or render) your content as an HTML
-page. It will have to display *only* your content, the layout system
-will include the layout around the HTML produced by the view.
+A :term:`view` class is able to display (or render) your content as an
+HTML page. It will have to display *only* your content. In the case of
+the default view, the layout system will include the :term:`layout`
+around the HTML produced by the view with the help of a default
+:term:`page`.
 
-As example, in a ``blog.py`` file you can define:
+As example for our ``silva.app.blog`` extension, in the ``blog.py``
+file you can define:
 
 .. code-block:: python
    :linenos:
@@ -156,13 +159,14 @@ Tips about Views
    in the *View* and your content would be the *Model*.
 
 
-Adding more views using the site layout
+Adding more pages using the site layout
 ---------------------------------------
 
-You can write a new page on your content using a
+You can write a new standalone :term:`page` on your content using a
 ``silva.core.views.views.Page`` (alias to ``silvaviews.Page`` in the
-example below). Like for your view class, your page will have *only*
-to render the content HTML, and the layout will be added around it.
+example below). Like for your :term:`view` class, your :term:`page`
+will have *only* to render the content HTML, and the :term:`layout`
+will be added around it.
 
 Following the previous example given in
 :ref:`creating-a-default-view`, you can create a new page

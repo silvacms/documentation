@@ -303,7 +303,8 @@ Add this to ``__init__.py`` file of your extension:
   install = BlogInstaller("silva.app.blog", IBlogExtension)
 
 The first argument to the install object is the name of our extension
-``silva.app.blog``. The second is the marker interface.
+``silva.app.blog``. The second is a :term:`Zope interface` used as
+marker to know if the Silva extension is installed or not.
 
 At this point, you should be able to restart your Zope instance, and
 view, install, and uninstall your extension using ``service_extensions``
