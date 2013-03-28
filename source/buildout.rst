@@ -30,8 +30,8 @@ operating system:
 
 .. warning::
 
-   These are all required. If they are not installed, you won't be
-   able to install Silva.
+   All the requirements are required. If they are not installed, you
+   won't be able to install Silva correctly.
 
 Installing Silva for a quick drive
 ----------------------------------
@@ -169,93 +169,88 @@ Upgrading your installation
 
 The generic procedure to upgrade a Silva site is:
 
-1. stop your Zope instance,
+1. Make sure that any extra and/or custom extensions you are using
+   with Silva works with the new version you are upgrading to. Failing
+   to test this before the migration might break your Silva site and
+   make the upgrade fail.
 
-2. do a backup of your whole Zope instance,
+2. stop your Zope instance:
 
-3. change the version of Silva you are running on the file-system (see
-   below),
+   .. code-block:: sh
 
-4. re-run buildout to get the new version,
+      $ cd Silva
+      $ ./bin/paster serve deploy.ini stop
 
-5. verify the :ref:`upgrade-notes` for the version you are upgrading
-   and follow them,
+3. do a backup of your whole Buildout directory. Doing this will
+   permit you to restore your Silva site in case of problems,
 
-6. if there are no upgrade notes, restart your Zope instance, visit
-   each Silva Root you have and access the *service extensions* in ZMI
+4. update the version of Silva you are running on the file-system:
+
+   - if you have an SVN checkout, you can switch to the new version by
+     running ``svn switch`` in your Buildout directory. For instance
+     to upgrade to the version ``2.3.1``:
+
+      .. code-block:: sh
+
+         $ cd Silva
+         $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.3.1
+
+   - if you made your own buildout configuration that refers to the
+     Silva Buildout configuration using buildout's ``extends`` option,
+     you need update this URL.
+
+5. re-run buildout to get the new version:
+
+   .. code-block:: sh
+
+      $ cd Silva
+      $ bin/buildout -v
+
+6. verify the :ref:`upgrade-notes`. If a note is available for the
+   version you are upgrading to, you need to follow them:
+
+   .. toctree::
+      :maxdepth: 2
+
+      buildout/upgrade
+
+7. if there is no upgrade note, restart your Zope instance, visit each
+   Silva Root you have and access the *service extensions* in ZMI
    (*Zope Management Interface*)
    (``silvaroot-url/service_extensions/manage_extensions``), click on
    the button upgrade content.
 
-You cannot upgrade only one instance of Silva inside a Zope instance
-to a specific version. All Silva sites in a Zope instance run the same
-version of Silva (which is the one installed on the file-system).
+.. warning::
+
+   You cannot upgrade only one instance of Silva inside a Zope
+   instance to a specific version. All Silva sites in a Zope instance
+   run the same version of Silva (which is the one installed on the
+   file-system).
 
 Downgrade of versions is not supported. After you upgrade a Silva
 site, the only way to get back to the old version you were running is
 to restore a backup.
 
-To change the version of Silva your are running on the file-system:
+We recommend to first copy your site in a test installation and apply
+the upgrade procedure on this installation. After testing that
+everything on your site works, you can apply the same procedure on
+your production site. This is especially recommended for upgrades that
+jump between major versions of Silva.
 
-- if you have an SVN checkout, you can switch Silva versions by
-  running ``svn switch``, for instance to upgrade to the version
-  ``2.3.1``:
-
-   .. code-block:: sh
-
-      $ cd Silva
-      $ ./bin/paster serve deploy.ini stop
-      $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.3.1
-      $ ./bin/buildout
-
-- if you made your own buildout configuration that refers directly to
-  the Silva Buildout configuration using buildout's ``extends`` option
-  be sure to update the URL used, and rerun buildout:
-
-   .. code-block:: sh
-
-      $ cd Silva
-      $ ./bin/paster serve deploy.ini stop
-      $ ./bin/buildout
-
-.. warning::
-
-   If you are using any specific extra and/or custom extensions with
-   Silva, you should check that they are compatible with the version
-   of Silva you want to upgrade to. Failing to test these extensions
-   may break your site and cause the upgrade to fail.
-
-We recommend to first copy your site as a test site, and then do the
-upgrade procedure on the copy. After checking that everything on your
-site works, you can do the same procedure on your production
-site. This is especially recommended for upgrades that jump between
-versions, and for major releases of Silva.
-
-.. note::
-
-   Please refer to the specific upgrade notes for the version you are
-   upgrading to.
-
-.. toctree::
-   :maxdepth: 2
-
-   buildout/upgrade
-
-
-.. warning::
-
-   It's recommended to backup your data before attempting any
-   upgrade operations.
 
 Using Buildout
 --------------
 
 If you changed your configuration files, or updated your buildout
-tree, you need to re-run buildout:
+tree, you need to re-run buildout and restart your instance to apply
+the changes:
 
 .. code-block:: sh
 
+   $ cd Silva
+   $ ./bin/paster serve deploy.ini stop
    $ ./bin/buildout
+   $ ./bin/paster serve deploy.ini start
 
 .. note::
 

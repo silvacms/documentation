@@ -6,9 +6,9 @@ Creating new Silva content
 Create a new content
 --------------------
 
-To create a new Silva content, you need to define a class that inherits
-from one of the base content class of Silva, for instance
-:py:class:`Products.Silva.Asset.Asset`:
+To create a new Silva content, you need to define a Python class that
+inherits from one of the base content class defined in Silva. For
+instance :py:class:`Products.Silva.Asset.Asset`:
 
 .. code-block:: python
   :linenos:
@@ -22,19 +22,21 @@ from one of the base content class of Silva, for instance
           # Provides some more API on a Video file.
           pass
 
-It is all you need to do. On line 4, we set a ``meta_type``. It is a
-Zope 2 concept, and should identify uniquely your content type.
-
+It is all you need to do. On line 4, you set a ``meta_type``. It is a
+Zope 2 concept that is used to uniquely identify your content
+type. This class will old all the content related logic and data
+associated with your content, and be automatically saved into the ZODB.
 
 .. _creating-a-versioned-content:
 
 Creating a new versioned content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Versioned content are bit more tricky, as they are composed of two
-parts: the **content** class, and the **version** class. The first one
-implements all content related behavior, and the later will just store
-the data.
+Versioned content are bit more tricky than regular ones, as they are
+composed of two parts: the **content** class, and the **version**
+class. The first one implements all content related logic and the
+later will just store the data. By doing this, you can have different
+versions of your data.
 
 As an example, you can imagine a blog article:
 
@@ -47,40 +49,48 @@ As an example, you can imagine a blog article:
    class ArticleVersion(Version):
        meta_type = 'Blog Article Version'
 
+       def set_processed_text(self, text):
+           self.processed_text = text
+
        def get_processed_text(self):
            # Do things on self.text and set it into processed_text
-           return processed_text
+           return self.processed_text
 
    class Article(VersionedContent):
        meta_type = 'Blog Article'
 
 
-
-On line 11, we define the content class. On line 4, we define the
-version class. Note that on line 5, the version class have a different
-``meta_type`` than the content class, ``Version`` have been appended
-to it.
+On line 14, you define the content class, that will hold later related
+logic. On line 4, you define the version class. Note that on line 5,
+the version class that actually store the data. Not that the version
+class have a different ``meta_type`` than the content class,
+``Version`` have been appended to it.
 
 
 Available Silva bases content classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-All those base classes are usable to create new Silva content:
+All those base classes are usable to create new content in Silva:
 
 .. class:: Products.Silva.Publishabled.NonPublishable
 
-  Base for Silva content that should not directly appear to the
-  public. You need to use this base class with either
+  Base for content that should not directly appear to the public. You
+  need to use this base class with either
   ``OFS.SimpleItem.SimpleItem`` or ``OFS.Folder.Folder`` if you want
   your content to behave like a folder.  You can refer to the
-  :py:interface:`~silva.core.interfaces.content.INonPublishable` interface for
-  more information.
+  :py:interface:`~silva.core.interfaces.content.INonPublishable`
+  interface for more information.
+
+.. class:: Products.Silva.VersionedContent.VersionedNonPublishable
+
+  Base for versioned content that should not directly appear to the
+  public.
 
 .. class:: Products.Silva.Asset.Asset
 
-  ``File`` and ``Image`` are subclasses of this base class. Refer to
-  the :py:interface:`~silva.core.interfaces.content.IAsset` interface for more
-  information.
+  ``File`` and ``Image`` are sub-classes of this base class. Refer to
+  the :py:interface:`~silva.core.interfaces.content.IAsset` interface
+  for more information.
 
 .. class:: Products.Silva.Content.Content
 
@@ -121,22 +131,39 @@ All those base classes are usable to create new Silva content:
   to the :py:interface:`~silva.core.interfaces.content.IPublication`
   interface for more information.
 
+In addition to those classes, any already existing content is
+extendable by using the same technique.
+
+Extending Silva File
+~~~~~~~~~~~~~~~~~~~~
+
+Silva File have multiple implementation, depending of which storage
+you select in the service files. If you want to extend Silva File, you
+need to extend a specific given implementation, and not their base
+class.
+
+.. class:: Products.Silva.File.BlobFile
+
+   Implementation for files storing their data into ZODB blobs.
+
+.. class:: Products.Silva.File.ZODBFile
+
+   Implementation for files storing their data directly inside the ZODB.
+
+For site holding large amount of files, it is recommended to extend
+:py:class:`~Products.Silva.File.BlobFile`.
+
 Registering a new content with Grok
 -----------------------------------
 
-You can register a new content using :term:`Grok`.
-
-.. note::
-
-   You have to choose one way, and only way to do it. You cannot mix
-   different kind of registration.
+You can register your new content using :term:`Grok`.
 
 Regular content
 ~~~~~~~~~~~~~~~
 
 After enabling :term:`Grok` in your extension, your content will be
-registered for you. You customize the registration using
-:term:`Grok directives<Grok directive>`:
+registered for you automatically. You can customize the registration
+using :term:`Grok directives<Grok directive>`:
 
 .. code-block:: python
    :linenos:
@@ -149,23 +176,24 @@ registered for you. You customize the registration using
        silvaconf.icon('blog.png')
        silvaconf.priority(-3)
 
-On line 6, the ``silvaconf.icon`` directive sets the pathname to an
+On line 6, the ``silvaconf.icon`` directive sets  the filename of an
 icon file (``GIF`` or ``PNG``) to use as content icon. On line 7, the
-priority of the content in the addable menu is changed with the directive
+priority of the content in the addable menu is modified with the directive
 ``silvaconf.priority``.
 
 
-By default Silva will create a factory for your content.
+By default Silva will create a content factory for your content.
 
 .. glossary::
 
    *Content factory*
      A content factory is a function that create a new Zope 2 content
-     in Zope 2, and add in one container.
+     in Zope 2, and add it to the container specified in parameter.
 
-However, you can still provide yourself your own factory function to
-customize the creation of your content. You have some responsibilities
-if you so, like triggering some :term:`Zope event`:
+You can override this default factory with your own function in order
+to customize the creation of the content. You have some
+responsibilities if you do so, like triggering some :term:`Zope
+event`. For example you can customize the creation of the blog content:
 
 .. code-block:: python
 
@@ -180,14 +208,14 @@ if you so, like triggering some :term:`Zope event`:
        # Do what ever you want with blog
        notify(ObjectCreatedEvent(blog))
 
-And on your content you need to use the directive
-``silvaconf.factory`` (in the content class):
+On your content you need to use the directive ``silvaconf.factory``
+(in the content class) in order to declare your custom factory:
 
 .. code-block:: python
 
    silvaconf.factory('manage_addBlog')
 
-You can define a factory which is a ZMI add form, declare it on your
+If you define a factory that is a ZMI add form, declare it on your
 content *before* the real Python factory, and use the directive
 ``silvaconf.zmi_addable`` (in the content class) to make your content
 addable from ZMI:
@@ -216,9 +244,9 @@ addable from ZMI:
 Versioned content
 ~~~~~~~~~~~~~~~~~
 
-Registering a new versioned content in Silva works exactly like registering
-a regular content, except there is an additional :term:`Grok
-directive` is needed to associate the content class to the versioned
+Registering a new versioned content in Silva works exactly like
+registering a regular content, except there is an additional
+:term:`Grok directive` is needed to associate the version class to the
 content class:
 
 .. code-block:: python
@@ -236,9 +264,8 @@ content class:
        silvaconf.icon('article.png')
        silvaconf.version_class(ArticleVersion)
 
-The extra directive is used on line 11, and takes as argument directly
-the version class.
-
+The extra directive is used on line 11 and takes as argument the
+version class.
 
 
 .. _adding-a-content-python:
@@ -255,15 +282,17 @@ Python code add a new content in the container of your choice:
    factory = container.manage_addProduct['silva.app.blog']
    factory.manage_addArticle('identifier', u'My content')
 
-On line 1, we look for the factories of our extension, we called
-*silva.app.blog* during the :ref:`registering-extension-using-grok` of
-the extension. On line 2, we invoke the factory to create a new
-*Article* content.
+On line 1, you look for the factories registered by your extension,
+that you called *silva.app.blog* during the
+:ref:`registering-extension-using-grok` of the extension. On line 2,
+you invoke the factory to create a new *Article* content, with the
+given title and content.
 
 .. note::
 
-   Not only extension content are added into Zope this way, official
-   Silva content as well. For instance, here follows how to add a new folder.
+   Not only custom content are created and added this way, official
+   Silva content as well. For instance, here follows how to add a new
+   Silva Folder.
 
    .. code-block:: python
 

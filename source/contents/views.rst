@@ -79,9 +79,9 @@ In page templates, you have access to the following variables:
    Content or version that should be rendered. This is different than
    ``context``, in that in case of a versioned content, it will be the
    published version (or editable version if you are previewing it),
-   and not the versioned content itself. To collect information to
-   display, you should always use this ``content`` instead of
-   ``context``.
+   and not the versioned content itself, that is ``context``. To
+   collect information to display, you should always use this
+   ``content`` instead of ``context``.
 
 ``request``
    Refers to the Zope request object.
@@ -202,6 +202,12 @@ Following the previous example given in
 For all other details, a ``silvaviews.Page`` provides the same API
 than a ``silvaviews.View``.
 
+..note::
+
+  The default view for a content is not built using a page, as extra
+  logic is required for it. A default page is already available taking
+  care of this logic, and looking for a view to render the content.
+
 
 Adding more views not using the site layout
 -------------------------------------------
@@ -232,10 +238,10 @@ code needed to render the custom RSS feed.
    The fact you use ``silvaviews.View`` instead of ``silvaviews.Page``
    to render your content as HTML to the public comes from
    compatibility issues with the old ZODB based layout system and the
-   content versionning system.
+   content versioning system.
 
 
-Getting the URL of an object
+Getting the URL of a content
 ----------------------------
 
 From a python file, you can use the function ``absoluteURL``:
@@ -276,15 +282,15 @@ From a page template, you can use the view ``absolute_url``:
    deprecated and should not be used anymore.
 
 
-Getting the root content of the current site
---------------------------------------------
+Getting the top level content of the current site
+-------------------------------------------------
 
-The root content if your site might not be the Silva root, if you
-create sub-site using publication, so the method ``get_root`` will not
-work.
+The top level content of your site might not be the Silva Root
+content, if you created a sub-site using a publication for instance.
 
 From a python file, you can use the
-:py:interface:`silva.core.views.interfaces.IVirtualSite` adapter:
+:py:interface:`silva.core.views.interfaces.IVirtualSite` adapter on
+the request object:
 
 .. code-block:: python
 
@@ -294,8 +300,14 @@ From a python file, you can use the
 
        def update(self):
            site_info = IVirtualSite(self.request)
-           self.root = site.get_root()
-           self.root_url = site.get_root_url()
+           self.root = site_info.get_root()
+           self.root_url = site_info.get_root_url()
+
+
+.. warning::
+
+   Using the method ``get_root`` from :py:interface:`IRoot` will not
+   give you this top level content.
 
 
 .. _Zope Page Template: http://docs.zope.org/zope2/zope2book/ZPT.html

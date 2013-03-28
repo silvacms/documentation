@@ -141,7 +141,7 @@ Solution
 ~~~~~~~~
 
 You can install and use the Silva extension `silva.app.forest`_, that
-have been built for this case. It will remove all this complicated
+have been built for this use-case. It will remove all this complicated
 configuration from your Apache configuration, and store this
 information in Zope. It supports multiple sites, with aliases and the
 equivalent of multiple rewrite rules inside a given site.
