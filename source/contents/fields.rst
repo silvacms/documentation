@@ -114,10 +114,16 @@ Silva provides the following extra schema fields for use in the
 
 .. class:: silva.core.conf.schema.ID
 
-   Input a Silva content object identifier. When used in a form, the
-   validation of this field will only work when the identifier will
-   not be in used in the container on which the form have been called
-   on.
+   Input a valid identifier for a new Silva content. When used in a
+   form, the validation of this field will only succeed if the new
+   identifier is not already in used in the nearest container where
+   the form have accessed from and respect the criterias to be a valid
+   identifier.
+
+.. class:: silva.core.conf.schema.HTMLText
+
+   Input rich text using a WYSIWYG editor with the help of
+   ``silva.core.editor``.
 
 .. class:: silva.core.references.schema.Reference
 
@@ -130,11 +136,12 @@ Silva provides the following extra schema fields for use in the
 
 .. _collection-zope-schema:
 
-Collection Zope schema fields
------------------------------
+Zope schema fields for collections
+----------------------------------
 
-All collection fields have a required parameter ``value_type``,
-describing the type of the contained value.
+A collection fields let generate fields to input more than one value.
+They have a required parameter ``value_type``, describing the type of
+the contained value.
 
 For example, to have a list of strings you will write:
 

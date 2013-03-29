@@ -36,6 +36,12 @@ Content
   available. None of the previously script creating in ZODB are
   available.
 
+- The test helpers ``Products.Silva.tests.helpers`` have been
+  removed. You can access test fixture directly from the test layer
+  now and using standard :term:`Zope adapter` defined in Silva for the
+  other helpers (see
+  :py:interface:`~silva.core.interfaces.adapters.IPublicationWorkflow`).
+
 
 Code sources
 ------------

@@ -160,6 +160,11 @@ Python documentation: :ref:`distutils-index`.
    used. It is only a wrapper around the regular Python mechanims used
    to distribute Python extensions.
 
+.. note::
+
+   In addition you should create a MANIFEST.in file in order to ensure
+   all the files you want are distributed with your extension when you
+   make a tarball (:ref:`manifest`).
 
 Configuring a Silva extension
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -225,6 +230,11 @@ After modifying the Buildout configuration, you need to run
   It is the recommended way to add a released Silva extension to your
   Buildout directory, however it is the recommended way for Silva
   extension that you are *developing*.
+
+
+.. seealso::
+
+   :ref:`creating-a-test-script`.
 
 Installing an extension in Silva with ``service_extension``
 -----------------------------------------------------------

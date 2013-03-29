@@ -30,7 +30,7 @@ extension should contains the following files::
   src/silvatheme/blogtheme/configure.zcml
 
 
-Creation of a Layer and a Skin
+Creation of a layer and a skin
 ------------------------------
 
 The first task in creating a theme is to create a :term:`layer` and

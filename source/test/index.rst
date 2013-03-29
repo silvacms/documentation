@@ -1,5 +1,5 @@
-Tests in Silva
-==============
+Testing in Silva
+================
 
 .. contents::
 
@@ -7,31 +7,30 @@ Tests in Silva
 Running existing Silva tests
 ----------------------------
 
-If you used the :term:`Buildout` profile ``development.cfg`` or
-``silva-development.cfg`` you should have tests scripts installed in
-the ``bin`` folder of your :term:`Buildout` directory.
+If you installed Silva with :term:`Buildout` configuration file
+``development.cfg`` or ``silva-development.cfg`` test script should
+have beedn installed in the ``bin`` folder of your :term:`Buildout`
+directory.
 
-To run all the existing Silva tests you can just run the ``test-all``
+To run all the existing Silva tests you can just run the ``test-silva``
 script:
 
 .. code-block:: sh
 
-  $ ./bin/test-all
+  $ ./bin/test-silva
 
 You can use the ``test`` script to run only one extension test, using
-the option ``-s``:
+the option ``-m``:
 
 .. code-block:: sh
 
-  $ ./bin/test -s Products.Silva
+  $ ./bin/test m Products.Silva
 
-Or if you which to run only a test file, you can use the same ``test``
-script, with the ``-m`` option:
+Or you can run only a specific test file:
 
 .. code-block:: sh
 
   $ ./bin/test -m Products.Silva.tests.test_file
-
 
 To see the other options, you can use the ``--help`` option of the
 ``test`` script:
@@ -40,47 +39,58 @@ To see the other options, you can use the ``--help`` option of the
 
   $ ./bin/test --help
 
+Other test script are provided with Silva as well:
+
+- ``test-infrae``: Test all the non-specific Silva component used with
+  Silva.
+
+- ``test-zeam``: Test all the form framework used with Silva.
+
 .. _creating-a-test-script:
 
-Creating a new test script in Buildout
---------------------------------------
+Creating a new test script with Buildout
+----------------------------------------
 
-If you whish to test a new extension, you need to create a
-`zope.testrunner`_ script to run this extension tests. You can do this
-in :term:`Buildout` by adding a new section using the
-`zc.recipe.testrunner`_ recipe:
+In order to test a new Silva extension, a script is needed to run its
+test. This can be done your :term:`Buildout` configuration file by
+adding a new section using the `zc.recipe.testrunner`_ recipe.
+
+If you want to test for example ``silva.app.blog`` you should add to
+your ``buildout.cfg`` configuration file:
 
 .. code-block:: buildout
    :linenos:
 
    [buildout]
    parts +=
-      blog_tests
+      test-blog
 
-   [blog_tests]
+   [test-blog]
    recipe = zc.recipe.testrunner
    eggs =
       silva.app.blog
    defaults = ['-v']
 
-On line 5 through 9 we define a section which create our test script,
-``blog_tests``. On line 7 we give a list of extension we want to test,
-here ``silva.app.blog``. On line 9, we give some default options to
-the test runner, here to be verbose by default.
+- Line 3 add the new section ``test-blog`` to the list of section to
+  install
 
-To know more about the test script options, you can use ``--help`` on
-the created script:
+- Line 5 to 9 define the new section ``test-blog``. Line 6 specify the
+  recipe to use and 7 to 8 the Silva extension to test. Line 9 define
+  some default options to automatically give to the test script, like
+  the verbose mode in this case.
+
+To know more about the options you can give to your test script, you
+can use ``--help`` on it:
 
 .. code-block:: sh
 
-   $ ./bin/blog_tests --help
+   $ ./bin/test-blog --help
 
 To run the tests, like for the existing Silva tests, just un the script:
 
 .. code-block:: sh
 
-   $ ./bin/blog_tests
-
+   $ ./bin/test-blog
 
 .. _writing-a-new-test:
 
@@ -91,11 +101,11 @@ Tests are written using the Python :py:mod:`unittest` framework. To
 run them, `zope.testrunner`_ is used (please refer to
 :ref:`creating-a-test-script` in order to know how to run them).
 
-All modules containing tests should have the prefix ``test_`` in their
-module name, and be located in a ``tests`` sub-package of the tested
-package.
+All Python modules containing tests should have the prefix ``test_``
+in their name, and be located inside a ``tests`` sub-diretory of the
+tested package.
 
-In a testing module, you can rewrite a test case like this:
+A test case can be written like this:
 
 .. code-block:: python
   :linenos:
@@ -118,20 +128,21 @@ In a testing module, you can rewrite a test case like this:
       suite.addTest(unittest.makeSuite(SilvaTestCase))
       return suite
 
-On line 4, we create a new test case by inheriting from the
-:py:class:`unittest.TestCase` class. On line 5, we set the :term:`test
-layer` to be the Silva
-:py:data:`~Products.Silva.testing.FunctionalLayer`, that will create a
-Silva test site for our testing.
+- Line 4 create a new test case by inheriting from the
+  :py:class:`unittest.TestCase` class.
 
-On line 7 to 9, we set up ``self.root`` to be the root of the Silva
-site, and we logged into Zope as the user *author*.
+- Line 5 set the :term:`test layer` to be the default Silva one
+  (:py:data:`~Products.Silva.testing.FunctionalLayer`), that will
+  create a Silva test site for our testing.
 
-On line 14 to 17, we declare in a ``test_suite`` function which test
-case we want to be run. This is not required, if we didn't do that,
-all classes inheriting from :py:class:`unittest.TestCase` from the
-current would have been considered as test case to run while running
-the tests.
+- Line 7 to 9 set up ``self.root`` to be the root of the Silva site,
+  and log the test case into Zope as the user *author*.
+
+- Line 14 to 17 declares in a ``test_suite`` function which test case
+  we want to be run. This is not required, if we didn't do that, all
+  classes inheriting from :py:class:`unittest.TestCase` from the current
+  would have been considered as test case to run while running the
+  tests.
 
 .. glossary::
 
@@ -142,14 +153,13 @@ the tests.
       need to be able to run your test.
 
 
-Documentation on test API
--------------------------
+Testing API
+-----------
 
 .. toctree::
    :maxdepth: 2
 
    api
-   helpers
 
 .. _zope.testrunner: http://pypi.python.org/pypi/zope.testrunner
 .. _zc.recipe.testrunner: http://pypi.python.org/pypi/zc.recipe.testrunner
