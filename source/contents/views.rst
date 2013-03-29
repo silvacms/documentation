@@ -17,6 +17,24 @@ the default view, the layout system will include the :term:`layout`
 around the HTML produced by the view with the help of a default
 :term:`page`.
 
+.. class:: silva.core.views.views.View
+
+   Base class used to create new :term:`view`.
+
+   .. method:: update()
+
+      This method is called before the template is rendered. You can
+      override this method in order to compute values to use in your
+      template.
+
+   .. method:: render()
+
+      This method renders the template associated with the view. You
+      can override it if you don't want to use a template to render
+      your content, but Python code instead. You need to return a
+      *unicode* Python string.
+
+
 As example for our ``silva.app.blog`` extension, in the ``blog.py``
 file you can define:
 
@@ -36,9 +54,10 @@ file you can define:
        def title(self):
             return self.content.get_title()
 
-On line 5, the class ``BlogView`` implement your view. It inherits
-from ``silva.core.views.views.View`` (aliased as ``silvaviews.View``,
-*line 8*).
+
+On line 8, the class ``BlogView`` implement your view. It inherits
+from ``silva.core.views.views.View`` (aliased as ``silvaviews.View``
+on line 2).
 
 On line 9, the :term:`Grok directive` :py:func:`grok.context` tells
 the view which content to render, here the ``Blog`` content type.
@@ -162,11 +181,27 @@ Tips about Views
 Adding more pages using the site layout
 ---------------------------------------
 
-You can write a new standalone :term:`page` on your content using a
-``silva.core.views.views.Page`` (alias to ``silvaviews.Page`` in the
-example below). Like for your :term:`view` class, your :term:`page`
-will have *only* to render the content HTML, and the :term:`layout`
-will be added around it.
+You can write a new standalone :term:`page` on your content. Like for
+your default :term:`view` class, your :term:`page` will have *only* to
+render the content HTML, and the :term:`layout` will be added around
+it.
+
+.. class:: silva.core.views.views.Page
+
+    Base class used to create new :term:`page`.
+
+   .. method:: update()
+
+      This method is called before the template is rendered. You can
+      override this method in order to compute values to use in your
+      template.
+
+   .. method:: render()
+
+      This method renders the template associated with the page. You
+      can override it if you don't want to use a template to render
+      your content, but Python code instead. You need to return a
+      *unicode* Python string.
 
 Following the previous example given in
 :ref:`creating-a-default-view`, you can create a new page
@@ -189,7 +224,9 @@ Following the previous example given in
   to associate our page to the ``Blog`` content type.
 
 - On line 3, we use the :term:`Grok directive` :py:func:`grok.name` to
-  name our page ``post.html``.
+  name our page ``post.html``. Unlike the default view of a content,
+  you need to alaways given a name to page in order to be able to
+  access it.
 
 - On line 4, we use the :term:`Grok directive` :py:func:`grok.require`
   to require the user to have at least the security permission
@@ -316,4 +353,4 @@ the request object:
 
 .. _Zope Page Template: http://docs.zope.org/zope2/zope2book/ZPT.html
 .. _Model-View-Controller: http://en.wikipedia.org/wiki/Model-View-Controller
-.. _Chameleon Page Template: http://chameleon.repoze.org/docs/latest/
+.. _Chameleon Page Template: http://chameleon.readthedocs.org/en/latest/

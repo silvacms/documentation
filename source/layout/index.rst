@@ -1,13 +1,14 @@
 
 .. _creating-a-new-visual:
 
-Creating a visual theme
-=======================
+======================
+Creating a Silva theme
+======================
 
-You can create a visual theme (or layout) as a filesystem-based
+You can create a Silva theme (or sometime called a layout) as a Silva
 extension.
 
-You need first to create an extension (please refer to
+You need first to create an Silva extension (please refer to
 :ref:`creating-an-extension`). A full example is provided in this
 documentation. If you wish to see more code examples, you can have a
 look at the default layout extensions that are provided by default
@@ -18,7 +19,11 @@ with Silva. The code is available through Mercurial:
 - `multiflex theme <https://hg.infrae.com/silvatheme.multiflex>`_
 
 
-First some vocabulary on visual themes:
+Silva theme main components
+===========================
+
+Some components are defined in order to let the user determine the
+visual aspect and HTML rendering of the content accessed:
 
 .. glossary::
 
@@ -73,8 +78,8 @@ You can extend an already existing theme, by having your layer inherit
 this theme layer, or create them by yourself. For instance you can
 reuse default theme definitions done in the Porto layout.
 
-Visual theme elements
----------------------
+Silva theme extra components
+============================
 
 You use a few more elements to build your theme:
 
@@ -118,21 +123,12 @@ You use a few more elements to build your theme:
       it. You could imagine having a colunm on your layout, where
       layout parts can register dependently of the content.
 
-The Porto Layout
-----------------
 
-Is a default and simple layout shipped with ``silva.core.layout``. Its
-purpose is to contain default CSS for Silva Documents, and be easily
-overriden to implement your own layout.
-
-Layout Howto
-------------
-
-The next part will document the layout framework as a howto. It will
-be a reference on how to build a new layout for Silva as well.
+Creating a Silva theme
+======================
 
 .. toctree::
    :maxdepth: 2
 
-   howto
-   providers
+   base
+   porto

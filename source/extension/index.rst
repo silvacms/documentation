@@ -12,7 +12,7 @@ extension that is defined inside a Python package
 
 .. glossary::
 
-   *egg*
+   *Egg*
      Format in which a Python package can distributed to other
      users. This include all the code of the Python package, and some
      metadata information, like version, description, installation
@@ -96,13 +96,13 @@ get as final skeleton::
 
   setup.py
   src/silva/
-  src/ilva/__init__.py
+  src/silva/__init__.py
   src/silva/app/
   src/silva/app/__init__.py
   src/silva/app/blog
   src/silva/app/blog/__init__.py
 
-The ``setup.py`` file will contain:
+The ``setup.py`` should contains:
 
 .. code-block:: python
    :linenos:
@@ -125,21 +125,41 @@ The ``setup.py`` file will contain:
          packages=find_packages('src'),
          namespace_packages=['silva', 'silva.app'],
          include_package_data=True,
-         zip_safe=True,
+         zip_safe=False,
          install_requires=[
              'Products.Silva',
          ])
 
 - Line 3 and 4 defines the name of the Python extension and its version.
 
+- Line 5 to 14 defines metadata that makes your Python extension
+  searchable when it is distributed on a Package like the `Pypi`_.
+
 - Line 15 defines which directory contains the Python extension,
+
+- Line 16 defines which Python packages your Python extension
+  contains. In our case in use the utility function ``find_packages``
+  that does it automatically for us.
 
 - Line 17 who are the Python packages used as namespace. In our case
   it is ``silva`` and ``silva.app``. If you created a Python package
-  called ``silvatheme.rumba`` it would be ``silvatheme``.
+  called ``silvatheme.blogtheme`` it would be ``silvatheme``.
+
+- Line 18 and 19 includes non Python files (like :term:`ZCML` files) a
+  part of our extension.
 
 - Line 20 defines the requirements needed for this Python extension in
   order to works. In our case it is Silva.
+
+For more information about ``setup.py``, you can refer to the official
+Python documentation: :ref:`distutils-index`.
+
+.. note::
+
+   In order to improve the packaging process, `setuptools`_ is
+   used. It is only a wrapper around the regular Python mechanims used
+   to distribute Python extensions.
+
 
 Configuring a Silva extension
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -210,11 +230,11 @@ Installing an extension in Silva with ``service_extension``
 -----------------------------------------------------------
 
 In order to conditionally activate features in Silva, you might want
-to declare your extension to ``service_extension`` and create an
+to declare your Silva extension to ``service_extension`` and create an
 installer that will activate your Silva extension on demand.
 
 The Silva extension can be declared with the help of :term:`Grok
-directive` and a default installer can be used. It will let
+directive` and a default installer can be used. It will let you
 automatically activate and configure any content type that your Silva
 extension creates.
 
@@ -225,8 +245,8 @@ extension creates.
    theme, you are not required to declare your extension to
    ``service_extension`` and provide an installer.
 
-Registering an extension with ``service_extension``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Registring an extension with ``service_extension``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This configuration is done in Python, in the ``__init__.py`` file of
 your extension. For example in the case of the ``silva.app.blog``
@@ -265,11 +285,12 @@ allows you to specify a tuple:
 Activating a Silva extension via ``service_extension``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need to provide in the same ``__init__.py`` file that you declared
-your Silva extension an installer under the name of ``install``.
+You need to provide an installer under the name of ``install`` in the
+same ``__init__.py`` file that you declared your Silva extension to be
+able to activate it.
 
 You can extend the default installer provided by Silva. It will for
-any content type found in your Silva extension:
+any content type found in your Silva extension, it will:
 
 - Register them in Zope,
 
@@ -281,7 +302,7 @@ any content type found in your Silva extension:
 
 - Handle the status activated or un-activated of the extension.
 
-Add this to ``__init__.py`` file of your extension:
+It can be used like this:
 
 .. code-block:: python
 
@@ -310,5 +331,6 @@ At this point, you should be able to restart your Zope instance, and
 view, install, and uninstall your extension using ``service_extensions``
 in the Silva root.
 
+.. _Pypi: https://pypi.python.org/pypi
 .. _five.grok: http://pypi.python.org/pypi/five.grok
 .. _setuptools: https://pypi.python.org/pypi/setuptools

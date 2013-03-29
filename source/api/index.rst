@@ -9,7 +9,13 @@ All the API used the following Zope concepts:
      An interface is a Zope concept used to describe what an object
      (or a class) provides (or implements) as methods and attributes,
      and what are theirs signatures (argument list). This is just a
-     verified definition of the API that an object provides.
+     definition of the API that an object provides, that can be
+     tested.
+
+     It is defined with the help of a regular Python class that
+     inherit from ``zope.interface.Interface``. By convention, they
+     are always defined in a Python module called ``interfaces`` (i.e
+     in a file called ``interfaces.py``).
 
    *Zope adapter*
      An adapter provides additional behavior (i.e. attributes and
