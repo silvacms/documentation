@@ -85,9 +85,9 @@ change the HTML of the ``<head>`` tag:
     This :term:`viewlet manager` let your insert extra tags inside the
     ``<head>`` tag.
 
-For the example ``silvatheme.blogtheme`` that was based on the Porto
-Layout, you can add a new Python module ``theme.py`` in it where you
-put your customization:
+For example if you base your theme ``silvatheme.wonderfull`` on the
+Porto Layout, you can add a new Python module ``theme.py`` in it where
+you define the customization you want to apply:
 
 .. sourcecode:: python
    :linenos:
@@ -111,10 +111,10 @@ put your customization:
        def favicon_url(self):
            return self.static['my_custom_favicon.ico']()
 
-
 To this you can create a directory called ``theme_templates`` in the
-extensions, where you can add a `Chameleon Page Template`_ under the
-name ``layout.cpt`` with the following code:
+extension (so inside ``src/silvatheme/wonderfull``), where you can add
+a `Chameleon Page Template`_ under the name ``layout.cpt`` with the
+following customization:
 
 .. code-block:: html
 

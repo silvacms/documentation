@@ -187,7 +187,7 @@ with the :term:`Grok directive` :py:func:`grok.layer`. Optionaly you
 can define multiple layout and associate some of them to specific
 content type with the :term:`Grok directive` :py:func:`grok.context`.
 
-For the ``silvatheme.blogtheme` example you can define this really
+For the ``silvatheme.blogtheme`` example you can define this really
 simple layout:
 
 .. code-block:: python
