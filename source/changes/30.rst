@@ -1,10 +1,10 @@
-Changes in Silva 3.0 API
-========================
+Changes in Silva 3.0.x API
+==========================
 
-This document tracks the major changes between Silva 2.3 and Silva 3.0.
+This document tracks the major changes between Silva 2.3 and Silva 3.0.x
 
-Content
--------
+Silva 3.0 changes
+-----------------
 
 - :term:`ZCML` based registration have been removed (because it was
   unused).
@@ -43,16 +43,16 @@ Content
   :py:interface:`~silva.core.interfaces.adapters.IPublicationWorkflow`).
 
 
-3.0.1
-~~~~~
+Silva 3.0.1 changes
+~~~~~~~~~~~~~~~~~~~
 
 - The XML import and export API have been refactored and moved into
   the ``silva.core.xml`` extension. Base classes for creating new XML
   handlers and XML producers are available from this instance.
 
 
-Code sources
-------------
+Changes in the Code sources API
+-------------------------------
 
 
 - ``REQUEST.model`` is no longer available. Code sources must rely on
