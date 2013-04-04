@@ -5,13 +5,13 @@ Silva Documentation
 
 
 If you find any bugs regarding this documentation, please report them
-on https://launchpad.net/silva-documentation.
+on https://bugs.launchpad.net/silva-documentation.
 
 Any bugs about Silva itself can reported on
 https://bugs.launchpad.net/silva.
 
 
-Installation and Administration Documentation
+Installation and Administration documentation
 ---------------------------------------------
 
 This section document installation and system administration tasks
@@ -30,10 +30,9 @@ related to Silva:
 User documentation
 ------------------
 
-The user documentation is accessible in any Silva site you create if
-you click the option install documentation when you are creating your
-Silva site. In addition to this you consult it online at:
-https://infrae.com/products/silva/docs.
+The user documentation is accessible in any Silva site you created if
+you selected the option install documentation. In addition to this
+you consult it online at: https://infrae.com/products/silva/docs.
 
 Developer documentation
 -----------------------
