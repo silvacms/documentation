@@ -7,11 +7,14 @@ Silva Documentation
 If you find any bugs regarding this documentation, please report them
 on https://launchpad.net/silva-documentation.
 
+Any bugs about Silva itself can reported on
+https://bugs.launchpad.net/silva.
 
-Installation and Administration
--------------------------------
 
-This section describes installation and system administration tasks
+Installation and Administration Documentation
+---------------------------------------------
+
+This section document installation and system administration tasks
 related to Silva:
 
 .. toctree::
@@ -24,12 +27,20 @@ related to Silva:
    wsgi
    cluster/index
 
+User documentation
+------------------
+
+The user documentation is accessible in any Silva site you create if
+you click the option install documentation when you are creating your
+Silva site. In addition to this you consult it online at:
+https://infrae.com/products/silva/docs.
+
 Developer documentation
 -----------------------
 
-This section describes extending Silva's functionality. This is
-intended to developer who have at least knowledge on Python, and
-if possible on Zope.
+This section document the SDK that let extend Silva's
+functionality. This is intended to developer who have at least
+knowledge on Python and HTML, and if possible on Zope.
 
 
 .. toctree::
