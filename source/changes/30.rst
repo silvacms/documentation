@@ -43,6 +43,14 @@ Content
   :py:interface:`~silva.core.interfaces.adapters.IPublicationWorkflow`).
 
 
+3.0.1
+~~~~~
+
+- The XML import and export API have been refactored and moved into
+  the ``silva.core.xml`` extension. Base classes for creating new XML
+  handlers and XML producers are available from this instance.
+
+
 Code sources
 ------------
 
