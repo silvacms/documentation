@@ -32,7 +32,7 @@ you choose not, those can be installed later on.
 
 To add a new site, you will be prompted for a user name and a password. The
 installation defaults are ``admin`` and ``admin`` if you didn't specify
-otherwise while creating your Zope instance before.
+otherwise while creating your Buildout directory.
 
 When the Silva site is created, you will be redirected to its
 management interface, the :term:`SMI`. You can rely on the user
