@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General substitutions.
 project = 'Infrae Documentation Center'
-copyright = '2008-2012, Infrae'
+copyright = '2008-2013, Infrae'
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
