@@ -30,7 +30,7 @@ an existing Python module of your extension:
       grok.title('My Design')
 
       def update(self):
-          self.title = self.context.get_title_or_id()
+          self.title = self.content.get_title_or_id()
 
 
 - On line 4, we define the new design by inheriting from the
