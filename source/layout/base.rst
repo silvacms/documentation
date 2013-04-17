@@ -153,7 +153,7 @@ For example if from a Python code you want to get the URL of an image:
 
 .. code-block:: python
 
-   def get_reply_image(self):
+   def get_reply_image_url(self):
        return self.static['image_folder']['reply.png']()
 
 The ``static`` attributes is available as an option through a page

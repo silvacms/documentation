@@ -1,9 +1,9 @@
-Silva events
-============
+Events
+======
 
-When action in Silva are done, Zope events are triggered. You can
-listen to those, and execute the code you wish when actions are done
-in Silva.
+When a modification in Silva is done, Zope events are triggered. You
+can listen to those in order to execute code you wish when things
+happens.
 
 .. glossary::
 

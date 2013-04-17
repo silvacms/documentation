@@ -1,4 +1,6 @@
 
+.. _adding-forms-to-content:
+
 Adding forms to your content
 ============================
 
@@ -381,7 +383,7 @@ register them correctly.
 
 .. seealso::
 
-   :ref:`creating-a-default-view`
+   :ref:`creating-a-default-view`.
 
 
 Using more complex forms

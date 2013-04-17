@@ -1,7 +1,7 @@
 Silva Application Programming Interface
 =======================================
 
-All the API used the following Zope concepts:
+The Silva API uses the following Zope concepts:
 
 .. glossary::
 
@@ -40,22 +40,32 @@ All the API used the following Zope concepts:
      :term:`Zope utility` concepts.
 
 
-
-In Silva, all content object implements a :term:`Zope interface`,
-which describe their *official API*. Some other Silva functionality
-are obtained via :term:`Zope adapter`, by adapting a content
-object. Silva services are in fact :term:`Zope utility`.
-
+To use the Silva API you need to retrieve and use Zope components:
 
 .. toctree::
    :maxdepth: 2
 
    zca
+
+Each content in Silva is based on a base class, defining its core
+features. Management operations on them are done using :term:`Zope
+adapter`:
+
+.. toctree::
+   :maxdepth: 2
+
    objects
-   members
    contents
    versions
    assets
    folders
+
+Documentation on services and extra classes:
+
+.. toctree::
+   :maxdepth: 2
+
+   services
+   members
    events
    errors

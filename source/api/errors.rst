@@ -1,13 +1,12 @@
-Silva errors
-============
+Errors
+======
 
 .. currentmodule:: silva.core.interfaces.errors
 
-Custom exceptions can be triggered, or returned by methods and
+Custom exceptions can be triggered or returned by methods and
 coroutines in case of errors.
 
 They follow this API:
-
 
 .. autointerface:: IError
 

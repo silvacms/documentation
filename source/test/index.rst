@@ -24,7 +24,7 @@ the option ``-m``:
 
 .. code-block:: sh
 
-  $ ./bin/test m Products.Silva
+  $ ./bin/test -m Products.Silva
 
 Or you can run only a specific test file:
 

@@ -188,8 +188,8 @@ inside your Silva extension to declare it to Silva. It should contain:
 For the ``silva.app.blog`` example, the file should go inside the
 ``src/silva/app/blog`` directory.
 
-Adding a Silva extension to an existing Buildout directory
-----------------------------------------------------------
+Adding a new Silva extension to an existing Buildout directory
+--------------------------------------------------------------
 
 In you Buildout configuration file ``buildout.cfg`` or your own
 profile file, you can declare the extension using the ``develop``

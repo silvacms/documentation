@@ -1,4 +1,6 @@
 
+.. _security-and-user-information:
+
 Security and User information
 =============================
 
