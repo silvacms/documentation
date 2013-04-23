@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General substitutions.
-project = 'Infrae Documentation Center'
+project = 'SilvaCMS'
 copyright = '2008-2013, Infrae'
 
 # The default replacements for |version| and |release|, also used in various
@@ -151,7 +151,7 @@ html_last_updated_fmt = '%b %d, %Y'
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'InfraeDocumentationCenter'
+htmlhelp_basename = 'SilvaCMSDocumentation'
 
 
 # Options for LaTeX output
