@@ -406,4 +406,64 @@ menu:
 
    <nav tal:content="structure provider:blogactions"></nav>
 
+
+Customization of error pages
+----------------------------
+
+You can customize the content of error pages like 404 or generic error
+pages. To do this, you need to define a new :term:`page` called
+``error.html``, using the :term:`layout` if you want, and associate it
+with the given error.
+
+As example the  404 page can be customized:
+
+.. code-block:: python
+   :linenos:
+
+   from silva.core.views import views as silvaviews
+   from silva.core.views.httpheaders import ErrorHeaders
+   from zope.security.interfaces import IUnauthorized
+
+   class NotFoundPage(silvaviews.Page):
+       silvaconf.context(INotFound)
+       silvaconf.name('error.html')
+       silvaconf.layout(IBlogLayer)
+
+   class NotFoundHeaders(ErrorHeaders):
+       silvaconf.adapts(IBlogLayer, INotFound)
+
+       def other_headers(self, headers):
+           super(NotFoundHeaders, self).other_headers(headers)
+           self.response.setStatus(404)
+
+- Line 5 to 8 defines a new :term:`page` that will use a
+  :term:`layout` to render a 404 error. The context of the page will
+  be a special object, that gives you access by acquisition to the
+  context where the error happened, and via the attribute ``error``
+  the given original error. Since the class doesn't implement a
+  ``render`` method a template called ``notfoundpage.cpt`` will be
+  used instead.
+
+- Line 10 to 15 defines a new set of headers for this error in order
+  to set the HTTP code status to 404.
+
+The following common error are interesting:
+
+.. py:interface:: zope.publisher.interfaces.INotFound
+
+   Error triggered when the URL cannnot be mapped to a content or a
+   page in Silva. (404)
+
+.. py:interface:: zope.security.interfaces.IUnauthorized
+
+   Error triggered when the current user doesn't have access to the
+   requested content or page in Silva. (401)
+
+.. note::
+
+   You can define error pages for custom errors the same way. As well
+   it is possible to make a regular view in order to render an error
+   and not a :term:`page`.
+
+
 .. _Chameleon Page Template: http://chameleon.readthedocs.org/en/latest/
