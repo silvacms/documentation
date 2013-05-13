@@ -232,7 +232,7 @@ or :py:meth:`SilvaLayer.get_web_browser` (Selenium-based browser):
 Mail testing
 ------------
 
-.. py:module:: Products.Silva.testing
+.. py:currentmodule:: Products.Silva.testing
 
 You might want to test code that sends emails. For this, the Silva
 mail service (``service_mailhost``) have been mocked using

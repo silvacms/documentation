@@ -1,10 +1,12 @@
 Rendering your content
 ======================
 
-You can display your content by writing a view. This
-follows the well know pattern `Model-View-Controller`_.
+You can display your content by writing a view. This follows the well
+know pattern `Model-View-Controller`_.
 
 .. contents::
+
+.. py:module:: silva.core.views.views
 
 .. _creating-a-default-view:
 
@@ -17,7 +19,7 @@ the default view, the layout system will include the :term:`layout`
 around the HTML produced by the view with the help of a default
 :term:`page`.
 
-.. class:: silva.core.views.views.View
+.. py:class:: silva.core.views.views.View
 
    Base class used to create new :term:`view`.
 
@@ -186,7 +188,7 @@ your default :term:`view` class, your :term:`page` will have *only* to
 render the content HTML, and the :term:`layout` will be added around
 it.
 
-.. class:: silva.core.views.views.Page
+.. py:class:: silva.core.views.views.Page
 
     Base class used to create new :term:`page`.
 
@@ -243,11 +245,11 @@ Following the previous example given in
 For all other details, a ``silvaviews.Page`` provides the same API
 than a ``silvaviews.View``.
 
-..note::
+.. note::
 
-  The default view for a content is not built using a page, as extra
-  logic is required for it. A default page is already available taking
-  care of this logic, and looking for a view to render the content.
+   The default view for a content is not built using a page, as extra
+   logic is required for it. A default page is already available taking
+   care of this logic, and looking for a view to render the content.
 
 
 Adding more views not using the site layout
@@ -280,6 +282,60 @@ code needed to render the custom RSS feed.
    to render your content as HTML to the public comes from
    compatibility issues with the old ZODB based layout system and the
    content versioning system.
+
+
+.. _adding-resources-to-a-view:
+
+Adding specific resources to a view
+-----------------------------------
+
+.. py:module:: silva.fanstatic
+
+It is possible to include specific resources, like CSS or Javascript
+files only in a given view. To do this you can define an interface to
+which you associated the resources you want to include and use the
+function ``need`` to include them in your view:
+
+.. code-block:: python
+   :linenos:
+
+   from silva.core import conf as silvaconf
+   from silva.fanstatic import need
+   from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+
+   class IViewResources(IDefaultBrowserLayer):
+       silvaconf.resources('view.js')
+       silvaconf.resources('view.css')
+
+   class MyView(silvaviews.View):
+
+       def update(self):
+           need(IViewResources)
+
+
+- On line 4 to 6 we define a new :term:`Zope interface` to which we
+  associate the resources ``view.js`` and ``view.css``. The
+  corresponding resources files should exists inside a ``static``
+  located in the same folder than the Python module source file.
+
+- On line 11 we include the resources associated with the :term:`Zope
+  interface` previously defined with the help of
+  :py:func:`~silva.fanstatic.need` inside the ``update`` method.
+
+The resources will always be included, independently of the selected
+Silva theme. You can include in the same fashion resources to a
+:term:`page` or any other components generating HTML to the end user.
+
+
+.. py:function:: need(resources)
+
+   Include the given resources in the rendering of the page.
+
+.. seealso::
+
+   This mechanism is similar to the inclusion process of resources
+   inside a Silva theme. For more information please refer to
+   :ref:`inclusion-of-resources`.
 
 
 Getting the URL of a content

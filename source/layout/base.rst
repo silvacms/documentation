@@ -94,6 +94,8 @@ called ``src/silvatheme/blogtheme/static`` and add a file called
 ``blog.css`` inside it containing the CSS you wish to apply.
 
 
+.. _inclusion-of-resources:
+
 Automatic inclusion of resources in a layer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -135,6 +137,11 @@ Including resources automatically have multiple advantages:
   .. code-block:: css
 
      background-image: url('background.png');
+
+.. seealso::
+
+  If you want to include a resource only inside a given page, views or
+  form, please refer to :ref:`adding-resources-to-a-view`.
 
 
 Getting the URL of a resource from a template
