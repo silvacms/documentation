@@ -316,7 +316,8 @@ function ``need`` to include them in your view:
 - On line 4 to 6 we define a new :term:`Zope interface` to which we
   associate the resources ``view.js`` and ``view.css``. The
   corresponding resources files should exists inside a ``static``
-  located in the same folder than the Python module source file.
+  folder located in the same folder than the Python module source
+  file.
 
 - On line 11 we include the resources associated with the :term:`Zope
   interface` previously defined with the help of
