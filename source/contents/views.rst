@@ -57,15 +57,16 @@ file you can define:
             return self.content.get_title()
 
 
-On line 8, the class ``BlogView`` implement your view. It inherits
-from ``silva.core.views.views.View`` (aliased as ``silvaviews.View``
-on line 2).
+- Lines 8 to 12 define a class ``BlogView`` to implement your view. It
+  inherits from ``silva.core.views.views.View`` (aliased as
+  ``silvaviews.View`` on line 2).
 
-On line 9, the :term:`Grok directive` :py:func:`grok.context` tells
-the view which content to render, here the ``Blog`` content type.
+- Line 9 associates your view to a content with the :term:`Grok
+  directive` :py:func:`grok.context`. Here it will render the ``Blog``
+  content type.
 
-You can associate a page template to your view class, it will be
-used to generate the HTML output:
+If you associate a page template to your view class, it will be used
+to generate the HTML output:
 
 1. Create a template directory called ``blog_templates``. The name of
    the directory is prefixed with the module name where your view
@@ -313,15 +314,15 @@ function ``need`` to include them in your view:
            need(IViewResources)
 
 
-- On line 4 to 6 we define a new :term:`Zope interface` to which we
-  associate the resources ``view.js`` and ``view.css``. The
+- Lines 4 to 6 define a new :term:`Zope interface` to which the
+  resources ``view.js`` and ``view.css`` are associated. The
   corresponding resources files should exists inside a ``static``
   folder located in the same folder than the Python module source
   file.
 
-- On line 11 we include the resources associated with the :term:`Zope
+- Line 11 includes the resources associated with the :term:`Zope
   interface` previously defined with the help of
-  :py:func:`~silva.fanstatic.need` inside the ``update`` method.
+  :py:func:`~silva.fanstatic.need`.
 
 The resources will always be included, independently of the selected
 Silva theme. You can include in the same fashion resources to a
@@ -330,7 +331,7 @@ Silva theme. You can include in the same fashion resources to a
 
 .. py:function:: need(resources)
 
-   Include the given resources in the rendering of the page.
+   Includes the given resources in the rendering of the page.
 
 .. seealso::
 
