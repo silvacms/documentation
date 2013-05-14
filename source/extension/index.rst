@@ -50,12 +50,13 @@ Creating a Silva extension
 
 To create a Silva extension, you will need to create a Python
 package. Using the same name is recommended. For instance you can
-create a Blog extension called ``silva.app.blog``.
+create a Blog extension called ``silva.app.blog`` that will live
+inside a Python package called ``silva.app.blog``.
 
 A Python package is a directory containing an ``__init__.py`` file. To
-create the extension ``silva.app.blog`` you need to create the
+create the Python package ``silva.app.blog`` you need to create the
 corresponding directories and ``__init__.py`` files corresponding to
-the Python package::
+each package and sub-package::
 
   silva/
   silva/__init__.py
@@ -67,7 +68,8 @@ the Python package::
 In order not to break any other Python packages sharing the Python
 package ``silva.app`` with you, you need to fill-in the
 ``silva/__init__.py`` and ``silva/app/__init__.py`` files with the
-following Python code:
+following Python code, that will let you share those packages with
+them:
 
 .. code-block:: python
 
@@ -102,7 +104,7 @@ get as final skeleton::
   src/silva/app/blog
   src/silva/app/blog/__init__.py
 
-The ``setup.py`` should contains:
+The ``setup.py`` should contains at least:
 
 .. code-block:: python
    :linenos:
@@ -166,11 +168,14 @@ Python documentation: :ref:`distutils-index`.
    all the files you want are distributed with your extension when you
    make a tarball (:ref:`manifest`).
 
+.. _configuring-a-silva-extension:
+
 Configuring a Silva extension
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You need to create a :term:`ZCML` file called ``configure.zcml``
-inside your Silva extension to declare it to Silva. It should contain:
+inside your Silva extension to declare it to Silva. It should contain
+at least the following:
 
 .. code-block:: xml
 
@@ -227,8 +232,8 @@ After modifying the Buildout configuration, you need to run
 
 .. note::
 
-  It is the recommended way to add a released Silva extension to your
-  Buildout directory, however it is the recommended way for Silva
+  It is not the recommended way to add a released Silva extension to
+  your Buildout directory, however it is the recommended way for Silva
   extension that you are *developing*.
 
 
@@ -236,12 +241,12 @@ After modifying the Buildout configuration, you need to run
 
    :ref:`creating-a-test-script`.
 
-Installing an extension in Silva with ``service_extension``
------------------------------------------------------------
+Installing an extension in Silva with ``service_extensions``
+------------------------------------------------------------
 
 In order to conditionally activate features in Silva, you might want
-to declare your Silva extension to ``service_extension`` and create an
-installer that will activate your Silva extension on demand.
+to declare your Silva extension to ``service_extensions`` and create
+an installer that will activate your Silva extension on demand.
 
 The Silva extension can be declared with the help of :term:`Grok
 directive` and a default installer can be used. It will let you
@@ -251,16 +256,19 @@ extension creates.
 .. note::
 
    Silva themes don't require to be activated via
-   ``service_extension``. If your Silva extension contains only a
+   ``service_extensions``. If your Silva extension contains only a
    theme, you are not required to declare your extension to
-   ``service_extension`` and provide an installer.
+   ``service_extensions`` and provide an installer.
 
-Registring an extension with ``service_extension``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _registring-an-extension-to-service-extensions:
+
+Registring an extension with ``service_extensions``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This configuration is done in Python, in the ``__init__.py`` file of
 your extension. For example in the case of the ``silva.app.blog``
-extension:
+extension, it would be the file ``silva/app/blog/__init__.py`` and
+contains:
 
 .. code-block:: python
    :linenos:
@@ -270,13 +278,16 @@ extension:
    silvaconf.extension_name("silva.app.blog")
    silvaconf.extension_title("Silva Blog")
 
-- On line 3, the ``extension_name`` directive set the name of the
-  extension.
+- Line 3 defines the name of the extension using the directive
+  ``silvaconf.extension_name``. It will be used to refer the extension
+  while managing it with ``service_extensions`` and while adding new
+  content provided by the extension.
 
-- On line 4 the ``extension_title`` directive will set the title of
-  extension, displayed in the :term:`ZMI`.
+- Line 4 defines the title of the extension using the directive
+  ``silvaconf.extension_title``. It will be displayed in the
+  :term:`ZMI`, inside ``service_extensions``.
 
-If your extension depends on others extensions, like on `Silva
+If your extension depends on other extensions, like on `Silva
 Document` you can use the ``extension_depends`` directive to declare
 them:
 
@@ -337,9 +348,10 @@ The first argument to the install object is the name of our extension
 ``silva.app.blog``. The second is a :term:`Zope interface` used as
 marker to know if the Silva extension is installed or not.
 
-At this point, you should be able to restart your Zope instance, and
-view, install, and uninstall your extension using ``service_extensions``
-in the Silva root.
+At this point, you should be able to restart your Zope instance. In
+:term:`ZMI`, you should now be able to view, install, and uninstall
+your extension using ``service_extensions`` (located inside the Silva
+root).
 
 .. _Pypi: https://pypi.python.org/pypi
 .. _five.grok: http://pypi.python.org/pypi/five.grok

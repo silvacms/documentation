@@ -8,7 +8,8 @@ Create a new content
 
 To create a new Silva content, you need to define a Python class that
 inherits from one of the base content class defined in Silva. For
-instance :py:class:`Products.Silva.Asset.Asset`:
+instance to create an Asset, you need to inherit from the class
+:py:class:`Products.Silva.Asset.Asset`:
 
 .. code-block:: python
   :linenos:
@@ -22,10 +23,11 @@ instance :py:class:`Products.Silva.Asset.Asset`:
           # Provides some more API on a Video file.
           pass
 
-It is all you need to do. On line 4, you set a ``meta_type``. It is a
-Zope 2 concept that is used to uniquely identify your content
-type. This class will old all the content related logic and data
-associated with your content, and be automatically saved into the ZODB.
+- Line 4 defines a *unique* ``meta_type`` for the content. It is a
+  Zope 2 concept that is used to uniquely identify your content
+  type. This class will hold all the content related logic and data
+  associated with your content. It will be automatically saved into
+  the ZODB.
 
 .. _creating-a-versioned-content:
 
@@ -60,11 +62,15 @@ As an example, you can imagine a blog article:
        meta_type = 'Blog Article'
 
 
-On line 14, you define the content class, that will hold later related
-logic. On line 4, you define the version class. Note that on line 5,
-the version class that actually store the data. Not that the version
-class have a different ``meta_type`` than the content class,
-``Version`` have been appended to it.
+- Lines 14 to 15 define the content class that will hold logic code
+  related to your content.
+
+- Lines 4 to 12 define the version class that will hold the data
+  related to your content.
+
+The version class have a different ``meta_type`` than the content
+class, usually it will be the ``meta_type`` of the content class to
+which ``Version`` have been appended.
 
 
 Available Silva bases content classes
@@ -153,17 +159,17 @@ class.
 For site holding large amount of files, it is recommended to extend
 :py:class:`~Products.Silva.File.BlobFile`.
 
-Registering a new content with Grok
------------------------------------
+Configuring a new content
+-------------------------
 
-You can register your new content using :term:`Grok`.
+:term:`Grok` will detect and your new content. For this you need to be
+sure you properly :ref:`configuring-a-silva-extension`.
 
 Regular content
 ~~~~~~~~~~~~~~~
 
-After enabling :term:`Grok` in your extension, your content will be
-registered for you automatically. You can customize the registration
-using :term:`Grok directives<Grok directive>`:
+You can customize the registration using :term:`Grok directives<Grok
+directive>`:
 
 .. code-block:: python
    :linenos:
@@ -176,10 +182,12 @@ using :term:`Grok directives<Grok directive>`:
        silvaconf.icon('blog.png')
        silvaconf.priority(-3)
 
-On line 6, the ``silvaconf.icon`` directive sets  the filename of an
-icon file (``GIF`` or ``PNG``) to use as content icon. On line 7, the
-priority of the content in the addable menu is modified with the directive
-``silvaconf.priority``.
+- Line 6 associate a content icon with the ``silvaconf.icon``
+  directive. The parameter is a the filename of an icon file (``GIF``
+  or ``PNG``) relative from the folder of your extension,
+
+- Line 7 change the priority of the content in the addable menu with
+  the directive ``silvaconf.priority``.
 
 
 By default Silva will create a content factory for your content.
@@ -188,12 +196,13 @@ By default Silva will create a content factory for your content.
 
    *Content factory*
      A content factory is a function that create a new Zope 2 content
-     in Zope 2, and add it to the container specified in parameter.
+     in Zope 2,and add it to the container specified in parameter.
 
 You can override this default factory with your own function in order
 to customize the creation of the content. You have some
 responsibilities if you do so, like triggering some :term:`Zope
-event`. For example you can customize the creation of the blog content:
+event`. For example you can customize the creation of the blog
+content:
 
 .. code-block:: python
 
@@ -218,7 +227,7 @@ On your content you need to use the directive ``silvaconf.factory``
 If you define a factory that is a ZMI add form, declare it on your
 content *before* the real Python factory, and use the directive
 ``silvaconf.zmi_addable`` (in the content class) to make your content
-addable from ZMI:
+addable from ZMI (appear in the ZMI drop down):
 
 .. code-block:: python
 
@@ -239,7 +248,7 @@ addable from ZMI:
    event to do it.
 
 
-.. _registring-a-versioned-content:
+.. _registering-a-versioned-content:
 
 Versioned content
 ~~~~~~~~~~~~~~~~~
@@ -282,17 +291,19 @@ Python code add a new content in the container of your choice:
    factory = container.manage_addProduct['silva.app.blog']
    factory.manage_addArticle('identifier', u'My content')
 
-On line 1, you look for the factories registered by your extension,
-that you called *silva.app.blog* during the
-:ref:`registering-extension-using-grok` of the extension. On line 2,
-you invoke the factory to create a new *Article* content, with the
-given title and content.
+- Line 1 looks for the factories registered by the extension called
+  *silva.app.blog*. This name was defined during the registration of
+  the extension, for more information see also
+  :ref:`registring-an-extension-to-service-extensions`.
+
+- Line 2 invokes the factory associated with the content *Article* to
+  create a new *Article* content with the given title and content.
 
 .. note::
 
    Not only custom content are created and added this way, official
-   Silva content as well. For instance, here follows how to add a new
-   Silva Folder.
+   Silva content as well. For instance, here to add a new Silva
+   Folder:
 
    .. code-block:: python
 

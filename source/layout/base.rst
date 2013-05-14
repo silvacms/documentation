@@ -68,14 +68,14 @@ to a file called ``src/silvatheme/blogtheme/interfaces.py`` like this:
        silvaconf.skin('Blog theme')
 
 
-- Line 6 define a :term:`layer` as a Python class. It inherit from the
-  base interface ``ISilvaLayer``.
+- Line 5 defines a :term:`layer` as a Python class. It inherits from
+  the base interface ``ISilvaLayer``.
 
-- Line 10 define the :term:`skin` as a Python class. It inherit form
+- Line 9 defines the :term:`skin` as a Python class. It inherits form
   the previously defined :term:`layer` to include its elements and of
   the interface ``ISilvaSkin`` that defines it as a :term:`skin`.
 
-- Line 13 register the :term:`skin` in Silva with the help of the
+- Line 12 registers the :term:`skin` in Silva with the help of the
   :term:`Grok directive` :py:func:`grok.skin` (imported via
   ``silva.core.conf`` here on line 1). This will make the skin
   selectable as a desktop skin in the Settings of the :term:`SMI`.
@@ -436,7 +436,7 @@ As example the  404 page can be customized:
            super(NotFoundHeaders, self).other_headers(headers)
            self.response.setStatus(404)
 
-- Line 5 to 8 defines a new :term:`page` that will use a
+- Lines 5 to 8 define a new :term:`page` that will use a
   :term:`layout` to render a 404 error. The context of the page will
   be a special object, that gives you access by acquisition to the
   context where the error happened, and via the attribute ``error``
@@ -444,17 +444,17 @@ As example the  404 page can be customized:
   ``render`` method a template called ``notfoundpage.cpt`` will be
   used instead.
 
-- Line 10 to 15 defines a new set of headers for this error in order
+- Lines 10 to 15 define a new set of headers for this error in order
   to set the HTTP code status to 404.
 
 The following common error are interesting:
 
-.. py:interface:: zope.publisher.interfaces.INotFound
+.. interface:: zope.publisher.interfaces.INotFound
 
    Error triggered when the URL cannnot be mapped to a content or a
    page in Silva. (404)
 
-.. py:interface:: zope.security.interfaces.IUnauthorized
+.. interface:: zope.security.interfaces.IUnauthorized
 
    Error triggered when the current user doesn't have access to the
    requested content or page in Silva. (401)

@@ -7,7 +7,6 @@ a look at: http://www.muthukadan.net/docs/zca.html.
 
 .. contents::
 
-
 .. _query-a-zope-adapter:
 
 How to retrieve a Zope adapter

@@ -5,7 +5,7 @@ Creating a design
 First of all, you need to create an extension (please refer to
 :ref:`creating-an-extension`). After you need to:
 
-- enable Grok in your extension (:ref:`enable-grok-for-your-extension`),
+- configure your extension (:ref:`configuring-a-silva-extension`),
 
 - include ``silva.core.contentlayout`` as a dependency in the
   ``configure.zcml`` of your extension.

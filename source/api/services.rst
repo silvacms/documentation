@@ -1,8 +1,8 @@
 Services
 ========
 
-Services are :term:`Zope utilities` that help you access some of the
-functionalities of Silva.
+Services are :term:`Zope utility` that help you access some of the
+generic functionalities of Silva.
 
 .. contents::
 

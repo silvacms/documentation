@@ -71,13 +71,13 @@ your ``buildout.cfg`` configuration file:
       silva.app.blog
    defaults = ['-v']
 
-- Line 3 add the new section ``test-blog`` to the list of section to
+- Line 3 adds the new section ``test-blog`` to the list of section to
   install
 
-- Line 5 to 9 define the new section ``test-blog``. Line 6 specify the
-  recipe to use and 7 to 8 the Silva extension to test. Line 9 define
-  some default options to automatically give to the test script, like
-  the verbose mode in this case.
+- Line 5 to 9 define the new section ``test-blog``. Line 6 specifies
+  the recipe to use and 7 to 8 the Silva extension to test. Line 9
+  defines some default options to automatically give to the test
+  script, like the verbose mode in this case.
 
 To know more about the options you can give to your test script, you
 can use ``--help`` on it:

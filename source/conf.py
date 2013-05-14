@@ -30,7 +30,7 @@ extensions = [
 
 intersphinx_mapping = {
     'grok': ('http://grok.zope.org/doc/1.5/', None),
-    'python': ('http://docs.python.org/release/2.7.3/', None),
+    'python': ('http://docs.python.org/release/2.7.4/', None),
     }
 
 # inheritance_graph_attrs = dict(rankdir="TB", size='"20, 20"', fontsize=14)
