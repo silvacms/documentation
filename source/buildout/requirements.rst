@@ -68,13 +68,6 @@ Installation under Linux Ubuntu/Debian
       $ sudo apt-get install subversion mercurial git-core
 
 
-Installation under Linux Fedora/Centos/Redhat
----------------------------------------------
-
-Please see the following documentation:
-
-http://silva.mine.ch/Silva-Installation-under-Linux-Fedora-Centos-Redhat
-
 Installation under Mac OS X
 ---------------------------
 
