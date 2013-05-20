@@ -61,17 +61,17 @@ If you give the name a prefix this will cause the sources to be
 grouped together in the ZMI, e.g. Silva's default Code Sources all
 have an id that is prefixed with ``cs_``.
 
-Creating a code source on the filesystem
+Creating a Code Source on the filesystem
 ----------------------------------------
 
-You can define code sources on the file system, inside a Python
+You can define Code Sources on the file system, inside a Python
 package. By declaring this package in the ``setup.py`` file, the
 ``service_codesources`` in :term:`ZMI` will be able to propose to
-managers to install those code sources.
+managers to install those Code Sources.
 
 For instance in case of the ``silva.app.blog`` extension you need to:
 
-- create a sub-package to host the code sources, like
+- create a sub-package to host the Code Sources, like
   ``silva.app.blog.codesources``,
 
 - add the following parameters to the call to the function ``setup``
@@ -84,8 +84,8 @@ For instance in case of the ``silva.app.blog`` extension you need to:
      defaults = silva.app.blog.codesources
      """,
 
-After this modification you need to re-run buildout in order to the
-modification done to the ``setup.py`` file and restart your Silva
+After this modification you need to re-run buildout for the
+modification in the ``setup.py`` file and restart your Silva
 server:
 
 .. code-block:: sh
@@ -95,17 +95,17 @@ server:
    $ bin/paster serve debug.ini restart
 
 
-Exporting a new code source
+Exporting a new Code Source
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To export a new code source in a configured extension, you need first
-to create a directory that have the same name than your code source
-inside the Python package that is configured to host the code
-sources. In this new directory you need to create an empty file called
+To export a new Code Source in a configured extension, you need first
+to create a directory that has the same name as your Code Source
+inside the Python package that is configured to host the Code
+Sources. In this new directory you need to create an empty file called
 ``source.ini``.
 
 For instance, in the case of the ``silva.app.blog`` extension you can
-create a directory called ``cs_feedback`` to export a code source
+create a directory called ``cs_feedback`` to export a Code Source
 called ``cs_feedback`` in it. You should now have the following
 directories and file in your extension::
 
@@ -114,26 +114,26 @@ directories and file in your extension::
   src/silva/app/blog/codesources/cs_feedback
   src/silva/app/blog/codesources/cs_feedback/source.ini
 
-After you can either restart your Silva server or click on the button
+Afterwards you can either restart your Silva server or click on the button
 *Refresh* located on the tab *Install Code Sources* of the
-``service_codesources`` in :term:`ZMI`. Your code source,
-``cs_feedback`` should now appear in the list of installable code
-source and be marked as broken.
+``service_codesources`` in the :term:`ZMI`. Your Code Source,
+``cs_feedback`` should now appear in the list of installable Code
+Sources and be marked as broken.
 
-If you now visit in :term:`ZMI` the edit tab of your code source, you
+If you now visit in the :term:`ZMI` the edit tab of your Code Source, you
 should be able to select next to the *Location* option the value
 ``silva.app.blog:/silva/app/blog/codesources/cs_feedback`` and click
 on the button *Save changes*. After this you should see a new button
 *Export to filesystem*. Clicking on this button should export the
 files on the filesystem in the newly created directory.
 
-Creating a new code source
+Creating a new Code Source
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To create a code source on the filesystem you need to create few
+To create a Code Source on the file system you need to create a few
 files. The most important one is ``source.ini``. This file follows a
-windows like INI file format and define the properties and settings of
-the code source.
+windows like INI file format to define the properties and settings of
+the Code Source.
 
 .. code-block:: buildout
    :linenos:
@@ -147,41 +147,41 @@ the code source.
    usuable = on
    previewable = on
 
-- Line 1 defines a configuration section to store the code source
+- Line 1 defines a configuration section to store the Code Source
   parameters,
 
 - Line 2 defines the default identifier that will be used to create
-  the code source during the installation. The identifier is used as
-  well to associate the code source on the filesystem with an instance
+  the Code Source during the installation. The identifier is used as
+  well to associate the Code Source on the filesystem with an instance
   in the ZODB,
 
 - Line 3 defines the title that the Silva user will see and use in
-  order to select the code source in Silva content,
+  order to select the Code Source in Silva content,
 
 - Line 4 defines the name of the script or page template that will be
-  used in order to render the code source in Silva content,
+  used in order to render the Code Source in Silva content,
 
 - Line 5 to 6 define an optional description that the Silva user will
   see in addition to the title,
 
 - Line 7 sets the flag ``usuable`` to on. This flag will allow the
-  Silva user to use this code source and create newly set of
+  Silva user to use this Code Source and create newly set of
   parameters in Silva content. If set to off only existing set
   parameters can be edited in Silva content,
 
 - Line 8 sets the flag ``previewable`` to on, that will enable the
-  preview all code sources in the WYSIWYG editor. Preview in the
-  editor can be disabled in the editor, in cases the code sources
+  preview all Code Sources in the WYSIWYG editor. Preview in the
+  editor can be disabled in the editor, in cases the Code Sources
   contains complicated Javascript that might not work in the editor.
 
-If you code source need parameters, you can add a file called
+If your Code Source needs parameters, you can add a file called
 ``parameters.xml`` that contains the XML definition of a Formulator
 form.
 
-You can add an icon to your code source, by adding a file called
-``icon.png`` or ``icon.gif`` to your code source.
+You can add an icon to your Code Source, by adding a file called
+``icon.png`` or ``icon.gif`` to your Code Source.
 
-Any other file you add in the code source will be installed inside it.
+Any other file you add in the Code Source will be installed inside it.
 
 For instance in the case of the ``silva.app.blog`` extension, you
 should have the following files in the code source at the end::
