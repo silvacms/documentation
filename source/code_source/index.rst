@@ -1,5 +1,5 @@
-Creating a Code Source
-======================
+Code Sources on the file system
+===============================
 
 This document explains how to deal with Code Sources on the file
 system level. Code Sources are usually first created in the
@@ -21,49 +21,9 @@ A Silva developer can create a product that will contain all the Code
 Sources used in various sites. These sources will then be available in
 the Code Source Service.
 
-Migrating a Code Source to the file system
-------------------------------------------
-
-Once a Code Source is created and tested in the :term:`ZMI`, its code
-can be dumped to the file system. In the Edit screen of a Code Sourse
-there is a "Dump to file system" button and an "Export as ZIP"
-button. If you're working locally, meaning you created the Code Source
-in a Silva running on your machine, then the "Dump to file system"
-button dump all the files of the Code Source into a directory with the
-same id. XXX is this correct?  If you're working on a server then the
-"Export as ZIP" function may be easier.  This will export Code Source
-the files packed in a ZIP file. Save the ZIP to your disk and expand
-it.
-
-Depending on the Code Source contents, there will be three or more
-files. As an example we'll dump the TOC Code Source which will
-contain::
-
-  icon.png  parameters.xml  source.ini  toc.pt  toc_sort_on.py
-
-
-* The icon which is used in the :term:`SMI`.
-
-* The parameters XML file which contains the parameters form.
-
-* The ``source.ini`` contains configuration, the same as in the Edit
-  screen form.
-
-* The ``toc.pt`` is the renderer, which can be a page template or Python script.
-
-* A helper script, ``toc_sort_on.py``, is also present.
-
-The directory containing these items should be moved into the
-'codesources' directory of your product. It makes sense to give the
-directory the same name as the id in the ``source.ini``.
-
-If you give the name a prefix this will cause the sources to be
-grouped together in the ZMI, e.g. Silva's default Code Sources all
-have an id that is prefixed with ``cs_``.
-
-Creating a Code Source on the filesystem
-----------------------------------------
-
+Exporting and creating a Code Source on the filesystem
+------------------------------------------------------
+ 
 You can define Code Sources on the file system, inside a Python
 package. By declaring this package in the ``setup.py`` file, the
 ``service_codesources`` in :term:`ZMI` will be able to propose to
@@ -94,20 +54,24 @@ server:
    $ bin/buildout -v
    $ bin/paster serve debug.ini restart
 
+Now your package is properly configured to host code sources.
 
-Exporting a new Code Source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Exporting a new Code Source previously created in the ZMI
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Once a Code Source is created and tested in the ZMI,
+its code can be dumped to the file system. 
 To export a new Code Source in a configured extension, you need first
 to create a directory that has the same name as your Code Source
-inside the Python package that is configured to host the Code
-Sources. In this new directory you need to create an empty file called
+inside the previously created ``codesources`` folder in the Python package 
+that is configured to host the Code Sources. 
+In this new directory you need to create an empty file called
 ``source.ini``.
 
 For instance, in the case of the ``silva.app.blog`` extension you can
 create a directory called ``cs_feedback`` to export a Code Source
 called ``cs_feedback`` in it. You should now have the following
-directories and file in your extension::
+directories and files in your extension::
 
   src/silva/app/blog/codesources
   src/silva/app/blog/codesources/__init__.py
@@ -123,15 +87,50 @@ Sources and be marked as broken.
 If you now visit in the :term:`ZMI` the edit tab of your Code Source, you
 should be able to select next to the *Location* option the value
 ``silva.app.blog:/silva/app/blog/codesources/cs_feedback`` and click
-on the button *Save changes*. After this you should see a new button
-*Export to filesystem*. Clicking on this button should export the
-files on the filesystem in the newly created directory.
+on the button *Save changes*. After this you should see four new buttons 
+(see the figure below), among these buttons there's *Export to filesystem* button. 
+Clicking on this button should export the files of your Code Source on the filesystem 
+in the newly created directory.
 
-Creating a new Code Source
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. figure:: update_export_cs.png
+        :alt: Update and Export buttons in the ZMI
+        :align: left
+Update and Export buttons in the ZMI
 
-To create a Code Source on the file system you need to create a few
-files. The most important one is ``source.ini``. This file follows a
+If you're working on a remote server then the *Export and download as ZIP* 
+function may be useful. This will export Code Source files packed in a ZIP file. 
+After clicking on it, save the ZIP to your disk and expand it.
+
+Depending on the Code Source contents, there will be three or more
+files. As an example, exporting the TOC Code Source as zip will give an archive
+that will contain::
+
+  icon.png  parameters.xml  source.ini  toc.pt  toc_sort_on.py
+
+* The icon which is used in the :term:`SMI`.
+
+* The parameters XML file which contains the parameters form.
+
+* The ``source.ini`` contains configuration, the same as in the Edit
+  screen form.
+
+* The ``toc.pt`` is the renderer, which can be a page template or Python script.
+
+* A helper script, ``toc_sort_on.py``, is also present.
+
+The directory containing these items can be moved into the
+'codesources' directory of your product. It makes sense to give the
+directory the same name as the id in the ``source.ini``.
+
+If you give the name a prefix this will cause the sources to be
+grouped together in the ZMI, e.g. Silva's default Code Sources all
+have an id that is prefixed with ``cs_``.
+
+Creating a new Code Source directly on the filesystem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To create a Code Source on the file system you need a few files.
+The most important one is ``source.ini``. This file follows a
 windows like INI file format to define the properties and settings of
 the Code Source.
 
@@ -169,9 +168,9 @@ the Code Source.
   parameters in Silva content. If set to off only existing set
   parameters can be edited in Silva content,
 
-- Line 8 sets the flag ``previewable`` to on, that will enable the
-  preview all Code Sources in the WYSIWYG editor. Preview in the
-  editor can be disabled in the editor, in cases the Code Sources
+- Line 8 sets the flag ``previewable`` to on, that will enable to
+  preview Code Sources in the WYSIWYG editor. Preview in the
+  editor can be disabled, in cases the Code Source
   contains complicated Javascript that might not work in the editor.
 
 If your Code Source needs parameters, you can add a file called
