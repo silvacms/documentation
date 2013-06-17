@@ -21,21 +21,32 @@ A Silva developer can create a product that will contain all the Code
 Sources used in various sites. These sources will then be available in
 the Code Source Service.
 
+.. contents::
+
+
 Exporting and creating a Code Source on the filesystem
 ------------------------------------------------------
- 
+
 You can define Code Sources on the file system, inside a Python
 package. By declaring this package in the ``setup.py`` file, the
 ``service_codesources`` in :term:`ZMI` will be able to propose to
 managers to install those Code Sources.
 
-For instance in case of the ``silva.app.blog`` extension you need to:
+.. _preparing-a-silva-extension-to-hold-code-sources:
 
-- create a sub-package to host the Code Sources, like
+Preparing a Silva extension to hold Code Sources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To be able to create and export code sources inside a Silva extension,
+you need to declare a sub-Python package (basically a folder) to hold
+them. For instance in case of the ``silva.app.blog`` extension you
+need to:
+
+- create a sub-package, with an empty ``__init__.py`` like
   ``silva.app.blog.codesources``,
 
 - add the following parameters to the call to the function ``setup``
-  in the ``setup.py`` file:
+  in the ``setup.py`` file of your extension:
 
   .. code-block:: python
 
@@ -54,19 +65,19 @@ server:
    $ bin/buildout -v
    $ bin/paster serve debug.ini restart
 
-Now your package is properly configured to host code sources.
+Now your package is properly configured to hold Code Sources.
+
 
 Exporting a new Code Source previously created in the ZMI
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once a Code Source is created and tested in the ZMI,
-its code can be dumped to the file system. 
-To export a new Code Source in a configured extension, you need first
-to create a directory that has the same name as your Code Source
-inside the previously created ``codesources`` folder in the Python package 
-that is configured to host the Code Sources. 
-In this new directory you need to create an empty file called
-``source.ini``.
+Once a Code Source is created and tested in the ZMI, its code can be
+dumped to the file system.  To export a new Code Source in a
+configured extension, you need first to create a directory that has
+the same name as your Code Source inside the previously created
+``codesources`` folder in the Python package that is configured to
+host the Code Sources.  In this new directory you need to create an
+empty file called ``source.ini``.
 
 For instance, in the case of the ``silva.app.blog`` extension you can
 create a directory called ``cs_feedback`` to export a Code Source
@@ -84,26 +95,27 @@ Afterwards you can either restart your Silva server or click on the button
 ``cs_feedback`` should now appear in the list of installable Code
 Sources and be marked as broken.
 
-If you now visit in the :term:`ZMI` the edit tab of your Code Source, you
-should be able to select next to the *Location* option the value
+If you now visit in the :term:`ZMI` the edit tab of your Code Source,
+you should be able to select next to the *Location* option the value
 ``silva.app.blog:/silva/app/blog/codesources/cs_feedback`` and click
-on the button *Save changes*. After this you should see four new buttons 
-(see the figure below), among these buttons there's *Export to filesystem* button. 
-Clicking on this button should export the files of your Code Source on the filesystem 
-in the newly created directory.
+on the button *Save changes*. After this you should see four new
+buttons (see the figure below), among these buttons there's *Export to
+filesystem* button.  Clicking on this button should export the files
+of your Code Source on the filesystem in the newly created directory.
 
 .. figure:: update_export_cs.png
         :alt: Update and Export buttons in the ZMI
         :align: left
 Update and Export buttons in the ZMI
 
-If you're working on a remote server then the *Export and download as ZIP* 
-function may be useful. This will export Code Source files packed in a ZIP file. 
-After clicking on it, save the ZIP to your disk and expand it.
+If you're working on a remote server then the *Export and download as
+ZIP* function may be useful. This will export Code Source files packed
+in a ZIP file.  After clicking on it, save the ZIP to your disk and
+expand it.
 
 Depending on the Code Source contents, there will be three or more
-files. As an example, exporting the TOC Code Source as zip will give an archive
-that will contain::
+files. As an example, exporting the TOC Code Source as zip will give
+an archive that will contain::
 
   icon.png  parameters.xml  source.ini  toc.pt  toc_sort_on.py
 
@@ -129,10 +141,10 @@ have an id that is prefixed with ``cs_``.
 Creating a new Code Source directly on the filesystem
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To create a Code Source on the file system you need a few files.
-The most important one is ``source.ini``. This file follows a
-windows like INI file format to define the properties and settings of
-the Code Source.
+To create a Code Source on the file system you need a few files.  The
+most important one is ``source.ini``. This file follows a windows like
+INI file format to define the properties and settings of the Code
+Source.
 
 .. code-block:: buildout
    :linenos:
@@ -192,3 +204,21 @@ should have the following files in the code source at the end::
   src/silva/app/blog/codesources/cs_feedback/icon.png
   src/silva/app/blog/codesources/cs_feedback/parameters.xml
   src/silva/app/blog/codesources/cs_feedback/render_feedback.pt
+
+
+Export of multiple Code Sources at once
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is possible to export multiple code sources located inside the same
+folder, directly below it or located in sub-folders at once.
+
+For this you need first to
+:ref:`preparing-a-silva-extension-to-hold-code-sources`. After, you
+can in :term:`ZMI` access the form ``/manage_export_codesources`` on
+the folder URL that contains the Code sources you want to export. You
+need to fill the name of your extension in the *Extension name* field,
+check *Recursive export?* if you want to export Code Sources located
+in sub-folder and click on the *Export* button. Found Code Sources
+will be created inside the extension. If a Code Sources with the same
+identifier already exists inside the extension, it will be updated
+only if the Code Source location matches the extension one.
