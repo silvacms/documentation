@@ -1,10 +1,15 @@
 Changes in Silva 3.0.x API
 ==========================
 
-This document tracks the major changes between Silva 2.3 and Silva 3.0.x
+This document tracks the major changes between Silva 2.3 and Silva
+3.0.x.
+
+.. contents::
 
 Silva 3.0 changes
 -----------------
+
+Major changes:
 
 - :term:`ZCML` based registration have been removed (because it was
   unused).
@@ -34,7 +39,7 @@ Silva 3.0 changes
 
 - Silva legacy layouts, built in ZODB, are no longer supported nor
   available. None of the previously script creating in ZODB are
-  available.
+  available. Most of the API used by those have been removed as well.
 
 - The test helpers ``Products.Silva.tests.helpers`` have been
   removed. You can access test fixture directly from the test layer
@@ -42,9 +47,15 @@ Silva 3.0 changes
   other helpers (see
   :py:interface:`~silva.core.interfaces.adapters.IPublicationWorkflow`).
 
+- All the Silva API have been reviewed to be more `PEP8`_ compliant. For
+  instance, ``getDimensions`` on a Silva Image have been renamed to
+  ``get_dimensions``.
+
 
 Silva 3.0.1 changes
 ~~~~~~~~~~~~~~~~~~~
+
+Main changes:
 
 - The XML import and export API have been refactored and moved into
   the ``silva.core.xml`` extension. Base classes for creating new XML
@@ -54,8 +65,7 @@ Silva 3.0.1 changes
 Changes in the Code sources API
 -------------------------------
 
-Please refer to :ref:`silva_api_for_code_sources` as well.
-
+Major changes:
 
 - ``REQUEST.model`` is no longer available. Code sources must rely on
   the parameters ``model`` and ``version`` that are given to them
@@ -64,9 +74,9 @@ Please refer to :ref:`silva_api_for_code_sources` as well.
 - Options are properly provided to code sources: a Formulator Boolean
   field will give you a boolean in your script, not a string, same for
   an integer, or a list of values. Reference fields returns directly
-  the object which have been selected, or None, or a list of selected
-  objects if the multiple option was previously activated in the
-  field.
+  the object which have been selected, or *None*, or a list of
+  selected objects if the multiple option was previously activated in
+  the field.
 
 - LookupWindow Formulator field have been replaced with a Reference
   Formulator field.
@@ -75,3 +85,17 @@ Please refer to :ref:`silva_api_for_code_sources` as well.
   content using the ``view`` and ``preview`` method on them. You can
   instead using the helper
   :py:func:`~Products.SilvaExternalSources.codesources.api.render_content`.
+
+- Some parameter names are now reserved, or might trigger problems
+  when used in conjunction with ZODB Python scripts. They are renamed
+  during the upgrade: ``content`` is renamed to ``content_value`` and
+  ``script`` to ``script_value``.
+
+
+The Silva API provided with the help of :term:`Zope adapter` is not
+directly usuable in code sources. To access it, a more precise API
+have been defined. Please refer to :ref:`silva_api_for_code_sources`
+for additional information.
+
+
+.. _PEP8: http://www.python.org/dev/peps/pep-0008/
