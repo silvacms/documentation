@@ -24,6 +24,106 @@ the Code Source Service.
 .. contents::
 
 
+.. _silva_api_for_code_sources:
+
+Silva API for Code Sources
+--------------------------
+
+Since Code Sources are executed from scripts and templates defined in
+ZODB content, even if the original file used to create those comes
+from the filesystem, they are restricted in the API they can use.
+
+In order to improve the possiblities they can provide, a simple API
+let them access the core features of Silva in a secure way:
+
+.. module:: Products.SilvaExternalSources.codesources.api
+
+.. function:: render_content(content, request, suppress_title=False)
+
+   Renders the given ``content`` using the ``request``. If
+   ``suppress_title`` is true, the title won't be rendered, if it is
+   possible (not every content in Silva support this option).
+
+   :returns: A string containing the rendered HTML.
+
+.. function:: include_resource(css=None, js=None, requires=[], bottom=False)
+
+   Include the specified ``css`` or ``js`` URL in the final rendered
+   page. They can be either a string, representing the URL, or a list
+   of string representing multiple URLs if multiple resources must be
+   included at once. ``requires`` let you specify a list of resources
+   previously included that must appear before the one you are
+   currently included. If ``bottom`` is true, the resources will be
+   rendered if possible at the bottom of the page.
+
+   :returns: A resource object that can be passed again to an resource
+      include function in the ``requires`` argument.
+
+.. function:: include_snippet(css=None, js=None, requires=[], bottom=False)
+
+   Include the specified ``css`` or ``js`` snippet in the final
+   rendered page. This behaves exactly like the
+   :py:func:`include_resources` function, except it uses snippets
+   instead of URLs.
+
+.. function:: get_publishable_content_types(context)
+
+   Return all available Zope *meta_type* of Silva content that be
+   pusblished in the site. ``context`` must be a Zope object stored
+   inside the Silva site, only used to retrieve the Silva site.
+
+   :returns: A list containing the content *meta_types*.
+
+.. function:: get_container_content_types(context)
+
+   Return all available *meta_type* of Silva content that be added in
+   the site (publishable and not publishable). ``context`` must be a
+   Zope object stored inside the Silva site, only used to retrieve the
+   Silva site.
+
+.. function:: get_content_tree(content, depth)
+
+   Return the content tree starting from the given ``content`` with at
+   most the given ``depth``. This will return the result of the
+   ``get_tree`` provided by the :term:`Zope adapter`
+   :py:interface:`~silva.core.interfaces.adapters.ITreeContents`
+
+   .. warning:: This might be slow and trigger performances issues.
+
+.. function:: get_content_public_tree(content, depth)
+
+   Return the public content tree starting from the given ``content``
+   with at most the given ``depth``. This will return the result of
+   the ``get_public_tree`` provided by the :term:`Zope adapter`
+   :py:interface:`~silva.core.interfaces.adapters.ITreeContents`
+
+   .. warning:: This might be slow and trigger performances issues.
+
+
+Silva extensions might provide additional API to let Code Sources
+access theirs features.
+
+
+Using the Silva API in a Code Source
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can easily those defined function in your code source. To use them
+from a ZODB script, just import them:
+
+.. code-block:: python
+
+   from Products.SilvaExternalSources.codesources.api import render_content
+
+From a page template, you can use a ``python`` expression in order to
+access them:
+
+.. code-block:: html
+
+   <tal:content
+       tal:define="render_content python:modules['Products.SilvaExternalSources.codesources.api'].render_content"
+       tal:content="python:render_content(document, request)" />
+
+
 Exporting and creating a Code Source on the filesystem
 ------------------------------------------------------
 

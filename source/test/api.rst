@@ -1,7 +1,7 @@
 Testing API
 ===========
 
-.. py:module:: Products.Silva.testing
+.. module:: Products.Silva.testing
 
 .. contents::
 
@@ -201,29 +201,29 @@ Functional testing with Javascript-based application
 Settings for functional testing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. py:module:: Products.Silva.ftesting
+.. module:: Products.Silva.ftesting
 
 Different functions can be used in order to configure test browser
 obtained with :py:meth:`SilvaLayer.get_browser` (Python-based browser)
 or :py:meth:`SilvaLayer.get_web_browser` (Selenium-based browser):
 
-.. py:function:: smi_settings(browser)
+.. function:: smi_settings(browser)
 
    Initialize the created browser with expressions that let you
    retrieve SMI elements like *feedback*, *error*, *listing* and
    more.
 
-.. py:function:: public_settings(browser)
+.. function:: public_settings(browser)
 
    Initialize the created browser with expressions that let you public
    elements rendered by Silva and the default Porto Layout components.
 
-.. py:function:: zmi_settings(browser)
+.. function:: zmi_settings(browser)
 
    Initialize the created browser with expressions that let you test
    services in ZMI and forms created by Silva for ZMI objects.
 
-.. py:function:: rest_settings(browser)
+.. function:: rest_settings(browser)
 
    Initialize the created browser to be able to test REST calls. It is
    not compatible with the Selenium based browser.

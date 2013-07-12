@@ -107,7 +107,8 @@ The tree feature is now provided by a :term:`Zope adapter` as well, on
 
 .. note::
 
-   Those operations are really slow on large containers.
+   Those operations are really slow on large containers and might slow
+   down the whole Silva site if used frequently.
 
 .. versionadded:: 3.0
 

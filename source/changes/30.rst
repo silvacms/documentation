@@ -54,6 +54,8 @@ Silva 3.0.1 changes
 Changes in the Code sources API
 -------------------------------
 
+Please refer to :ref:`silva_api_for_code_sources` as well.
+
 
 - ``REQUEST.model`` is no longer available. Code sources must rely on
   the parameters ``model`` and ``version`` that are given to them
@@ -68,3 +70,8 @@ Changes in the Code sources API
 
 - LookupWindow Formulator field have been replaced with a Reference
   Formulator field.
+
+- It is no longer possible to render a foreign content inside a
+  content using the ``view`` and ``preview`` method on them. You can
+  instead using the helper
+  :py:func:`~Products.SilvaExternalSources.codesources.api.render_content`.
