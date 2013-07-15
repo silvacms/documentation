@@ -32,7 +32,7 @@ User documentation
 
 The user documentation is accessible in any Silva site you created if
 you selected the option install documentation. In addition to this
-you consult it online at: https://infrae.com/products/silva/docs.
+you can consult it online at: http://silvacms.org/docs.
 
 Developer documentation
 -----------------------
