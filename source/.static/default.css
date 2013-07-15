@@ -714,17 +714,16 @@ form.comment textarea {
     background: #fff;
     font-size: 12pt;
   }
+  div.document {
+    width: 100%;
+  }
   div.documentwrapper {
-    margin: 0;
-    margin-left: 2%;
-    padding-top: 1em;
     border-top: 1px solid #930;
     background-color: #fff;
-    width : 100%;
   }
   div.bodywrapper {
     width: auto;
-    margin: 0 5%;
+    margin: 0;
     padding: 0;
     border: 0;
     float: none !important;
@@ -733,6 +732,7 @@ form.comment textarea {
   }
   div.body {
     background-color: #fff;
+    padding: 1.5em 2em;
   }
   a:link, a:visited {
     color: #520;
