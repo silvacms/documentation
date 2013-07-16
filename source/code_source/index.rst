@@ -123,6 +123,45 @@ access them:
        tal:define="render_content python:modules['Products.SilvaExternalSources.codesources.api'].render_content"
        tal:content="python:render_content(document, request)" />
 
+Defining your own API to use in a Code Source
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the existing API for Code Source doesn't statisfy your needs, you
+can define your own API to use. In order to do this, you need to
+create a custom Python module on the filesystem in your Silva
+extension and declare to Zope each function you want to be able to use
+in your code source as public.
+
+First you need to make sure your extension is properly
+configured. Please refer to :ref:`configuring-a-silva-extension` for
+this. After you can add Python module, like for this in the case of
+the ``silva.app.blog`` example a module called
+``silva.app.blog.codesources.api``:
+
+.. code-block:: python
+   :linenos:
+
+   from AccessControl import ModuleSecurityInfo
+
+   module_security = ModuleSecurityInfo('silva.app.blog.codesources.api')
+
+   module_security.declarePublic('get_talkback_information')
+   def get_talkback_information(post, count=10):
+      return []
+
+
+- line 3 allows the Python module to be imported in ZODB. The name
+  passed to ``ModuleSecurityInfo`` must match the name of the Python
+  module,
+
+- line 6 to 7 defines a function that be can be used in ZODB by either
+  a Python script or a Zope page template. Line 5 allows the ZODB
+  content to import and used the function. The name passed as argument
+  must match the name of the function.
+
+We recommend you to use this method to provide trusted code to ZODB
+content over the usage of external methods.
+
 
 Exporting and creating a Code Source on the filesystem
 ------------------------------------------------------
@@ -204,9 +243,8 @@ filesystem* button.  Clicking on this button should export the files
 of your Code Source on the filesystem in the newly created directory.
 
 .. figure:: update_export_cs.png
-        :alt: Update and Export buttons in the ZMI
-        :align: left
-Update and Export buttons in the ZMI
+   :alt: Update and Export buttons in the ZMI
+   :align: left
 
 If you're working on a remote server then the *Export and download as
 ZIP* function may be useful. This will export Code Source files packed
