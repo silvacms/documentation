@@ -159,9 +159,18 @@ the ``silva.app.blog`` example a module called
   content to import and used the function. The name passed as argument
   must match the name of the function.
 
+Since this Python code lives on the filesystem it is not subjected to
+the security restriction that Python code in ZODB have, but you must
+restart Silva each time you to change it in order to apply the
+changes.
+
 We recommend you to use this method to provide trusted code to ZODB
 content over the usage of external methods.
 
+.. warning::
+
+   You need to be carefull wth the API you grant people access to. It
+   might create a security breach or loop.
 
 Exporting and creating a Code Source on the filesystem
 ------------------------------------------------------
