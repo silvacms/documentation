@@ -50,12 +50,15 @@ knowledge on Python and HTML, and if possible on Zope.
    layout/index
    contents/index
    services
-   extension/upgrade
    api/index
    test/index
-   addons/index
-   development_guidelines
+   extension/upgrade
    changes/index
+
+.. toctree::
+   :maxdepth: 2
+
+   addons/index
 
 Interesting Links
 -----------------
