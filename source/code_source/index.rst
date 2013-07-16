@@ -1,11 +1,11 @@
-Code Sources on the file system
-===============================
+Creating Code Sources
+=====================
 
-This document explains how to deal with Code Sources on the file
-system level. Code Sources are usually first created in the
-:term:`ZMI` and then dumped to the file system. This allows their code
-to be checked into a source code control system and simplifies future
-maintenance of Code Sources within Silva sites.
+This document explains how to create Code Sources from the file system
+level. Code Sources are usually first created in the :term:`ZMI` and
+then exported to the file system. This allows their code to be checked
+into a source code control system and simplifies future maintenance of
+Code Sources within Silva sites.
 
 A Manager role is needed to create a Code Source in the
 :term:`ZMI`. This process is explained in the user documentation:
@@ -14,7 +14,7 @@ http://silvacms.org/docs/user/manager/creating_a_code_source
 Sometimes a newly created Code Source is a one-off, meaning it won't
 be used elsewhere. However if the Code Source needs to be maintained
 and/or used in multiple sites then it makes sense to manage the Code
-Source via Silva's Code Source Service. FMI see:
+Source via Silva's Code Source Service. For more information see:
 http://silvacms.org/docs/user/manager/code_source_service
 
 A Silva developer can create a product that will contain all the Code

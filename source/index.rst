@@ -50,6 +50,7 @@ knowledge on Python and HTML, and if possible on Zope.
    layout/index
    contents/index
    services
+   extension/upgrade
    api/index
    test/index
    addons/index

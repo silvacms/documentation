@@ -164,6 +164,8 @@ setup:
    buildout/extending
 
 
+.. _upgrading-your-installation:
+
 Upgrading your installation
 ---------------------------
 
