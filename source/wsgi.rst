@@ -96,7 +96,7 @@ a :term:`ZEO` server or `RelStorage`_.
 You **cannot** configure multiple processes without a :term:`ZEO`
 server or a `RelStorage`_ or it will corrupt your Zope database.
 
-if you enable multiple processes, all Zope processes will use the same
+If you enable multiple processes, all Zope processes will use the same
 Zope configuration to connect to the same database which means there
 will be only one Zope instance created with the same settings.
 
