@@ -119,6 +119,19 @@ After generating the buildout files, run the installation:
 When finished the command ``bin/paster`` will be available. It will let
 you start and use Silva: :ref:`starting-creating-silva-site`.
 
+.. note::
+
+   Silva 3.x uses a temporary directory to upload files, located by
+   default inside the buildout directory (in ``var/uploads``). You
+   might want to clean it now and then. On unix systems you can use
+   the following command inside a crontab in order to do it ($buildout
+   refers to the buildout directory):
+
+   .. code-block:: sh
+
+      find $buildout/var/uploads -type d -ctime +1 -prune -print0 | xargs -n 1 -0 rm -rf
+
+
 Available configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -151,6 +164,7 @@ directory:
 
    A Buildout configuration that is extended might called a Buildout
    profile.
+
 
 Extending your installation
 ---------------------------
