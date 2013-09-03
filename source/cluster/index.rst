@@ -44,6 +44,24 @@ As a load balancer in front, you can use:
 - An hardware solution (usually expensive).
 
 
+In case of large cluster, you can configure an upload server for files:
+
+.. toctree::
+   :maxdepth: 2
+
+   uploading
+
+
+Note about the date and time configuration
+------------------------------------------
+
+If you have multiple physical or virtual servers inside your cluster,
+we recommand you to properly configure each server so their time
+settings is properly synchronized with a common source. You can
+enforce it on Unix by configuring an NTP server with
+``ntpdate``. Failing to do so might creates problems with the default
+authentication method used in Silva.
+
 .. _mod_proxy_balancer: http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html
 .. _Squid: http://www.squid-cache.org/
 .. _Pound: http://www.apsis.ch/pound/

@@ -1,7 +1,7 @@
 .. _memcached-setup:
 
-Configure a cache using memcached
-=================================
+Configuring a cache using memcached
+===================================
 
 Silva can use `memcached`_ as cache backend. It is required to use it
 as soon as you have more than one Zope servers hosting the same Silva
@@ -29,6 +29,7 @@ your buildout configuration:
    memcache-address = localhost:11211
    zope-conf-additional =
      <product-config silva.core.cache>
+       memcache ${instance:memcache-address}
        default.type ext:memcached
        default.lock_dir ${buildout:directory}/var/cache/lock/default
        default.url ${instance:memcache-address}

@@ -1,14 +1,15 @@
 Store Zope database into a SQL server with RelStorage
 =====================================================
 
-`Relstorage`_ let Zope store its data into a SQL server.
+`Relstorage`_ let Zope stores its data into a SQL server.
 
 Multiple Zope instance can connect simultaneously to the same SQL
-database to use the same data, making possible to distribute the
-requests among those multiple Zope instance. This create an
+database to use the same data, making possible it to distribute the
+requests among those multiple Zope instance. This creates an
 installation equivalent to one using ZEO, without ZEO.
 
-If your SQL server support fail-over, you can have a full fail-over installation.
+If your SQL server support fail-over, you can have a full fail-over
+installation.
 
 Currently, the following SQL servers are supported:
 
@@ -18,6 +19,9 @@ Currently, the following SQL servers are supported:
 
 - Oracle.
 
+We don't recommand to store the blobs inside the SQL server, but to
+continue to store them on the filesystem, inside a directory that is
+shared among the various servers you have, if you have more than one.
 
 .. warning::
 
@@ -28,7 +32,8 @@ Currently, the following SQL servers are supported:
 .. warning::
 
    If you wish to use ZEO *and* RelStorage, the ZEO server should be
-   the only client connected the SQL server.
+   the only client connected the SQL server. But ZEO is useless in
+   this case.
 
 
 Installation with buildout
@@ -53,16 +58,19 @@ We need to modify the ``instance`` section in buildout to use
      cache-local-mb 100
 
 
-The line 5 configure the type of SQL database to use. ``postgresql``
-and ``oracle`` are valid options. Line 44 to 47 defines how to connect
-to the MySQL server. Options to connect to PostGreSQl and Oracle are
-different, refer to the documentation of `RelStorage`_ for those.
+- The line 5 configures the type of SQL database to
+  use. ``postgresql`` and ``oracle`` are valid options. Line 44 to 47
+  defines how to connect to the MySQL server. Options to connect to
+  PostGreSQl and Oracle are different, refer to the documentation of
+  `RelStorage`_ for those.
 
-Line 10 specify the directory to store Blobs files. *All* Zope servers
-connected to the SQL database should share the *same* Blobs directory.
+- Line 10 specifies the directory to store Blobs files. *All* Zope
+  servers connected to the SQL database should share the *same* Blobs
+  directory. If they are located on different physical servers, you
+  can share the directory using NFS for instance.
 
-Line 11 define a in memory cache. Don't abuse of this option, install
-`memcached`_ instead.
+- Line 11 define a in memory cache. Don't abuse of this option,
+  install `memcached`_ instead.
 
 
 Using memcached to improve performances

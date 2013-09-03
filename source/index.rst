@@ -23,8 +23,7 @@ related to Silva:
    buildout
    buildout/extending
    getting-started-with-silva
-   apache
-   wsgi
+   hosting
    cluster/index
 
 User documentation

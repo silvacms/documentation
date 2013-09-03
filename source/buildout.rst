@@ -129,7 +129,11 @@ you start and use Silva: :ref:`starting-creating-silva-site`.
 
    .. code-block:: sh
 
-      find $buildout/var/uploads -type d -ctime +1 -prune -print0 | xargs -n 1 -0 rm -rf
+      find $buildout/var/uploads -type d -ctime +1 -depth 1 -prune -print0 | xargs -n 1 -0 rm -rf
+
+   The syntax for ``find`` might change depending on your Unix
+   flavor. Please check the proper syntax in your manual before
+   activating this script.
 
 
 Available configurations
