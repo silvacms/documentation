@@ -64,8 +64,8 @@ Lines 5 to 19 defines a new part to install ``uwsgi``:
   even reduce them.
 
 - Line 17 defines the option ``lazy`` which is critical in order to
-  use the ZODB. **Not specifying this option might result in data
-  lost**.
+  use the ZODB. **Not specifying this option might result in losing
+  data**.
 
 - Line 18 and 19 tells uWSGI to act as a daemon and go in the
   background after it started. If you wish to run it as foreground
