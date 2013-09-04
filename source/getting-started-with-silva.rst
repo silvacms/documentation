@@ -77,6 +77,11 @@ And the following command can tell you if Silva is running.
 
    $ ./bin/paster serve deploy.ini status
 
+For obvious security reasons, we don't recommand to run Silva using a
+privileged user like ``root`` on Unix, but a regular non-privileged
+user. If you wish to start the server as such, we recommend you to use
+``sudo`` at all time.
+
 
 Running in development mode
 ---------------------------

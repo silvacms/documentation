@@ -17,10 +17,6 @@ starting with ``http://www.mysite.com`` instead of
 go through Apache as well.
 
 
-.. note:: You are free to use other proxy software if they support
-  rewriting of URLs. You can use `Nginx`_ or directly `Squid`_ if you
-  want to do caching as well.
-
 Configuring rewrite rules in Apache
 -----------------------------------
 
@@ -147,9 +143,8 @@ information in Zope. It supports multiple sites, with aliases and the
 equivalent of multiple rewrite rules inside a given site.
 
 
-.. _Nginx: http://nginx.org/
 .. _Squid: http://www.squid-cache.org/
 .. _mod_proxy: http://httpd.apache.org/docs/2.2/mod/mod_proxy.html
 .. _mod_proxy_http: http://httpd.apache.org/docs/2.2/mod/mod_proxy_http.html
 .. _mod_rewrite: http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html
-.. _silva.app.forest: http://infrae.com/download/silva_all/silva.app.forest
+.. _silva.app.forest: http://silvacms.org/getsilva/packages/silva_all/silva.app.forest

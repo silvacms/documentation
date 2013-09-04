@@ -4,7 +4,7 @@ Configuring a cache using memcached
 ===================================
 
 Silva can use `memcached`_ as cache backend. It is required to use it
-as soon as you have more than one Zope servers hosting the same Silva
+as soon as you have more than one Silva servers hosting the same Silva
 site (meaning you use :term:`ZEO` or RelStorage).
 
 .. contents::

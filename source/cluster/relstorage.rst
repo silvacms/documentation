@@ -3,9 +3,9 @@ Store Zope database into a SQL server with RelStorage
 
 `Relstorage`_ let Zope stores its data into a SQL server.
 
-Multiple Zope instance can connect simultaneously to the same SQL
+Multiple Silva processus can connect simultaneously to the same SQL
 database to use the same data, making possible it to distribute the
-requests among those multiple Zope instance. This creates an
+requests among those multiple Silva servers. This creates an
 installation equivalent to one using ZEO, without ZEO.
 
 If your SQL server support fail-over, you can have a full fail-over
@@ -21,7 +21,8 @@ Currently, the following SQL servers are supported:
 
 We don't recommand to store the blobs inside the SQL server, but to
 continue to store them on the filesystem, inside a directory that is
-shared among the various servers you have, if you have more than one.
+shared among the various servers you have, if you have more than
+one. NFS is efficiant way to do so.
 
 .. warning::
 
@@ -104,9 +105,9 @@ memcached server.
 .. warning::
 
     We recommend to use a different memcache instance than the one used
-    for Silva to cache RelStorage data. *All* Zope server connected
+    for Silva to cache RelStorage data. *All* Silva server connected
     to the same SQL database should share the *same* memcached
-    server.
+    instance.
 
 
 .. _RelStorage: http://pypi.python.org/pypi/RelStorage

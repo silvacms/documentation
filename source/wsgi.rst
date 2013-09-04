@@ -2,9 +2,9 @@ Configuring Apache's mod_wsgi to present your site to the world
 ===============================================================
 
 Silva now support WSGI. You can use Apache's ``mod_wsgi`` to directly
-serve it, without having it running in a different daemon and
+serve it, without having it running in a different processus and
 redirecting requests to it. This is the recommend way to use Silva for
-medium-sized installations.
+medium-sized installations or if your prefer Apache over Nginx.
 
 .. contents::
 
@@ -69,9 +69,10 @@ Explanation
   user ``username`` and group ``username`` the process is going to
   run. These user **must** be the same non-privileged user that you
   used to install Silva. The option ``threads`` defines the number of
-  threads to use in each process. **You must not** configure more than
-  7 threads in any case. Finally the option ``maximum-requests`` renew
-  our WSGI process every 10000 requests.
+  threads to use in each process. It is not recommanded to configure
+  more than 15 threads in any case, or performances might be severely
+  degraded. Finally the option ``maximum-requests`` renew our WSGI
+  process every 10000 requests.
 
 - Line 7, defines the rewrite rule to trigger Zope VirtualHostMonster,
   so that Zope generates URLs without the identifier ``mysite`` in
