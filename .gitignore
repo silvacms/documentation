@@ -1,0 +1,9 @@
+.DS_Store
+.installed.cfg
+.mr.developer.cfg
+bin
+build
+develop-eggs
+eggs
+parts
+src

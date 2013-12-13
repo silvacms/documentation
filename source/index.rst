@@ -4,11 +4,14 @@ Silva Documentation
 .. contents::
 
 
-If you find any bugs regarding this documentation, please report them
-on https://bugs.launchpad.net/silva-documentation.
+The source of this documentation is located on GitHub:
+https://github.com/silvacms/documentation. If you find any bugs
+regarding this documentation, you can either directly fix them on
+GitHub and create a pull request or report them on the Launchpad issue
+tracker: https://bugs.launchpad.net/silva-documentation.
 
-Any bugs about Silva itself can reported on
-https://bugs.launchpad.net/silva.
+Any bugs about Silva itself can reported on Launchpad as well, in a
+different tracker: https://bugs.launchpad.net/silva.
 
 
 Installation and Administration documentation

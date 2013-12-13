@@ -40,49 +40,32 @@ In order to test Silva, we recommend you to install the Virtual Images
 available on http://silvacms.org/.
 
 
-Installing Silva from SVN for development or production
--------------------------------------------------------
+Installing Silva from GitHub for development or production
+----------------------------------------------------------
 
 For production deployment or development we recommend you to install
-Silva by getting it from the Infrae subversion.
+Silva by getting it from GitHub at  https://github.com/silvacms/buildout/.
 
-You need to install Subversion if it's not already installed on your
-system.
+You need to install Git if it's not already installed on your system.
 
-There are different buildout SVN trees for different Silva
-versions. An SVN tag corresponds to a specific release of Silva, the
-``tag`` repository is located here::
-
-  https://svn.infrae.com/buildout/silva/tag
-
-We highly recommend to use tags for production websites.
-
-The development branches of Silva versions are located in in the
-``branch`` repository``::
-
-  https://svn.infrae.com/buildout/silva/branch
-
-For the latest development version of Silva go to the ``trunk``
-repository::
-
-  https://svn.infrae.com/buildout/silva/trunk
+There are different branches in Git for each different main versions
+of Silva. Each Git tag corresponds to a specific release of Silva. For
+the latest development version of Silva, the branch master from Git is
+used.
 
 All buildout directories work the same way.
-
-.. note::
-
-   Pay close attention to how your SVN is configured. Especially the
-   ``global-ignores`` section of you SVN configuration file. For more
-   information see :ref:`svn-configuration`.
 
 Getting your Buildout directory
 ```````````````````````````````
 
-Run the following command to fetch files from SVN:
+Run the command ``git clone`` to fetch files from GitHub, and ``git
+checkout`` to retrieve either a branch or a tag, like it is done here:
 
 .. code-block:: sh
 
-   $ svn co https://svn.infrae.com/buildout/silva/tag/Silva-3.0 Silva
+   $ git clone https://github.com/silvacms/buildout Silva
+   $ cd Silva
+   $ git checkout Silva-3.0.3
 
 You can consult the ``README.txt`` file in the newly created ``Silva``
 directory which contains additional information for the specific Silva
@@ -216,12 +199,12 @@ The generic procedure to upgrade a Silva site is:
 
    - if you have an SVN checkout, you can switch to the new version by
      running ``svn switch`` in your Buildout directory. For instance
-     to upgrade to the version ``2.3.1``:
+     to upgrade to the version ``3.0.4``:
 
       .. code-block:: sh
 
          $ cd Silva
-         $ svn switch https://svn.infrae.com/buildout/silva/tag/Silva-2.3.1
+         $ git checkout Silva-3.0.4
 
    - if you made your own buildout configuration that refers to the
      Silva Buildout configuration using buildout's ``extends`` option,
