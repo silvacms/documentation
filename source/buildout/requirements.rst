@@ -61,11 +61,11 @@ Installation under Linux Ubuntu/Debian
 3. Version control systems
 
    If you want to install the development version, you will need to
-   install various control system:
+   install Git in order to the code of Silva:
 
    .. code-block:: sh
 
-      $ sudo apt-get install subversion mercurial git-core
+      $ sudo apt-get install git-core
 
 
 Installation under Mac OS X
