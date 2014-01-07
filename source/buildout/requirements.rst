@@ -26,7 +26,7 @@ Installation under Linux Ubuntu/Debian
       $ sudo apt-get install python2.7-dev build-essential
 
    You will also need a working C compiler (gcc), which is what the
-   ``build-essential`` package will install.
+   ``build-essential`` package will be installed.
 
    Another set of headers that are required is the zlib compression
    library (``zlib.h``). Again use the package manger to install the
@@ -43,13 +43,7 @@ Installation under Linux Ubuntu/Debian
 
    .. code-block:: sh
 
-      $ sudo apt-get install libjpeg62-dev
-
-   Then install PIL:
-
-   .. code-block:: sh
-
-      $ sudo apt-get install python-imaging
+      $ sudo apt-get install libjpeg8-dev
 
    Silva also uses libXML2 and libXSLT, so you need to install them as
    well:
@@ -60,12 +54,12 @@ Installation under Linux Ubuntu/Debian
 
 3. Version control systems
 
-   If you want to install the development version, you will need to
-   install Git in order to the code of Silva:
+   Finally you might want to install Git in order to clone the
+   buildout or the development version form GitHub:
 
    .. code-block:: sh
 
-      $ sudo apt-get install git-core
+      $ sudo apt-get install git
 
 
 Installation under Mac OS X
@@ -109,12 +103,12 @@ As well we recommand to install ``file`` in order to get ``libmagic``:
 
    $ sudo port -v install file
 
-If you want to install a development version of Silva, you will need
-to install various version control systems:
+Finally you might want to install Git in order to clone the buildout
+or the development version form GitHub:
 
 .. code-block:: sh
 
-   $ sudo port -v install subversion mercurial git-core
+   $ sudo port -v install git-core
 
 
 Installation under FreeBSD
@@ -154,16 +148,12 @@ And ``libxml2`` and ``libxslt``:
   $ make install
   $ make distclean
 
-To install the development version, you will want to install various
-version control systems:
+Finally you might want to install Git in order to clone the buildout
+or the development version form GitHub:
 
 .. code-block:: sh
 
-  $ cd /usr/ports/devel/subversion
-  $ make install distclean
   $ cd /usr/ports/devel/git
-  $ make install distclean
-  $ cd /usr/ports/devel/mercurial
   $ make install distclean
 
 
@@ -217,30 +207,11 @@ We don't recommend (nor support) Windows as a production environment.
 
    This will tell Python to use MinGW to compile needed extensions.
 
-3. We need Subversion. You can download and install it from the `Slik
-   distribution page <http://www.sliksvn.com/pub/Slik-Subversion-1.7.4-win32.msi>`_.
-
-   After, you should be able to type ``svn help`` in a newly created
-   shell.
-
-   We recommand to install `PySVN for Windows, Python 2.7 and SVN
-   1.7.3
-   <http://pysvn.tigris.org/files/documents/1233/49177/py27-pysvn-svn173-1.7.6-1457.exe>`_.
-
-   If you are installing a development version, you will need to
-   install Git and Mercurial for windows as well:
-
-   - For Git, you can install `Git for Windows
-     <http://msysgit.github.com/>`_. During the installation process,
-     select the option to add the Git command to the Windows
-     path. After the installation you should able to type ``git
-     --help`` in a newly created shell, like for svn.
-
-   - For Mercurial, you can follow `the official instruction
-     <http://mercurial.selenic.com/wiki/WindowsInstall>`_, installing
-     the latest version available. After this, you need to add the
-     installation path to the Windows path, so you can type ``hg
-     --help`` in a newly created shell as well.
+3. Finally you need to install Git. You can install `Git for Windows
+   <http://msysgit.github.com/>`_. During the installation process,
+   select the option to add the Git command to the Windows
+   path. After the installation you should able to type ``git
+   --help`` in a newly created shell.
 
 4. You also need to install `pywin32
    <http://sourceforge.net/projects/pywin32/>`_, for Python 2.7.
@@ -248,9 +219,8 @@ We don't recommend (nor support) Windows as a production environment.
 .. warning::
 
    It's recommended to work in directories which don't have any spaces
-   in their paths. When you will be asked to checkout files from SVN
-   to create your buildout directory, keep this in mind (or you will
-   have problems).
+   in their paths. Keep this in mind while getting the code of Silva
+   or you might run into problems after.
 
 .. note::
 
