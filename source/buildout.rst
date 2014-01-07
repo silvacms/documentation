@@ -344,3 +344,12 @@ refer to the link below before asking questions on the mailing-list.
 
    buildout/troubleshooting
 
+
+Packaging buildout
+------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   buildout/packaging
+
